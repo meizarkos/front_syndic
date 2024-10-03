@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
-import 'package:front_syndic/text.dart';
+import 'package:front_syndic/core_value.dart';
+import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/header/header_for_all.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
@@ -31,13 +32,13 @@ class _ConnectAllState extends State<ConnectAll> {
             padding: const EdgeInsets.all(20.0), // Add padding around the text
             child: Center(
               child: Text(
-                LoginStrings.seConnecter,
+                AppText.loginTitle,
                 style: Theme.of(context).textTheme.displayLarge,
               ),
             ),
-          ),
+          ), // Add padding around the text
           Padding(
-            padding: const EdgeInsets.all(15.0), // Add padding around the text
+            padding: const EdgeInsets.all(15), // Add padding around the text
             child: Center(
               child: TextField(
                 onChanged: (value) {
@@ -48,16 +49,16 @@ class _ConnectAllState extends State<ConnectAll> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius:
-                        BorderRadius.circular(10.0), // Set corner radius here
+                        BorderRadius.circular(AppUIValue.textInputBorderRadius), // Set corner radius here
                   ),
-                  labelText: LoginStrings.email,
+                  labelText: AppText.loginLabelTextEmail,
                 ),
                 style: Theme.of(context).textTheme.displaySmall,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(15.0), // Add padding around the text
+            padding: const EdgeInsets.all(15), // Add padding around the text
             child: Center(
               child: TextField(
                 obscureText: true,
@@ -69,19 +70,19 @@ class _ConnectAllState extends State<ConnectAll> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius:
-                        BorderRadius.circular(10.0), // Set corner radius here
+                        BorderRadius.circular(AppUIValue.textInputBorderRadius), // Set corner radius here
                   ),
-                  labelText: LoginStrings.password,
+                  labelText: AppText.loginLabelTextPassword,
                 ),
                 style: Theme.of(context).textTheme.displaySmall,
               ),
             ),
           ),
           ErrorVisibility(
-              errorVisibility: errorVisibility, errorText: LoginStrings.errorText
+              errorVisibility: errorVisibility, errorText: AppText.loginErrorText
           ),
           Padding(
-            padding: const EdgeInsets.all(15.0), // Add padding around the text
+            padding: const EdgeInsets.all(10), // Add padding around the text
             child: Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -91,30 +92,39 @@ class _ConnectAllState extends State<ConnectAll> {
                   //sendConnexionRequest(email, password, widget.route,_handleErrorText, _handleErrorVisibility,_pushToConnectSuccess);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: mainBackgroundColor, // Background color
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 15.0, horizontal: 20.0), // Button padding
+                  backgroundColor: AppColors.mainBackgroundColor, // Background color
+                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20), // Button padding
                   textStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                  ), // Text style
+                  ),
+                  elevation: AppUIValue.elevation,
+                  shadowColor: Colors.black,
                 ),
-                child: const Text(
-                  LoginStrings.seConnecter,
+                child: Text(
+                  AppText.loginConnectionButtonText,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: AppColors.mainTextColor,
+                    shadows: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        blurRadius: 1,
+                        spreadRadius: 1,
+                        blurStyle: BlurStyle.inner,
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0), // Add padding around the text
             child: Center(
               child: Text(
-                LoginStrings.register,
+                AppText.loginLinkToRegister,
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),

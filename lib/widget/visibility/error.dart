@@ -22,7 +22,7 @@ class ErrorVisibility extends StatelessWidget {
             errorText,
             style: const TextStyle(
               fontSize: 14,
-              color: mainErrorColor,
+              color: AppColors.mainErrorColor,
             ),
           ),
         ),

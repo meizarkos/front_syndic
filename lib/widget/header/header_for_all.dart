@@ -14,7 +14,7 @@ class HeaderForAll extends StatelessWidget{
       title: const Text(
           'Fixiia',
       ),
-      backgroundColor: mainBackgroundColor,
+      backgroundColor: AppColors.mainBackgroundColor,
       elevation: 0,
       toolbarHeight: appBarHeight,
       shape: const RoundedRectangleBorder(
