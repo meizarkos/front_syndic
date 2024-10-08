@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:front_syndic/views/login_register/login.dart';
+import 'package:front_syndic/views/union_side/union_main.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/': (context) => const ConnectAll(),
+          '/union_main': (context) => UnionMain(),
         },
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {

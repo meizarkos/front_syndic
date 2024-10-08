@@ -5,6 +5,7 @@ import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/header/header_for_all.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
+import '../../api_handler/login/login.dart';
 import '../../widget/header/app_bar_size.dart';
 
 class ConnectAll extends StatefulWidget {
@@ -18,6 +19,7 @@ class _ConnectAllState extends State<ConnectAll> {
   var email = 'aaa@aaa.com';
   var password = 'aaa';
   var errorVisibility = false;
+  var loginResponse = [];
 
   @override
   Widget build(BuildContext context) {
@@ -85,11 +87,12 @@ class _ConnectAllState extends State<ConnectAll> {
             padding: const EdgeInsets.all(10), // Add padding around the text
             child: Center(
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  var res = await sendConnexionRequest(email, password, ()=>_handleErrorVisibility);
                   setState(() {
-                    errorVisibility = true;
+                    loginResponse = res;
                   });
-                  //sendConnexionRequest(email, password, widget.route,_handleErrorText, _handleErrorVisibility,_pushToConnectSuccess);
+                  _pushTo(loginResponse);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.mainBackgroundColor, // Background color
@@ -120,12 +123,17 @@ class _ConnectAllState extends State<ConnectAll> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(15.0), // Add padding around the text
-            child: Center(
-              child: Text(
-                AppText.loginLinkToRegister,
-                style: Theme.of(context).textTheme.labelMedium,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/register');
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(15.0), // Add padding around the text
+              child: Center(
+                child: Text(
+                  AppText.loginLinkToRegister,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
               ),
             ),
           ),
@@ -133,4 +141,19 @@ class _ConnectAllState extends State<ConnectAll> {
       ),
     );
   }
+  void _handleErrorVisibility() {
+    setState(() {
+      errorVisibility = true;
+    });
+  }
+
+  void _pushTo(List<dynamic> response) {
+    if(response[0] == '0') {
+      Navigator.pushNamed(context, response[1]);
+    }
+    else{
+      return;
+    }
+  }
+
 }
