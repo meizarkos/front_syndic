@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/': (context) => const ConnectAll(),
-          '/union_main': (context) => UnionMain(),
+          '/union_main': (context) => const UnionMain(),
         },
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {

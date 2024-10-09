@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/co_owner/co_owner.dart';
 import '../request.dart';
@@ -11,7 +9,7 @@ Future<List<CoOwner>?> fetchAllCoOwnersFromUnion() async {
         .map((recordJson) => CoOwner.fromJson(recordJson))
         .toList();
     return records;
-  } on DioException catch(e) {
+  } catch(e) {
     return null;
   }
 }

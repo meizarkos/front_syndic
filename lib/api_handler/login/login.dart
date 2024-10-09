@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:front_syndic/api_handler/request_with_body.dart';
 import '../credential.dart';
 
@@ -19,7 +18,7 @@ Future<List<String>> sendConnexionRequest(String email, String password,Function
       handleVisibility(true);
       return ['1','1'];
     }
-  } on DioException catch(e) {
+  } catch(e) {
       handleVisibility(true);
       return ['1','1'];
   }

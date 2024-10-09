@@ -1,3 +1,5 @@
+import 'package:front_syndic/models/adress/adress.dart';
+
 class AttributesCoOwner {
   static String uuid = 'uuid';
   static String name = 'name';
@@ -14,17 +16,20 @@ class CoOwner{
   final String? adressId;
   final String? syndicId;
   // final String? councilId;
+  final Adress? adress;
   final String? createdAt;
   final String? updatedAt;
 
 
   const CoOwner({
-    required this.uuid,
-    required this.name,
-    required this.adressId,
-    required this.syndicId,
-    required this.updatedAt,
-    required this.createdAt,
+    this.uuid,
+    this.name,
+    this.adressId,
+    this.syndicId,
+    // this.councilId,
+    this.adress,
+    this.updatedAt,
+    this.createdAt,
   });
 
   factory CoOwner.fromJson(Map<String, dynamic> json) {
@@ -34,6 +39,7 @@ class CoOwner{
       adressId: json[AttributesCoOwner.adress_id],
       syndicId: json[AttributesCoOwner.syndic_id],
       // councilId: json[attributesCoOwner.council_id],
+      adress: Adress.fromJson(json['adress']),
       updatedAt: json[AttributesCoOwner.updatedAt],
       createdAt: json[AttributesCoOwner.createdAt],
     );

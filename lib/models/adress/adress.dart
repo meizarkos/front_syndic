@@ -2,7 +2,7 @@ class AttributesAdress {
   static String uuid = "uuid";
   static String country = "country";
   static String city = "city";
-  static String location = "location";
+  static String street = "street";
   static String postalCode = "postal_code";
   static String region = "region";
   static String comment = "comment";
@@ -14,7 +14,7 @@ class Adress{
   final String? uuid;
   final String? country;
   final String? city;
-  final String? adress;
+  final String? street;
   final String? postalCode;
   final String? region;
   final String? comment;
@@ -22,15 +22,15 @@ class Adress{
   final String? updatedAt;
 
   const Adress({
-    required this.uuid,
-    required this.country,
-    required this.city,
-    required this.region,
-    required this.postalCode,
-    required this.adress,
-    required this.comment,
-    required this.updatedAt,
-    required this.createdAt,
+    this.uuid,
+    this.country,
+    this.city,
+    this.region,
+    this.postalCode,
+    this.street,
+    this.comment,
+    this.updatedAt,
+    this.createdAt,
   });
 
   factory Adress.fromJson(Map<String, dynamic> json) {
@@ -40,7 +40,7 @@ class Adress{
       city: json[AttributesAdress.city],
       region: json[AttributesAdress.region],
       postalCode: json[AttributesAdress.postalCode],
-      adress: json[AttributesAdress.location],
+      street: json[AttributesAdress.street],
       comment: json[AttributesAdress.comment],
       updatedAt: json[AttributesAdress.updatedAt],
       createdAt: json[AttributesAdress.createdAt],

@@ -7,4 +7,10 @@ class AppText {
   static const String loginLabelTextEmail = 'Email';
   static const String loginLabelTextPassword = 'Mot de passe';
   static const String loginErrorText = 'Mauvais identifiants';
+
+  /* UnionMainStrings */
+  static const String noStringNameForCowner = 'Nom introuvable';
+  static const String noStringNameForCownerSubtitle = 'Adresse inconnu';
+  static const String unionMainSearchBarEmpty = 'Rechercher';
+  static const String unionMainAddButton = 'Ajouter';
 }
