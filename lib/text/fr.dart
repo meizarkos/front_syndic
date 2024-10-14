@@ -1,4 +1,7 @@
 class AppText {
+  /* General API */
+  static const String apiErrorText = 'Une erreur est survenue';
+  static const String apiNoResult = 'Pas de résultat';
 
   /* LoginStrings */
   static const String loginTitle = 'Connexion';

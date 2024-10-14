@@ -132,7 +132,7 @@ class _ConnectAllState extends State<ConnectAll> {
               child: Center(
                 child: Text(
                   AppText.loginLinkToRegister,
-                  style: Theme.of(context).textTheme.labelMedium,
+                  style: Theme.of(context).textTheme.labelSmall,
                 ),
               ),
             ),

@@ -3,9 +3,9 @@ import 'package:front_syndic/models/adress/adress.dart';
 class AttributesCoOwner {
   static String uuid = 'uuid';
   static String name = 'name';
-  static String adress_id = 'adress_id';
-  static String syndic_id = 'syndic_id';
-  // static String council_id = 'council_id';
+  static String adressId = 'adress_id';
+  static String syndicId = 'syndic_id';
+  static String councilId = 'council_id';
   static String createdAt = 'created_at';
   static String updatedAt = 'updated';
 }
@@ -15,7 +15,7 @@ class CoOwner{
   final String? name;
   final String? adressId;
   final String? syndicId;
-  // final String? councilId;
+  final String? councilId;
   final Adress? adress;
   final String? createdAt;
   final String? updatedAt;
@@ -26,7 +26,7 @@ class CoOwner{
     this.name,
     this.adressId,
     this.syndicId,
-    // this.councilId,
+    this.councilId,
     this.adress,
     this.updatedAt,
     this.createdAt,
@@ -36,9 +36,9 @@ class CoOwner{
     return CoOwner(
       uuid: json[AttributesCoOwner.uuid],
       name: json[AttributesCoOwner.name],
-      adressId: json[AttributesCoOwner.adress_id],
-      syndicId: json[AttributesCoOwner.syndic_id],
-      // councilId: json[attributesCoOwner.council_id],
+      adressId: json[AttributesCoOwner.adressId],
+      syndicId: json[AttributesCoOwner.syndicId],
+      councilId: json[AttributesCoOwner.councilId],
       adress: Adress.fromJson(json['adress']),
       updatedAt: json[AttributesCoOwner.updatedAt],
       createdAt: json[AttributesCoOwner.createdAt],

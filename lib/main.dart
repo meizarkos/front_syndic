@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:front_syndic/views/login_register/login.dart';
+import 'package:front_syndic/views/union_side/co_owner_main.dart';
 import 'package:front_syndic/views/union_side/union_main.dart';
 
 void main() {
@@ -26,24 +27,19 @@ class MyApp extends StatelessWidget {
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
+            displaySmall: TextStyle(
+              fontSize: 14,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
             labelMedium: TextStyle(
               fontSize: 16,
-              color: Colors.blue,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.underline,
-            ),
-            displaySmall: TextStyle(
-              fontSize: 13,
               color: Colors.black,
-            ),
-            headlineLarge: TextStyle(
-              fontSize: 22,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
             ),
             labelSmall: TextStyle(
-              fontSize: 13,
-              color: Colors.black,
+              fontSize: 14,
+              color: Colors.blue,
+              decoration: TextDecoration.underline, // Apply underline
             ),
           ),
         ),
@@ -53,14 +49,14 @@ class MyApp extends StatelessWidget {
         },
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
-          /*case '/request_user/chose_description':
+          case '/co_owner_main':
               final arguments = settings.arguments;
-              if (arguments is CreateRequest) {
+              if (arguments is String) {
                 return MaterialPageRoute(
-                  builder: (context) => ChoseDescriptionRequestUser(createRequest : arguments),
+                  builder: (context) => CoOwnerMain(uuid: arguments),
                 );
               }
-              break;*/
+              break;
             default:
               return null;
           }

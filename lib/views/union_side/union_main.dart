@@ -52,13 +52,13 @@ class _UnionMainState extends State<UnionMain> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError || snapshot.data == null) {
-                  return const Center(child: Text('Error'));
+                  return const Center(child: Text(AppText.apiErrorText));
                 } else if (snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No result'));
+                  return const Center(child: Text(AppText.apiNoResult));
                 } else {
                   final dataFiltered = lengthOfList(snapshot.data);
                   if (dataFiltered == null || dataFiltered.isEmpty) {
-                    return const Center(child: Text('No result'));
+                    return const Center(child: Text(AppText.apiNoResult));
                   }
                   final size = dataFiltered.length + 1;
                   return Expanded(
@@ -74,9 +74,14 @@ class _UnionMainState extends State<UnionMain> {
                         if (index == dataFiltered.length) {
                           return const SizedBox(height: 25);
                         }
-                        return CoOwnerCell(
-                          title: dataFiltered[index].name,
-                          subtitle: dataFiltered[index].adress?.street,
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/co_owner_main', arguments: dataFiltered[index].uuid);
+                          },
+                          child: CoOwnerCell(
+                            title: dataFiltered[index].name,
+                            subtitle: dataFiltered[index].adress?.street,
+                          ),
                         );
                       },
                     ),
@@ -93,17 +98,22 @@ class _UnionMainState extends State<UnionMain> {
           onPressed: () {
             //Navigator.pushNamed(context, '/register_co_owner');
           },
-          label: const Text(
-            AppText.unionMainAddButton,
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ), // Text to display
-          icon: const Icon(
-            Icons.add_box,
-            color: Colors.white,
-          ), // Icon to display
-          backgroundColor: Colors.black, //
+          backgroundColor: Colors.black,
+          label: const Row(
+            children: [
+              Text(
+                AppText.unionMainAddButton,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(width: 8), // Add space between text and icon
+              Icon(
+                Icons.add_box,
+                color: Colors.white,
+              ),
+            ],
+          ),
         ),
       ),
     );
