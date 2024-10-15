@@ -16,4 +16,15 @@ class AppText {
   static const String noStringNameForCownerSubtitle = 'Adresse inconnu';
   static const String unionMainSearchBarEmpty = 'Rechercher';
   static const String unionMainAddButton = 'Ajouter';
+
+  /* CoOwnerMain */
+  static const String buttonSeeInvoice = 'Voir mes factures';
+  static const String buttonCreateARequest = 'Créer une demande';
+  static const String titleMeeting = 'Mes devis';
+  static const String titleNextMeeting = 'Passage pour un devis le :';
+  static const String seeEstimate = 'Voir mes devis';
+  static const String noTimingFound = 'Pas de rendez-vous fixé';
+  static const String titleNextWork = 'Prochain travaux';
+  static const String latestWorkRequest = 'Mes dernières demandes';
+  static const String latestEstimate = 'Mes derniers devis';
 }

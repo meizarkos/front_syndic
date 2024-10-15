@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:front_syndic/api_handler/co_owner/get_main_data_co_owner.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/co_owner/co_owner.dart';
 import 'package:front_syndic/models/estimate/estimate.dart';
+import 'package:front_syndic/views/union_side/co_owner_main/row_of_text_and_icon.dart';
+import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
-import '../../models/timing/timing.dart';
-import '../../models/timing/timing_estimate.dart';
-import '../../models/work_request/work_request.dart';
-import '../../text/fr.dart';
-import '../../utils/string_handler/handle_string.dart';
-import '../../widget/decoration/decoration_round_main_color.dart';
-import '../../widget/text_style/text_style_main_color.dart';
+import '../../../color.dart';
+import '../../../models/timing/timing.dart';
+import '../../../models/timing/timing_estimate.dart';
+import '../../../models/work_request/work_request.dart';
+import '../../../text/fr.dart';
+import '../../../utils/string_handler/handle_string.dart';
+import '../../../widget/decoration/decoration_round_main_color.dart';
+import '../../../widget/text_style/text_style_main_color.dart';
+import 'column_of_text_button.dart';
 
 const spaceInsideColumn = 25.0;
 
@@ -60,38 +63,43 @@ class CoOwnerMain extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                           const SizedBox(height: spaceInsideColumn),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/co_owner.svg',
-                                width: 40.0,
-                                height: 40.0,
-                              ),
-                              const SizedBox(width: 20),
-                              Text(
-                                trimText(stringNullOrDefaultValue(coOwner?.adress?.city, AppText.noStringNameForCownerSubtitle),20),
-                                style: Theme.of(context).textTheme.labelMedium,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
+                          rowOfTextAndIcon('assets/co_owner.svg',coOwner?.adress?.city, AppText.noStringNameForCownerSubtitle, context),
                           const SizedBox(height: spaceInsideColumn),
-                          Text(
-                            trimText(stringNullOrDefaultValue(coOwner?.adress?.street, AppText.noStringNameForCownerSubtitle),20),
-                            style: Theme.of(context).textTheme.labelMedium,
-                            textAlign: TextAlign.center,
-                          )
+                          rowOfTextAndIcon('assets/location.svg',coOwner?.adress?.street, AppText.noStringNameForCownerSubtitle, context),
+                          const SizedBox(height: spaceInsideColumn),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              child: elevatedButtonOpacity(AppColors.mainTextColor.withOpacity(AppUIValue.opacityActionButton), AppText.buttonCreateARequest, context, ()=>goToCreateWorkRequest(context)),
+                          ),
+                          const SizedBox(height: 10),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            child: elevatedButtonOpacity(AppColors.mainTextColor.withOpacity(AppUIValue.opacityActionButton), AppText.buttonSeeInvoice, context, ()=>goToInvoice(context)),
+                          ),
                         ],
                       ),
                     ),
                   ),
                 ),
+                const SizedBox(height: 25),
+                Center(
+                  child: columnOfTextButton(AppText.titleMeeting,AppText.titleNextMeeting,stringNullOrDefaultValue(timing?.time, AppText.noTimingFound),AppText.seeEstimate, ()=>goToAllMeetingForEstimate(context), context),
+                )
               ],
             );
           }
         },
       ),
     );
+  }
+  void goToCreateWorkRequest(BuildContext context) {
+    Navigator.pushNamed(context, '/co_owner_work_request');
+  }
+  void goToInvoice(BuildContext context) {
+    Navigator.pushNamed(context, '/invoice');
+  }
+
+  void goToAllMeetingForEstimate(BuildContext context) {
+    Navigator.pushNamed(context, '/all_meeting_estimate');
   }
 }

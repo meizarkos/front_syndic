@@ -8,3 +8,10 @@ BoxDecoration decorationRoundMainColor() {
     color: AppColors.mainBackgroundColor,
   );
 }
+
+BoxDecoration decorationRoundRedColor(){
+  return BoxDecoration(
+    borderRadius: BorderRadius.circular(25.0),
+    color: AppColors.actionButtonColor,
+  );
+}
