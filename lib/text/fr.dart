@@ -20,11 +20,25 @@ class AppText {
   /* CoOwnerMain */
   static const String buttonSeeInvoice = 'Voir mes factures';
   static const String buttonCreateARequest = 'Créer une demande';
-  static const String titleMeeting = 'Mes devis';
+
+  static const String titleMeeting = 'Mon prochain devis';
   static const String titleNextMeeting = 'Passage pour un devis le :';
-  static const String seeEstimate = 'Voir mes devis';
+  static const String seeEstimate = 'Voir mes rendez-vous';
   static const String noTimingFound = 'Pas de rendez-vous fixé';
-  static const String titleNextWork = 'Prochain travaux';
-  static const String latestWorkRequest = 'Mes dernières demandes';
-  static const String latestEstimate = 'Mes derniers devis';
+
+  static const String titleNextWorkMeeting = 'Mes prochains travaux';
+  static const String titleTimingEstimate = 'Passage pour les travaux le :';
+  static const String buttonTextWorkMeeting = 'Voir mes dates de travaux';
+
+  static const String titleNextWork = 'Mes demandes';
+  static const String noDateForWork = 'Pas de date fixée';
+  static const String noTiltedForWork = 'Pas de titre';
+  static const String buttonTextWorkRequest = 'Voir mes demandes';
+  static const String preTextWorkRequest = 'Devis pour le : ';
+
+  static const String titleNexEstimate = 'Mes devis';
+  static const String buttonTextEstimate = 'Voir mes devis';
+  static const String subtitleEstimate = 'Travaux prévus pour le : ';
+
+
 }

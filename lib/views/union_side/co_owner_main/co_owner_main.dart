@@ -29,77 +29,137 @@ class CoOwnerMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: fetchCoOwnerMainData(uuid),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError || snapshot.data == null) {
-            return const Center(child: Text(AppText.apiErrorText));
-          } else if (snapshot.data!.isEmpty) {
-            return const Center(child: Text(AppText.apiNoResult));
-          } else {
-            final coOwner = snapshot.data?["co_owner"] as CoOwner?;
-            final workRequest = snapshot.data?["work_request"] as WorkRequest?;
-            final estimate = snapshot.data?["estimate"] as Estimate?;
-            final timingEstimate = snapshot.data?["timing_estimate"] as TimingEstimate?;
-            final timing = snapshot.data?["timing"] as Timing?;
-            return Column(
-              children: [
-                const SizedBox(height: 40),
-                Center(
-                  child: Card(
-                    elevation: AppUIValue.elevation,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
-                      decoration: decorationRoundMainColor(),
-                      child: Column(
-                        children: [
-                          Text(
-                            trimText(stringNullOrDefaultValue(coOwner?.name, AppText.noStringNameForCowner),11),
-                            style: getTextStyleMainColor(25.0),
-                            maxLines: 1,
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: spaceInsideColumn),
-                          rowOfTextAndIcon('assets/co_owner.svg',coOwner?.adress?.city, AppText.noStringNameForCownerSubtitle, context),
-                          const SizedBox(height: spaceInsideColumn),
-                          rowOfTextAndIcon('assets/location.svg',coOwner?.adress?.street, AppText.noStringNameForCownerSubtitle, context),
-                          const SizedBox(height: spaceInsideColumn),
-                          SizedBox(
+      body: SingleChildScrollView(
+        child: FutureBuilder(
+          future: fetchCoOwnerMainData(uuid),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError || snapshot.data == null) {
+              return const Center(child: Text(AppText.apiErrorText));
+            } else if (snapshot.data!.isEmpty) {
+              return const Center(child: Text(AppText.apiNoResult));
+            } else {
+              final coOwner = snapshot.data?["co_owner"] as CoOwner?;
+              final workRequest = snapshot.data?["work_request"] as WorkRequest?;
+              final estimate = snapshot.data?["estimate"] as Estimate?;
+              final timingEstimate = snapshot.data?["timing_estimate"] as TimingEstimate?;
+              final timing = snapshot.data?["timing"] as Timing?;
+              return Column(
+                children: [
+                  const SizedBox(height: 40),
+                  Center(
+                    child: Card(
+                      elevation: AppUIValue.elevation,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        padding:
+                            const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+                        decoration: decorationRoundMainColor(),
+                        child: Column(
+                          children: [
+                            Text(
+                              trimText(
+                                  stringNullOrDefaultValue(coOwner?.name,
+                                      AppText.noStringNameForCowner),
+                                  11),
+                              style: getTextStyleMainColor(25.0),
+                              maxLines: 1,
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: spaceInsideColumn),
+                            rowOfTextAndIcon(
+                                'assets/co_owner.svg',
+                                coOwner?.adress?.city,
+                                AppText.noStringNameForCownerSubtitle,
+                                context),
+                            const SizedBox(height: spaceInsideColumn),
+                            rowOfTextAndIcon(
+                                'assets/location.svg',
+                                coOwner?.adress?.street,
+                                AppText.noStringNameForCownerSubtitle,
+                                context),
+                            const SizedBox(height: spaceInsideColumn),
+                            SizedBox(
                               width: MediaQuery.of(context).size.width * 0.9,
-                              child: elevatedButtonOpacity(AppColors.mainTextColor.withOpacity(AppUIValue.opacityActionButton), AppText.buttonCreateARequest, context, ()=>goToCreateWorkRequest(context)),
-                          ),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            child: elevatedButtonOpacity(AppColors.mainTextColor.withOpacity(AppUIValue.opacityActionButton), AppText.buttonSeeInvoice, context, ()=>goToInvoice(context)),
-                          ),
-                        ],
+                              child: elevatedButtonOpacity(
+                                  AppColors.mainTextColor.withOpacity(
+                                      AppUIValue.opacityActionButton),
+                                  AppText.buttonCreateARequest,
+                                  context,
+                                  () => goTo(context,'/co_owner_work_request')),
+                            ),
+                            const SizedBox(height: 10),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              child: elevatedButtonOpacity(
+                                  AppColors.mainTextColor.withOpacity(
+                                      AppUIValue.opacityActionButton),
+                                  AppText.buttonSeeInvoice,
+                                  context,
+                                  () => goTo(context,'/invoice')),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 25),
-                Center(
-                  child: columnOfTextButton(AppText.titleMeeting,AppText.titleNextMeeting,stringNullOrDefaultValue(timing?.time, AppText.noTimingFound),AppText.seeEstimate, ()=>goToAllMeetingForEstimate(context), context),
-                )
-              ],
-            );
-          }
-        },
+                  const SizedBox(height: 25),
+                  Center(
+                    child: columnOfTextButton(
+                        AppText.titleMeeting,
+                        AppText.titleNextMeeting,
+                        stringNullOrDefaultValue(
+                            timing?.time, AppText.noTimingFound),
+                        AppText.seeEstimate,
+                        () => goTo(context,'/meetings'),
+                        context),
+                  ),
+                  const SizedBox(height: 25),
+                  Center(
+                    child: columnOfTextButton(
+                        AppText.titleNextWorkMeeting,
+                        AppText.titleTimingEstimate,
+                        stringNullOrDefaultValue(
+                            timingEstimate?.time, AppText.noTimingFound),
+                        AppText.buttonTextWorkMeeting,
+                            () => goTo(context,'/meetings'),
+                        context),
+                  ),
+                  const SizedBox(height: 25),
+                  Center(
+                    child: columnOfTextButton(
+                      AppText.titleNextWork,
+                      stringNullOrDefaultValue(
+                          workRequest?.title, AppText.noTiltedForWork),
+                      AppText.preTextWorkRequest + stringNullOrDefaultValue(workRequest?.interventionDate,AppText.noDateForWork),
+                      AppText.buttonTextWorkRequest,
+                      () => goTo(context,'/work_request'),
+                      context,
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  Center(
+                    child: columnOfTextButton(
+                      AppText.titleNexEstimate,
+                      AppText.subtitleEstimate,
+                      stringNullOrDefaultValue(estimate?.interventionDateStart,AppText.noDateForWork),
+                      AppText.buttonTextEstimate,
+                          () => goTo(context,'/estimates'),
+                      context,
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                ],
+              );
+            }
+          },
+        ),
       ),
     );
   }
-  void goToCreateWorkRequest(BuildContext context) {
-    Navigator.pushNamed(context, '/co_owner_work_request');
-  }
-  void goToInvoice(BuildContext context) {
-    Navigator.pushNamed(context, '/invoice');
-  }
 
-  void goToAllMeetingForEstimate(BuildContext context) {
-    Navigator.pushNamed(context, '/all_meeting_estimate');
+  void goTo(BuildContext context, String path) {
+    Navigator.pushNamed(context, path);
   }
 }

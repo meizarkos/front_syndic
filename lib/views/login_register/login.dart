@@ -19,7 +19,6 @@ class _ConnectAllState extends State<ConnectAll> {
   var email = 'aaa@aaa.com';
   var password = 'aaa';
   var errorVisibility = false;
-  var loginResponse = [];
 
   @override
   Widget build(BuildContext context) {
@@ -88,11 +87,8 @@ class _ConnectAllState extends State<ConnectAll> {
             child: Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  var res = await sendConnexionRequest(email, password, ()=>_handleErrorVisibility);
-                  setState(() {
-                    loginResponse = res;
-                  });
-                  _pushTo(loginResponse);
+                  var res = await sendConnexionRequest(email, password, ()=>_handleErrorVisibility());
+                  _pushTo(res);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.mainBackgroundColor, // Background color
@@ -147,9 +143,17 @@ class _ConnectAllState extends State<ConnectAll> {
     });
   }
 
-  void _pushTo(List<dynamic> response) {
+  void _pushTo(List<String?> response) {
+    if(response[1] == null){
+      return;
+    }
     if(response[0] == '0') {
-      Navigator.pushNamed(context, response[1]);
+      if(response[2] != null){
+        Navigator.pushNamed(context, response[1]!,arguments : response[2]!);
+      }
+      else{
+        Navigator.pushNamed(context, response[1]!);
+      }
     }
     else{
       return;

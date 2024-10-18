@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:front_syndic/api_handler/request_with_body.dart';
 import '../credential.dart';
 
-Future<List<String>> sendConnexionRequest(String email, String password,Function handleVisibility) async {
+Future<List<String?>> sendConnexionRequest(String email, String password,VoidCallback handleVisibility) async {
   var body = jsonEncode({
     'email': email,
     'password': password,
@@ -12,14 +13,16 @@ Future<List<String>> sendConnexionRequest(String email, String password,Function
     var response = await requestWithBody(url: '/login', method: "POST", body: body);
     if(response.statusCode == 200) {
       Credential.instance.token = 'Bearer ${response.data['token']}';
-      return ['0', response.data['route']];
+      final route = response.data['route'] as String?;
+      final uuid = response.data['uuid'] as String?;
+      return ['0',route,uuid];
     }
     else{
-      handleVisibility(true);
+      handleVisibility();
       return ['1','1'];
     }
   } catch(e) {
-      handleVisibility(true);
+      handleVisibility;
       return ['1','1'];
   }
 }
