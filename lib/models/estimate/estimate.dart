@@ -1,10 +1,10 @@
+import '../timing/timing_estimate.dart';
+
 class AttributesEstimate{
   static const uuid = 'uuid';
   static const workRequestId = 'work_request_id';
   static const artisanId = 'artisan_id';
   static const price = 'price';
-  static const interventionDateStart = 'intervention_date_start';
-  static const interventionDateEnd = 'intervention_date_end';
   static const description = 'description';
   static const commentary = 'commentary';
   static const status = 'status';
@@ -17,11 +17,10 @@ class Estimate {
   final String? workRequestId;
   final String? artisanId;
   final String? price;
-  final String? interventionDateStart;
-  final String? interventionDateEnd;
   final String? description;
   final String? commentary;
   final String? status;
+  final List<TimingEstimate>? timingsEstimate;
   final String? createdAt;
   final String? updatedAt;
 
@@ -30,11 +29,10 @@ class Estimate {
     this.workRequestId,
     this.artisanId,
     this.price,
-    this.interventionDateStart,
-    this.interventionDateEnd,
     this.description,
     this.commentary,
     this.status,
+    this.timingsEstimate,
     this.updatedAt,
     this.createdAt,
   });
@@ -45,11 +43,12 @@ class Estimate {
       workRequestId: json[AttributesEstimate.workRequestId],
       artisanId: json[AttributesEstimate.artisanId],
       price: json[AttributesEstimate.price],
-      interventionDateStart: json[AttributesEstimate.interventionDateStart],
-      interventionDateEnd: json[AttributesEstimate.interventionDateEnd],
       description: json[AttributesEstimate.description],
       commentary: json[AttributesEstimate.commentary],
       status: json[AttributesEstimate.status],
+      timingsEstimate: (json['timing_estimates'] as List<dynamic>)
+          .map((timingEstimateJson) => TimingEstimate.fromJson(timingEstimateJson))
+          .toList(),
       updatedAt: json[AttributesEstimate.updatedAt],
       createdAt: json[AttributesEstimate.createdAt],
     );

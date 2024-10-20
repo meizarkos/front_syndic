@@ -1,11 +1,12 @@
 import 'dart:ffi';
 
+import 'package:front_syndic/models/timing/timing.dart';
+
 class AttributesWorkRequest{
   static const uuid = 'uuid';
   static const category = 'category';
   static const title = 'title';
   static const description = 'description';
-  static const interventionDate = 'intervention_date';
   static const status = 'status';
   static const numberOfEstimate = 'number_of_estimate';
   static const coOwnerId =  'co_owner_id';
@@ -19,9 +20,9 @@ class WorkRequest{
   final String? category;
   final String? title;
   final String? description;
-  final String? interventionDate;
   final String? status;
   final Int? numberOfEstimate;
+  final List<Timing>? timings;
   final String? coOwnerId;
   final String? updatedAt;
   final String? createdAt;
@@ -31,9 +32,9 @@ class WorkRequest{
     this.category,
     this.title,
     this.description,
-    this.interventionDate,
     this.status,
     this.numberOfEstimate,
+    this.timings,
     this.coOwnerId,
     this.updatedAt,
     this.createdAt,
@@ -45,9 +46,11 @@ class WorkRequest{
       category: json[AttributesWorkRequest.category],
       title: json[AttributesWorkRequest.title],
       description: json[AttributesWorkRequest.description],
-      interventionDate: json[AttributesWorkRequest.interventionDate],
       status: json[AttributesWorkRequest.status],
       numberOfEstimate: json[AttributesWorkRequest.numberOfEstimate],
+      timings: (json['timings'] as List<dynamic>)
+          .map((timingJson) => Timing.fromJson(timingJson))
+          .toList(),
       coOwnerId: json[AttributesWorkRequest.coOwnerId],
       updatedAt: json[AttributesWorkRequest.updatedAt],
       createdAt: json[AttributesWorkRequest.createdAt],

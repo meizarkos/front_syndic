@@ -1,6 +1,7 @@
 class AttributesTiming {
   static const uuid = 'uuid';
   static const workRequestId =  'work_request_id';
+  static const artisanId = 'artisan_id';
   static const time = 'time';
   static const status = 'status';
   static const createdAt = 'created_at';
@@ -10,6 +11,7 @@ class AttributesTiming {
 class Timing{
   final String? uuid;
   final String? workRequestId;
+  final String? artisanId;
   final String? time;
   final String? status;
   final String? createdAt;
@@ -19,6 +21,7 @@ class Timing{
   const Timing({
     this.uuid,
     this.workRequestId,
+    this.artisanId,
     this.time,
     this.status,
     this.updatedAt,
@@ -30,6 +33,7 @@ class Timing{
     return Timing(
       uuid: json[AttributesTiming.uuid],
       workRequestId: json[AttributesTiming.workRequestId],
+      artisanId: json[AttributesTiming.artisanId],
       time: json[AttributesTiming.time],
       status: json[AttributesTiming.status],
       updatedAt: json[AttributesTiming.updatedAt],

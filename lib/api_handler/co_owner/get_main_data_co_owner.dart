@@ -8,13 +8,27 @@ import '../request.dart';
 
 Future<Map<String, dynamic>> fetchCoOwnerMainData(String uuid) async {
   try{
-    final response = await request(url: '${APIValue.baseUnion}co_owner_main_data/$uuid', method: "GET");
+    final response = await request(url: '${APIValue.unionCouncil}co_owner_main_data/$uuid', method: "GET");
     final records = response.data;
     final coOwner = CoOwner.fromJson(records["co_owner"]);
-    final workRequest = WorkRequest.fromJson(records["work_request"]);
-    final estimate = Estimate.fromJson(records["estimate"]);
-    final timingEstimate = TimingEstimate.fromJson(records["timing_estimate"]);
-    final timing = Timing.fromJson(records["timing"]);
+
+    var workRequest = const WorkRequest();
+    if(records["work_request"] != null) {
+      workRequest = WorkRequest.fromJson(records["work_request"]);
+    }
+    var estimate = const Estimate();
+    if(records["estimate"] != null) {
+      estimate = Estimate.fromJson(records["estimate"]);
+    }
+    var timingEstimate = const TimingEstimate();
+    if(records["timing_estimate"] != null) {
+      timingEstimate = TimingEstimate.fromJson(records["timing_estimate"]);
+    }
+    var timing = const Timing();
+    if(records["timing"] != null) {
+      timing = Timing.fromJson(records["timing"]);
+    }
+
     return {
       "co_owner": coOwner,
       "work_request": workRequest,

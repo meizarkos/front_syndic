@@ -3,6 +3,7 @@ import 'package:front_syndic/api_handler/co_owner/get_main_data_co_owner.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/co_owner/co_owner.dart';
 import 'package:front_syndic/models/estimate/estimate.dart';
+import 'package:front_syndic/utils/date_to_string/date.dart';
 import 'package:front_syndic/views/union_side/co_owner_main/row_of_text_and_icon.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
@@ -110,7 +111,7 @@ class CoOwnerMain extends StatelessWidget {
                         AppText.titleMeeting,
                         AppText.titleNextMeeting,
                         stringNullOrDefaultValue(
-                            timing?.time, AppText.noTimingFound),
+                            fromStringToStringDate(timing?.time), AppText.noTimingFound),
                         AppText.seeEstimate,
                         () => goTo(context,'/meetings'),
                         context),
@@ -121,7 +122,7 @@ class CoOwnerMain extends StatelessWidget {
                         AppText.titleNextWorkMeeting,
                         AppText.titleTimingEstimate,
                         stringNullOrDefaultValue(
-                            timingEstimate?.time, AppText.noTimingFound),
+                            fromStringToStringDate(timingEstimate?.dateStart), AppText.noTimingFound),
                         AppText.buttonTextWorkMeeting,
                             () => goTo(context,'/meetings'),
                         context),
@@ -130,9 +131,10 @@ class CoOwnerMain extends StatelessWidget {
                   Center(
                     child: columnOfTextButton(
                       AppText.titleNextWork,
-                      stringNullOrDefaultValue(
-                          workRequest?.title, AppText.noTiltedForWork),
-                      AppText.preTextWorkRequest + stringNullOrDefaultValue(workRequest?.interventionDate,AppText.noDateForWork),
+                      trimText(stringNullOrDefaultValue(
+                          workRequest?.title, AppText.noTiltedForWork), 20),
+                      AppText.preTextWorkRequest +
+                          stringNullOrDefaultValue(listTiming(workRequest?.timings, AppText.noDateForWork), AppText.noDateForWork),
                       AppText.buttonTextWorkRequest,
                       () => goTo(context,'/work_request'),
                       context,
@@ -143,7 +145,7 @@ class CoOwnerMain extends StatelessWidget {
                     child: columnOfTextButton(
                       AppText.titleNexEstimate,
                       AppText.subtitleEstimate,
-                      stringNullOrDefaultValue(estimate?.interventionDateStart,AppText.noDateForWork),
+                      stringNullOrDefaultValue(listTimingEstimate(estimate?.timingsEstimate,AppText.noDateForWork), AppText.noDateForWork),
                       AppText.buttonTextEstimate,
                           () => goTo(context,'/estimates'),
                       context,
@@ -161,5 +163,21 @@ class CoOwnerMain extends StatelessWidget {
 
   void goTo(BuildContext context, String path) {
     Navigator.pushNamed(context, path);
+  }
+
+  String? listTiming(List<Timing>? timings, String defaultValue) {
+    final res = handleEmptyList(timings, defaultValue );
+    if(res != null){
+      return res;
+    }
+    return fromStringToStringDate(timings?[0].time);
+  }
+
+  String? listTimingEstimate(List<TimingEstimate>? timingsEstimate, String defaultValue) {
+    final res = handleEmptyList(timingsEstimate, defaultValue );
+    if(res != null){
+      return res;
+    }
+    return fromStringToStringDate(timingsEstimate?[0].dateStart);
   }
 }

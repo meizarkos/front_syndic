@@ -8,4 +8,5 @@ class AppUIValue{
 
 class APIValue{
   static const String baseUnion = 'union/';
+  static const String unionCouncil = 'union_and_council/';
 }
