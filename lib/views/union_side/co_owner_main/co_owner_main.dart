@@ -111,7 +111,7 @@ class CoOwnerMain extends StatelessWidget {
                         AppText.titleMeeting,
                         AppText.titleNextMeeting,
                         stringNullOrDefaultValue(
-                            fromStringToStringDate(timing?.time), AppText.noTimingFound),
+                            fromStringToDateTimeString(timing?.time), AppText.noTimingFound),
                         AppText.seeEstimate,
                         () => goTo(context,'/meetings'),
                         context),
@@ -122,7 +122,7 @@ class CoOwnerMain extends StatelessWidget {
                         AppText.titleNextWorkMeeting,
                         AppText.titleTimingEstimate,
                         stringNullOrDefaultValue(
-                            fromStringToStringDate(timingEstimate?.dateStart), AppText.noTimingFound),
+                            fromStringToDateTimeString(timingEstimate?.dateStart), AppText.noTimingFound),
                         AppText.buttonTextWorkMeeting,
                             () => goTo(context,'/meetings'),
                         context),
@@ -132,11 +132,11 @@ class CoOwnerMain extends StatelessWidget {
                     child: columnOfTextButton(
                       AppText.titleNextWork,
                       trimText(stringNullOrDefaultValue(
-                          workRequest?.title, AppText.noTiltedForWork), 20),
+                          workRequest?.title, AppText.noTitleForWork), 20),
                       AppText.preTextWorkRequest +
                           stringNullOrDefaultValue(listTiming(workRequest?.timings, AppText.noDateForWork), AppText.noDateForWork),
                       AppText.buttonTextWorkRequest,
-                      () => goTo(context,'/work_request'),
+                      () => goTo(context,'/co_owner/work_requests', arguments: uuid),
                       context,
                     ),
                   ),
@@ -161,8 +161,8 @@ class CoOwnerMain extends StatelessWidget {
     );
   }
 
-  void goTo(BuildContext context, String path) {
-    Navigator.pushNamed(context, path);
+  void goTo(BuildContext context, String path, {Object? arguments}) {
+    Navigator.pushNamed(context, path, arguments: arguments);
   }
 
   String? listTiming(List<Timing>? timings, String defaultValue) {
@@ -170,7 +170,7 @@ class CoOwnerMain extends StatelessWidget {
     if(res != null){
       return res;
     }
-    return fromStringToStringDate(timings?[0].time);
+    return fromStringToDateTimeString(timings?[0].time);
   }
 
   String? listTimingEstimate(List<TimingEstimate>? timingsEstimate, String defaultValue) {
@@ -178,6 +178,6 @@ class CoOwnerMain extends StatelessWidget {
     if(res != null){
       return res;
     }
-    return fromStringToStringDate(timingsEstimate?[0].dateStart);
+    return fromStringToDateTimeString(timingsEstimate?[0].dateStart);
   }
 }

@@ -1,3 +1,5 @@
+import 'package:front_syndic/text/fr.dart';
+
 class DateErrorStrings {
   static const noDateFound = "No date found";
 }
@@ -54,6 +56,15 @@ String? fromStringToStringDate(String? date){
   catch(e){
     return null;
   }
+}
+
+String? fromStringToDateTimeString(String? date){
+  final dateLocal = fromStringToStringDate(date);
+  if(dateLocal == null){
+    return DateErrorStrings.noDateFound;
+  }
+  final time = date?.substring(11, 16);
+  return "$dateLocal ${AppText.at} $time";
 }
 
 String fromCalendarToString(int day, int month, int year){

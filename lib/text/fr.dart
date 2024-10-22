@@ -2,6 +2,11 @@ class AppText {
   /* General API */
   static const String apiErrorText = 'Une erreur est survenue';
   static const String apiNoResult = 'Pas de résultat';
+  static const String at = 'à';
+
+  /* General not found */
+
+  static const String noDescriptionWorkRequest = 'Pas de description';
 
   /* LoginStrings */
   static const String loginTitle = 'Connexion';
@@ -32,7 +37,7 @@ class AppText {
 
   static const String titleNextWork = 'Mes demandes';
   static const String noDateForWork = 'Pas de date fixée';
-  static const String noTiltedForWork = 'Pas de titre';
+  static const String noTitleForWork = 'Pas de titre';
   static const String buttonTextWorkRequest = 'Voir mes demandes';
   static const String preTextWorkRequest = 'Devis pour le : ';
 

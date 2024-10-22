@@ -21,7 +21,7 @@ class WorkRequest{
   final String? title;
   final String? description;
   final String? status;
-  final Int? numberOfEstimate;
+  final int? numberOfEstimate;
   final List<Timing>? timings;
   final String? coOwnerId;
   final String? updatedAt;
