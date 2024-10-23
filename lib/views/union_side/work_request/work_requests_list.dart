@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:front_syndic/core_value.dart';
+import 'package:front_syndic/views/union_side/work_request/selector_row.dart';
 import 'package:front_syndic/views/union_side/work_request/work_request_cell.dart';
 
 import '../../../api_handler/co_owner/get_work_request.dart';
 import '../../../models/work_request/work_request.dart';
 import '../../../text/fr.dart';
+import '../../../widget/button/add_floating_button.dart';
+import '../../../widget/search_bar/search_bar.dart';
 
 class WorkRequestsList extends StatefulWidget {
   const WorkRequestsList({
@@ -18,6 +22,11 @@ class WorkRequestsList extends StatefulWidget {
 }
 
 class _WorkRequestsListState extends State<WorkRequestsList> {
+  final List<String> _workRequests = [AppText.workRequestsPending, AppText.workRequestsHistory];
+  final futureList = [fetchWorkRequestFromCoOwnerPending, fetchWorkRequestFromCoOwnerPast];
+  String searchValue = '';
+  int indexSelected = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,15 +36,32 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
               child: Column(
                 children: [
                   const SizedBox(height: 25),
-                  const Text(
-                    "FEUR",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                  Padding(
+                    padding: const EdgeInsets.only(left: AppUIValue.spaceScreenToAny, top : 25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: _workRequests.asMap().entries.map((entry) {
+                        int index = entry.key; // Access the index
+                        String title = entry.value; // Access the title
+                        var isSelected = index == indexSelected;
+                        return SelectorHistoricCell(
+                          title: title,
+                          selected: isSelected,
+                          onTap : ()=> _changeSelected(title),
+                        );
+                      }).toList(),
                     ),
                   ),
+                  const SizedBox(height: 15),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: SearchBarCustom(
+                      onChanged: _searchValueChange,
+                    ),
+                  ),
+                  const SizedBox(height: 15),
                   FutureBuilder(
-                    future: fetchWorkRequestFromCoOwner(widget.coOwnerUuid),
+                    future: futureList[indexSelected](widget.coOwnerUuid),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
@@ -44,11 +70,13 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                       } else if (snapshot.data!.isEmpty) {
                         return const Center(child: Text(AppText.apiNoResult));
                       } else {
-                        final dataFiltered = snapshot.data as List<WorkRequest>;
-                        final size = dataFiltered.length + 1;
+                        final dataFiltered = filteredData(snapshot.data);
+                        if (dataFiltered == null || dataFiltered.isEmpty) {
+                          return const Center(child: Text(AppText.apiNoResult));
+                        }
                         return Expanded(
                           child: ListView.builder(
-                            itemCount: size,
+                            itemCount: dataFiltered.length + 1,
                             itemBuilder: (context, index) {
                               if (index == dataFiltered.length) {
                                 return const SizedBox(height: 15);
@@ -72,7 +100,32 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                 ],
               ),
             )
-        )
+        ),
+        floatingActionButton: addFloatingButton(() {
+          //Navigator.pushNamed(context, '/add_work_request', arguments: widget.coOwnerUuid);
+        }),
     );
+  }
+
+
+
+  void _changeSelected(String title) {
+    setState(() {
+      indexSelected = _workRequests.indexOf(title);
+    });
+  }
+  void _searchValueChange(String value) {
+    setState(() {
+      searchValue = value;
+    });
+  }
+
+  List<WorkRequest>? filteredData(List<WorkRequest>? data) {
+    return data?.where((workRequest) {
+      if (workRequest.title == null) {
+        return false;
+      }
+      return workRequest.title!.toLowerCase().startsWith(searchValue.toLowerCase());
+    }).toList();
   }
 }

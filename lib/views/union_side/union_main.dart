@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/text/fr.dart';
+import 'package:front_syndic/widget/button/add_floating_button.dart';
 import 'package:front_syndic/widget/search_bar/search_bar.dart';
 
 import '../../api_handler/co_owner/get_co_owner_of_union.dart';
@@ -92,30 +93,9 @@ class _UnionMainState extends State<UnionMain> {
           ],
         ),
       ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: FloatingActionButton.extended(
-          onPressed: () {
-            //Navigator.pushNamed(context, '/register_co_owner');
-          },
-          backgroundColor: Colors.black,
-          label: const Row(
-            children: [
-              Text(
-                AppText.unionMainAddButton,
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(width: 8), // Add space between text and icon
-              Icon(
-                Icons.add_box,
-                color: Colors.white,
-              ),
-            ],
-          ),
-        ),
-      ),
+      floatingActionButton: addFloatingButton(() {
+        //Navigator.pushNamed(context, '/add_co_owner');
+      }),
     );
   }
 

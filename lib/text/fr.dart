@@ -45,5 +45,7 @@ class AppText {
   static const String buttonTextEstimate = 'Voir mes devis';
   static const String subtitleEstimate = 'Travaux prévus pour le : ';
 
-
+  /* WorkRequest */
+  static const String workRequestsPending = 'En attente';
+  static const String workRequestsHistory = 'Historique';
 }
