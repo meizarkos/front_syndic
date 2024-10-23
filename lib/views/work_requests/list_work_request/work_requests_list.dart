@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/core_value.dart';
-import 'package:front_syndic/views/union_side/work_request/selector_row.dart';
-import 'package:front_syndic/views/union_side/work_request/work_request_cell.dart';
+import 'package:front_syndic/views/work_requests/list_work_request/selector_row.dart';
+import 'package:front_syndic/views/work_requests/list_work_request/work_request_cell.dart';
 
-import '../../../api_handler/co_owner/get_work_request.dart';
-import '../../../models/work_request/work_request.dart';
-import '../../../text/fr.dart';
-import '../../../widget/button/add_floating_button.dart';
-import '../../../widget/search_bar/search_bar.dart';
+import '../../../../api_handler/co_owner/get_work_request.dart';
+import '../../../../models/work_request/work_request.dart';
+import '../../../../text/fr.dart';
+import '../../../../widget/button/add_floating_button.dart';
+import '../../../../widget/search_bar/search_bar.dart';
 
 class WorkRequestsList extends StatefulWidget {
   const WorkRequestsList({
@@ -102,7 +102,7 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
             )
         ),
         floatingActionButton: addFloatingButton(() {
-          //Navigator.pushNamed(context, '/add_work_request', arguments: widget.coOwnerUuid);
+          Navigator.pushNamed(context, '/work_requests/pictures');
         }),
     );
   }

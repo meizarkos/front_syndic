@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/union_side/co_owner_main/co_owner_main.dart';
 import 'package:front_syndic/views/union_side/union_main.dart';
-import 'package:front_syndic/views/union_side/work_request/work_requests_list.dart';
+import 'package:front_syndic/views/work_requests/create_work_request/take_picture.dart';
+import 'package:front_syndic/views/work_requests/list_work_request/work_requests_list.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const ConnectAll(),
         '/union_main': (context) => const UnionMain(),
+        '/work_requests/pictures': (context) => CameraScreen(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
                 ),
               );
             }
+            break;
 
           default:
             return null;

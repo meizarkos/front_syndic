@@ -3,10 +3,10 @@ import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/utils/date_to_string/date.dart';
 import 'package:front_syndic/utils/string_handler/handle_string.dart';
 
-import '../../../models/timing/timing.dart';
-import '../../../text/fr.dart';
-import '../../../widget/decoration/decoration_round_main_color.dart';
-import '../../../widget/text_style/text_style_main_color.dart';
+import '../../../../models/timing/timing.dart';
+import '../../../../text/fr.dart';
+import '../../../../widget/decoration/decoration_round_main_color.dart';
+import '../../../../widget/text_style/text_style_main_color.dart';
 
 class WorkRequestCell extends StatelessWidget {
   const WorkRequestCell({
