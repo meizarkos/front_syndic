@@ -48,4 +48,10 @@ class AppText {
   /* WorkRequest */
   static const String workRequestsPending = 'En attente';
   static const String workRequestsHistory = 'Historique';
+
+  /* takePictureWorkRequest */
+  static const String takePictureSkip = 'Passer cette étape';
+  static const String takePictureSave = 'Continuer';
+  static const String takePictureEraseAll = 'Tout effacer';
+  static const String takePictureApprove = 'Enregistrer cette photo ?';
 }

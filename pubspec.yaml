@@ -30,4 +30,5 @@ flutter:
   assets:
     - assets/co_owner.svg
     - assets/location.svg
+    - assets/close.svg
   uses-material-design: true
