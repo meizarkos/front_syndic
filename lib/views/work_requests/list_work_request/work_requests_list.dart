@@ -1,7 +1,9 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/selector_row.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_request_cell.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../api_handler/co_owner/get_work_request.dart';
 import '../../../../models/work_request/work_request.dart';
@@ -101,13 +103,20 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
               ),
             )
         ),
-        floatingActionButton: addFloatingButton(() {
-          Navigator.pushNamed(context, '/work_requests/pictures');
+        floatingActionButton: addFloatingButton(()async {
+          final CameraDescription camera = await getCamera();
+          final permission = await _checkPermissions();
+          if(!permission){
+            return;
+          }
+          _goTo(camera);
         }),
     );
   }
 
-
+  void _goTo(CameraDescription camera){
+    Navigator.pushNamed(context, '/work_requests/pictures',arguments: camera);
+  }
 
   void _changeSelected(String title) {
     setState(() {
@@ -127,5 +136,27 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
       }
       return workRequest.title!.toLowerCase().startsWith(searchValue.toLowerCase());
     }).toList();
+  }
+
+  Future<CameraDescription> getCamera() async {
+    final cameras = await availableCameras();
+    return cameras.first;
+  }
+
+  void _goToCategory() {
+    Navigator.pushNamed(context, '/work_requests/category');
+  }
+
+  Future<bool> _checkPermissions() async {
+    PermissionStatus status = await Permission.camera.status;
+    if (!status.isGranted) {
+      status = await Permission.camera.request();
+    }
+
+    if(!status.isGranted){
+      _goToCategory();
+      return false;
+    }
+    return true;
   }
 }
