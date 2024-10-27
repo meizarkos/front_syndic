@@ -12,7 +12,7 @@ Future<Map<String, dynamic>> fetchCoOwnerMainData(String uuid) async {
     final records = response.data;
     final coOwner = CoOwner.fromJson(records["co_owner"]);
 
-    var workRequest = const WorkRequest();
+    var workRequest = WorkRequest();
     if(records["work_request"] != null) {
       workRequest = WorkRequest.fromJson(records["work_request"]);
     }

@@ -4,6 +4,11 @@ class AppText {
   static const String apiNoResult = 'Pas de résultat';
   static const String at = 'à';
 
+  /*General*/
+  static const String save = 'Enregister';
+  static const String minute = 'Minute';
+  static const String hour = 'Heure';
+
   /* General not found */
 
   static const String noDescriptionWorkRequest = 'Pas de description';
@@ -54,4 +59,15 @@ class AppText {
   static const String takePictureSave = 'Continuer';
   static const String takePictureEraseAll = 'Tout effacer';
   static const String takePictureApprove = 'Enregistrer cette photo ?';
+
+  /* createWorkRequest */
+  static const String title = 'Titre';
+  static const String description = 'Description';
+  static const String descriptionPlaceHolder = 'Décrivez votre demande';
+  static const String titlePlaceHolder = 'Titre de votre demande';
+  static const String createTitleWorkErrorText = 'Veuillez remplir tous les champs';
+  static const String createCategoryTitle = 'Choisissez une catégorie';
+  static const List<String> listOfTaskCategory = ['Plomberie', 'Electricité', 'Peinture', 'Sol', 'Menuiserie'];
+  static const String createWorkRequestCategoryIsEmpty = 'Veuillez choisir une catégorie';
+  static const String createWorkRequestTimingWrong = 'Veuillez choisir une date et une heure correcte';
 }

@@ -4,15 +4,16 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:front_syndic/core_value.dart';
+import 'package:front_syndic/models/work_request/create_work_request.dart';
 
 import '../../../text/fr.dart';
 
 class CameraScreen extends StatefulWidget {
-  final CameraDescription camera;
+  final CreateWorkRequest createWorkRequest;
 
   const CameraScreen({
     super.key,
-    required this.camera
+    required this.createWorkRequest
   });
 
   @override
@@ -31,7 +32,7 @@ class CameraScreenState extends State<CameraScreen> {
   void initState() {
     super.initState();
     _controller = CameraController(
-      widget.camera,
+      widget.createWorkRequest.camera!,
       ResolutionPreset.high,
     );
     _initializeControllerFuture = _controller.initialize();
@@ -52,13 +53,14 @@ class CameraScreenState extends State<CameraScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
+            dispose();
             Navigator.pop(context); // Return to previous screen
           },
         ),
         actions: [
           TextButton(
             onPressed: () {
-              // Define behavior for skipping
+              _goToCategory();
             },
             child: Text(
               AppText.takePictureSkip,
@@ -70,27 +72,18 @@ class CameraScreenState extends State<CameraScreen> {
           ),
           GestureDetector(
             onTap: () {
-              if (takePicture == 0) {
-                setState(() {
-                  imageStore = null;
-                  takePicture = 1;
-                });
-              }
+              setState(() {
+                imageStore = null;
+                takePicture = 1;
+              });
             },
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  takePicture = 1;
-                });
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(right: AppUIValue.spaceScreenToAny),
-                child: SvgPicture.asset(
-                  'assets/close.svg',
-                  color: takePicture == 0 ? Colors.white : Colors.transparent,
-                  width: 20,
-                  height: 20,
-                ),
+            child: Padding(
+              padding: const EdgeInsets.only(right: AppUIValue.spaceScreenToAny),
+              child: SvgPicture.asset(
+                'assets/close.svg',
+                color: takePicture == 0 ? Colors.white : Colors.transparent,
+                width: 20,
+                height: 20,
               ),
             ),
           )
@@ -147,7 +140,7 @@ class CameraScreenState extends State<CameraScreen> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Define behavior for saving and leaving
+                            _goToCategory();
                           },
                           child: SizedBox(
                             width: 100,
@@ -192,7 +185,7 @@ class CameraScreenState extends State<CameraScreen> {
                           images.add(imageStore!);
                         }
                         if(images.length == 3){
-                          //push to next screen
+                          _goToCategory();
                         }
                         takePicture = 1;
                       });
@@ -221,5 +214,11 @@ class CameraScreenState extends State<CameraScreen> {
         },
       ),
     );
+  }
+
+  void _goToCategory() {
+    dispose();
+    widget.createWorkRequest.images = images;
+    Navigator.pushNamed(context, '/work_requests/category',arguments: widget.createWorkRequest);
   }
 }

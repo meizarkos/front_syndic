@@ -1,0 +1,130 @@
+import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+import 'package:front_syndic/color.dart';
+import 'package:front_syndic/core_value.dart';
+import 'package:front_syndic/widget/decoration/text_field_deco_main.dart';
+import 'package:front_syndic/widget/header/app_bar_back_button.dart';
+import 'package:front_syndic/widget/visibility/error.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import '../../../models/work_request/create_work_request.dart';
+import '../../../text/fr.dart';
+import '../../../widget/button/elevated_button_opacity.dart';
+
+class TitleAndDesc extends StatefulWidget {
+  const TitleAndDesc({
+    super.key,
+    required this.createWorkRequest,
+  });
+
+  final CreateWorkRequest createWorkRequest;
+
+  @override
+  State<TitleAndDesc> createState() => _TitleAndDescState();
+}
+
+class _TitleAndDescState extends State<TitleAndDesc> {
+  var errorVisible = false;
+  var titleValue = '';
+  var descriptionValue = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: appBarBackButton(context),
+      body: Padding(
+        padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppText.title,
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+            const SizedBox(height: 2),
+            TextField(
+              decoration: textFieldMainDeco(AppText.titlePlaceHolder),
+              onChanged: (value) {
+                titleValue = value;
+              },
+              maxLength: 50,
+            ),
+            const SizedBox(height: 15),
+            Text(
+              AppText.description,
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+            const SizedBox(height: 2),
+            TextField(
+              decoration : textFieldMainDeco(AppText.descriptionPlaceHolder),
+              onChanged: (value) {
+                descriptionValue = value;
+              },
+              maxLength: 1280,
+              maxLines: 10,
+            ),
+            const SizedBox(height: 7),
+            ErrorVisibility(errorVisibility: errorVisible, errorText: AppText.createTitleWorkErrorText),
+            const SizedBox(height: 7),
+            Center(
+              child: elevatedButtonOpacityAndTextColor(
+                AppColors.mainBackgroundColor,
+                AppText.save,
+                context,
+                () async {
+                  if(titleValue.isEmpty || descriptionValue.isEmpty){
+                    setState(() {
+                      errorVisible = true;
+                    });
+                    return;
+                  }
+                  widget.createWorkRequest.workRequest.title = titleValue;
+                  widget.createWorkRequest.workRequest.description = descriptionValue;
+                  final CameraDescription camera = await getCamera();
+                  final permission = await _checkPermissions();
+                  if(!permission){
+                    return;
+                  }
+                  _goToCamera(camera);
+                },
+                AppColors.mainTextColor
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<CameraDescription> getCamera() async {
+    final cameras = await availableCameras();
+    return cameras.first;
+  }
+
+  void _goToCategory() {
+    Navigator.pushNamed(context, '/work_requests/category');
+  }
+
+  void _goToCamera(CameraDescription camera) {
+    widget.createWorkRequest.camera = camera;
+    if(widget.createWorkRequest.camera == null){
+      _goToCategory();
+      return;
+    }
+    Navigator.pushNamed(context, '/work_requests/pictures', arguments: widget.createWorkRequest);
+  }
+
+  Future<bool> _checkPermissions() async {
+    PermissionStatus status = await Permission.camera.status;
+    if (!status.isGranted) {
+      status = await Permission.camera.request();
+    }
+
+    if(!status.isGranted){
+      _goToCategory();
+      return false;
+    }
+    return true;
+  }
+}

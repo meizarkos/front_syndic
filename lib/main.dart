@@ -4,8 +4,12 @@ import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/union_side/co_owner_main/co_owner_main.dart';
 import 'package:front_syndic/views/union_side/union_main.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category.dart';
+import 'package:front_syndic/views/work_requests/create_work_request/chose_date_time.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/take_picture.dart';
+import 'package:front_syndic/views/work_requests/create_work_request/title_and_desc.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_requests_list.dart';
+
+import 'models/work_request/create_work_request.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +53,6 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const ConnectAll(),
         '/union_main': (context) => const UnionMain(),
-        '/work_requests/category': (context) => const WorkRequestCategory(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
@@ -74,13 +77,44 @@ class MyApp extends StatelessWidget {
               );
             }
             break;
-
+          case '/work_requests/title_and_desc':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => TitleAndDesc(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
           case '/work_requests/pictures':
             final arguments = settings.arguments;
-            if (arguments is CameraDescription) {
+            if (arguments is CreateWorkRequest) {
               return MaterialPageRoute(
                 builder: (context) => CameraScreen(
-                  camera: arguments,
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/work_requests/category':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => WorkRequestCategory(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/work_requests/chose_date_time':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => ChoseDateTime(
+                  createWorkRequest: arguments,
                 ),
               );
             }

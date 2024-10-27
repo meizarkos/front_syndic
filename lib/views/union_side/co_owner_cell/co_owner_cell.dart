@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/utils/string_handler/handle_string.dart';
 import 'package:front_syndic/widget/text_style/text_style_main_color.dart';

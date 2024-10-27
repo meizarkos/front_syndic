@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:front_syndic/models/timing/timing.dart';
 
 class AttributesWorkRequest{
@@ -16,18 +14,18 @@ class AttributesWorkRequest{
 }
 
 class WorkRequest{
-  final String? uuid;
-  final String? category;
-  final String? title;
-  final String? description;
-  final String? status;
-  final int? numberOfEstimate;
-  final List<Timing>? timings;
-  final String? coOwnerId;
-  final String? updatedAt;
-  final String? createdAt;
+  String? uuid;
+ String? category;
+ String? title;
+ String? description;
+ String? status;
+ int? numberOfEstimate;
+ List<Timing>? timings;
+ String? coOwnerId;
+ String? updatedAt;
+ String? createdAt;
 
-  const WorkRequest({
+  WorkRequest({
     this.uuid,
     this.category,
     this.title,
