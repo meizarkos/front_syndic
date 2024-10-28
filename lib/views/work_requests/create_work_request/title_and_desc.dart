@@ -81,12 +81,17 @@ class _TitleAndDescState extends State<TitleAndDesc> {
                   }
                   widget.createWorkRequest.workRequest.title = titleValue;
                   widget.createWorkRequest.workRequest.description = descriptionValue;
-                  final CameraDescription camera = await getCamera();
                   final permission = await _checkPermissions();
                   if(!permission){
                     return;
                   }
-                  _goToCamera(camera);
+                  final camera = await _getCamera();
+                  widget.createWorkRequest.camera = camera;
+                  if(widget.createWorkRequest.camera == null){
+                    _goToCategory();
+                    return;
+                  }
+                  _goToCamera();
                 },
                 AppColors.mainTextColor
               ),
@@ -106,12 +111,7 @@ class _TitleAndDescState extends State<TitleAndDesc> {
     Navigator.pushNamed(context, '/work_requests/category');
   }
 
-  void _goToCamera(CameraDescription camera) {
-    widget.createWorkRequest.camera = camera;
-    if(widget.createWorkRequest.camera == null){
-      _goToCategory();
-      return;
-    }
+  void _goToCamera() {
     Navigator.pushNamed(context, '/work_requests/pictures', arguments: widget.createWorkRequest);
   }
 
@@ -126,5 +126,10 @@ class _TitleAndDescState extends State<TitleAndDesc> {
       return false;
     }
     return true;
+  }
+
+  Future<CameraDescription> _getCamera() async {
+    final cameras = await availableCameras();
+    return cameras.first;
   }
 }

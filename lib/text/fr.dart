@@ -3,6 +3,7 @@ class AppText {
   static const String apiErrorText = 'Une erreur est survenue';
   static const String apiNoResult = 'Pas de résultat';
   static const String at = 'à';
+  static const String le = 'Le';
 
   /*General*/
   static const String save = 'Enregister';
@@ -69,5 +70,6 @@ class AppText {
   static const String createCategoryTitle = 'Choisissez une catégorie';
   static const List<String> listOfTaskCategory = ['Plomberie', 'Electricité', 'Peinture', 'Sol', 'Menuiserie'];
   static const String createWorkRequestCategoryIsEmpty = 'Veuillez choisir une catégorie';
-  static const String createWorkRequestTimingWrong = 'Veuillez choisir une date et une heure correcte';
+  static const String createWorkRequestTimingWrong = 'Veuillez choisir une date de disponibilité';
+  static const String createWorkRequestTiming = 'Sélectionner le';
 }

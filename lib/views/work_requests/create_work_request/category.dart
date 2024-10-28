@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
@@ -94,4 +95,11 @@ class _WorkRequestCategoryState extends State<WorkRequestCategory> {
       Navigator.pushNamed(context, '/work_requests/chose_date_time', arguments: widget.createWorkRequest);
     }
   }
+
+  Future<CameraDescription> _getCamera() async {
+    final cameras = await availableCameras();
+    return cameras.first;
+  }
+
+
 }

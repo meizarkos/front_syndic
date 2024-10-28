@@ -4,7 +4,7 @@ import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/union_side/co_owner_main/co_owner_main.dart';
 import 'package:front_syndic/views/union_side/union_main.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category.dart';
-import 'package:front_syndic/views/work_requests/create_work_request/chose_date_time.dart';
+import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/take_picture.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/title_and_desc.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_requests_list.dart';

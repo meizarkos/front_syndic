@@ -31,6 +31,7 @@ class CameraScreenState extends State<CameraScreen> {
   @override
   void initState() {
     super.initState();
+    images = widget.createWorkRequest.images;
     _controller = CameraController(
       widget.createWorkRequest.camera!,
       ResolutionPreset.high,
@@ -40,7 +41,6 @@ class CameraScreenState extends State<CameraScreen> {
 
   @override
   void dispose() {
-    // Dispose of the controller when the widget is disposed.
     _controller.dispose();
     super.dispose();
   }
@@ -53,7 +53,6 @@ class CameraScreenState extends State<CameraScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            dispose();
             Navigator.pop(context); // Return to previous screen
           },
         ),
@@ -100,36 +99,36 @@ class CameraScreenState extends State<CameraScreen> {
                   child: CameraPreview(_controller),
                 ),
                 Positioned(
-                  bottom: 30,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () async {
-                        try {
-                          await _initializeControllerFuture;
-                          final image = await _controller.takePicture();
-                          setState(() {
-                            takePicture = 0;
-                            imageStore = Image.file(File(image.path));
-                          });
-                        } catch (e) {
-                          print(e);
-                        }
-                      },
-                      child: Container(
-                        width: 80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(40),
-                          border: Border.all(
-                            color: takePicture == 1 ? Colors.white : Colors.transparent, // Outline color
-                            width: 7, // Outline width
+                    bottom: 30,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () async {
+                          try {
+                            await _initializeControllerFuture;
+                            final image = await _controller.takePicture();
+                            setState(() {
+                              takePicture = 0;
+                              imageStore = Image.file(File(image.path));
+                            });
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(40),
+                            border: Border.all(
+                              color: takePicture == 1 ? Colors.white : Colors.transparent, // Outline color
+                              width: 7, // Outline width
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  )
+                    )
                 ),
                 Positioned(
                   bottom: 20, left: 0, right: 0,
@@ -181,11 +180,11 @@ class CameraScreenState extends State<CameraScreen> {
                   onTap: () {
                     if (takePicture == 0) {
                       setState(() {
+                        if(images.length == 3){
+                          images.removeLast();
+                        }
                         if(imageStore != null){
                           images.add(imageStore!);
-                        }
-                        if(images.length == 3){
-                          _goToCategory();
                         }
                         takePicture = 1;
                       });
