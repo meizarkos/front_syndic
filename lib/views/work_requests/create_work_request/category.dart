@@ -95,11 +95,4 @@ class _WorkRequestCategoryState extends State<WorkRequestCategory> {
       Navigator.pushNamed(context, '/work_requests/chose_date_time', arguments: widget.createWorkRequest);
     }
   }
-
-  Future<CameraDescription> _getCamera() async {
-    final cameras = await availableCameras();
-    return cameras.first;
-  }
-
-
 }

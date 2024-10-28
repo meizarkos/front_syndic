@@ -216,7 +216,7 @@ class CameraScreenState extends State<CameraScreen> {
   }
 
   void _goToCategory() {
-    dispose();
+    //dispose();
     widget.createWorkRequest.images = images;
     Navigator.pushNamed(context, '/work_requests/category',arguments: widget.createWorkRequest);
   }
