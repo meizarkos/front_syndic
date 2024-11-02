@@ -1,4 +1,5 @@
 import 'package:front_syndic/text/fr.dart';
+import 'package:intl/intl.dart';
 
 class DateErrorStrings {
   static const noDateFound = "No date found";
@@ -130,4 +131,26 @@ String fromDateTimeToStringForApi(DateTime? date){
     day = "0$day";
   }
   return "$month/$day/$year";
+}
+
+String? formatStringToApiDate(String? dateString,String formatExit){
+  if(dateString == null){
+    return null;
+  }
+  DateTime? parsedDate;
+  List<String> formats = ["yyyy-M-d", "yyyy-MM-dd","yyyy-MM-d", "yyyy-M-dd"];
+  for (String format in formats) {
+    try {
+      parsedDate = DateFormat(format).parseStrict(dateString);
+      break;
+    } catch (e) {
+      continue;
+    }
+  }
+
+  if (parsedDate == null) {
+    return "Invalid date format";
+  }
+
+  return DateFormat(formatExit).format(parsedDate);
 }
