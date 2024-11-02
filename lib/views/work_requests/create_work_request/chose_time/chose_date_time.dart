@@ -28,13 +28,18 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay? selectedTime;
 
-  List<DateTime> selectedDates = [];
   bool errorVisibility = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.createWorkRequest.workRequest.timings ??= [];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarBackButton(context),
+      appBar: appBarBackButton(context,title : AppText.createWorkRequestInterventionDate),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -57,17 +62,23 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
               ),
             ),
             const SizedBox(height: 20),
-            ...selectedDates.map((date) {
-              return CreateWorkRequestCellTime(
-                date: date,
-                onDelete: () {
-                  setState(() {
-                    selectedDates.remove(
-                        date); // Removed `!` assuming selectedDates is not nullable
-                  });
-                },
-              );
-            }),
+            if (widget.createWorkRequest.workRequest.timings != null &&
+                widget.createWorkRequest.workRequest.timings!.isNotEmpty)
+              ...widget.createWorkRequest.workRequest.timings!.map((date) {
+                if(date.date == null || date.time == null){
+                  return const SizedBox();
+                }
+                return CreateWorkRequestCellTime(
+                  date: date.date!,
+                  time: date.time!,
+                  onDelete: () {
+                    setState(() {
+                      widget.createWorkRequest.workRequest.timings!.remove(date);
+                    });
+                  },
+                );
+              }),
+            const SizedBox(height: 35),
             elevatedButtonOpacityAndTextColor(
               AppColors.mainBackgroundColor,
               AppText.save,
@@ -110,29 +121,26 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
         pickedTime.hour,
         pickedTime.minute,
       );
-      if (selectedDates.length > 10) {
-        selectedDates.removeLast();
+      widget.createWorkRequest.workRequest.timings ??= [];
+      if (widget.createWorkRequest.workRequest.timings!.length > 10) {
+        widget.createWorkRequest.workRequest.timings!.removeLast();
       }
-      selectedDates.add(selectedDate);
+      widget.createWorkRequest.workRequest.timings!.add(
+        Timing(
+          date: '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}',
+          time: '${selectedDate.hour}:${selectedDate.minute}',
+        ),
+      );
     });
   }
 
   void _onSave() {
-    if (selectedDates.isEmpty) {
+    if (widget.createWorkRequest.workRequest.timings == null || widget.createWorkRequest.workRequest.timings!.isEmpty) {
       setState(() {
         errorVisibility = true;
       });
       return;
     }
-    widget.createWorkRequest.workRequest.timings = [];
-    for (int i = 0; i < selectedDates.length; i++) {
-      widget.createWorkRequest.workRequest.timings?.add(Timing(
-        time: selectedDates[i].toString(),
-      ));
-    }
-    setState(() {
-      selectedDates = [];
-    });
-    Navigator.pop(context);
+    Navigator.pushNamed(context, '/work_requests/recap', arguments: widget.createWorkRequest);
   }
 }

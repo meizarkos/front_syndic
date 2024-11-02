@@ -2,6 +2,7 @@ class AttributesTimingEstimate {
   static const uuid = 'uuid';
   static const estimateId =  'estimate_id';
   static const dateStart = 'date_start';
+  static const timeStart = 'time_start';
   static const dateEnd = 'date_end';
   static const status = 'status';
   static const createdAt = 'created_at';
@@ -12,6 +13,7 @@ class TimingEstimate{
   final String? uuid;
   final String? estimateId;
   final String? dateStart;
+  final String? timeStart;
   final String? dateEnd;
   final String? status;
   final String? createdAt;
@@ -22,6 +24,7 @@ class TimingEstimate{
     this.uuid,
     this.estimateId,
     this.dateStart,
+    this.timeStart,
     this.dateEnd,
     this.status,
     this.updatedAt,
@@ -34,6 +37,7 @@ class TimingEstimate{
       uuid: json[AttributesTimingEstimate.uuid],
       estimateId: json[AttributesTimingEstimate.estimateId],
       dateStart: json[AttributesTimingEstimate.dateStart],
+      timeStart: json[AttributesTimingEstimate.timeStart],
       dateEnd: json[AttributesTimingEstimate.dateEnd],
       status: json[AttributesTimingEstimate.status],
       updatedAt: json[AttributesTimingEstimate.updatedAt],

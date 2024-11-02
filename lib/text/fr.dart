@@ -64,6 +64,8 @@ class AppText {
   /* createWorkRequest */
   static const String title = 'Titre';
   static const String description = 'Description';
+  static const String category = 'Catégorie';
+  static const String yourDisposition = 'Vos disponibilitées';
   static const String descriptionPlaceHolder = 'Décrivez votre demande';
   static const String titlePlaceHolder = 'Titre de votre demande';
   static const String createTitleWorkErrorText = 'Veuillez remplir tous les champs';
@@ -72,4 +74,7 @@ class AppText {
   static const String createWorkRequestCategoryIsEmpty = 'Veuillez choisir une catégorie';
   static const String createWorkRequestTimingWrong = 'Veuillez choisir une date de disponibilité';
   static const String createWorkRequestTiming = 'Sélectionner le';
+  static const String createWorkRequestInterventionDate = 'Date d\'intervention';
+  static const String createWorkRequestRecap = 'Récapitulatif';
+  static const String createWorkRequestConfirm = 'Confirmer cette demande';
 }

@@ -68,15 +68,20 @@ String? fromStringToDateTimeString(String? date){
 }
 
 String fromCalendarToString(int day, int month, int year){
-  var monthString = month.toString();
-  if(month.toString().length < 2){
-    monthString = "0$month";
+  try{
+    var monthString = month.toString();
+    if(month.toString().length < 2){
+      monthString = "0$month";
+    }
+    var dayString = day.toString();
+    if(day.toString().length < 2){
+      dayString = "0$day";
+    }
+    return "$dayString/$monthString/$year";
   }
-  var dayString = day.toString();
-  if(day.toString().length < 2){
-    dayString = "0$day";
+  catch(e){
+    return DateErrorStrings.noDateFound;
   }
-  return "$dayString/$monthString/$year";
 }
 
 String fromDateTimeToStringShort(DateTime? date){

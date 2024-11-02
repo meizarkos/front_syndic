@@ -111,7 +111,7 @@ class CoOwnerMain extends StatelessWidget {
                         AppText.titleMeeting,
                         AppText.titleNextMeeting,
                         stringNullOrDefaultValue(
-                            fromStringToDateTimeString(timing?.time), AppText.noTimingFound),
+                            fromStringToDateTimeString("${timing?.date} ${timing?.time}"), AppText.noTimingFound),
                         AppText.seeEstimate,
                         () => goTo(context,'/meetings'),
                         context),
@@ -122,7 +122,7 @@ class CoOwnerMain extends StatelessWidget {
                         AppText.titleNextWorkMeeting,
                         AppText.titleTimingEstimate,
                         stringNullOrDefaultValue(
-                            fromStringToDateTimeString(timingEstimate?.dateStart), AppText.noTimingFound),
+                            fromStringToDateTimeString("${timingEstimate?.dateStart} ${timingEstimate?.timeStart}"), AppText.noTimingFound),
                         AppText.buttonTextWorkMeeting,
                             () => goTo(context,'/meetings'),
                         context),
@@ -170,7 +170,7 @@ class CoOwnerMain extends StatelessWidget {
     if(res != null){
       return res;
     }
-    return fromStringToDateTimeString(timings?[0].time);
+    return fromStringToDateTimeString("${timings?[0].date} ${timings?[0].time}");
   }
 
   String? listTimingEstimate(List<TimingEstimate>? timingsEstimate, String defaultValue) {
@@ -178,6 +178,6 @@ class CoOwnerMain extends StatelessWidget {
     if(res != null){
       return res;
     }
-    return fromStringToDateTimeString(timingsEstimate?[0].dateStart);
+    return fromStringToDateTimeString("${timingsEstimate?[0].dateStart} ${timingsEstimate?[0].timeStart}");
   }
 }

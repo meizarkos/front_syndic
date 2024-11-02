@@ -25,8 +25,15 @@ class TitleAndDesc extends StatefulWidget {
 
 class _TitleAndDescState extends State<TitleAndDesc> {
   var errorVisible = false;
-  var titleValue = '';
-  var descriptionValue = '';
+  String? titleValue = '';
+  String? descriptionValue= '';
+
+  @override
+  void initState(){
+    super.initState();
+    titleValue = widget.createWorkRequest.workRequest.title;
+    descriptionValue = widget.createWorkRequest.workRequest.description;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +80,7 @@ class _TitleAndDescState extends State<TitleAndDesc> {
                 AppText.save,
                 context,
                 () async {
-                  if(titleValue.isEmpty || descriptionValue.isEmpty){
+                  if(titleValue == null || titleValue == '' || descriptionValue == null || descriptionValue == ''){
                     setState(() {
                       errorVisible = true;
                     });
@@ -108,7 +115,7 @@ class _TitleAndDescState extends State<TitleAndDesc> {
   }
 
   void _goToCategory() {
-    Navigator.pushNamed(context, '/work_requests/category');
+    Navigator.pushNamed(context, '/work_requests/category',arguments: widget.createWorkRequest);
   }
 
   void _goToCamera() {
@@ -117,11 +124,17 @@ class _TitleAndDescState extends State<TitleAndDesc> {
 
   Future<bool> _checkPermissions() async {
     PermissionStatus status = await Permission.camera.status;
-    if (!status.isGranted) {
+
+    if(status.isPermanentlyDenied){
+      _goToCategory();
+      return false;
+    }
+
+    if (!status.isGranted || status.isLimited || status.isProvisional) {
       status = await Permission.camera.request();
     }
 
-    if(!status.isGranted){
+    if(!status.isGranted || status.isPermanentlyDenied){
       _goToCategory();
       return false;
     }

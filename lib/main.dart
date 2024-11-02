@@ -5,6 +5,7 @@ import 'package:front_syndic/views/union_side/co_owner_main/co_owner_main.dart';
 import 'package:front_syndic/views/union_side/union_main.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time.dart';
+import 'package:front_syndic/views/work_requests/create_work_request/recap.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/take_picture.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/title_and_desc.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_requests_list.dart';
@@ -37,7 +38,6 @@ class MyApp extends StatelessWidget {
           displaySmall: TextStyle(
             fontSize: 14,
             color: Colors.black,
-            fontWeight: FontWeight.bold,
           ),
           labelMedium: TextStyle(
             fontSize: 18,
@@ -114,6 +114,17 @@ class MyApp extends StatelessWidget {
             if (arguments is CreateWorkRequest) {
               return MaterialPageRoute(
                 builder: (context) => ChoseDateTime(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/work_requests/recap':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => RecapWorkRequest(
                   createWorkRequest: arguments,
                 ),
               );

@@ -21,8 +21,20 @@ class WorkRequestCategory extends StatefulWidget {
 }
 
 class _WorkRequestCategoryState extends State<WorkRequestCategory> {
-  String? category = 'Plomberie';
+  String? category;
   bool errorVisibility = false;
+
+  @override
+  void initState(){
+    super.initState();
+    if(widget.createWorkRequest.workRequest.category != null) {
+      category = widget.createWorkRequest.workRequest.category;
+    }
+    else{
+      category = 'Plomberie';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
