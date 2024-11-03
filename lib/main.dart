@@ -9,6 +9,7 @@ import 'package:front_syndic/views/work_requests/create_work_request/recap.dart'
 import 'package:front_syndic/views/work_requests/create_work_request/take_picture.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/title_and_desc.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_requests_list.dart';
+import 'package:front_syndic/views/work_requests/patch/recap.dart';
 
 import 'models/work_request/create_work_request.dart';
 
@@ -61,6 +62,17 @@ class MyApp extends StatelessWidget {
             if (arguments is String) {
               return MaterialPageRoute(
                 builder: (context) => CoOwnerMain(
+                  uuid: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/work_requests/detail':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => RecapPatchWorkRequest(
                   uuid: arguments,
                 ),
               );

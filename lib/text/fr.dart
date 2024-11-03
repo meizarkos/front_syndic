@@ -9,7 +9,8 @@ class AppText {
   static const String save = 'Enregister';
   static const String minute = 'Minute';
   static const String hour = 'Heure';
-
+  static const String modify = 'Modifier';
+  static const String delete = 'Supprimer';
   /* General not found */
 
   static const String noDescriptionWorkRequest = 'Pas de description';

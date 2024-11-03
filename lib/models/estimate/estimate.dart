@@ -46,9 +46,9 @@ class Estimate {
       description: json[AttributesEstimate.description],
       commentary: json[AttributesEstimate.commentary],
       status: json[AttributesEstimate.status],
-      timingsEstimate: (json['timing_estimates'] as List<dynamic>)
-          .map((timingEstimateJson) => TimingEstimate.fromJson(timingEstimateJson))
-          .toList(),
+      timingsEstimate: (json['timing_estimates'] as List<dynamic>?)
+          ?.map((timingEstimateJson) => TimingEstimate.fromJson(timingEstimateJson))
+          .toList() ?? [],
       updatedAt: json[AttributesEstimate.updatedAt],
       createdAt: json[AttributesEstimate.createdAt],
     );

@@ -84,7 +84,7 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                               }
                               return GestureDetector(
                                 onTap: () {
-                                  //Navigator.push(context, MaterialPageRoute(builder: (context) => WorkRequestDetail(workRequest: dataFiltered[index])));
+                                  Navigator.pushNamed(context,'/work_requests/detail',arguments: dataFiltered[index].uuid);
                                 },
                                 child: WorkRequestCell(
                                   title: dataFiltered[index].title,
