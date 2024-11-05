@@ -84,7 +84,9 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                               }
                               return GestureDetector(
                                 onTap: () {
-                                  Navigator.pushNamed(context,'/work_requests/detail',arguments: dataFiltered[index].uuid);
+                                  Navigator.pushNamed(context,'/work_requests/detail',
+                                      arguments: {'uuid':dataFiltered[index].uuid,'coOwnerId':widget.coOwnerUuid}
+                                  );
                                 },
                                 child: WorkRequestCell(
                                   title: dataFiltered[index].title,

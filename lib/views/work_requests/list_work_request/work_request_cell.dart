@@ -61,8 +61,11 @@ class WorkRequestCell extends StatelessWidget {
     if (timings == null || timings!.isEmpty) {
       return AppText.noTimingFound;
     }
-    final timingDate = timings![0].time;
-    final timingString = fromStringToDateTimeString(timingDate);
-    return timingString;
+    final timingDate = timings![0].date;
+    final timingHour = timings![0].time;
+    if(timingDate == null || timingHour == null){
+      return AppText.noTimingFound;
+    }
+    return "${formatStringToApiDate(timingDate, 'dd/MM/yyyy')} ${AppText.at} ${formatTimeString(timingHour)}";
   }
 }

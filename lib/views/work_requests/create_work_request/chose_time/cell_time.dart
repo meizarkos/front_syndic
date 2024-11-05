@@ -35,7 +35,7 @@ class CreateWorkRequestCellTime extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '${AppText.le} ${formatDateString(date)} ${AppText.at} $time',
+            '${AppText.le} ${formatDateString(date)} ${AppText.at} ${formatTimeString(time)}',
             style: Theme.of(context).textTheme.displayMedium,
           ),
           GestureDetector(
@@ -70,5 +70,25 @@ class CreateWorkRequestCellTime extends StatelessWidget {
     }
     
     return DateFormat("dd/MM/yyyy").format(parsedDate);
+  }
+
+  String formatTimeString(String timeString) {
+    DateTime? parsedTime;
+    List<String> formats = ["HH:mm", "H:m", "HH:m", "H:mm",'HH:mm:ss']; // Define possible time formats
+
+    for (String format in formats) {
+      try {
+        parsedTime = DateFormat(format).parseStrict(timeString);
+        break;
+      } catch (e) {
+        continue;
+      }
+    }
+
+    if (parsedTime == null) {
+      return "Invalid time format";
+    }
+
+    return DateFormat("HH : mm").format(parsedTime).replaceAll(':', 'h'); // Convert to desired time format
   }
 }

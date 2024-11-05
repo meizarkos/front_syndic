@@ -58,7 +58,7 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
               onTap: _choseTime,
               child: Text(
                 '${AppText.createWorkRequestTiming} ${fromCalendarToString(selectedDate.day, selectedDate.month, selectedDate.year)}',
-                style: Theme.of(context).textTheme.displayMedium,
+                style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
             const SizedBox(height: 20),

@@ -10,6 +10,7 @@ import 'package:front_syndic/views/work_requests/create_work_request/take_pictur
 import 'package:front_syndic/views/work_requests/create_work_request/title_and_desc.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_requests_list.dart';
 import 'package:front_syndic/views/work_requests/patch/recap.dart';
+import 'package:front_syndic/views/work_requests/patch/timing_recap.dart';
 
 import 'models/work_request/create_work_request.dart';
 
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
             color: Colors.black,
           ),
           labelSmall: TextStyle(
-            fontSize: 14,
+            fontSize: 18,
             color: Colors.blue,
             decoration: TextDecoration.underline, // Apply underline
           ),
@@ -70,9 +71,21 @@ class MyApp extends StatelessWidget {
 
           case '/work_requests/detail':
             final arguments = settings.arguments;
-            if (arguments is String) {
+            if (arguments is Map<String, String?>) {
               return MaterialPageRoute(
                 builder: (context) => RecapPatchWorkRequest(
+                  uuid: arguments['uuid'],
+                  coOwnerId: arguments['coOwnerId'],
+                ),
+              );
+            }
+            break;
+
+          case '/work_requests/timings':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => RecapTimingChange(
                   uuid: arguments,
                 ),
               );

@@ -11,6 +11,8 @@ class AppText {
   static const String hour = 'Heure';
   static const String modify = 'Modifier';
   static const String delete = 'Supprimer';
+  static const String cancel = 'Annuler';
+  static const String confirm = 'Confirmer';
   /* General not found */
 
   static const String noDescriptionWorkRequest = 'Pas de description';
@@ -78,4 +80,11 @@ class AppText {
   static const String createWorkRequestInterventionDate = 'Date d\'intervention';
   static const String createWorkRequestRecap = 'Récapitulatif';
   static const String createWorkRequestConfirm = 'Confirmer cette demande';
+
+  /* Recap */
+  static const String recapError = 'Tous les champs sont obligatoieres';
+  static const String recapGoToMeeting = 'Modifier mes disponibilitées';
+  static const String recapSuccessModifying = 'Votre demande a bien été modifiée';
+  static const String recapDialogDelete = "Confirmer la supression vous fera perdre toutes les données liées à l'affaire en cours, devis, rendez-vous et autres seront annulés/supprimés";
+  static const String recapDialogTitle = 'Confirmer la supression';
 }
