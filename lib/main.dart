@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:front_syndic/views/artisan_side/artisan_main.dart';
 import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/union_side/co_owner_main/co_owner_main.dart';
 import 'package:front_syndic/views/union_side/union_main.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const ConnectAll(),
         '/union_main': (context) => const UnionMain(),
+        '/artisan_main': (context) => const ArtisanMain(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
