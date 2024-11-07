@@ -1,36 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/api_handler/work_request/work_request_post.dart';
-import 'package:front_syndic/core_value.dart';
-import 'package:front_syndic/utils/string_handler/handle_string.dart';
-import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 
 import '../../../color.dart';
-import '../../../models/work_request/create_work_request.dart';
+import '../../../core_value.dart';
+import '../../../models/work_request/work_request.dart';
 import '../../../text/fr.dart';
+import '../../../utils/string_handler/handle_string.dart';
 import '../../../widget/button/elevated_button_opacity.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
-import 'chose_time/cell_time.dart';
+import '../../../widget/header/app_bar_back_button.dart';
+import '../../work_requests/create_work_request/chose_time/cell_time.dart';
+import '../../work_requests/create_work_request/recap.dart';
 
-const double spaceTitleDesc = 20;
-const double spaceCate = 20;
-
-class RecapWorkRequest extends StatefulWidget {
-  const RecapWorkRequest({
+class DetailWorkRequestArtisanSide extends StatelessWidget {
+  const DetailWorkRequestArtisanSide({
     super.key,
-    required this.createWorkRequest,
+    required this.workRequest,
   });
 
-  final CreateWorkRequest createWorkRequest;
+  final WorkRequest workRequest;
 
-  @override
-  State<RecapWorkRequest> createState() => _RecapWorkRequestState();
-}
-
-class _RecapWorkRequestState extends State<RecapWorkRequest> {
   @override
   Widget build(BuildContext context) {
+    const double _spaceCate = 20;
     return Scaffold(
-      appBar: appBarBackButton(context,title : AppText.createWorkRequestRecap),
+      appBar: appBarBackButton(context),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
@@ -40,12 +33,12 @@ class _RecapWorkRequestState extends State<RecapWorkRequest> {
             children: [
               Text(
                 stringNullOrDefaultValue(
-                    widget.createWorkRequest.workRequest.title,
+                    workRequest.title,
                     AppText.apiNoResult),
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               divider(),
-              const SizedBox(height: spaceCate),
+              const SizedBox(height: _spaceCate),
               Text(
                 AppText.description,
                 style: Theme.of(context).textTheme.displayMedium,
@@ -56,14 +49,14 @@ class _RecapWorkRequestState extends State<RecapWorkRequest> {
                 decoration: decorationRoundMainColor(),
                 child: Text(
                   stringNullOrDefaultValue(
-                      widget.createWorkRequest.workRequest.description,
+                      workRequest.description,
                       AppText.apiNoResult),
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
               const SizedBox(height: spaceTitleDesc),
               divider(),
-              const SizedBox(height: spaceCate),
+              const SizedBox(height: _spaceCate),
               Text(
                 AppText.category,
                 style: Theme.of(context).textTheme.displayMedium,
@@ -71,21 +64,21 @@ class _RecapWorkRequestState extends State<RecapWorkRequest> {
               const SizedBox(height: spaceTitleDesc),
               Text(
                 stringNullOrDefaultValue(
-                    widget.createWorkRequest.workRequest.category,
+                    workRequest.category,
                     AppText.apiNoResult),
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               const SizedBox(height: spaceTitleDesc),
               divider(),
-              const SizedBox(height: spaceCate),
+              const SizedBox(height: _spaceCate),
               Text(
                 AppText.workRequestArtisanSideDisponibility,
                 style: Theme.of(context).textTheme.displayMedium,
               ),
               const SizedBox(height: spaceTitleDesc),
-              if (widget.createWorkRequest.workRequest.timings != null &&
-                  widget.createWorkRequest.workRequest.timings!.isNotEmpty)
-                ...widget.createWorkRequest.workRequest.timings!.map((date) {
+              if (workRequest.timings != null &&
+                  workRequest.timings!.isNotEmpty)
+                ...workRequest.timings!.map((date) {
                   if (date.date == null || date.time == null) {
                     return const SizedBox();
                   }
@@ -100,7 +93,7 @@ class _RecapWorkRequestState extends State<RecapWorkRequest> {
               Center(
                 child: elevatedButtonOpacityAndTextColor(
                   AppColors.mainBackgroundColor,
-                  AppText.save,
+                  AppText.workRequestArtisanSideSendFirstMessage,
                   context,
                   _onSave,
                   AppColors.mainTextColor,
@@ -113,20 +106,14 @@ class _RecapWorkRequestState extends State<RecapWorkRequest> {
     );
   }
 
-  Divider divider() {
-    return Divider(
-      color: Colors.grey,  // Couleur de la ligne
-      thickness: 2,        // Épaisseur de la ligne
-    );
+  void _onSave() async {
+
   }
 
-  void _onSave() async{
-    await postWorkRequest(widget.createWorkRequest.workRequest.coOwnerId, widget.createWorkRequest);
-    Navigator.pushNamedAndRemoveUntil(
-        context,
-        '/co_owner/work_requests',
-          (Route<dynamic> route) => false,
-      arguments: widget.createWorkRequest.workRequest.coOwnerId,
+  Divider divider() {
+    return Divider(
+      color: Colors.grey,
+      thickness: 2
     );
   }
 }

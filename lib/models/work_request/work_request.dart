@@ -1,3 +1,4 @@
+import 'package:front_syndic/models/adress/adress.dart';
 import 'package:front_syndic/models/timing/timing.dart';
 
 class AttributesWorkRequest {
@@ -9,6 +10,7 @@ class AttributesWorkRequest {
   static const numberOfEstimate = 'number_of_estimate';
   static const coOwnerId = 'co_owner_id';
 // static const appartments_id = 'appartments_id';
+  static const adress = 'adress';
   static const updatedAt = 'upadated_at';
   static const createdAt = 'created_at';
 }
@@ -21,6 +23,7 @@ class WorkRequest {
   String? status;
   int? numberOfEstimate;
   List<Timing>? timings;
+  Adress? adress;
   String? coOwnerId;
   String? updatedAt;
   String? createdAt;
@@ -34,6 +37,7 @@ class WorkRequest {
     this.numberOfEstimate,
     this.timings,
     this.coOwnerId,
+    this.adress,
     this.updatedAt,
     this.createdAt,
   });
@@ -50,6 +54,9 @@ class WorkRequest {
           ?.map((timingJson) => Timing.fromJson(timingJson))
           .toList() ?? [],
       coOwnerId: json[AttributesWorkRequest.coOwnerId],
+      adress: json.containsKey(AttributesWorkRequest.adress) && json[AttributesWorkRequest.adress] != null
+          ? Adress.fromJson(json[AttributesWorkRequest.adress])
+          : null,
       updatedAt: json[AttributesWorkRequest.updatedAt],
       createdAt: json[AttributesWorkRequest.createdAt],
     );

@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/core_value.dart';
-import 'package:front_syndic/utils/date_to_string/date.dart';
-import 'package:front_syndic/utils/string_handler/handle_string.dart';
+import 'package:front_syndic/models/adress/adress.dart';
 
-import '../../../../models/timing/timing.dart';
-import '../../../../text/fr.dart';
-import '../../../../widget/decoration/decoration_round_main_color.dart';
-import '../../../../widget/text_style/text_style_main_color.dart';
+import '../../core_value.dart';
+import '../../text/fr.dart';
+import '../../utils/string_handler/handle_string.dart';
+import '../../widget/decoration/decoration_round_main_color.dart';
+import '../../widget/text_style/text_style_main_color.dart';
 
-class WorkRequestCell extends StatelessWidget {
-  const WorkRequestCell({
+class CellWorkRequestArtisanSide extends StatelessWidget {
+  const CellWorkRequestArtisanSide({
     super.key,
     required this.title,
     required this.subtitle,
-    required this.timings,
+    required this.adress,
   });
 
   final String? title;
   final String? subtitle;
-  final List<Timing>? timings;
+  final Adress? adress;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +38,10 @@ class WorkRequestCell extends StatelessWidget {
               ),
               const SizedBox(height: 35),
               Text(
-                "${AppText.preTextWorkRequest} ${stringNullOrDefaultValue(getTiming(), AppText.noTimingFound)}",
+                "${adress?.city} ${adress?.region}\n${adress?.street} ",
                 style: Theme.of(context).textTheme.displayMedium,
                 textAlign: TextAlign.center,
-                maxLines: 1,
+                maxLines: 3,
               ),
               const SizedBox(height: 50),
               Text(
@@ -55,17 +54,5 @@ class WorkRequestCell extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String? getTiming() {
-    if (timings == null || timings!.isEmpty) {
-      return AppText.noTimingFound;
-    }
-    final timingDate = timings![0].date;
-    final timingHour = timings![0].time;
-    if(timingDate == null || timingHour == null){
-      return AppText.noTimingFound;
-    }
-    return "${formatStringToApiDate(timingDate, 'dd/MM/yyyy')} ${AppText.at} ${formatTimeString(timingHour)}";
   }
 }

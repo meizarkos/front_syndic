@@ -3,7 +3,7 @@ import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/selector_row.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_request_cell.dart';
 
-import '../../../../api_handler/co_owner/get_work_request.dart';
+import '../../../api_handler/work_request/get_work_request.dart';
 import '../../../../models/work_request/work_request.dart';
 import '../../../../text/fr.dart';
 import '../../../../widget/button/add_floating_button.dart';

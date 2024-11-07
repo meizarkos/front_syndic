@@ -16,7 +16,7 @@ class ConnectAll extends StatefulWidget {
 }
 
 class _ConnectAllState extends State<ConnectAll> {
-  var email = 'aaa@aaa.com';
+  var email = 'ar@ar.com';
   var password = 'aaa';
   var errorVisibility = false;
 

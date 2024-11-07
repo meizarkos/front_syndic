@@ -13,8 +13,9 @@ class AppText {
   static const String delete = 'Supprimer';
   static const String cancel = 'Annuler';
   static const String confirm = 'Confirmer';
-  /* General not found */
 
+  /* General not found */
+  static const String noCategoryFound = 'Pas de catégorie';
   static const String noDescriptionWorkRequest = 'Pas de description';
 
   /* LoginStrings */
@@ -74,6 +75,10 @@ class AppText {
   static const String createTitleWorkErrorText = 'Veuillez remplir tous les champs';
   static const String createCategoryTitle = 'Choisissez une catégorie';
   static const List<String> listOfTaskCategory = ['Plomberie', 'Electricité', 'Peinture', 'Sol', 'Menuiserie'];
+  static const List<String> listOfTaskCategoryWithNull = [
+    ...listOfTaskCategory,
+    'Pas de categorie'
+  ];
   static const String createWorkRequestCategoryIsEmpty = 'Veuillez choisir une catégorie';
   static const String createWorkRequestTimingWrong = 'Veuillez choisir une date de disponibilité';
   static const String createWorkRequestTiming = 'Sélectionner le';
@@ -87,4 +92,11 @@ class AppText {
   static const String recapSuccessModifying = 'Votre demande a bien été modifiée';
   static const String recapDialogDelete = "Confirmer la supression vous fera perdre toutes les données liées à l'affaire en cours, devis, rendez-vous et autres seront annulés/supprimés";
   static const String recapDialogTitle = 'Confirmer la supression';
+
+  /* WorRequestArtisanSide */
+
+  static const String workRequestArtisanSideInterventionOf = 'Intervention de type : ';
+  static const String workRequestArtisanSideFilterBy = 'Filtrer par : ';
+  static const String workRequestArtisanSideSendFirstMessage = 'Contacter';
+  static const String workRequestArtisanSideDisponibility = 'Disponibilitées';
 }

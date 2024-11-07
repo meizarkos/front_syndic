@@ -1,6 +1,8 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:front_syndic/models/work_request/work_request.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
+import 'package:front_syndic/views/artisan_side/work_request_detail/detail_work_request.dart';
 import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/union_side/co_owner_main/co_owner_main.dart';
 import 'package:front_syndic/views/union_side/union_main.dart';
@@ -153,6 +155,17 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (context) => RecapWorkRequest(
                   createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/work_requests/artisan/detail':
+            final arguments = settings.arguments;
+            if (arguments is WorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => DetailWorkRequestArtisanSide(
+                  workRequest: arguments,
                 ),
               );
             }
