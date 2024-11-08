@@ -99,4 +99,7 @@ class AppText {
   static const String workRequestArtisanSideFilterBy = 'Filtrer par : ';
   static const String workRequestArtisanSideSendFirstMessage = 'Contacter';
   static const String workRequestArtisanSideDisponibility = 'Disponibilitées';
+
+  /* WorkRequestMessage */
+  static const String workRequestMessageHint = 'Type your message...';
 }

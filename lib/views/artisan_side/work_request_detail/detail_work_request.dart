@@ -21,7 +21,7 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double _spaceCate = 20;
+    const double spaceCate = 20;
     return Scaffold(
       appBar: appBarBackButton(context),
       body: SingleChildScrollView(
@@ -38,7 +38,7 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               divider(),
-              const SizedBox(height: _spaceCate),
+              const SizedBox(height: spaceCate),
               Text(
                 AppText.description,
                 style: Theme.of(context).textTheme.displayMedium,
@@ -56,7 +56,7 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
               ),
               const SizedBox(height: spaceTitleDesc),
               divider(),
-              const SizedBox(height: _spaceCate),
+              const SizedBox(height: spaceCate),
               Text(
                 AppText.category,
                 style: Theme.of(context).textTheme.displayMedium,
@@ -70,7 +70,7 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
               ),
               const SizedBox(height: spaceTitleDesc),
               divider(),
-              const SizedBox(height: _spaceCate),
+              const SizedBox(height: spaceCate),
               Text(
                 AppText.workRequestArtisanSideDisponibility,
                 style: Theme.of(context).textTheme.displayMedium,
@@ -95,7 +95,7 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
                   AppColors.mainBackgroundColor,
                   AppText.workRequestArtisanSideSendFirstMessage,
                   context,
-                  _onSave,
+                  ()=>_onSave(context),
                   AppColors.mainTextColor,
                 ),
               )
@@ -106,14 +106,14 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
     );
   }
 
-  void _onSave() async {
-
+  void _onSave(BuildContext context) async {
+    Navigator.pushNamed(context, '/work_requests/artisan/first_conv', arguments: workRequest);
   }
 
   Divider divider() {
     return Divider(
-      color: Colors.grey,
-      thickness: 2
+        color: Colors.grey,
+        thickness: 2
     );
   }
 }
