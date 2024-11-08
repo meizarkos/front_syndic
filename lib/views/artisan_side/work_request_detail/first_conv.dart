@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:front_syndic/api_handler/conversation/conv_cell.dart';
+import 'package:front_syndic/api_handler/conversation/post_first_conv.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/conversation/conversation.dart';
 import 'package:front_syndic/text/fr.dart';
@@ -6,7 +8,6 @@ import 'package:front_syndic/utils/string_handler/handle_string.dart';
 import 'package:front_syndic/widget/divider/divider.dart';
 
 import '../../../models/work_request/work_request.dart';
-import '../../../widget/header/app_bar_back_button.dart';
 
 class FirstConv extends StatefulWidget {
   const FirstConv({
@@ -24,7 +25,9 @@ class _FirstConvState extends State<FirstConv> {
 
   final TextEditingController _messageController = TextEditingController();
 
-  List<Conversation> _conversations = [];
+  List<Conversation> _conversations = [Conversation(message: "Bonjour, je suis intéressé par votre demande", createdAt: "2021-09-01T12:00:00", side: "other")];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +65,19 @@ class _FirstConvState extends State<FirstConv> {
             width: MediaQuery.of(context).size.width, // Full width divider
             child: divider(2, Colors.grey),
           ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _conversations.length,
+              itemBuilder: (context, index) {
+                final conv = _conversations[index];
+                return ConvCell(
+                  message: conv.message,
+                  createdAt: conv.createdAt,
+                  side: conv.side == 'artisan' ? true : false,
+                );
+              },
+            ),
+          ),
         ],
       ),
       bottomSheet: Padding(
@@ -80,8 +96,16 @@ class _FirstConvState extends State<FirstConv> {
             const SizedBox(width: 8),
             IconButton(
               icon: const Icon(Icons.send),
-              onPressed: () {
+              onPressed: () async {
+                final conv = await postFirstConvArtisan(widget.workRequest.uuid, _messageController.text);
+                print(conv?.message!);
+                if(conv == null) {
+                  return;
+                }
                 _messageController.clear();
+                setState(() {
+                  _conversations.add(conv);
+                });
               },
             ),
           ],

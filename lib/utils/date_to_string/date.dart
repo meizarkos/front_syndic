@@ -175,3 +175,18 @@ String formatTimeString(String timeString) {
 
   return DateFormat("HH : mm").format(parsedTime).replaceAll(':', 'h'); // Convert to desired time format
 }
+
+String fromDateTimeToConvString(String? date){
+  if(date == null){
+    return DateErrorStrings.noDateFound;
+  }
+  DateTime? parsedDate;
+  try {
+    parsedDate =DateTime.parse(date);
+  } catch (e) {
+    return 'NN';
+  }
+
+  return DateFormat("dd/MM HH:mm").format(parsedDate);
+
+}

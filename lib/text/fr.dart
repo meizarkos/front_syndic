@@ -102,4 +102,5 @@ class AppText {
 
   /* WorkRequestMessage */
   static const String workRequestMessageHint = 'Type your message...';
+  static const String workRequestNoMessage = 'No message';
 }
