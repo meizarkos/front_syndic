@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/api_handler/conversation/conv_cell.dart';
 import 'package:front_syndic/api_handler/conversation/post_first_conv.dart';
+import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/conversation/conversation.dart';
 import 'package:front_syndic/text/fr.dart';
-import 'package:front_syndic/utils/string_handler/handle_string.dart';
+import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/divider/divider.dart';
 
+import '../../../api_handler/conversation/fectch_from_work_request.dart';
 import '../../../models/work_request/work_request.dart';
 
 class FirstConv extends StatefulWidget {
@@ -22,39 +24,57 @@ class FirstConv extends StatefulWidget {
 }
 
 class _FirstConvState extends State<FirstConv> {
-
   final TextEditingController _messageController = TextEditingController();
 
-  List<Conversation> _conversations = [Conversation(message: "Bonjour, je suis intéressé par votre demande", createdAt: "2021-09-01T12:00:00", side: "other")];
+  List<Conversation> _conversations = [];
+  bool isLoading = true;
 
-
+  @override
+  void initState() {
+    super.initState();
+    fetchConversationFromWorkRequest(widget.workRequest.uuid).then((value) {
+      if (value != null) {
+        setState(() {
+          isLoading = false;
+          _conversations = value;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 120.0,
         leading: IconButton(
-          icon : Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back),
           color: Colors.black,
-          onPressed: () {Navigator.pop(context);},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: Padding(
           padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                trimText(stringNullOrDefaultValue(widget.workRequest.title,AppText.noTitleForWork), 20),
-                style: Theme.of(context).textTheme.displayLarge,
-              ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny),
-              Text(
-                trimText(stringNullOrDefaultValue(widget.workRequest.description,AppText.noDescriptionWorkRequest), 100),
-                style: Theme.of(context).textTheme.displaySmall,
-                maxLines: 2,
-              ),
-            ],
+          child: elevatedButtonOpacityAndTextColor(
+            AppColors.mainBackgroundColor,
+            AppText.createAMeeting,
+            context,
+            () {
+              Navigator.pushNamed(
+                context,
+                '/work_requests/artisan/post_meeting',
+                arguments: widget.workRequest.uuid,
+              );
+            },
+            AppColors.mainTextColor,
           ),
         ),
       ),
@@ -97,9 +117,9 @@ class _FirstConvState extends State<FirstConv> {
             IconButton(
               icon: const Icon(Icons.send),
               onPressed: () async {
-                final conv = await postFirstConvArtisan(widget.workRequest.uuid, _messageController.text);
-                print(conv?.message!);
-                if(conv == null) {
+                final conv = await postFirstConvArtisan(
+                    widget.workRequest.uuid, _messageController.text);
+                if (conv == null) {
                   return;
                 }
                 _messageController.clear();
