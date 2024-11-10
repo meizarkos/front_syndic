@@ -104,4 +104,6 @@ class AppText {
   static const String workRequestMessageHint = 'Type your message...';
   static const String workRequestNoMessage = 'No message';
   static const String createAMeeting = 'Créez un rendez-vous';
+  static const String createAMeetingTime = 'Choisir une heure';
+  static const String createAMeetingMessage = 'Rendez-vous créer pour le';
 }

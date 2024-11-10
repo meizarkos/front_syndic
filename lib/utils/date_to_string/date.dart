@@ -134,6 +134,7 @@ String fromDateTimeToStringForApi(DateTime? date){
 }
 
 String? formatStringToApiDate(String? dateString,String formatExit){
+  print(dateString);
   if(dateString == null){
     return null;
   }
@@ -156,7 +157,10 @@ String? formatStringToApiDate(String? dateString,String formatExit){
 }
 
 
-String formatTimeString(String timeString) {
+String formatTimeString(String? timeString) {
+  if(timeString == null){
+    return DateErrorStrings.noDateFound;
+  }
   DateTime? parsedTime;
   List<String> formats = ["HH:mm", "H:m", "HH:m", "H:mm",'HH:mm:ss']; // Define possible time formats
 

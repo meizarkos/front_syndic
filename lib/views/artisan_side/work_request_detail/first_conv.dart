@@ -98,6 +98,7 @@ class _FirstConvState extends State<FirstConv> {
               },
             ),
           ),
+          const SizedBox(height: 80),
         ],
       ),
       bottomSheet: Padding(
