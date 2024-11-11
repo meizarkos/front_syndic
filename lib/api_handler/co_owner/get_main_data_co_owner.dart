@@ -25,7 +25,7 @@ Future<Map<String, dynamic>> fetchCoOwnerMainData(String uuid) async {
     if(records["timing_estimate"] != null) {
       timingEstimate = TimingEstimate.fromJson(records["timing_estimate"]);
     }
-    var timing = const Timing();
+    var timing = Timing();
     if(records["timing"] != null) {
       timing = Timing.fromJson(records["timing"]);
     }

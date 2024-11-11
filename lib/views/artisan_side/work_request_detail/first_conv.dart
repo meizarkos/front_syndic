@@ -71,7 +71,7 @@ class _FirstConvState extends State<FirstConv> {
               Navigator.pushNamed(
                 context,
                 '/work_requests/artisan/post_meeting',
-                arguments: widget.workRequest.uuid,
+                arguments: widget.workRequest,
               );
             },
             AppColors.mainTextColor,

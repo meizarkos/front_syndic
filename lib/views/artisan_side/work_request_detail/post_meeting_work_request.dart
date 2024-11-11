@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/utils/string_handler/handle_string.dart';
 
 import '../../../api_handler/timing/post_meeting_artisan.dart';
 import '../../../color.dart';
 import '../../../models/timing/timing.dart';
+import '../../../models/work_request/work_request.dart';
 import '../../../text/fr.dart';
 import '../../../utils/date_to_string/date.dart';
 import '../../../widget/button/elevated_button_opacity.dart';
 import '../../../widget/header/app_bar_back_button.dart';
+import '../../../widget/visibility/error.dart';
 
 class PostMeetingWorkRequest extends StatefulWidget {
   const PostMeetingWorkRequest({
     super.key,
-    required this.uuid,
+    required this.workRequest,
   });
 
-  final String uuid;
+  final WorkRequest workRequest;
 
   @override
   State<PostMeetingWorkRequest> createState() => _PostMeetingWorkRequestState();
@@ -58,6 +59,11 @@ class _PostMeetingWorkRequestState extends State<PostMeetingWorkRequest> {
                 style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
+            const SizedBox(height: 15),
+            ErrorVisibility(
+              errorVisibility: errorVisibility,
+              errorText: AppText.createAMeetingError,
+            ),
             const SizedBox(height: 35),
             elevatedButtonOpacityAndTextColor(
               AppColors.mainBackgroundColor,
@@ -79,8 +85,17 @@ class _PostMeetingWorkRequestState extends State<PostMeetingWorkRequest> {
   }
 
   void _onSave()async{
-    await postTimingFromWorkRequestArtisan(widget.uuid, timing);
+    if(timing.date == null || timing.time == null){
+      setState(() {
+        errorVisibility = true;
+      });
+      return;
+    }
+    timing.date = formatStringToApiDate(timing.date,'yyyy-MM-dd');
+    await postTimingFromWorkRequestArtisan(widget.workRequest.uuid, timing);
     Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.of(context).pushNamed('/work_requests/artisan/first_conv', arguments: widget.workRequest);
   }
 
   Future<void> _choseTime() async {

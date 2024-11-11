@@ -106,4 +106,5 @@ class AppText {
   static const String createAMeeting = 'Créez un rendez-vous';
   static const String createAMeetingTime = 'Choisir une heure';
   static const String createAMeetingMessage = 'Rendez-vous créer pour le';
+  static const String createAMeetingError = 'Veuillez choisir une date et une heure';
 }

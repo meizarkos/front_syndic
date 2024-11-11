@@ -186,10 +186,10 @@ class MyApp extends StatelessWidget {
 
           case '/work_requests/artisan/post_meeting':
             final arguments = settings.arguments;
-            if (arguments is String) {
+            if (arguments is WorkRequest) {
               return MaterialPageRoute(
                 builder: (context) => PostMeetingWorkRequest(
-                  uuid: arguments,
+                  workRequest: arguments,
                 ),
               );
             }

@@ -10,17 +10,17 @@ class AttributesTiming {
 }
 
 class Timing{
-  final String? uuid;
-  final String? workRequestId;
-  final String? artisanId;
-  final String? date;
-  final String? time;
-  final String? status;
-  final String? createdAt;
-  final String? updatedAt;
+   String? uuid;
+   String? workRequestId;
+   String? artisanId;
+   String? date;
+   String? time;
+   String? status;
+   String? createdAt;
+   String? updatedAt;
 
 
-  const Timing({
+  Timing({
     this.uuid,
     this.workRequestId,
     this.artisanId,
