@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/api_handler/conversation/conv_cell.dart';
+import 'package:front_syndic/views/conversation/conv_cell.dart';
 import 'package:front_syndic/api_handler/conversation/post_first_conv.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
@@ -8,11 +8,11 @@ import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/divider/divider.dart';
 
-import '../../../api_handler/conversation/fectch_from_work_request.dart';
+import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../models/work_request/work_request.dart';
 
-class FirstConv extends StatefulWidget {
-  const FirstConv({
+class FirstConvFromWorkRequestArtisan extends StatefulWidget {
+  const FirstConvFromWorkRequestArtisan({
     super.key,
     required this.workRequest,
   });
@@ -20,10 +20,10 @@ class FirstConv extends StatefulWidget {
   final WorkRequest workRequest;
 
   @override
-  State<FirstConv> createState() => _FirstConvState();
+  State<FirstConvFromWorkRequestArtisan> createState() => _FirstConvFromWorkRequestArtisanState();
 }
 
-class _FirstConvState extends State<FirstConv> {
+class _FirstConvFromWorkRequestArtisanState extends State<FirstConvFromWorkRequestArtisan> {
   final TextEditingController _messageController = TextEditingController();
 
   List<Conversation> _conversations = [];

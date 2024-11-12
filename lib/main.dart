@@ -177,7 +177,7 @@ class MyApp extends StatelessWidget {
             final arguments = settings.arguments;
             if (arguments is WorkRequest) {
               return MaterialPageRoute(
-                builder: (context) => FirstConv(
+                builder: (context) => FirstConvFromWorkRequestArtisan(
                   workRequest: arguments,
                 ),
               );
