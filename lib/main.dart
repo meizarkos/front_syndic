@@ -61,6 +61,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const ConnectAll(),
         '/union_main': (context) => const UnionMain(),
         '/artisan_main': (context) => const ArtisanMain(),
+        '/artisan_main/first_conv': (context) => const FirstConvArtisan(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
@@ -97,6 +98,29 @@ class MyApp extends StatelessWidget {
               );
             }
             break;
+
+          case '/artisan/see_conv':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => AllConvArtisan(
+                  id: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/artisan/post_meeting':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => PostMeetingArtisan(
+                  uuid: arguments,
+                ),
+              );
+            }
+            break;
+
 
           case '/co_owner/work_requests':
             final arguments = settings.arguments;
@@ -177,7 +201,7 @@ class MyApp extends StatelessWidget {
             final arguments = settings.arguments;
             if (arguments is String) {
               return MaterialPageRoute(
-                builder: (context) => AllConvArtisan(
+                builder: (context) => AllConvArtisanForWorkRequest(
                   id: arguments,
                 ),
               );
@@ -188,7 +212,7 @@ class MyApp extends StatelessWidget {
             final arguments = settings.arguments;
             if (arguments is String) {
               return MaterialPageRoute(
-                builder: (context) => PostMeetingArtisan(
+                builder: (context) => PostMeetingArtisanFromWorkRequest(
                   uuid: arguments,
                 ),
               );
@@ -205,6 +229,29 @@ class MyApp extends StatelessWidget {
               );
             }
             break;
+
+          case '/council/see_conv':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => AllConvCouncil(
+                  id: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/council/post_meeting':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => PostMeetingCouncil(
+                  uuid: arguments,
+                ),
+              );
+            }
+            break;
+
 
           default:
             return null;

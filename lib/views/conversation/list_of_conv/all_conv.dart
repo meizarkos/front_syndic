@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/conv_cell.dart';
-import 'package:front_syndic/api_handler/conversation/post_first_conv.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/conversation/conversation.dart';
@@ -15,12 +14,14 @@ class SeeConv extends StatefulWidget {
     required this.futureForGetConv,
     required this.futureForPostConv,
     required this.route,
+    required this.sideText
   });
 
   final String uuid;
   final Future<List<Conversation>?> futureForGetConv;
   final Function futureForPostConv;
   final String route;
+  final String sideText;
 
   @override
   State<SeeConv> createState() => _SeeConvState();
@@ -96,7 +97,7 @@ class _SeeConvState extends State<SeeConv> {
                 return ConvCell(
                   message: conv.message,
                   createdAt: conv.createdAt,
-                  side: conv.side == 'artisan' ? true : false,
+                  side: conv.side == widget.sideText ? true : false,
                 );
               },
             ),
@@ -121,8 +122,10 @@ class _SeeConvState extends State<SeeConv> {
             IconButton(
               icon: const Icon(Icons.send),
               onPressed: () async {
-                final conv = await postFirstConvArtisan(
-                    widget.uuid, _messageController.text);
+                final conv = await widget.futureForPostConv(
+                  widget.uuid,
+                  _messageController.text,
+                );
                 if (conv == null) {
                   return;
                 }

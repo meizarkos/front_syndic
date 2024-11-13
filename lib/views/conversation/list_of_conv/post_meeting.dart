@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../api_handler/timing/post_meeting_artisan.dart';
 import '../../../color.dart';
 import '../../../models/timing/timing.dart';
 import '../../../text/fr.dart';
@@ -95,7 +94,7 @@ class _PostMeetingState extends State<PostMeeting> {
       return;
     }
     timing.date = formatStringToApiDate(timing.date,'yyyy-MM-dd');
-    await postTimingFromWorkRequestArtisan(widget.uuid, timing);
+    await widget.postMeeting(widget.uuid, timing);
     Navigator.pop(context);
     Navigator.pop(context);
     Navigator.of(context).pushNamed(widget.routeAllConv, arguments: widget.uuid);

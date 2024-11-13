@@ -26,7 +26,7 @@ Future<List<Conversation>?> fetchSpecificConvArtisan(String? uuid) async {
 }
 
 Future<List<Conversation>?> fetchFirstConvArtisan() async {
-  return await fetchConversation('${APIValue.artisan}first_conv_artisan');
+  return await fetchConversation('${APIValue.artisan}first_conv_artisan'); 
 }
 
 Future<List<Conversation>?> fetchFirstConvCouncil(String? uuid) async {

@@ -9,10 +9,12 @@ class FirstConv extends StatefulWidget {
     super.key,
     required this.future,
     required this.title,
+    required this.routeToDetailConv,
   });
 
   final Future<List<Conversation>?> future;
   final String title;
+  final String routeToDetailConv;
 
   @override
   State<FirstConv> createState() => _FirstConvState();
@@ -51,7 +53,7 @@ class _FirstConvState extends State<FirstConv> {
                   }
                   return GestureDetector(
                     onTap: (){
-
+                      Navigator.pushNamed(context, widget.routeToDetailConv, arguments: snapshot.data![index].uuid);
                     },
                     child : FirstConvCell(conversation: snapshot.data![index]),
                   );

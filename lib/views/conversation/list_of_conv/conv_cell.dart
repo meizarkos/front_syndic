@@ -34,11 +34,17 @@ class ConvCell extends StatelessWidget {
                   color: side ?  AppColors.mainBackgroundColor : Colors.grey,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text(
-                  stringNullOrDefaultValue(message,AppText.workRequestNoMessage),
-                  style: Theme.of(context).textTheme.displaySmall,
-                  softWrap: true,
-                  overflow: TextOverflow.visible,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minWidth: 0,
+                    maxWidth: MediaQuery.of(context).size.width * 0.6,
+                  ),
+                  child: Text(
+                    stringNullOrDefaultValue(message,AppText.workRequestNoMessage),
+                    style: Theme.of(context).textTheme.displaySmall,
+                    softWrap: true,
+                    overflow: TextOverflow.visible,
+                  ),
                 ),
               ),
               const SizedBox(height: 5),
