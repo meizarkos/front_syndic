@@ -3,26 +3,29 @@ import 'package:flutter/material.dart';
 import '../../../api_handler/timing/post_meeting_artisan.dart';
 import '../../../color.dart';
 import '../../../models/timing/timing.dart';
-import '../../../models/work_request/work_request.dart';
 import '../../../text/fr.dart';
 import '../../../utils/date_to_string/date.dart';
 import '../../../widget/button/elevated_button_opacity.dart';
 import '../../../widget/header/app_bar_back_button.dart';
 import '../../../widget/visibility/error.dart';
 
-class PostMeetingWorkRequest extends StatefulWidget {
-  const PostMeetingWorkRequest({
+class PostMeeting extends StatefulWidget {
+  const PostMeeting({
     super.key,
-    required this.workRequest,
+    required this.uuid,
+    required this.routeAllConv,
+    required this.postMeeting,
   });
 
-  final WorkRequest workRequest;
+  final String uuid;
+  final String routeAllConv;
+  final Function postMeeting;
 
   @override
-  State<PostMeetingWorkRequest> createState() => _PostMeetingWorkRequestState();
+  State<PostMeeting> createState() => _PostMeetingState();
 }
 
-class _PostMeetingWorkRequestState extends State<PostMeetingWorkRequest> {
+class _PostMeetingState extends State<PostMeeting> {
 
   DateTime firstDate = DateTime.now();
   DateTime lastDate = DateTime.now().add(const Duration(days: 365));
@@ -92,16 +95,16 @@ class _PostMeetingWorkRequestState extends State<PostMeetingWorkRequest> {
       return;
     }
     timing.date = formatStringToApiDate(timing.date,'yyyy-MM-dd');
-    await postTimingFromWorkRequestArtisan(widget.workRequest.uuid, timing);
+    await postTimingFromWorkRequestArtisan(widget.uuid, timing);
     Navigator.pop(context);
     Navigator.pop(context);
-    Navigator.of(context).pushNamed('/work_requests/artisan/first_conv', arguments: widget.workRequest);
+    Navigator.of(context).pushNamed(widget.routeAllConv, arguments: widget.uuid);
   }
 
   Future<void> _choseTime() async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
-      initialTime: const TimeOfDay(hour: 10, minute: 47),
+      initialTime: const TimeOfDay(hour: 10, minute: 00),
       builder: (BuildContext context, Widget? child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),

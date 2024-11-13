@@ -147,7 +147,7 @@ class CoOwnerMain extends StatelessWidget {
                       AppText.subtitleEstimate,
                       stringNullOrDefaultValue(listTimingEstimate(estimate?.timingsEstimate,AppText.noDateForWork), AppText.noDateForWork),
                       AppText.buttonTextEstimate,
-                          () => goTo(context,'/estimates'),
+                          () => goTo(context,'/first_conv_council',arguments: uuid),
                       context,
                     ),
                   ),

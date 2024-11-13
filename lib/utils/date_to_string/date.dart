@@ -134,7 +134,6 @@ String fromDateTimeToStringForApi(DateTime? date){
 }
 
 String? formatStringToApiDate(String? dateString,String formatExit){
-  print(dateString);
   if(dateString == null){
     return null;
   }

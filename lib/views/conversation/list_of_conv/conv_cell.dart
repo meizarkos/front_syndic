@@ -3,8 +3,8 @@ import 'package:front_syndic/color.dart';
 import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/utils/string_handler/handle_string.dart';
 
-import '../../core_value.dart';
-import '../../utils/date_to_string/date.dart';
+import '../../../core_value.dart';
+import '../../../utils/date_to_string/date.dart';
 
 class ConvCell extends StatelessWidget {
   const ConvCell({
@@ -37,6 +37,8 @@ class ConvCell extends StatelessWidget {
                 child: Text(
                   stringNullOrDefaultValue(message,AppText.workRequestNoMessage),
                   style: Theme.of(context).textTheme.displaySmall,
+                  softWrap: true,
+                  overflow: TextOverflow.visible,
                 ),
               ),
               const SizedBox(height: 5),

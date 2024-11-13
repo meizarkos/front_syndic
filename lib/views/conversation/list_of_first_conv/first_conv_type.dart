@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../api_handler/conversation/fetch_conversation.dart';
+import '../../../api_handler/conversation/fetch_first_conversation.dart';
+import '../../../text/fr.dart';
 import 'first_conv.dart';
 
 class FirstConvCouncil extends StatelessWidget {
@@ -14,6 +15,7 @@ class FirstConvCouncil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FirstConv(
+      title: AppText.titleCouncilMessage,
       future: fetchFirstConvCouncil(id),
     );
   }

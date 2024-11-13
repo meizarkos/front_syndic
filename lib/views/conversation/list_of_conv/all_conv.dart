@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/views/conversation/conv_cell.dart';
+import 'package:front_syndic/views/conversation/list_of_conv/conv_cell.dart';
 import 'package:front_syndic/api_handler/conversation/post_first_conv.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
@@ -8,22 +8,25 @@ import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/divider/divider.dart';
 
-import '../../../api_handler/conversation/fetch_conversation.dart';
-import '../../../models/work_request/work_request.dart';
-
-class FirstConvFromWorkRequestArtisan extends StatefulWidget {
-  const FirstConvFromWorkRequestArtisan({
+class SeeConv extends StatefulWidget {
+  const SeeConv({
     super.key,
-    required this.workRequest,
+    required this.uuid,
+    required this.futureForGetConv,
+    required this.futureForPostConv,
+    required this.route,
   });
 
-  final WorkRequest workRequest;
+  final String uuid;
+  final Future<List<Conversation>?> futureForGetConv;
+  final Function futureForPostConv;
+  final String route;
 
   @override
-  State<FirstConvFromWorkRequestArtisan> createState() => _FirstConvFromWorkRequestArtisanState();
+  State<SeeConv> createState() => _SeeConvState();
 }
 
-class _FirstConvFromWorkRequestArtisanState extends State<FirstConvFromWorkRequestArtisan> {
+class _SeeConvState extends State<SeeConv> {
   final TextEditingController _messageController = TextEditingController();
 
   List<Conversation> _conversations = [];
@@ -32,7 +35,7 @@ class _FirstConvFromWorkRequestArtisanState extends State<FirstConvFromWorkReque
   @override
   void initState() {
     super.initState();
-    fetchConversationFromWorkRequest(widget.workRequest.uuid).then((value) {
+    widget.futureForGetConv.then((value) {
       if (value != null) {
         setState(() {
           isLoading = false;
@@ -70,8 +73,8 @@ class _FirstConvFromWorkRequestArtisanState extends State<FirstConvFromWorkReque
             () {
               Navigator.pushNamed(
                 context,
-                '/work_requests/artisan/post_meeting',
-                arguments: widget.workRequest,
+                widget.route,
+                arguments: widget.uuid,
               );
             },
             AppColors.mainTextColor,
@@ -119,7 +122,7 @@ class _FirstConvFromWorkRequestArtisanState extends State<FirstConvFromWorkReque
               icon: const Icon(Icons.send),
               onPressed: () async {
                 final conv = await postFirstConvArtisan(
-                    widget.workRequest.uuid, _messageController.text);
+                    widget.uuid, _messageController.text);
                 if (conv == null) {
                   return;
                 }

@@ -17,6 +17,7 @@ class AppText {
   /* General not found */
   static const String noCategoryFound = 'Pas de catégorie';
   static const String noDescriptionWorkRequest = 'Pas de description';
+  static const String noDate = 'Pas de date';
 
   /* LoginStrings */
   static const String loginTitle = 'Connexion';
@@ -107,4 +108,8 @@ class AppText {
   static const String createAMeetingTime = 'Choisir une heure';
   static const String createAMeetingMessage = 'Rendez-vous créer pour le';
   static const String createAMeetingError = 'Veuillez choisir une date et une heure';
+
+  /* Message */
+  static const String messageNoMessage = 'Pas de message';
+  static const String titleCouncilMessage = 'Vos messages';
 }
