@@ -5,33 +5,36 @@ import 'package:front_syndic/utils/string_handler/handle_string.dart';
 
 import '../../../core_value.dart';
 import '../../../utils/date_to_string/date.dart';
+import 'all_conv_type.dart';
 
 class ConvCell extends StatelessWidget {
   const ConvCell({
     super.key,
     required this.message,
     required this.createdAt,
+    required this.fromYou,
     required this.side,
   });
 
   final String? message;
   final String? createdAt;
-  final bool side;
+  final bool fromYou;
+  final String side;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: side ? MainAxisAlignment.end : MainAxisAlignment.start,
+      mainAxisAlignment: fromYou ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
           child: Column(
-            crossAxisAlignment: side ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            crossAxisAlignment: fromYou ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             children: [
               Container(
                 padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
                 decoration: BoxDecoration(
-                  color: side ?  AppColors.mainBackgroundColor : Colors.grey,
+                  color: _handleColorSide(),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: ConstrainedBox(
@@ -41,7 +44,10 @@ class ConvCell extends StatelessWidget {
                   ),
                   child: Text(
                     stringNullOrDefaultValue(message,AppText.workRequestNoMessage),
-                    style: Theme.of(context).textTheme.displaySmall,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                    ),
                     softWrap: true,
                     overflow: TextOverflow.visible,
                   ),
@@ -57,5 +63,16 @@ class ConvCell extends StatelessWidget {
         ),
       ],
     );
+  }
+  Color _handleColorSide(){
+    if(fromYou){
+      return AppColors.mainBackgroundColor;
+    }
+    else if(SideConv.artisan == side || SideConv.other == side){
+      return Colors.grey[300]!;
+    }
+    else{
+      return Colors.orangeAccent;
+    }
   }
 }

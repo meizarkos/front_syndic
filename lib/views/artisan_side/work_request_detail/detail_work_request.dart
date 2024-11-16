@@ -107,8 +107,8 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
   }
 
   void _onSave(BuildContext context) async {
-    Navigator.pushNamed(context,'/artisan_main/first_conv');
-    //Navigator.pushNamed(context, '/work_requests/artisan/first_conv', arguments: workRequest.uuid);
+    //Navigator.pushNamed(context,'/artisan_main/first_conv');
+    Navigator.pushNamed(context, '/work_requests/artisan/first_conv', arguments: workRequest.uuid);
   }
 
   Divider divider() {

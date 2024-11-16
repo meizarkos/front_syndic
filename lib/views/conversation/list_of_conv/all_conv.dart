@@ -97,7 +97,8 @@ class _SeeConvState extends State<SeeConv> {
                 return ConvCell(
                   message: conv.message,
                   createdAt: conv.createdAt,
-                  side: conv.side == widget.sideText ? true : false,
+                  fromYou: conv.side == widget.sideText ? true : false,
+                  side: conv.side ?? 'other',
                 );
               },
             ),
