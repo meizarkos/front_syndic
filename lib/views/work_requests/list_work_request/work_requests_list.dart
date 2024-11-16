@@ -13,10 +13,7 @@ import '../../../models/work_request/create_work_request.dart';
 class WorkRequestsList extends StatefulWidget {
   const WorkRequestsList({
     super.key,
-    required this.coOwnerUuid,
   });
-
-  final String coOwnerUuid;
 
   @override
   State<WorkRequestsList> createState() => _WorkRequestsListState();
@@ -62,7 +59,7 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                   ),
                   const SizedBox(height: 15),
                   FutureBuilder(
-                    future: futureList[indexSelected](widget.coOwnerUuid),
+                    future: futureList[indexSelected](),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
@@ -85,13 +82,13 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                               return GestureDetector(
                                 onTap: () {
                                   Navigator.pushNamed(context,'/work_requests/detail',
-                                      arguments: {'uuid':dataFiltered[index].uuid,'coOwnerId':widget.coOwnerUuid}
+                                      arguments: dataFiltered[index].uuid
                                   );
                                 },
                                 child: WorkRequestCell(
                                   title: dataFiltered[index].title,
                                   subtitle: dataFiltered[index].description,
-                                  timings: dataFiltered[index].timings,
+                                  type : dataFiltered[index].category,
                                 ),
                               );
                             },
@@ -106,7 +103,6 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
         ),
         floatingActionButton: addFloatingButton(()async {
           var createWorkRequest = CreateWorkRequest([],WorkRequest(),null);
-          createWorkRequest.workRequest.coOwnerId = widget.coOwnerUuid;
           Navigator.pushNamed(context, '/work_requests/title_and_desc',arguments: createWorkRequest);
         }),
     );

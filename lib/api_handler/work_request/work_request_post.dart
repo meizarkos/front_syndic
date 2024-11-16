@@ -8,10 +8,7 @@ import 'package:intl/intl.dart';
 import '../../core_value.dart';
 import '../../utils/date_to_string/date.dart';
 
-Future<void> postWorkRequest(String? uuid,CreateWorkRequest createWorkRequest) async {
-  if(uuid == null) {
-    return;
-  }
+Future<void> postWorkRequest(CreateWorkRequest createWorkRequest) async {
 
   List<String> dateFormatted = [];
 
@@ -38,7 +35,7 @@ Future<void> postWorkRequest(String? uuid,CreateWorkRequest createWorkRequest) a
 
   try {
     final response = await requestWithBody(
-        url: '${APIValue.unionCouncil}work_requests/$uuid',
+        url: '${APIValue.unionCouncil}work_request',
         method: "POST",
         body: body
     );

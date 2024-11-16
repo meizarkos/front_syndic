@@ -4,7 +4,7 @@ class AttributesCoOwner {
   static String uuid = 'uuid';
   static String name = 'name';
   static String adressId = 'adress_id';
-  static String syndicId = 'syndic_id';
+  static String unionId = 'union_id';
   static String councilId = 'council_id';
   static String createdAt = 'created_at';
   static String updatedAt = 'updated';
@@ -14,7 +14,7 @@ class CoOwner{
   final String? uuid;
   final String? name;
   final String? adressId;
-  final String? syndicId;
+  final String? unionId;
   final String? councilId;
   final Adress? adress;
   final String? createdAt;
@@ -25,7 +25,7 @@ class CoOwner{
     this.uuid,
     this.name,
     this.adressId,
-    this.syndicId,
+    this.unionId,
     this.councilId,
     this.adress,
     this.updatedAt,
@@ -37,7 +37,7 @@ class CoOwner{
       uuid: json[AttributesCoOwner.uuid],
       name: json[AttributesCoOwner.name],
       adressId: json[AttributesCoOwner.adressId],
-      syndicId: json[AttributesCoOwner.syndicId],
+      unionId: json[AttributesCoOwner.unionId],
       councilId: json[AttributesCoOwner.councilId],
       adress: Adress.fromJson(json['adress']),
       updatedAt: json[AttributesCoOwner.updatedAt],

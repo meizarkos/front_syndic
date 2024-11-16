@@ -4,7 +4,6 @@ import 'package:front_syndic/api_handler/work_request/fetch_work_request_detail.
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/text/fr.dart';
-import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 
 import '../../../api_handler/work_request/patch_work_request.dart';
 import '../../../models/work_request/work_request.dart';
@@ -14,12 +13,10 @@ import '../../../widget/visibility/error.dart';
 class RecapPatchWorkRequest extends StatefulWidget {
   const RecapPatchWorkRequest({
     super.key,
-    required this.uuid,
-    required this.coOwnerId,
+    required this.workRequestUuid,
   });
 
-  final String? uuid;
-  final String? coOwnerId;
+  final String? workRequestUuid;
 
   @override
   State<RecapPatchWorkRequest> createState() => _RecapPatchWorkRequestState();
@@ -44,7 +41,18 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
   Widget build(BuildContext context) {
     if (isLoading) {
       return Scaffold(
-        appBar: appBarBackButton(context),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/co_owner/work_requests', // The new route
+                    (Route<dynamic> route) => false, // Remove all previous routes
+              );
+            },
+          ),
+        ),
         body: Column(
           children: [
             ErrorVisibility(
@@ -55,7 +63,18 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
       );
     } else {
       return Scaffold(
-        appBar: appBarBackButton(context),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/co_owner/work_requests', // The new route
+                    (Route<dynamic> route) => false, // Remove all previous routes
+              );
+            },
+          ),
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
@@ -140,7 +159,7 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, '/work_requests/timings',
-                        arguments: widget.uuid);
+                        arguments: widget.workRequestUuid);
                   },
                   child: Center(
                     child: Text(
@@ -206,12 +225,12 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
   }
 
   Future<void> fetchData() async {
-    if(widget.uuid == null){
+    if(widget.workRequestUuid == null){
       Navigator.pop(context);
       return;
     }
     try {
-      final res = await fetchWorkRequesDetail(widget.uuid!);
+      final res = await fetchWorkRequestDetail(widget.workRequestUuid!);
       if (res == null) {
         apiErrorVisibility = true;
         return;
@@ -244,7 +263,7 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
         errorVisibility = false;
         successVisibility = true;
       });
-      await patchWorkRequesDetail(widget.uuid!, workRequestStatic);
+      await patchWorkRequesDetail(widget.workRequestUuid!, workRequestStatic);
     }
   }
 
@@ -270,7 +289,6 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
                   context,
                   '/co_owner/work_requests',
                       (Route<dynamic> route) => false,
-                  arguments: widget.coOwnerId,
                 );
               },
             ),
@@ -281,6 +299,6 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
   }
 
   Future<void> delete()async{
-    await deleteWorkRequesDetail(widget.uuid!);
+    await deleteWorkRequesDetail(widget.workRequestUuid!);
   }
 }

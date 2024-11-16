@@ -6,9 +6,9 @@ import '../../models/estimate/estimate.dart';
 import '../../models/work_request/work_request.dart';
 import '../request.dart';
 
-Future<Map<String, dynamic>> fetchCoOwnerMainData(String uuid) async {
+Future<Map<String, dynamic>> fetchCoOwnerMainData() async {
   try{
-    final response = await request(url: '${APIValue.unionCouncil}co_owner_main_data/$uuid', method: "GET");
+    final response = await request(url: '${APIValue.unionCouncil}co_owner_main_data', method: "GET");
     final records = response.data;
     final coOwner = CoOwner.fromJson(records["co_owner"]);
 

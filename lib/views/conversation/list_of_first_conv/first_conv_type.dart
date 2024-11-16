@@ -7,16 +7,13 @@ import 'first_conv.dart';
 class FirstConvCouncil extends StatelessWidget {
   const FirstConvCouncil({
     super.key,
-    required this.id,
   });
-
-  final String id;
 
   @override
   Widget build(BuildContext context) {
     return FirstConv(
       title: AppText.titleCouncilMessage,
-      future: fetchFirstConvCouncil(id),
+      future: fetchFirstConvCouncil(),
       routeToDetailConv: '/council/see_conv',
     );
   }

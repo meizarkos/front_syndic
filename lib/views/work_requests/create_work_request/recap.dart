@@ -121,12 +121,11 @@ class _RecapWorkRequestState extends State<RecapWorkRequest> {
   }
 
   void _onSave() async{
-    await postWorkRequest(widget.createWorkRequest.workRequest.coOwnerId, widget.createWorkRequest);
+    await postWorkRequest(widget.createWorkRequest);
     Navigator.pushNamedAndRemoveUntil(
         context,
         '/co_owner/work_requests',
           (Route<dynamic> route) => false,
-      arguments: widget.createWorkRequest.workRequest.coOwnerId,
     );
   }
 }

@@ -6,6 +6,7 @@ import '../../../api_handler/conversation/post_conv.dart';
 class SideConv{
   static const artisan = 'artisan';
   static const other = 'other';
+  static const union = 'union';
 }
 
 class AllConvArtisanForWorkRequest extends StatelessWidget {

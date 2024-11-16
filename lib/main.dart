@@ -62,27 +62,18 @@ class MyApp extends StatelessWidget {
         '/union_main': (context) => const UnionMain(),
         '/artisan_main': (context) => const ArtisanMain(),
         '/artisan_main/first_conv': (context) => const FirstConvArtisan(),
+        '/co_owner/work_requests': (context) => const WorkRequestsList(),
+        '/first_conv_council': (context) => const FirstConvCouncil(),
+        '/co_owner_main': (context) => const CoOwnerMain(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
-          case '/co_owner_main':
+          case '/work_requests/detail':
             final arguments = settings.arguments;
             if (arguments is String) {
               return MaterialPageRoute(
-                builder: (context) => CoOwnerMain(
-                  uuid: arguments,
-                ),
-              );
-            }
-            break;
-
-          case '/work_requests/detail':
-            final arguments = settings.arguments;
-            if (arguments is Map<String, String?>) {
-              return MaterialPageRoute(
                 builder: (context) => RecapPatchWorkRequest(
-                  uuid: arguments['uuid'],
-                  coOwnerId: arguments['coOwnerId'],
+                  workRequestUuid: arguments,
                 ),
               );
             }
@@ -121,17 +112,6 @@ class MyApp extends StatelessWidget {
             }
             break;
 
-
-          case '/co_owner/work_requests':
-            final arguments = settings.arguments;
-            if (arguments is String) {
-              return MaterialPageRoute(
-                builder: (context) => WorkRequestsList(
-                  coOwnerUuid: arguments,
-                ),
-              );
-            }
-            break;
           case '/work_requests/title_and_desc':
             final arguments = settings.arguments;
             if (arguments is CreateWorkRequest) {
@@ -214,17 +194,6 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (context) => PostMeetingArtisanFromWorkRequest(
                   uuid: arguments,
-                ),
-              );
-            }
-            break;
-
-          case '/first_conv_council':
-            final arguments = settings.arguments;
-            if (arguments is String) {
-              return MaterialPageRoute(
-                builder: (context) => FirstConvCouncil(
-                  id: arguments,
                 ),
               );
             }

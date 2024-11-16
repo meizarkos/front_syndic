@@ -8,9 +8,10 @@ class AttributesWorkRequest {
   static const description = 'description';
   static const status = 'status';
   static const numberOfEstimate = 'number_of_estimate';
-  static const coOwnerId = 'co_owner_id';
-// static const appartments_id = 'appartments_id';
   static const adress = 'adress';
+  static const councilId = 'council_id';
+  static const unionId = 'union_id';
+  static const userId = 'user_id';
   static const updatedAt = 'upadated_at';
   static const createdAt = 'created_at';
 }
@@ -24,7 +25,9 @@ class WorkRequest {
   int? numberOfEstimate;
   List<Timing>? timings;
   Adress? adress;
-  String? coOwnerId;
+  String? councilId;
+  String? unionId;
+  String? userId;
   String? updatedAt;
   String? createdAt;
 
@@ -36,8 +39,10 @@ class WorkRequest {
     this.status,
     this.numberOfEstimate,
     this.timings,
-    this.coOwnerId,
     this.adress,
+    this.councilId,
+    this.unionId,
+    this.userId,
     this.updatedAt,
     this.createdAt,
   });
@@ -53,10 +58,12 @@ class WorkRequest {
       timings: (json['timings'] as List<dynamic>?)
           ?.map((timingJson) => Timing.fromJson(timingJson))
           .toList() ?? [],
-      coOwnerId: json[AttributesWorkRequest.coOwnerId],
       adress: json.containsKey(AttributesWorkRequest.adress) && json[AttributesWorkRequest.adress] != null
           ? Adress.fromJson(json[AttributesWorkRequest.adress])
           : null,
+      councilId: json[AttributesWorkRequest.councilId],
+      unionId: json[AttributesWorkRequest.unionId],
+      userId: json[AttributesWorkRequest.userId],
       updatedAt: json[AttributesWorkRequest.updatedAt],
       createdAt: json[AttributesWorkRequest.createdAt],
     );

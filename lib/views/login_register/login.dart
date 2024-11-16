@@ -16,7 +16,7 @@ class ConnectAll extends StatefulWidget {
 }
 
 class _ConnectAllState extends State<ConnectAll> {
-  var email = 'ar@ar.com';
+  var email = 'council@council.com';
   var password = 'aaa';
   var errorVisibility = false;
 
@@ -148,12 +148,8 @@ class _ConnectAllState extends State<ConnectAll> {
       return;
     }
     if(response[0] == '0') {
-      if(response[2] != null){
-        Navigator.pushNamed(context, response[1]!,arguments : response[2]!);
-      }
-      else{
-        Navigator.pushNamed(context, response[1]!);
-      }
+      print(response[1]!);
+      Navigator.pushNamed(context, response[1]!);
     }
     else{
       return;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/utils/string_handler/handle_string.dart';
 
-import '../../../core_value.dart';
 import '../../../models/conversation/conversation.dart';
 import '../../../text/fr.dart';
 import '../../../utils/date_to_string/date.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
+import '../../../widget/text_style/text_style_main_color.dart';
 
 class FirstConvCell extends StatelessWidget {
   const FirstConvCell({
@@ -26,7 +26,7 @@ class FirstConvCell extends StatelessWidget {
           children: [
             Text(
                 trimText(stringNullOrDefaultValue(conversation.workRequest?.title, AppText.noTitleForWork), 25),
-                style: Theme.of(context).textTheme.displayMedium
+                style: getTextStyleMainColor(20)
             ),
             const SizedBox(height: 15),
             Text(trimText(stringNullOrDefaultValue(conversation.message,AppText.messageNoMessage),150)),

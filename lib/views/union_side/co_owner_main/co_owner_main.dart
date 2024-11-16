@@ -22,17 +22,14 @@ const spaceInsideColumn = 25.0;
 class CoOwnerMain extends StatelessWidget {
   const CoOwnerMain({
     super.key,
-    required this.uuid,
   });
-
-  final String uuid;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: FutureBuilder(
-          future: fetchCoOwnerMainData(uuid),
+          future: fetchCoOwnerMainData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -136,7 +133,7 @@ class CoOwnerMain extends StatelessWidget {
                       AppText.preTextWorkRequest +
                           stringNullOrDefaultValue(listTiming(workRequest?.timings, AppText.noDateForWork), AppText.noDateForWork),
                       AppText.buttonTextWorkRequest,
-                      () => goTo(context,'/co_owner/work_requests', arguments: uuid),
+                      () => goTo(context,'/co_owner/work_requests'),
                       context,
                     ),
                   ),
@@ -147,7 +144,7 @@ class CoOwnerMain extends StatelessWidget {
                       AppText.subtitleEstimate,
                       stringNullOrDefaultValue(listTimingEstimate(estimate?.timingsEstimate,AppText.noDateForWork), AppText.noDateForWork),
                       AppText.buttonTextEstimate,
-                          () => goTo(context,'/first_conv_council',arguments: uuid),
+                          () => goTo(context,'/first_conv_council'),
                       context,
                     ),
                   ),

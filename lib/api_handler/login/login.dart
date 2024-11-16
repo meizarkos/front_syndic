@@ -14,8 +14,7 @@ Future<List<String?>> sendConnexionRequest(String email, String password,VoidCal
     if(response.statusCode == 200) {
       Credential.instance.token = 'Bearer ${response.data['token']}';
       final route = response.data['route'] as String?;
-      final uuid = response.data['uuid'] as String?;
-      return ['0',route,uuid];
+      return ['0',route];
     }
     else{
       handleVisibility();

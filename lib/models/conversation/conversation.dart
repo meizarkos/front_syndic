@@ -8,6 +8,9 @@ class AttributesConversation{
   static const String workRequestId = 'work_request_id';
   static const String workRequest = 'work_request';
   static const String artisanId = 'artisan_id';
+  static const String unionId = 'union_id';
+  static const String councilId = 'council_id';
+  static const String userId = 'user_id';
   static const String updatedAt = 'upadated_at';
   static const String createdAt = 'created_at';
 }
@@ -19,6 +22,9 @@ class Conversation {
   String? side;
   String? workRequestId;
   String? artisanId;
+  String? unionId;
+  String? councilId;
+  String? userId;
   WorkRequest? workRequest;
   String? updatedAt;
   String? createdAt;
@@ -31,6 +37,9 @@ class Conversation {
     this.workRequestId,
     this.workRequest,
     this.artisanId,
+    this.unionId,
+    this.councilId,
+    this.userId,
     this.updatedAt,
     this.createdAt,
   });
@@ -43,6 +52,9 @@ class Conversation {
     workRequestId = json[AttributesConversation.workRequestId];
     workRequest = json[AttributesConversation.workRequest] != null ? WorkRequest.fromJson(json[AttributesConversation.workRequest]) : null;
     artisanId = json[AttributesConversation.artisanId];
+    unionId = json[AttributesConversation.unionId];
+    councilId = json[AttributesConversation.councilId];
+    userId = json[AttributesConversation.userId];
     updatedAt = json[AttributesConversation.updatedAt];
     createdAt = json[AttributesConversation.createdAt];
   }
