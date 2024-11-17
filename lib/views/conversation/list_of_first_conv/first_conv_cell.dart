@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/utils/string_handler/handle_string.dart';
 
 import '../../../models/conversation/conversation.dart';
@@ -19,20 +20,23 @@ class FirstConvCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10),
-      child: Container(
-        decoration: decorationRoundMainColor(),
-        padding: EdgeInsets.all(25),
-        child: Column(
-          children: [
-            Text(
-                trimText(stringNullOrDefaultValue(conversation.workRequest?.title, AppText.noTitleForWork), 25),
-                style: getTextStyleMainColor(20)
-            ),
-            const SizedBox(height: 15),
-            Text(trimText(stringNullOrDefaultValue(conversation.message,AppText.messageNoMessage),150)),
-            const SizedBox(height: 25),
-            Text(_date()),
-          ],
+      child: Card(
+        elevation: AppUIValue.elevation,
+        child: Container(
+          decoration: decorationRoundMainColor(),
+          padding: EdgeInsets.all(25),
+          child: Column(
+            children: [
+              Text(
+                  trimText(stringNullOrDefaultValue(conversation.workRequest?.title, AppText.noTitleForWork), 25),
+                  style: getTextStyleMainColor(20)
+              ),
+              const SizedBox(height: 15),
+              Text(trimText(stringNullOrDefaultValue(conversation.message,AppText.messageNoMessage),150)),
+              const SizedBox(height: 25),
+              Text(_date()),
+            ],
+          ),
         ),
       ),
     );

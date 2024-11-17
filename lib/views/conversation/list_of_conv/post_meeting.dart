@@ -83,6 +83,7 @@ class _PostMeetingState extends State<PostMeeting> {
   void onDateChanged(DateTime date) {
     setState(() {
       selectedDate = date;
+      timing.date = '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}';
     });
   }
 
