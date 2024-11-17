@@ -6,6 +6,7 @@ import 'package:front_syndic/views/conversation/list_of_conv/all_conv_type.dart'
 import 'package:front_syndic/views/conversation/list_of_conv/all_post_meeting_type.dart';
 import 'package:front_syndic/views/conversation/list_of_first_conv/first_conv_type.dart';
 import 'package:front_syndic/views/login_register/login.dart';
+import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/union_side/co_owner_main/co_owner_main.dart';
 import 'package:front_syndic/views/union_side/union_main.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category.dart';
@@ -65,6 +66,7 @@ class MyApp extends StatelessWidget {
         '/co_owner/work_requests': (context) => const WorkRequestsList(),
         '/first_conv_council': (context) => const FirstConvCouncil(),
         '/co_owner_main': (context) => const CoOwnerMain(),
+        '/in_progress': (context) => const InProgressCouncil(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {

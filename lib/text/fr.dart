@@ -112,4 +112,7 @@ class AppText {
   /* Message */
   static const String messageNoMessage = 'Pas de message';
   static const String titleCouncilMessage = 'Vos messages';
+
+  /* Timing */
+  static const String timingListTitle = 'Vos rendez-vous';
 }

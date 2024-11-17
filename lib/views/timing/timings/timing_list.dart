@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/timing/timing.dart';
+import '../../../text/fr.dart';
 
 class TimingList extends StatefulWidget {
   const TimingList({
@@ -17,8 +18,11 @@ class TimingList extends StatefulWidget {
 class _TimingListState extends State<TimingList> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppText.timingListTitle),
+      ),
+      body: const Center(
         child: CircularProgressIndicator(),
       ),
     );
