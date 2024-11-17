@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/api_handler/timing/get_timing_of_work_request.dart';
+import 'package:front_syndic/api_handler/timing/get_timings.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/utils/date_to_string/date.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
