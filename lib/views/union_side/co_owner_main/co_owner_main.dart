@@ -110,7 +110,7 @@ class CoOwnerMain extends StatelessWidget {
                         stringNullOrDefaultValue(
                             fromStringToDateTimeString("${timing?.date} ${timing?.time}"), AppText.noTimingFound),
                         AppText.seeEstimate,
-                        () => goTo(context,'/in_progress'),
+                        () => goTo(context,'/in_progress/council/conversation'),
                         context),
                   ),
                   const SizedBox(height: 25),

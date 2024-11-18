@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../text/fr.dart';
+
 class InProgressMain extends StatefulWidget {
-  const InProgressMain({super.key});
+  const InProgressMain({
+    super.key,
+    required this.top,
+    required this.body,
+  });
+
+  final Widget top;
+  final Widget body;
 
   @override
   State<InProgressMain> createState() => _InProgressMainState();
@@ -12,11 +21,18 @@ class _InProgressMainState extends State<InProgressMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Process'),
+        centerTitle: true,
+        title: const Text(AppText.inProgress),
+        automaticallyImplyLeading: false,
       ),
-      body: const Center(
-        child: CircularProgressIndicator(),
-      ),
+      body: Column(
+        children: [
+          widget.top,
+          Expanded(
+            child: widget.body,
+          ),
+        ],
+      )
     );
   }
 }

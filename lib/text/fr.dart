@@ -34,6 +34,7 @@ class AppText {
   static const String unionMainAddButton = 'Ajouter';
 
   /* CoOwnerMain */
+  static const String conversation = 'Conversations';
   static const String buttonSeeInvoice = 'Voir mes factures';
   static const String buttonCreateARequest = 'Créer une demande';
 
@@ -114,5 +115,21 @@ class AppText {
   static const String titleCouncilMessage = 'Vos messages';
 
   /* Timing */
+  static const String timing = 'Rendez-vous';
   static const String timingListTitle = 'Vos rendez-vous';
+
+  /* Estimate */
+  static const String estimate = 'Devis';
+
+  /* Timing Estimate */
+  static const String timingEstimate = 'Date travaux';
+
+  /* In Progress */
+  static const String inProgress = 'Affaire en cours';
+  static const List<String> inProgressListCouncil = [
+    conversation,
+    timing,
+    estimate,
+    timingEstimate
+  ];
 }

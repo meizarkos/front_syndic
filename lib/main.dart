@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
         '/co_owner/work_requests': (context) => const WorkRequestsList(),
         '/first_conv_council': (context) => const FirstConvCouncil(),
         '/co_owner_main': (context) => const CoOwnerMain(),
-        '/in_progress': (context) => const InProgressCouncil(),
+        '/in_progress/council/conversation': (context) => const InProgressCouncilConversation(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
