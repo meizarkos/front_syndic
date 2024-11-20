@@ -4,6 +4,9 @@ class AppText {
   static const String apiNoResult = 'Pas de résultat';
   static const String at = 'à';
   static const String le = 'Le';
+  static const String for_ = 'Pour : ';
+  static const String to = 'Au';
+  static const String from = 'du';
 
   /*General*/
   static const String save = 'Enregister';
@@ -120,9 +123,12 @@ class AppText {
 
   /* Estimate */
   static const String estimate = 'Devis';
+  static const String noPriceEstimate = 'Pas de prix trouvée';
+  static const String euro = '€';
 
   /* Timing Estimate */
   static const String timingEstimate = 'Date travaux';
+  static const String timingEstimateListTitle = 'Proposition de travaux du';
 
   /* In Progress */
   static const String inProgress = 'Affaire en cours';

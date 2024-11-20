@@ -24,10 +24,12 @@ class TopScreenInProgressCouncil extends StatefulWidget {
     super.key,
     required this.onChangedSearchValue,
     required this.category,
+    required this.onCategoryChanged,
   });
 
   final Function(String) onChangedSearchValue;
   final String category;
+  final Function(String) onCategoryChanged;
 
   @override
   State<TopScreenInProgressCouncil> createState() => _TopScreenInProgressCouncilState();
@@ -38,8 +40,7 @@ class _TopScreenInProgressCouncilState extends State<TopScreenInProgressCouncil>
   Widget build(BuildContext context) {
     return TopScreenInProgress(
         onChangedSearchValue: widget.onChangedSearchValue,
-        onCategoryChanged: pushToRouteCouncil,
-        category: widget.category,
+        onCategoryChanged: widget.onCategoryChanged,
         listOfCategory: AppText.inProgressListCouncil,
     );
   }

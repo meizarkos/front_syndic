@@ -12,6 +12,7 @@ class BodyInProgress extends StatefulWidget {
     required this.returnWorkRequestTitle,
     required this.returnDesc,
     required this.descSize,
+    required this.descStyle,
     this.returnThirdText,
     this.thirdTextSize,
   });
@@ -22,6 +23,7 @@ class BodyInProgress extends StatefulWidget {
   final Function(dynamic) returnWorkRequestTitle;
   final Function(dynamic) returnDesc;
   final int descSize;
+  final TextStyle? descStyle;
   final Function(dynamic)? returnThirdText;
   final int? thirdTextSize;
 
@@ -63,6 +65,7 @@ class _BodyInProgressState extends State<BodyInProgress> {
                         workRequestTitle: widget.returnWorkRequestTitle(dataFiltered[index]),
                         desc: widget.returnDesc(dataFiltered[index]),
                         descSize: widget.descSize,
+                        descStyle: widget.descStyle,
                         thirdText: widget.returnThirdText != null ? widget.returnThirdText!(dataFiltered[index]) : null,
                         thirdTextSize: widget.thirdTextSize,
                     ),

@@ -9,13 +9,11 @@ class TopScreenInProgress extends StatefulWidget {
     super.key,
     required this.onChangedSearchValue,          //to factorize
     required this.onCategoryChanged,  //to factorize
-    required this.category,
     required this.listOfCategory,    //to factorize
   });
 
   final Function(String) onChangedSearchValue;
-  final Function(String, BuildContext) onCategoryChanged;
-  final String category;
+  final Function(String) onCategoryChanged;
   final List<String> listOfCategory;
 
   @override
@@ -23,6 +21,9 @@ class TopScreenInProgress extends StatefulWidget {
 }
 
 class _TopScreenInProgressState extends State<TopScreenInProgress> {
+
+  String category = AppText.conversation;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +43,7 @@ class _TopScreenInProgressState extends State<TopScreenInProgress> {
                 style: Theme.of(context).textTheme.displayMedium,
               ),
               DropdownButton(
-                value: widget.category,
+                value: category,
                 isExpanded: false,
                 underline: Container(),
                 iconSize: 50,
@@ -59,9 +60,11 @@ class _TopScreenInProgressState extends State<TopScreenInProgress> {
                 }).toList(),
                 onChanged: (String? newValue) { //should return a widget to modify body
                   if(newValue != null) {
-                    return;
+                    setState(() {
+                      category = newValue;
+                    });
+                    widget.onCategoryChanged(newValue);
                   }
-                  widget.onCategoryChanged(newValue!, context);
                 },
               ),
             ],

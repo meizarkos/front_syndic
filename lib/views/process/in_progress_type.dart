@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/views/process/in_progress_main.dart';
 import 'package:front_syndic/views/process/top_screen_in_progress/top_screen_in_progress_type.dart';
+import 'package:front_syndic/views/process/top_screen_in_progress/top_screen_route_handler.dart';
 
 import '../../text/fr.dart';
-import 'body_in_progress/body_in_progress_type.dart';
 
 class InProgressCouncilConversation extends StatefulWidget {
   const InProgressCouncilConversation({super.key});
@@ -22,16 +22,21 @@ class _InProgressCouncilConversationState extends State<InProgressCouncilConvers
       top : TopScreenInProgressCouncil(
         onChangedSearchValue: _searchValueChange,
         category: category,
+        onCategoryChanged: _categoryChange,
       ),
-      body : BodyInProgressCouncilConversation( //handle route
-        searchValue: searchValue,
-      ),
+      body : topScreenRouteHandlerCouncil(searchValue,category),
     );
   }
 
   void _searchValueChange(String value) {
     setState(() {
       searchValue = value;
+    });
+  }
+
+  void _categoryChange(String value) {
+    setState(() {
+      category = value;
     });
   }
 }

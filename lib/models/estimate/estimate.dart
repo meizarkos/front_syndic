@@ -1,3 +1,5 @@
+import 'package:front_syndic/models/work_request/work_request.dart';
+
 import '../timing/timing_estimate.dart';
 
 class AttributesEstimate{
@@ -7,6 +9,7 @@ class AttributesEstimate{
   static const commentary = 'commentary';
   static const status = 'status';
   static const workRequestId = 'work_request_id';
+  static const workRequest = 'work_request';
   static const artisanId = 'artisan_id';
   static const unionId = 'union_id';
   static const councilId = 'council_id';
@@ -17,12 +20,13 @@ class AttributesEstimate{
 
 class Estimate {
   final String? uuid;
-  final String? price;
+  final int? price;
   final String? description;
   final String? commentary;
   final String? status;
   final List<TimingEstimate>? timingsEstimate;
   final String? workRequestId;
+  final WorkRequest? workRequest;
   final String? artisanId;
   final String? unionId;
   final String? councilId;
@@ -38,6 +42,7 @@ class Estimate {
     this.status,
     this.timingsEstimate,
     this.workRequestId,
+    this.workRequest,
     this.artisanId,
     this.unionId,
     this.councilId,
@@ -57,6 +62,9 @@ class Estimate {
           ?.map((timingEstimateJson) => TimingEstimate.fromJson(timingEstimateJson))
           .toList() ?? [],
       workRequestId: json[AttributesEstimate.workRequestId],
+      workRequest: json[AttributesEstimate.workRequest] != null
+          ? WorkRequest.fromJson(json[AttributesEstimate.workRequest])
+          : null,
       artisanId: json[AttributesEstimate.artisanId],
       unionId: json[AttributesEstimate.unionId],
       councilId: json[AttributesEstimate.councilId],

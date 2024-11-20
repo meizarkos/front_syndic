@@ -11,12 +11,14 @@ class CellInProgress extends StatelessWidget {
     required this.workRequestTitle,
     required this.desc,
     required this.descSize,
+    required this.descStyle,
     this.thirdText,
     this.thirdTextSize,
   });
 
   final String workRequestTitle;
   final String desc;
+  final TextStyle? descStyle;
   final String? thirdText;
   final int descSize;
   final int? thirdTextSize;
@@ -39,7 +41,7 @@ class CellInProgress extends StatelessWidget {
               const SizedBox(height: 15),
               Text(
                   trimText(desc,descSize),
-                  style: Theme.of(context).textTheme.displaySmall,
+                  style: descStyle,
               ),
               const SizedBox(height: 25),
               if(thirdText != null && thirdTextSize != null)
