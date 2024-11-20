@@ -15,3 +15,7 @@ String? handleEmptyList(List<dynamic>? list, String defaultValue){
   }
   return null;
 }
+
+String toLowerFirst(String text){
+  return text[0].toLowerCase() + text.substring(1);
+}

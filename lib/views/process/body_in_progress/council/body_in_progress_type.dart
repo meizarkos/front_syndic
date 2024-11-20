@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:front_syndic/api_handler/estimate/get_estimate.dart';
 import 'package:front_syndic/views/process/body_in_progress/body_in_progress.dart';
 
-import '../../../api_handler/conversation/fetch_conversation.dart';
-import '../../../api_handler/timing/get_timings.dart';
-import '../../../api_handler/timing_estimate/get_timing_estimate.dart';
+import '../../../../api_handler/conversation/fetch_conversation.dart';
+import '../../../../api_handler/timing/get_timings.dart';
+import '../../../../api_handler/timing_estimate/get_timing_estimate.dart';
 import 'function_access_param.dart';
 
 class BodyInProgressCouncilConversation extends StatelessWidget {
@@ -43,7 +43,7 @@ class BodyInProgressCouncilTiming extends StatelessWidget {
   Widget build(BuildContext context) {
     return BodyInProgress(
         future: fetchTimingsCouncil(),
-        routeToDetail: '/council/see_conv',
+        routeToDetail: '/council/timing_detail',
         searchValue: searchValue,
         returnWorkRequestTitle: getTitleAndAddPrefix,
         returnDesc: getDateMeeting,

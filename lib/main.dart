@@ -7,6 +7,7 @@ import 'package:front_syndic/views/conversation/list_of_conv/all_post_meeting_ty
 import 'package:front_syndic/views/conversation/list_of_first_conv/first_conv_type.dart';
 import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/process/in_progress_type.dart';
+import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/union_side/co_owner_main/co_owner_main.dart';
 import 'package:front_syndic/views/union_side/union_main.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category.dart';
@@ -76,6 +77,17 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (context) => RecapPatchWorkRequest(
                   workRequestUuid: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/council/timing_detail':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => TimingDetailCouncil(
+                  timingUuid: arguments,
                 ),
               );
             }

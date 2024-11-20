@@ -7,6 +7,7 @@ class AppText {
   static const String for_ = 'Pour : ';
   static const String to = 'Au';
   static const String from = 'du';
+  static const String one = 'Un';
 
   /*General*/
   static const String save = 'Enregister';
@@ -21,6 +22,7 @@ class AppText {
   static const String noCategoryFound = 'Pas de catégorie';
   static const String noDescriptionWorkRequest = 'Pas de description';
   static const String noDate = 'Pas de date';
+  static const String noPhone = 'Pas de numéro de téléphone trouvée';
 
   /* LoginStrings */
   static const String loginTitle = 'Connexion';
@@ -120,6 +122,13 @@ class AppText {
   /* Timing */
   static const String timing = 'Rendez-vous';
   static const String timingListTitle = 'Vos rendez-vous';
+  static const String create = 'a été fixé :';
+  static const String meetingEstimateText = 'Rencontrez vous pour faire un devis le';
+  static const String interventionPlace = 'Lieu de l\'intervention :';
+  static const String phoneContact = 'Votre numéro de contact est :';
+  static const String contactUs = "pour plus d'information";
+  static const String contact = 'Contactez';
+  static const String contactUnion = "Si vous n'êtes pas à l'origine de cette demande adressez vous à votre conseil syndical :";
 
   /* Estimate */
   static const String estimate = 'Devis';
