@@ -21,7 +21,7 @@ ElevatedButton elevatedButtonOpacity(Color backgroundColor, String buttonText, B
   );
 }
 
-ElevatedButton elevatedButtonOpacityAndTextColor(Color backgroundColor, String buttonText, BuildContext context,VoidCallback goTo,Color textColor) {
+ElevatedButton elevatedButtonAndTextColor(Color backgroundColor, String buttonText, BuildContext context,VoidCallback goTo,Color textColor) {
   return ElevatedButton(
     onPressed: goTo,
     style: ElevatedButton.styleFrom(

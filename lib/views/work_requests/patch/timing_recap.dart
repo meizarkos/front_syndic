@@ -102,7 +102,7 @@ class _RecapTimingChange extends State<RecapTimingChange> {
                   );
                 }),
               const SizedBox(height: 35),
-              elevatedButtonOpacityAndTextColor(
+              elevatedButtonAndTextColor(
                 AppColors.mainBackgroundColor,
                 AppText.save,
                 context,

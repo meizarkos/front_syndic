@@ -85,7 +85,7 @@ class _WorkRequestCategoryState extends State<WorkRequestCategory> {
           ErrorVisibility(
               errorVisibility: errorVisibility,
               errorText: AppText.createWorkRequestCategoryIsEmpty),
-          elevatedButtonOpacityAndTextColor(
+          elevatedButtonAndTextColor(
               AppColors.mainBackgroundColor,
               AppText.save,
               context,

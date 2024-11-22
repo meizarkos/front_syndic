@@ -7,7 +7,7 @@ class BodyInProgress extends StatefulWidget {
   const BodyInProgress({
     super.key,
     required this.future,
-    required this.routeToDetail,
+    required this.goToDetail,
     required this.searchValue,
     required this.returnWorkRequestTitle,
     required this.returnDesc,
@@ -18,7 +18,7 @@ class BodyInProgress extends StatefulWidget {
   });
 
   final Future future;
-  final String routeToDetail;
+  final Function(String) goToDetail;
   final String? searchValue;
   final Function(dynamic) returnWorkRequestTitle;
   final Function(dynamic) returnDesc;
@@ -58,9 +58,7 @@ class _BodyInProgressState extends State<BodyInProgress> {
                   return SizedBox();
                 }
                 return GestureDetector(
-                    onTap: (){
-                      Navigator.pushNamed(context, widget.routeToDetail, arguments: snapshot.data![index].uuid);
-                    },
+                    onTap: ()=>widget.goToDetail(dataFiltered[index].uuid),
                     child : CellInProgress(
                         workRequestTitle: widget.returnWorkRequestTitle(dataFiltered[index]),
                         desc: widget.returnDesc(dataFiltered[index]),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../color.dart';
 import '../../../core_value.dart';
+import '../../../models/to_screen/see_conv_arg.dart';
 import '../../../models/work_request/work_request.dart';
 import '../../../text/fr.dart';
 import '../../../utils/string_handler/handle_string.dart';
@@ -91,7 +93,7 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
                 }),
               const SizedBox(height: 20),
               Center(
-                child: elevatedButtonOpacityAndTextColor(
+                child: elevatedButtonAndTextColor(
                   AppColors.mainBackgroundColor,
                   AppText.workRequestArtisanSideSendFirstMessage,
                   context,
@@ -106,9 +108,12 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
     );
   }
 
-  void _onSave(BuildContext context) async {
-    //Navigator.pushNamed(context,'/artisan_main/first_conv');
-    Navigator.pushNamed(context, '/work_requests/artisan/first_conv', arguments: workRequest.uuid);
+  void _onSave(BuildContext context){
+    if(workRequest.uuid == null){
+      return;
+    }
+    Navigator.pushNamed(context, '/work_requests/artisan/first_conv',
+        arguments: SeeConvArg(uuid : workRequest.uuid!, futureToFetchData: fetchConversationFromWorkRequest));
   }
 
   Divider divider() {

@@ -98,7 +98,7 @@ class _RecapWorkRequestState extends State<RecapWorkRequest> {
                 }),
               const SizedBox(height: 20),
               Center(
-                child: elevatedButtonOpacityAndTextColor(
+                child: elevatedButtonAndTextColor(
                   AppColors.mainBackgroundColor,
                   AppText.save,
                   context,

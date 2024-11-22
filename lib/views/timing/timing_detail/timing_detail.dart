@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/widget/text_style/text_style_main_color.dart';
 
@@ -6,18 +7,26 @@ import '../../../models/timing/timing.dart';
 import '../../../text/fr.dart';
 import '../../../utils/date_to_string/date.dart';
 import '../../../utils/string_handler/handle_string.dart';
+import '../../../widget/button/elevated_button_opacity.dart';
+import '../../../widget/button/row_of_nav_button.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
 import '../../../widget/header/app_bar_back_button.dart';
 
 class TimingDetail extends StatefulWidget {
   const TimingDetail({
     super.key,
+    required this.routToConv,
+    required this.routeToEstimateDetail,
+    required this.routeToRefuse,
     required this.future,
     required this.getYou,
     required this.getClient,
     this.getUnion,
   });
 
+  final Function(String?) routToConv;
+  final Function(String?) routeToEstimateDetail;
+  final Function(String?) routeToRefuse;
   final Future<Timing?> future;
   final Function(dynamic) getYou;
   final Function(dynamic) getClient;
@@ -45,8 +54,16 @@ class _TimingDetailState extends State<TimingDetail> {
             return Padding(
               padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
+                  rowOfNavButton(
+                    AppText.seeConv,
+                    AppText.seeEstimateDetail,
+                    context,
+                    ()=>widget.routToConv(timing.uuid),
+                    ()=>widget.routeToEstimateDetail(timing.uuid),
+                  ),
+                  const SizedBox(height: 35),
                   Center(
                     child: Text(
                       timing.workRequest?.title ?? AppText.noTitleForWork,
@@ -106,6 +123,14 @@ class _TimingDetailState extends State<TimingDetail> {
                       ),
                     ),
                   ],
+                  const SizedBox(height: 35),
+                  elevatedButtonAndTextColor(
+                    AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
+                    AppText.refuse,
+                    context,
+                    ()=>widget.routeToRefuse(timing.uuid),
+                    Colors.black,
+                  )
                 ],
               ),
             );

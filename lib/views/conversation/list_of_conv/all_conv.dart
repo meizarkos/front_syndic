@@ -14,7 +14,9 @@ class SeeConv extends StatefulWidget {
     required this.futureForGetConv,
     required this.futureForPostConv,
     required this.route,
-    required this.sideText
+    required this.sideText,
+    required this.goToRequest,
+    required this.goToMeeting,
   });
 
   final String uuid;
@@ -22,10 +24,15 @@ class SeeConv extends StatefulWidget {
   final Function futureForPostConv;
   final String route;
   final String sideText;
+  final Function(String?) goToRequest;
+  final Function(String?) goToMeeting;
+
 
   @override
   State<SeeConv> createState() => _SeeConvState();
 }
+
+
 
 class _SeeConvState extends State<SeeConv> {
   final TextEditingController _messageController = TextEditingController();
@@ -65,20 +72,36 @@ class _SeeConvState extends State<SeeConv> {
             Navigator.pop(context);
           },
         ),
-        title: Padding(
-          padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
-          child: elevatedButtonOpacityAndTextColor(
-            AppColors.mainBackgroundColor,
-            AppText.createAMeeting,
-            context,
-            () {
-              Navigator.pushNamed(
-                context,
-                widget.route,
-                arguments: widget.uuid,
-              );
-            },
-            AppColors.mainTextColor,
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+            child : Row(
+              children: [
+                createButton(
+                  AppText.createAMeeting,
+                  widget.goToRequest(widget.uuid),
+                  color: AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
+                  textColor: Colors.black,
+                ),
+                const SizedBox(width: 10),
+                createButton(
+                  AppText.seeWorkRequest,
+                  widget.goToMeeting(widget.uuid),
+                ),
+                const SizedBox(width: 10),
+                createButton(
+                  AppText.seeMeeting,
+                      () {
+                    Navigator.pushNamed(
+                      context,
+                      widget.route,
+                      arguments: widget.uuid,
+                    );
+                  },
+                ),
+              ],
+            )
           ),
         ),
       ),
@@ -139,6 +162,17 @@ class _SeeConvState extends State<SeeConv> {
           ],
         ),
       ),
+    );
+  }
+
+  ElevatedButton createButton(String text, Function() onPressed,{Color color = AppColors.mainBackgroundColor,Color textColor = AppColors.mainTextColor}) {
+
+    return elevatedButtonAndTextColor(
+      color,
+      text,
+      context,
+      ()=>onPressed,
+      textColor,
     );
   }
 }

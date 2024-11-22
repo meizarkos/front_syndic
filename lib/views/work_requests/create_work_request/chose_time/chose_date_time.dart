@@ -79,7 +79,7 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
                 );
               }),
             const SizedBox(height: 35),
-            elevatedButtonOpacityAndTextColor(
+            elevatedButtonAndTextColor(
               AppColors.mainBackgroundColor,
               AppText.save,
               context,

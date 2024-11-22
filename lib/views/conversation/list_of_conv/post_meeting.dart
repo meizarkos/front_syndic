@@ -17,7 +17,7 @@ class PostMeeting extends StatefulWidget {
   });
 
   final String uuid;
-  final String routeAllConv;
+  final Function(String) routeAllConv;
   final Function postMeeting;
 
   @override
@@ -67,7 +67,7 @@ class _PostMeetingState extends State<PostMeeting> {
               errorText: AppText.createAMeetingError,
             ),
             const SizedBox(height: 35),
-            elevatedButtonOpacityAndTextColor(
+            elevatedButtonAndTextColor(
               AppColors.mainBackgroundColor,
               _noDateOrTime(),
               context,
@@ -98,7 +98,7 @@ class _PostMeetingState extends State<PostMeeting> {
     await widget.postMeeting(widget.uuid, timing);
     Navigator.pop(context);
     Navigator.pop(context);
-    Navigator.of(context).pushNamed(widget.routeAllConv, arguments: widget.uuid);
+    widget.routeAllConv(widget.uuid);
   }
 
   Future<void> _choseTime() async {

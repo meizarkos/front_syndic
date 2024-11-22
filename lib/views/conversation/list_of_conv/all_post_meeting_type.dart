@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/post_meeting.dart';
 
-import '../../../api_handler/timing/post_artisan.dart';
+import '../../../api_handler/conversation/fetch_conversation.dart';
+import '../../../api_handler/timing/post_timing.dart';
 
 class PostMeetingArtisanFromWorkRequest extends StatelessWidget {
   const PostMeetingArtisanFromWorkRequest({
@@ -15,7 +17,11 @@ class PostMeetingArtisanFromWorkRequest extends StatelessWidget {
   Widget build(BuildContext context) {
     return PostMeeting(
       uuid: uuid,
-      routeAllConv: '/work_requests/artisan/first_conv',
+      routeAllConv: (String uuid){
+        Navigator.pushNamed(context,  '/work_requests/artisan/first_conv',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchConversationFromWorkRequest)
+        );
+      },
       postMeeting: postTimingFromWorkRequestArtisan,
     );
   }
@@ -33,7 +39,11 @@ class PostMeetingArtisan extends StatelessWidget {
   Widget build(BuildContext context) {
     return PostMeeting(
       uuid: uuid,
-      routeAllConv: '/artisan/see_conv',
+      routeAllConv: (String uuid){
+        Navigator.pushNamed(context,  '/artisan/see_conv',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvArtisan)
+        );
+      },
       postMeeting: postTimingFromConvArtisan,
     );
   }
@@ -51,7 +61,11 @@ class PostMeetingCouncil extends StatelessWidget {
   Widget build(BuildContext context) {
     return PostMeeting(
       uuid: uuid,
-      routeAllConv: '/council/see_conv',
+      routeAllConv: (String uuid){
+        Navigator.pushNamed(context, '/council/see_conv',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncil)
+        );
+      },
       postMeeting: postTimingFromConvCouncil,
     );
   }

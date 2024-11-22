@@ -75,7 +75,7 @@ class _TitleAndDescState extends State<TitleAndDesc> {
             ErrorVisibility(errorVisibility: errorVisible, errorText: AppText.createTitleWorkErrorText),
             const SizedBox(height: 7),
             Center(
-              child: elevatedButtonOpacityAndTextColor(
+              child: elevatedButtonAndTextColor(
                 AppColors.mainBackgroundColor,
                 AppText.save,
                 context,

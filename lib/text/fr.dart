@@ -2,12 +2,6 @@ class AppText {
   /* General API */
   static const String apiErrorText = 'Une erreur est survenue';
   static const String apiNoResult = 'Pas de résultat';
-  static const String at = 'à';
-  static const String le = 'Le';
-  static const String for_ = 'Pour : ';
-  static const String to = 'Au';
-  static const String from = 'du';
-  static const String one = 'Un';
 
   /*General*/
   static const String save = 'Enregister';
@@ -17,6 +11,13 @@ class AppText {
   static const String delete = 'Supprimer';
   static const String cancel = 'Annuler';
   static const String confirm = 'Confirmer';
+  static const String refuse = 'Refuser';
+  static const String at = 'à';
+  static const String le = 'Le';
+  static const String for_ = 'Pour : ';
+  static const String to = 'Au';
+  static const String from = 'du';
+  static const String one = 'Un';
 
   /* General not found */
   static const String noCategoryFound = 'Pas de catégorie';
@@ -115,9 +116,11 @@ class AppText {
   static const String createAMeetingMessage = 'Rendez-vous créer pour le';
   static const String createAMeetingError = 'Veuillez choisir une date et une heure';
 
-  /* Message */
+  /* Conversation */
   static const String messageNoMessage = 'Pas de message';
   static const String titleCouncilMessage = 'Vos messages';
+  static const String seeWorkRequest = 'Voir la demande';
+  static const String seeMeeting = 'Voir le rendez-vous';
 
   /* Timing */
   static const String timing = 'Rendez-vous';
@@ -129,6 +132,10 @@ class AppText {
   static const String contactUs = "pour plus d'information";
   static const String contact = 'Contactez';
   static const String contactUnion = "Si vous n'êtes pas à l'origine de cette demande adressez vous à votre conseil syndical :";
+
+  /* Timing Detail */
+  static const String seeConv = 'Message';
+  static const String seeEstimateDetail = 'Voir le devis';
 
   /* Estimate */
   static const String estimate = 'Devis';

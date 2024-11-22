@@ -19,6 +19,7 @@ import 'package:front_syndic/views/work_requests/list_work_request/work_requests
 import 'package:front_syndic/views/work_requests/patch/recap.dart';
 import 'package:front_syndic/views/work_requests/patch/timing_recap.dart';
 
+import 'models/to_screen/see_conv_arg.dart';
 import 'models/work_request/create_work_request.dart';
 
 void main() {
@@ -84,10 +85,11 @@ class MyApp extends StatelessWidget {
 
           case '/council/timing_detail':
             final arguments = settings.arguments;
-            if (arguments is String) {
+            if (arguments is SeeConvArg) {
               return MaterialPageRoute(
                 builder: (context) => TimingDetailCouncil(
-                  timingUuid: arguments,
+                  timingUuid: arguments.uuid,
+                  fetchTimingDetail: arguments.futureToFetchData,
                 ),
               );
             }
@@ -106,10 +108,11 @@ class MyApp extends StatelessWidget {
 
           case '/artisan/see_conv':
             final arguments = settings.arguments;
-            if (arguments is String) {
+            if (arguments is SeeConvArg) {
               return MaterialPageRoute(
                 builder: (context) => AllConvArtisan(
-                  id: arguments,
+                  id: arguments.uuid,
+                  future: arguments.futureToFetchData,
                 ),
               );
             }
@@ -193,10 +196,11 @@ class MyApp extends StatelessWidget {
 
           case '/work_requests/artisan/first_conv':
             final arguments = settings.arguments;
-            if (arguments is String) {
+            if (arguments is SeeConvArg) {
               return MaterialPageRoute(
                 builder: (context) => AllConvArtisanForWorkRequest(
-                  id: arguments,
+                  id: arguments.uuid,
+                  future: arguments.futureToFetchData,
                 ),
               );
             }
@@ -215,10 +219,11 @@ class MyApp extends StatelessWidget {
 
           case '/council/see_conv':
             final arguments = settings.arguments;
-            if (arguments is String) {
+            if (arguments is SeeConvArg) {
               return MaterialPageRoute(
                 builder: (context) => AllConvCouncil(
-                  id: arguments,
+                  id : arguments.uuid,
+                  future: arguments.futureToFetchData,
                 ),
               );
             }
