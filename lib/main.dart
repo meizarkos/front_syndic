@@ -19,6 +19,7 @@ import 'package:front_syndic/views/work_requests/list_work_request/work_requests
 import 'package:front_syndic/views/work_requests/patch/recap.dart';
 import 'package:front_syndic/views/work_requests/patch/timing_recap.dart';
 
+import 'models/to_screen/artisan_detail_work_request.dart';
 import 'models/to_screen/see_conv_arg.dart';
 import 'models/work_request/create_work_request.dart';
 
@@ -185,10 +186,12 @@ class MyApp extends StatelessWidget {
 
           case '/work_requests/artisan/detail':
             final arguments = settings.arguments;
-            if (arguments is WorkRequest) {
+            if (arguments is ArtisanWorkRequestDetailArg) {
               return MaterialPageRoute(
                 builder: (context) => DetailWorkRequestArtisanSide(
-                  workRequest: arguments,
+                  futureToFetchData: arguments.futureToFetchData,
+                  workRequestUuid: arguments.workRequestUuid,
+                  showContact: arguments.showContact,
                 ),
               );
             }

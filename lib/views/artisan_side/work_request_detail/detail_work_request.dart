@@ -16,10 +16,14 @@ import '../../work_requests/create_work_request/recap.dart';
 class DetailWorkRequestArtisanSide extends StatelessWidget {
   const DetailWorkRequestArtisanSide({
     super.key,
-    required this.workRequest,
+    required this.futureToFetchData,
+    required this.workRequestUuid,
+    required this.showContact,
   });
 
-  final WorkRequest workRequest;
+  final Future<WorkRequest?> Function(String?) futureToFetchData;
+  final String? workRequestUuid;
+  final bool showContact;
 
   @override
   Widget build(BuildContext context) {
@@ -27,93 +31,112 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
     return Scaffold(
       appBar: appBarBackButton(context),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                stringNullOrDefaultValue(
-                    workRequest.title,
-                    AppText.apiNoResult),
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-              divider(),
-              const SizedBox(height: spaceCate),
-              Text(
-                AppText.description,
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-              const SizedBox(height: spaceTitleDesc),
-              Container(
-                padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
-                decoration: decorationRoundMainColor(),
+        child: FutureBuilder(
+          future: futureToFetchData(workRequestUuid),
+          builder: (BuildContext context, AsyncSnapshot<WorkRequest?> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (snapshot.hasError ||snapshot.data == null) {
+              return Center(
                 child: Text(
-                  stringNullOrDefaultValue(
-                      workRequest.description,
-                      AppText.apiNoResult),
-                  style: Theme.of(context).textTheme.displaySmall,
+                  AppText.apiNoResult,
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
+              );
+            }
+            final data = snapshot.data!;
+            return Padding(
+              padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    stringNullOrDefaultValue(
+                        data.title,
+                        AppText.apiNoResult),
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
+                  divider(),
+                  const SizedBox(height: spaceCate),
+                  Text(
+                    AppText.description,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  const SizedBox(height: spaceTitleDesc),
+                  Container(
+                    padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+                    decoration: decorationRoundMainColor(),
+                    child: Text(
+                      stringNullOrDefaultValue(
+                          data.description,
+                          AppText.apiNoResult),
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
+                  ),
+                  const SizedBox(height: spaceTitleDesc),
+                  divider(),
+                  const SizedBox(height: spaceCate),
+                  Text(
+                    AppText.category,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  const SizedBox(height: spaceTitleDesc),
+                  Text(
+                    stringNullOrDefaultValue(
+                        data.category,
+                        AppText.apiNoResult),
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  const SizedBox(height: spaceTitleDesc),
+                  divider(),
+                  const SizedBox(height: spaceCate),
+                  Text(
+                    AppText.workRequestArtisanSideDisponibility,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  const SizedBox(height: spaceTitleDesc),
+                  if (data.timings != null &&
+                      data.timings!.isNotEmpty)
+                    ...data.timings!.map((date) {
+                      if (date.date == null || date.time == null) {
+                        return const SizedBox();
+                      }
+                      return CreateWorkRequestCellTime(
+                        date: date.date!,
+                        time: date.time!,
+                        onDelete: () {},
+                        showIcon: false,
+                      );
+                    }),
+                  const SizedBox(height: 20),
+                  showContact ? Center(
+                      child: elevatedButtonAndTextColor(
+                        AppColors.mainBackgroundColor,
+                        AppText.workRequestArtisanSideSendFirstMessage,
+                        context,
+                            ()=>_onSave(context),
+                        AppColors.mainTextColor,
+                      )
+                  ) : const SizedBox(),
+                ],
               ),
-              const SizedBox(height: spaceTitleDesc),
-              divider(),
-              const SizedBox(height: spaceCate),
-              Text(
-                AppText.category,
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-              const SizedBox(height: spaceTitleDesc),
-              Text(
-                stringNullOrDefaultValue(
-                    workRequest.category,
-                    AppText.apiNoResult),
-                style: Theme.of(context).textTheme.displaySmall,
-              ),
-              const SizedBox(height: spaceTitleDesc),
-              divider(),
-              const SizedBox(height: spaceCate),
-              Text(
-                AppText.workRequestArtisanSideDisponibility,
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-              const SizedBox(height: spaceTitleDesc),
-              if (workRequest.timings != null &&
-                  workRequest.timings!.isNotEmpty)
-                ...workRequest.timings!.map((date) {
-                  if (date.date == null || date.time == null) {
-                    return const SizedBox();
-                  }
-                  return CreateWorkRequestCellTime(
-                    date: date.date!,
-                    time: date.time!,
-                    onDelete: () {},
-                    showIcon: false,
-                  );
-                }),
-              const SizedBox(height: 20),
-              Center(
-                child: elevatedButtonAndTextColor(
-                  AppColors.mainBackgroundColor,
-                  AppText.workRequestArtisanSideSendFirstMessage,
-                  context,
-                  ()=>_onSave(context),
-                  AppColors.mainTextColor,
-                ),
-              )
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
   }
 
   void _onSave(BuildContext context){
-    if(workRequest.uuid == null){
+    if(workRequestUuid == null){
       return;
     }
     Navigator.pushNamed(context, '/work_requests/artisan/first_conv',
-        arguments: SeeConvArg(uuid : workRequest.uuid!, futureToFetchData: fetchConversationFromWorkRequest));
+        arguments: SeeConvArg(uuid : workRequestUuid!, futureToFetchData: fetchConversationFromWorkRequest));
   }
 
   Divider divider() {
