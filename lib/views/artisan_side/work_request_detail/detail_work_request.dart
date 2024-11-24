@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../color.dart';
 import '../../../core_value.dart';
-import '../../../models/to_screen/see_conv_arg.dart';
 import '../../../models/work_request/work_request.dart';
 import '../../../text/fr.dart';
 import '../../../utils/string_handler/handle_string.dart';
@@ -13,7 +11,7 @@ import '../../../widget/header/app_bar_back_button.dart';
 import '../../work_requests/create_work_request/chose_time/cell_time.dart';
 import '../../work_requests/create_work_request/recap.dart';
 
-class DetailWorkRequestArtisanSide extends StatelessWidget {
+class DetailWorkRequestArtisanSide extends StatefulWidget {
   const DetailWorkRequestArtisanSide({
     super.key,
     required this.futureToFetchData,
@@ -26,13 +24,18 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
   final bool showContact;
 
   @override
+  State<DetailWorkRequestArtisanSide> createState() => _DetailWorkRequestArtisanSideState();
+}
+
+class _DetailWorkRequestArtisanSideState extends State<DetailWorkRequestArtisanSide> {
+  @override
   Widget build(BuildContext context) {
     const double spaceCate = 20;
     return Scaffold(
       appBar: appBarBackButton(context),
       body: SingleChildScrollView(
         child: FutureBuilder(
-          future: futureToFetchData(workRequestUuid),
+          future: widget.futureToFetchData(widget.workRequestUuid),
           builder: (BuildContext context, AsyncSnapshot<WorkRequest?> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -113,7 +116,7 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
                       );
                     }),
                   const SizedBox(height: 20),
-                  showContact ? Center(
+                  widget.showContact ? Center(
                       child: elevatedButtonAndTextColor(
                         AppColors.mainBackgroundColor,
                         AppText.workRequestArtisanSideSendFirstMessage,
@@ -132,11 +135,13 @@ class DetailWorkRequestArtisanSide extends StatelessWidget {
   }
 
   void _onSave(BuildContext context){
-    if(workRequestUuid == null){
+    if(widget.workRequestUuid == null){
       return;
     }
-    Navigator.pushNamed(context, '/work_requests/artisan/first_conv',
+    Navigator.pushNamed(context, '/in_progress/artisan');
+    /*Navigator.pushNamed(context, '/work_requests/artisan/first_conv',
         arguments: SeeConvArg(uuid : workRequestUuid!, futureToFetchData: fetchConversationFromWorkRequest));
+    */
   }
 
   Divider divider() {

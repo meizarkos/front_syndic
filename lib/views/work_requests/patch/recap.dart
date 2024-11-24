@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/api_handler/work_request/delete_work_request.dart';
-import 'package:front_syndic/api_handler/work_request/fetch_work_request_detail.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/text/fr.dart';
@@ -14,9 +13,13 @@ class RecapPatchWorkRequest extends StatefulWidget {
   const RecapPatchWorkRequest({
     super.key,
     required this.workRequestUuid,
+    required this.fetchDetailWorkRequest,
+    required this.onBack,
   });
 
   final String? workRequestUuid;
+  final Function(String?) fetchDetailWorkRequest;
+  final VoidCallback onBack;
 
   @override
   State<RecapPatchWorkRequest> createState() => _RecapPatchWorkRequestState();
@@ -44,13 +47,7 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/co_owner/work_requests', // The new route
-                    (Route<dynamic> route) => false, // Remove all previous routes
-              );
-            },
+            onPressed: widget.onBack,
           ),
         ),
         body: Column(
@@ -66,13 +63,7 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/co_owner/work_requests', // The new route
-                    (Route<dynamic> route) => false, // Remove all previous routes
-              );
-            },
+            onPressed: widget.onBack,
           ),
         ),
         body: SingleChildScrollView(
@@ -230,7 +221,7 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
       return;
     }
     try {
-      final res = await fetchWorkRequestDetail(widget.workRequestUuid!);
+      final res = await widget.fetchDetailWorkRequest(widget.workRequestUuid!);
       if (res == null) {
         apiErrorVisibility = true;
         return;

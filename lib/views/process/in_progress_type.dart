@@ -40,3 +40,42 @@ class _InProgressCouncilConversationState extends State<InProgressCouncilConvers
     });
   }
 }
+
+
+class InProgressArtisanConversation extends StatefulWidget {
+  const InProgressArtisanConversation({super.key});
+
+  @override
+  State<InProgressArtisanConversation> createState() => _InProgressArtisanConversationState();
+}
+
+class _InProgressArtisanConversationState extends State<InProgressArtisanConversation> {
+
+  var searchValue = '';
+  var category = AppText.conversation;
+
+  @override
+  Widget build(BuildContext context) {
+    return InProgressMain(
+      top : TopScreenInProgressCouncil(
+        onChangedSearchValue: _searchValueChange,
+        category: category,
+        onCategoryChanged: _categoryChange,
+      ),
+      body : topScreenRouteHandlerArtisan(searchValue,category),
+    );
+  }
+
+  void _searchValueChange(String value) {
+    setState(() {
+      searchValue = value;
+    });
+  }
+
+  void _categoryChange(String value) {
+    setState(() {
+      category = value;
+    });
+  }
+}
+

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/models/work_request/work_request.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
 import 'package:front_syndic/views/artisan_side/work_request_detail/detail_work_request.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/all_conv_type.dart';
@@ -20,6 +19,7 @@ import 'package:front_syndic/views/work_requests/patch/recap.dart';
 import 'package:front_syndic/views/work_requests/patch/timing_recap.dart';
 
 import 'models/to_screen/artisan_detail_work_request.dart';
+import 'models/to_screen/council_work_request_detail.dart';
 import 'models/to_screen/see_conv_arg.dart';
 import 'models/work_request/create_work_request.dart';
 
@@ -70,15 +70,18 @@ class MyApp extends StatelessWidget {
         '/first_conv_council': (context) => const FirstConvCouncil(),
         '/co_owner_main': (context) => const CoOwnerMain(),
         '/in_progress/council/conversation': (context) => const InProgressCouncilConversation(),
+        '/in_progress/artisan':(context)=> const InProgressArtisanConversation(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
           case '/work_requests/detail':
             final arguments = settings.arguments;
-            if (arguments is String) {
+            if (arguments is CouncilWorkRequestDetail) {
               return MaterialPageRoute(
                 builder: (context) => RecapPatchWorkRequest(
-                  workRequestUuid: arguments,
+                  workRequestUuid: arguments.uuid,
+                  fetchDetailWorkRequest: arguments.futureToFetchData,
+                  onBack: arguments.onGoBack,
                 ),
               );
             }
@@ -179,6 +182,18 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (context) => RecapWorkRequest(
                   createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/timing/artisan/detail':
+            final arguments = settings.arguments;
+            if (arguments is SeeConvArg) {
+              return MaterialPageRoute(
+                builder: (context) => TimingDetailArtisan(
+                  timingUuid: arguments.uuid,
+                  fetchTimingDetail: arguments.futureToFetchData,
                 ),
               );
             }

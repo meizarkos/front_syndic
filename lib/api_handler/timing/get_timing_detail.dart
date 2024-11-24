@@ -19,10 +19,16 @@ Future<Timing?> fetchTimingDetailCouncil(String? uuid) async {
 
 Future<Timing?> fetchTimingDetailCouncilFromConversation(String? uuid) async {
   if(uuid == null) return null;
-  return await fetchTimingDetail('${APIValue.artisan}timing_detail_council_from_conversation/$uuid');
+  return await fetchTimingDetail('${APIValue.unionCouncil}timing_detail_council_from_conversation/$uuid');
 }
 
 Future<Timing?> fetchTimingDetailCouncilFromEstimate(String? uuid) async {
   if(uuid == null) return null;
   return await fetchTimingDetail('${APIValue.artisan}timing_detail_council_from_estimate/$uuid');
+}
+
+
+Future<Timing?> fetchTimingDetailArtisan(String? uuid) async {
+  if(uuid == null) return null;
+  return await fetchTimingDetail('${APIValue.artisan}timing_detail_artisan/$uuid');
 }

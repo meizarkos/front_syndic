@@ -1,5 +1,5 @@
-import '../../../../text/fr.dart';
-import '../../../../utils/date_to_string/date.dart';
+import '../../../text/fr.dart';
+import '../../../utils/date_to_string/date.dart';
 
 String getTitleWorkRequest(dynamic data){
   return data.workRequest?.title ?? AppText.noTitleForWork;

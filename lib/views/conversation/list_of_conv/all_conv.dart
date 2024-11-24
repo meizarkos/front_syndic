@@ -80,25 +80,23 @@ class _SeeConvState extends State<SeeConv> {
               children: [
                 createButton(
                   AppText.createAMeeting,
-                  widget.goToRequest(widget.uuid),
+                  ()=>{
+                    Navigator.pushNamed(context, widget.route,
+                      arguments: widget.uuid,
+                    )
+                  },
                   color: AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
                   textColor: Colors.black,
                 ),
                 const SizedBox(width: 10),
                 createButton(
                   AppText.seeWorkRequest,
-                  widget.goToMeeting(widget.uuid),
+                    ()=>widget.goToRequest(widget.uuid),
                 ),
                 const SizedBox(width: 10),
                 createButton(
                   AppText.seeMeeting,
-                      () {
-                    Navigator.pushNamed(
-                      context,
-                      widget.route,
-                      arguments: widget.uuid,
-                    );
-                  },
+                    ()=>widget.goToMeeting(widget.uuid),
                 ),
               ],
             )
@@ -171,7 +169,7 @@ class _SeeConvState extends State<SeeConv> {
       color,
       text,
       context,
-      ()=>onPressed,
+      onPressed,
       textColor,
     );
   }

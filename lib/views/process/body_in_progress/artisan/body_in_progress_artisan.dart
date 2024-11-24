@@ -9,8 +9,8 @@ import '../../../../api_handler/timing_estimate/get_timing_estimate.dart';
 import '../../../../models/to_screen/see_conv_arg.dart';
 import '../function_access_param.dart';
 
-class BodyInProgressCouncilConversation extends StatelessWidget {
-  const BodyInProgressCouncilConversation({
+class BodyInProgressArtisanConversation extends StatelessWidget {
+  const BodyInProgressArtisanConversation({
     super.key,
     required this.searchValue,
   });
@@ -20,14 +20,14 @@ class BodyInProgressCouncilConversation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BodyInProgress(
-        future: fetchFirstConvCouncil(),
+        future: fetchFirstConvArtisan(),
         goToDetail: (uuid) => {
           Navigator.pushNamed(
             context,
-            '/council/see_conv',
+            '/work_requests/artisan/first_conv',
             arguments: SeeConvArg(
               uuid: uuid,
-              futureToFetchData: fetchSpecificConvCouncil,
+              futureToFetchData: fetchSpecificConvArtisan,
             ),
           )
         },
@@ -41,8 +41,8 @@ class BodyInProgressCouncilConversation extends StatelessWidget {
   }
 }
 
-class BodyInProgressCouncilTiming extends StatelessWidget {
-  const BodyInProgressCouncilTiming({
+class BodyInProgressArtisanTiming extends StatelessWidget {
+  const BodyInProgressArtisanTiming({
     super.key,
     required this.searchValue,
   });
@@ -52,14 +52,14 @@ class BodyInProgressCouncilTiming extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BodyInProgress(
-      future: fetchTimingsCouncil(),
+      future: fetchTimingsArtisan(),
       goToDetail: (uuid) => {
         Navigator.pushNamed(
           context,
-          '/council/timing_detail',
+          '/work_requests/artisan/detail',
           arguments: SeeConvArg(
             uuid: uuid,
-            futureToFetchData: fetchTimingDetailCouncil,
+            futureToFetchData: fetchTimingDetailArtisan,
           ),
         )
       },
@@ -72,8 +72,8 @@ class BodyInProgressCouncilTiming extends StatelessWidget {
   }
 }
 
-class BodyInProgressCouncilEstimate extends StatelessWidget {
-  const BodyInProgressCouncilEstimate({
+class BodyInProgressArtisanEstimate extends StatelessWidget {
+  const BodyInProgressArtisanEstimate({
     super.key,
     required this.searchValue,
   });
@@ -105,8 +105,8 @@ class BodyInProgressCouncilEstimate extends StatelessWidget {
   }
 }
 
-class BodyInProgressCouncilTimingEstimate extends StatelessWidget {
-  const BodyInProgressCouncilTimingEstimate({
+class BodyInProgressArtisanTimingEstimate extends StatelessWidget {
+  const BodyInProgressArtisanTimingEstimate({
     super.key,
     required this.searchValue,
   });

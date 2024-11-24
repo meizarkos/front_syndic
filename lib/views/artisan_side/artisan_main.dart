@@ -3,6 +3,8 @@ import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/views/artisan_side/cell_work_request.dart';
 
 import '../../api_handler/work_request/fetch_all_work_request.dart';
+import '../../api_handler/work_request/fetch_work_request_detail.dart';
+import '../../models/to_screen/artisan_detail_work_request.dart';
 import '../../models/work_request/work_request.dart';
 import '../../text/fr.dart';
 import '../../widget/search_bar/search_bar.dart';
@@ -86,7 +88,13 @@ class _ArtisanMainState extends State<ArtisanMain> {
                       }
                       return GestureDetector(
                         onTap: () {
-                            Navigator.pushNamed(context, "/work_requests/artisan/detail", arguments: dataFiltered[index]);
+                          Navigator.pushNamed(context, "/work_requests/artisan/detail",
+                                arguments: ArtisanWorkRequestDetailArg(
+                                    workRequestUuid:dataFiltered[index].uuid,
+                                    futureToFetchData: fetchWorkRequestDetailArtisan,
+                                    showContact: true,
+                                ),
+                            );
                         },
                         child: CellWorkRequestArtisanSide(
                           title: dataFiltered[index].title,

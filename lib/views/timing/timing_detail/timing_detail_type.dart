@@ -56,3 +56,47 @@ class TimingDetailCouncil extends StatelessWidget {
     );
   }
 }
+
+class TimingDetailArtisan extends StatelessWidget {
+  const TimingDetailArtisan({
+    super.key,
+    required this.timingUuid,
+    required this.fetchTimingDetail,
+  });
+
+  final String? timingUuid;
+  final Function(String?) fetchTimingDetail;
+
+  @override
+  Widget build(BuildContext context) {
+    return TimingDetail(
+      routToConv: (String? uuid) {
+        if(uuid == null) return;
+        /*Navigator.pushNamed(context, '/council/see_conv',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncilFromTiming)
+        );*/
+      },
+      routeToEstimateDetail:  (String? uuid) {
+        if(uuid == null) return;
+        /*Navigator.pushNamed(context, '/council/see_conv',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncilFromTiming)
+        );*/
+      },
+      routeToRefuse: (String? uuid) {
+        if(uuid == null) return;
+        /*Navigator.pushReplacementNamed(context, '/council/see_conv',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncilFromTiming)
+        );*/
+      },
+      future: fetchTimingDetail(timingUuid),
+      getYou: (dynamic){
+        final artisan = dynamic.artisan as Artisan?;
+        return "${AppText.phoneContact} ${artisan?.phone ?? AppText.noPhone}";
+      },
+      getClient: (dynamic) {
+        final  council = dynamic.council as Council?;
+        return "${AppText.contact} ${council?.lastName ?? ''} ${toLowerFirst(AppText.to)} ${council?.phone ?? AppText.noPhone} ${AppText.contactUs}";
+      },
+    );
+  }
+}

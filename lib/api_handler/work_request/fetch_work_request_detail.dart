@@ -17,13 +17,17 @@ Future<WorkRequest?> fetchWorkRequestDetailArtisan(String? uuidWorkRequest) asyn
   return fetchWorkRequestDetail('${APIValue.artisan}detail_work_request_artisan/$uuidWorkRequest');
 }
 
-Future<WorkRequest?> fetchWorkRequestDetailUnion(String? idConv) async {
-  if(idConv == null) return null;
-  return fetchWorkRequestDetail('${APIValue.artisan}detail_work_request_artisan_from_conv/$idConv');
+Future<WorkRequest?> fetchWorkRequestDetailArtisanFromConv(String? convId) async{
+  if(convId == null) return null;
+  return fetchWorkRequestDetail('${APIValue.artisan}detail_work_request_artisan_from_conv/$convId');
 }
-
 
 Future<WorkRequest?> fetchWorkRequestDetailCouncil(String? uuid) async {
   if(uuid == null) return null;
   return fetchWorkRequestDetail('${APIValue.unionCouncil}work_request_detail/$uuid');
+}
+
+Future<WorkRequest?> fetchWorkRequestDetailCouncilFromConversation(String? uuid) async {
+  if(uuid == null) return null;
+  return fetchWorkRequestDetail('${APIValue.unionCouncil}work_request_detail_from_conv/$uuid');
 }
