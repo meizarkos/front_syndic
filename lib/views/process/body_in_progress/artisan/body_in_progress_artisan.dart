@@ -24,7 +24,7 @@ class BodyInProgressArtisanConversation extends StatelessWidget {
         goToDetail: (uuid) => {
           Navigator.pushNamed(
             context,
-            '/work_requests/artisan/first_conv',
+            '/artisan/see_conv',
             arguments: SeeConvArg(
               uuid: uuid,
               futureToFetchData: fetchSpecificConvArtisan,

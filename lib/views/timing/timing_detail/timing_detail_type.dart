@@ -4,6 +4,7 @@ import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail.dart';
 
 import '../../../api_handler/conversation/fetch_conversation.dart';
+import '../../../api_handler/timing/refuse_timing_detail.dart';
 import '../../../models/council/council.dart';
 import '../../../models/union/union.dart';
 import '../../../text/fr.dart';
@@ -22,20 +23,21 @@ class TimingDetailCouncil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TimingDetail(
-      routToConv: (String? uuid) {
+      routeToConv: (String? uuid) {
         if(uuid == null) return;
-        Navigator.pushNamed(context, '/council/see_conv',
+        Navigator.pushReplacementNamed(context, '/council/see_conv',
           arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncilFromTiming)
         );
       },
       routeToEstimateDetail:  (String? uuid) {
-        if(uuid == null) return;
+        /*if(uuid == null) return;
         Navigator.pushNamed(context, '/council/see_conv',
             arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncilFromTiming)
-        );
+        );*/
       },
-      routeToRefuse: (String? uuid) {
+      routeToRefuse: (String? uuid) async{
         if(uuid == null) return;
+        await refuseTimingDetailCouncil(uuid);
         Navigator.pushReplacementNamed(context, '/council/see_conv',
             arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncilFromTiming)
         );
@@ -70,23 +72,24 @@ class TimingDetailArtisan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TimingDetail(
-      routToConv: (String? uuid) {
+      routeToConv: (String? uuid) {
         if(uuid == null) return;
-        /*Navigator.pushNamed(context, '/council/see_conv',
-            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncilFromTiming)
-        );*/
+        Navigator.pushReplacementNamed(context, '/artisan/see_conv',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvArtisanFromTiming)
+        );
       },
       routeToEstimateDetail:  (String? uuid) {
-        if(uuid == null) return;
-        /*Navigator.pushNamed(context, '/council/see_conv',
-            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncilFromTiming)
+        /*if(uuid == null) return;
+        Navigator.pushNamed(context, '/artisan/see_conv',
+        arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvArtisanFromTiming)
         );*/
       },
-      routeToRefuse: (String? uuid) {
+      routeToRefuse: (String? uuid)async{
+        await refuseTimingDetailArtisan(uuid);
         if(uuid == null) return;
-        /*Navigator.pushReplacementNamed(context, '/council/see_conv',
-            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncilFromTiming)
-        );*/
+        Navigator.pushReplacementNamed(context, '/artisan/see_conv',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvArtisanFromTiming)
+        );
       },
       future: fetchTimingDetail(timingUuid),
       getYou: (dynamic){
@@ -95,7 +98,7 @@ class TimingDetailArtisan extends StatelessWidget {
       },
       getClient: (dynamic) {
         final  council = dynamic.council as Council?;
-        return "${AppText.contact} ${council?.lastName ?? ''} ${toLowerFirst(AppText.to)} ${council?.phone ?? AppText.noPhone} ${AppText.contactUs}";
+        return "${AppText.contact} ${toUpperFirst(council?.lastName ?? '')} ${toLowerFirst(AppText.to)} ${council?.phone ?? AppText.noPhone} ${AppText.contactUs}";
       },
     );
   }

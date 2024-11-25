@@ -82,7 +82,7 @@ class _SeeConvState extends State<SeeConv> {
                   AppText.createAMeeting,
                   ()=>{
                     Navigator.pushNamed(context, widget.route,
-                      arguments: widget.uuid,
+                      arguments: _conversations[0].uuid ?? widget.uuid,
                     )
                   },
                   color: AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
@@ -91,12 +91,18 @@ class _SeeConvState extends State<SeeConv> {
                 const SizedBox(width: 10),
                 createButton(
                   AppText.seeWorkRequest,
-                    ()=>widget.goToRequest(widget.uuid),
+                      ()=>{
+                       if(_conversations[0].uuid != null){
+                         widget.goToRequest(_conversations[0].uuid),
+                       }
+                       else{widget.goToRequest(widget.uuid),}
+
+                      }
                 ),
                 const SizedBox(width: 10),
                 createButton(
                   AppText.seeMeeting,
-                    ()=>widget.goToMeeting(widget.uuid),
+                    ()=>widget.goToMeeting(_conversations[0].uuid),
                 ),
               ],
             )

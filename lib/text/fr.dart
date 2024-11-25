@@ -129,7 +129,7 @@ class AppText {
   static const String meetingEstimateText = 'Rencontrez vous pour faire un devis le';
   static const String interventionPlace = 'Lieu de l\'intervention :';
   static const String phoneContact = 'Votre numéro de contact est :';
-  static const String contactUs = "pour plus d'information";
+  static const String contactUs = "pour plus d'informations";
   static const String contact = 'Contactez';
   static const String contactUnion = "Si vous n'êtes pas à l'origine de cette demande adressez vous à votre conseil syndical :";
 

@@ -5,7 +5,7 @@ import '../../core_value.dart';
 import 'elevated_button_opacity.dart';
 
 Row rowOfNavButton(String textUp, String textDown, BuildContext context,
-    VoidCallback onPressedDown, VoidCallback onPressedUp) {
+    VoidCallback onPressedUp, VoidCallback onPressedDown) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround,
     children: [

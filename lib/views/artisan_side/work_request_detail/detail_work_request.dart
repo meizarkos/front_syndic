@@ -34,7 +34,7 @@ class _DetailWorkRequestArtisanSideState extends State<DetailWorkRequestArtisanS
     return Scaffold(
       appBar: appBarBackButton(context),
       body: SingleChildScrollView(
-        child: FutureBuilder(
+        child: FutureBuilder( 
           future: widget.futureToFetchData(widget.workRequestUuid),
           builder: (BuildContext context, AsyncSnapshot<WorkRequest?> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {

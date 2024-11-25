@@ -69,7 +69,13 @@ class AllConvArtisan extends StatelessWidget {
         );
       },
       goToMeeting: (String? id) {
-
+        if(id == null) return;
+        Navigator.pushNamed(context,'/timing/artisan/detail',
+            arguments: SeeConvArg(
+              uuid: id,
+              futureToFetchData: fetchTimingDetailArtisanFromConv,
+            )
+        );
       },
       futureForGetConv: future(id),
       futureForPostConv: postConvArtisan,

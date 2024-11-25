@@ -19,3 +19,7 @@ String? handleEmptyList(List<dynamic>? list, String defaultValue){
 String toLowerFirst(String text){
   return text[0].toLowerCase() + text.substring(1);
 }
+
+String toUpperFirst(String text){
+  return text[0].toUpperCase() + text.substring(1);
+}

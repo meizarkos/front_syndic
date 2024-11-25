@@ -6,7 +6,7 @@ Future<Timing?> fetchTimingDetail(String route) async {
   try{
     final response = await request(url: route, method: "GET");
     final records = Timing.fromJson(response.data);
-    return records;
+    return records; 
   } catch(e) {
     return null;
   }
@@ -31,4 +31,9 @@ Future<Timing?> fetchTimingDetailCouncilFromEstimate(String? uuid) async {
 Future<Timing?> fetchTimingDetailArtisan(String? uuid) async {
   if(uuid == null) return null;
   return await fetchTimingDetail('${APIValue.artisan}timing_detail_artisan/$uuid');
+}
+
+Future<Timing?> fetchTimingDetailArtisanFromConv(String? uuid) async {
+  if(uuid == null) return null;
+  return await fetchTimingDetail('${APIValue.artisan}timing_detail_artisan_from_conv/$uuid');
 }

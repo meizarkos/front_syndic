@@ -15,7 +15,7 @@ import '../../../widget/header/app_bar_back_button.dart';
 class TimingDetail extends StatefulWidget {
   const TimingDetail({
     super.key,
-    required this.routToConv,
+    required this.routeToConv,
     required this.routeToEstimateDetail,
     required this.routeToRefuse,
     required this.future,
@@ -24,7 +24,7 @@ class TimingDetail extends StatefulWidget {
     this.getUnion,
   });
 
-  final Function(String?) routToConv;
+  final Function(String?) routeToConv;
   final Function(String?) routeToEstimateDetail;
   final Function(String?) routeToRefuse;
   final Future<Timing?> future;
@@ -60,7 +60,7 @@ class _TimingDetailState extends State<TimingDetail> {
                     AppText.seeConv,
                     AppText.seeEstimateDetail,
                     context,
-                    ()=>widget.routToConv(timing.uuid),
+                    ()=>widget.routeToConv(timing.uuid),
                     ()=>widget.routeToEstimateDetail(timing.uuid),
                   ),
                   const SizedBox(height: 35),
