@@ -19,22 +19,22 @@ class AttributesEstimate{
 }
 
 class Estimate {
-  final String? uuid;
-  final int? price;
-  final String? description;
-  final String? commentary;
-  final String? status;
-  final List<TimingEstimate>? timingsEstimate;
-  final String? workRequestId;
-  final WorkRequest? workRequest;
-  final String? artisanId;
-  final String? unionId;
-  final String? councilId;
-  final String? userId;
-  final String? createdAt;
-  final String? updatedAt;
+  String? uuid;
+  double? price;
+  String? description;
+  String? commentary;
+  String? status;
+  List<TimingEstimate>? timingsEstimate;
+  String? workRequestId;
+  WorkRequest? workRequest;
+  String? artisanId;
+  String? unionId;
+  String? councilId;
+  String? userId;
+  String? createdAt;
+  String? updatedAt;
 
-  const Estimate({
+  Estimate({
     this.uuid,
     this.price,
     this.description,

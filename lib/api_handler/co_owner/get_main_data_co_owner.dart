@@ -17,7 +17,7 @@ Future<Map<String, dynamic>> fetchCoOwnerMainData() async {
       workRequest = WorkRequest.fromJson(records["work_request"]);
     }
 
-    var estimate = const Estimate();
+    var estimate = Estimate();
     if(records["estimate"] != null) {
       estimate = Estimate.fromJson(records["estimate"]);
     }

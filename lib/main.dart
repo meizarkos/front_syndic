@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:front_syndic/models/estimate/estimate.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
 import 'package:front_syndic/views/artisan_side/work_request_detail/detail_work_request.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/all_conv_type.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/all_post_meeting_type.dart';
 import 'package:front_syndic/views/conversation/list_of_first_conv/first_conv_type.dart';
+import 'package:front_syndic/views/estimate/create_estimate/recap_estimate.dart';
+import 'package:front_syndic/views/estimate/create_estimate/set_description_estimate.dart';
+import 'package:front_syndic/views/estimate/create_estimate/set_price_and_commentary.dart';
 import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
@@ -109,6 +113,36 @@ class MyApp extends StatelessWidget {
               );
             }
             break;
+
+          case '/artisan/create_estimate/description':
+            final arguments = settings.arguments;
+            if(arguments is Estimate){
+              return MaterialPageRoute(
+                builder: (context) => SetDescriptionEstimate(
+                  estimate: arguments,
+                ),
+              );
+            }
+
+          case '/artisan/create_estimate/price':
+            final arguments = settings.arguments;
+            if(arguments is Estimate){
+              return MaterialPageRoute(
+                builder: (context) => SetPriceAndCommentary(
+                  estimate: arguments,
+                ),
+              );
+            }
+
+          case '/artisan/create_estimate/recap':
+            final arguments = settings.arguments;
+            if(arguments is Estimate){
+              return MaterialPageRoute(
+                builder: (context) => RecapEstimate(
+                  estimate: arguments,
+                ),
+              );
+            }
 
           case '/artisan/see_conv':
             final arguments = settings.arguments;

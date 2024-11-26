@@ -138,6 +138,12 @@ class AppText {
   static const String seeEstimateDetail = 'Voir le devis';
 
   /* Estimate */
+  static const String createEstimatePrice = 'Prix';
+  static const String createEstimatePricePlaceHolder = 'Prix de votre devis';
+  static const String createEstimateCommentary = 'Commentaire';
+  static const String createEstimateCommentaryPlaceHolder = 'Commentaire sur le devis';
+  static const String descEstimate = 'Description des travaux';
+  static const String descEstimatePlaceHolder = 'Description de vos travaux';
   static const String estimate = 'Devis';
   static const String noPriceEstimate = 'Pas de prix trouvée';
   static const String euro = '€';
