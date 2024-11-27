@@ -56,7 +56,7 @@ class BodyInProgressArtisanTiming extends StatelessWidget {
       goToDetail: (uuid) => {
         Navigator.pushNamed(
           context,
-          '/work_requests/artisan/detail',
+          '/timing/artisan/detail',
           arguments: SeeConvArg(
             uuid: uuid,
             futureToFetchData: fetchTimingDetailArtisan,
@@ -83,7 +83,7 @@ class BodyInProgressArtisanEstimate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BodyInProgress(
-      future: fetchAllEstimateCouncil(),
+      future: fetchAllEstimateArtisan(),
       goToDetail: (uuid) => {
         Navigator.pushNamed(
           context,

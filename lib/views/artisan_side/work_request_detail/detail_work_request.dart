@@ -139,11 +139,10 @@ class _DetailWorkRequestArtisanSideState extends State<DetailWorkRequestArtisanS
     if(widget.workRequestUuid == null){
       return;
     }
-    //Navigator.pushNamed(context, '/in_progress/artisan');
+    Navigator.pushNamed(context, '/in_progress/artisan');
     /*Navigator.pushNamed(context, '/work_requests/artisan/first_conv',
         arguments: SeeConvArg(uuid : workRequestUuid!, futureToFetchData: fetchConversationFromWorkRequest));
     */
-    Navigator.pushNamed(context, '/artisan/create_estimate/description',arguments: Estimate());
   }
 
   Divider divider() {

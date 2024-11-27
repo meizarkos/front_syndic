@@ -54,7 +54,7 @@ class Estimate {
   factory Estimate.fromJson(Map<String, dynamic> json) {
     return Estimate(
       uuid: json[AttributesEstimate.uuid],
-      price: json[AttributesEstimate.price],
+      price: json[AttributesEstimate.price]?.toDouble(),
       description: json[AttributesEstimate.description],
       commentary: json[AttributesEstimate.commentary],
       status: json[AttributesEstimate.status],

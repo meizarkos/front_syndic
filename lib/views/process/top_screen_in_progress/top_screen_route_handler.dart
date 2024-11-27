@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/views/process/body_in_progress/council/body_in_progress_type.dart';
+import 'package:front_syndic/views/process/body_in_progress/council/body_in_progress_council.dart';
 
 import '../../../text/fr.dart';
 import '../body_in_progress/artisan/body_in_progress_artisan.dart';

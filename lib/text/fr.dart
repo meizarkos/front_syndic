@@ -4,6 +4,7 @@ class AppText {
   static const String apiNoResult = 'Pas de résultat';
 
   /*General*/
+  static const String contact = 'Contact';
   static const String save = 'Enregister';
   static const String minute = 'Minute';
   static const String hour = 'Heure';
@@ -130,7 +131,7 @@ class AppText {
   static const String interventionPlace = 'Lieu de l\'intervention :';
   static const String phoneContact = 'Votre numéro de contact est :';
   static const String contactUs = "pour plus d'informations";
-  static const String contact = 'Contactez';
+  static const String contactez = 'Contactez';
   static const String contactUnion = "Si vous n'êtes pas à l'origine de cette demande adressez vous à votre conseil syndical :";
 
   /* Timing Detail */
@@ -138,9 +139,11 @@ class AppText {
   static const String seeEstimateDetail = 'Voir le devis';
 
   /* Estimate */
+  static const String createEstimate = 'Créer un devis';
   static const String createEstimatePrice = 'Prix';
   static const String createEstimatePricePlaceHolder = 'Prix de votre devis';
   static const String createEstimateCommentary = 'Commentaire';
+  static const String noCommentary = 'Pas de commentaire';
   static const String createEstimateCommentaryPlaceHolder = 'Commentaire sur le devis';
   static const String descEstimate = 'Description des travaux';
   static const String descEstimatePlaceHolder = 'Description de vos travaux';

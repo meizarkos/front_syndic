@@ -3,6 +3,7 @@ import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/widget/text_style/text_style_main_color.dart';
 
+import '../../../models/estimate/estimate.dart';
 import '../../../models/timing/timing.dart';
 import '../../../text/fr.dart';
 import '../../../utils/date_to_string/date.dart';
@@ -22,6 +23,7 @@ class TimingDetail extends StatefulWidget {
     required this.getYou,
     required this.getClient,
     this.getUnion,
+    this.isArtisan = false,
   });
 
   final Function(String?) routeToConv;
@@ -31,6 +33,7 @@ class TimingDetail extends StatefulWidget {
   final Function(dynamic) getYou;
   final Function(dynamic) getClient;
   final Function(dynamic)? getUnion;
+  final bool isArtisan;
 
   @override
   State<TimingDetail> createState() => _TimingDetailState();
@@ -60,8 +63,8 @@ class _TimingDetailState extends State<TimingDetail> {
                     AppText.seeConv,
                     AppText.seeEstimateDetail,
                     context,
-                    ()=>widget.routeToConv(timing.uuid),
-                    ()=>widget.routeToEstimateDetail(timing.uuid),
+                    () => widget.routeToConv(timing.uuid),
+                    () => widget.routeToEstimateDetail(timing.uuid),
                   ),
                   const SizedBox(height: 35),
                   Center(
@@ -96,7 +99,7 @@ class _TimingDetailState extends State<TimingDetail> {
                   ),
                   const SizedBox(height: 35),
                   Text(
-                    'Contact',
+                    AppText.contactez,
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                   const SizedBox(height: 15),
@@ -114,7 +117,8 @@ class _TimingDetailState extends State<TimingDetail> {
                     Align(
                       alignment: Alignment.center,
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width*0.8, // Define the width to constrain text justification
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        // Define the width to constrain text justification
                         child: Text(
                           widget.getUnion!(timing),
                           style: Theme.of(context).textTheme.displaySmall,
@@ -123,14 +127,8 @@ class _TimingDetailState extends State<TimingDetail> {
                       ),
                     ),
                   ],
-                  const SizedBox(height: 35),
-                  elevatedButtonAndTextColor(
-                    AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
-                    AppText.refuse,
-                    context,
-                    ()=>widget.routeToRefuse(timing.uuid),
-                    Colors.black,
-                  )
+                  const SizedBox(height: 40),
+                  inArtisanCase(timing),
                 ],
               ),
             );
@@ -138,5 +136,50 @@ class _TimingDetailState extends State<TimingDetail> {
         ),
       ),
     );
+  }
+
+  Widget inArtisanCase(Timing timing) {
+    if (widget.isArtisan == false) {
+      return elevatedButtonAndTextColor(
+        AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
+        AppText.refuse,
+        context,
+        () => widget.routeToRefuse(timing.uuid),
+        Colors.black,
+      );
+    } else {
+      return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: elevatedButtonAndTextColor(
+                AppColors.actionButtonColor
+                    .withOpacity(AppUIValue.opacityActionButton),
+                AppText.createEstimate,
+                context,
+                () {
+                  final estimate = Estimate();
+                  estimate.workRequestId = timing.workRequestId;
+                  Navigator.pushNamed(
+                    context,
+                    '/artisan/create_estimate/description',
+                    arguments: estimate,
+                  );
+                },
+                Colors.black,
+              ),
+            ),
+            SizedBox(width: 10), // Add spacing between the buttons
+            Expanded(
+              child: elevatedButtonAndTextColor(
+                Colors.black,
+                AppText.refuse,
+                context,
+                () => widget.routeToRefuse(timing.uuid),
+                Colors.white,
+              ),
+            ),
+      ]);
+    }
   }
 }

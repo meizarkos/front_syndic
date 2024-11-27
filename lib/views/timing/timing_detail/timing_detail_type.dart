@@ -49,7 +49,7 @@ class TimingDetailCouncil extends StatelessWidget {
       },
       getClient: (dynamic) {
         final artisan = dynamic.artisan as Artisan?;
-        return "${AppText.contact} ${artisan?.companyName ?? ''} ${toLowerFirst(AppText.to)} ${artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
+        return "${AppText.contactez} ${artisan?.companyName ?? ''} ${toLowerFirst(AppText.to)} ${artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
       },
       getUnion: (dynamic) {
         final union = dynamic.union as UnionApi?;
@@ -98,8 +98,9 @@ class TimingDetailArtisan extends StatelessWidget {
       },
       getClient: (dynamic) {
         final  council = dynamic.council as Council?;
-        return "${AppText.contact} ${toUpperFirst(council?.lastName ?? '')} ${toLowerFirst(AppText.to)} ${council?.phone ?? AppText.noPhone} ${AppText.contactUs}";
+        return "${AppText.contactez} ${toUpperFirst(council?.lastName ?? '')} ${toLowerFirst(AppText.to)} ${council?.phone ?? AppText.noPhone} ${AppText.contactUs}";
       },
+      isArtisan: true,
     );
   }
 }
