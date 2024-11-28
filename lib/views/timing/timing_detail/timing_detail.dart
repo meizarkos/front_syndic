@@ -159,7 +159,7 @@ class _TimingDetailState extends State<TimingDetail> {
                 context,
                 () {
                   final estimate = Estimate();
-                  estimate.workRequestId = timing.workRequestId;
+                  estimate.workRequestId = timing.workRequest?.uuid;
                   Navigator.pushNamed(
                     context,
                     '/artisan/create_estimate/description',

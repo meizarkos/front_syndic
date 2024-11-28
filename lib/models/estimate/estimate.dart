@@ -8,6 +8,7 @@ class AttributesEstimate{
   static const description = 'description';
   static const commentary = 'commentary';
   static const status = 'status';
+  static const statusGoal = 'status_goal';
   static const workRequestId = 'work_request_id';
   static const workRequest = 'work_request';
   static const artisanId = 'artisan_id';
@@ -23,7 +24,8 @@ class Estimate {
   double? price;
   String? description;
   String? commentary;
-  String? status;
+  int? status;
+  int? statusGoal;
   List<TimingEstimate>? timingsEstimate;
   String? workRequestId;
   WorkRequest? workRequest;
@@ -40,6 +42,7 @@ class Estimate {
     this.description,
     this.commentary,
     this.status,
+    this.statusGoal,
     this.timingsEstimate,
     this.workRequestId,
     this.workRequest,
@@ -58,6 +61,7 @@ class Estimate {
       description: json[AttributesEstimate.description],
       commentary: json[AttributesEstimate.commentary],
       status: json[AttributesEstimate.status],
+      statusGoal: json[AttributesEstimate.statusGoal],
       timingsEstimate: (json['timing_estimates'] as List<dynamic>?)
           ?.map((timingEstimateJson) => TimingEstimate.fromJson(timingEstimateJson))
           .toList() ?? [],

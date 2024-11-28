@@ -103,7 +103,6 @@ class AppText {
   static const String recapDialogTitle = 'Confirmer la supression';
 
   /* WorRequestArtisanSide */
-
   static const String workRequestArtisanSideInterventionOf = 'Intervention de type : ';
   static const String workRequestArtisanSideFilterBy = 'Filtrer par : ';
   static const String workRequestArtisanSideSendFirstMessage = 'Contacter';
@@ -150,6 +149,8 @@ class AppText {
   static const String estimate = 'Devis';
   static const String noPriceEstimate = 'Pas de prix trouvée';
   static const String euro = '€';
+  static const String estimateDetailTitle = 'Détail du devis';
+  static const String noDescriptionEstimate = 'Pas de description pour ce devis';
 
   /* Timing Estimate */
   static const String timingEstimate = 'Date travaux';

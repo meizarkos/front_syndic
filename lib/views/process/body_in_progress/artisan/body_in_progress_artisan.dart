@@ -3,6 +3,7 @@ import 'package:front_syndic/api_handler/estimate/get_estimate.dart';
 import 'package:front_syndic/views/process/body_in_progress/body_in_progress.dart';
 
 import '../../../../api_handler/conversation/fetch_conversation.dart';
+import '../../../../api_handler/estimate/get_estimate_detail.dart';
 import '../../../../api_handler/timing/get_timing_detail.dart';
 import '../../../../api_handler/timing/get_timings.dart';
 import '../../../../api_handler/timing_estimate/get_timing_estimate.dart';
@@ -87,11 +88,8 @@ class BodyInProgressArtisanEstimate extends StatelessWidget {
       goToDetail: (uuid) => {
         Navigator.pushNamed(
           context,
-          '/council/see_conv',
-          arguments: SeeConvArg(
-            uuid: uuid,
-            futureToFetchData: fetchTimingDetailCouncil,
-          ),
+          '/estimate/artisan/detail',
+          arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchEstimateDetailArtisan),
         )
       },
       searchValue: searchValue,
