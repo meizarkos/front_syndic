@@ -78,7 +78,7 @@ class _SetPriceAndCommentaryState extends State<SetPriceAndCommentary> {
                 ),
                 const SizedBox(height: AppUIValue.spaceScreenToAny),
                 Text(
-                  AppText.createEstimateCommentary,
+                  AppText.commentary,
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 const SizedBox(height: 2),
@@ -110,7 +110,7 @@ class _SetPriceAndCommentaryState extends State<SetPriceAndCommentary> {
   }
 
   void _save(){
-    if(price == -1){
+    if(price == -1 || price<0){
       setState(() {
         errorVisibility = true;
       });

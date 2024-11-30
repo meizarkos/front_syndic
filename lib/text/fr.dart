@@ -4,6 +4,7 @@ class AppText {
   static const String apiNoResult = 'Pas de résultat';
 
   /*General*/
+  static const String commentary = 'Commentaire';
   static const String contact = 'Contact';
   static const String save = 'Enregister';
   static const String minute = 'Minute';
@@ -141,7 +142,6 @@ class AppText {
   static const String createEstimate = 'Créer un devis';
   static const String createEstimatePrice = 'Prix';
   static const String createEstimatePricePlaceHolder = 'Prix de votre devis';
-  static const String createEstimateCommentary = 'Commentaire';
   static const String noCommentary = 'Pas de commentaire';
   static const String createEstimateCommentaryPlaceHolder = 'Commentaire sur le devis';
   static const String descEstimate = 'Description des travaux';

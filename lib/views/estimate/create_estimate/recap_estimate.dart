@@ -54,7 +54,7 @@ class _RecapEstimateState extends State<RecapEstimate> {
                 ),
                 const SizedBox(height: AppUIValue.spaceScreenToAny*3),
                 Text(
-                  AppText.createEstimateCommentary,
+                  AppText.commentary,
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
                 const SizedBox(height: 2),
