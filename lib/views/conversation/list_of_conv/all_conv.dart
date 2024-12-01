@@ -17,6 +17,7 @@ class SeeConv extends StatefulWidget {
     required this.sideText,
     required this.goToRequest,
     required this.goToMeeting,
+    required this.goToEstimate,
   });
 
   final String uuid;
@@ -26,6 +27,7 @@ class SeeConv extends StatefulWidget {
   final String sideText;
   final Function(String?) goToRequest;
   final Function(String?) goToMeeting;
+  final Function(String?) goToEstimate;
 
 
   @override
@@ -103,6 +105,11 @@ class _SeeConvState extends State<SeeConv> {
                 createButton(
                   AppText.seeMeeting,
                     ()=>widget.goToMeeting(_conversations[0].uuid),
+                ),
+                const SizedBox(width: 10),
+                createButton(
+                  AppText.seeEstimateDetail,
+                  ()=>widget.goToEstimate(_conversations[0].uuid),
                 ),
               ],
             )

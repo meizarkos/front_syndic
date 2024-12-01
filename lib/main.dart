@@ -8,7 +8,7 @@ import 'package:front_syndic/views/conversation/list_of_first_conv/first_conv_ty
 import 'package:front_syndic/views/estimate/create_estimate/recap_estimate.dart';
 import 'package:front_syndic/views/estimate/create_estimate/set_description_estimate.dart';
 import 'package:front_syndic/views/estimate/create_estimate/set_price_and_commentary.dart';
-import 'package:front_syndic/views/estimate/estimate/estimate_detail_type.dart';
+import 'package:front_syndic/views/estimate/estimate_artisan/estimate_detail_type.dart';
 import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';

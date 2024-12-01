@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/views/estimate/estimate/estimate_detail.dart';
-
-import '../../../models/estimate/estimate.dart';
+import 'package:front_syndic/views/estimate/estimate_artisan/estimate_detail_artisan.dart';
 
 class EstimateDetailArtisan extends StatelessWidget {
   const EstimateDetailArtisan({

@@ -45,7 +45,12 @@ Future<List<Conversation>?> fetchFirstConvArtisan() async {
 
 Future<List<Conversation>?> fetchSpecificConvArtisanFromTiming(String? uuid) async {
   if(uuid == null) return null;
-  return await fetchConversation('${APIValue.artisan}all_conv_artisan_from_timing//$uuid');
+  return await fetchConversation('${APIValue.artisan}all_conv_artisan_from_timing/$uuid');
+}
+
+Future<List<Conversation>?> fetchSpecificConvArtisanFromEstimate(String? uuid) async {
+  if(uuid == null) return null;
+  return await fetchConversation('${APIValue.artisan}all_conv_artisan_from_estimate/$uuid');
 }
 
 

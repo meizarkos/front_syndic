@@ -102,6 +102,8 @@ class AppText {
   static const String recapSuccessModifying = 'Votre demande a bien été modifiée';
   static const String recapDialogDelete = "Confirmer la supression vous fera perdre toutes les données liées à l'affaire en cours, devis, rendez-vous et autres seront annulés/supprimés";
   static const String recapDialogTitle = 'Confirmer la supression';
+  static const String recapDialogEstimateModify = 'Confirmer la modification de votre devis';
+  static const String recapDialogEstimateModifyContent = 'Confirmer la modification de votre devis remettra le processus de validation à zéro';
 
   /* WorRequestArtisanSide */
   static const String workRequestArtisanSideInterventionOf = 'Intervention de type : ';

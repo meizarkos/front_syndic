@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/core_value.dart';
+import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
+import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../api_handler/estimate/delete_estimate.dart';
 import '../../../api_handler/estimate/patch_estimate.dart';
 import '../../../models/estimate/estimate.dart';
@@ -27,20 +29,21 @@ class EstimateDetail extends StatefulWidget {
 }
 
 class _EstimateDetailState extends State<EstimateDetail> {
-
   final TextEditingController _controllerDesc = TextEditingController();
   final TextEditingController _controllerPrice = TextEditingController();
   final TextEditingController _controllerCommentary = TextEditingController();
   Estimate estimateFromRequest = Estimate();
   bool errorVisibilityModify = false;
-  bool errorVisibility  =  false;
+  bool errorVisibility = false;
 
-  late Future<Estimate?> _futureEstimate; // Store the Future in a state variable
+  late Future<Estimate?>
+      _futureEstimate; // Store the Future in a state variable
 
   @override
   void initState() {
     super.initState();
-    _futureEstimate = widget.fetchData(widget.uuid); // Initialize the Future once
+    _futureEstimate =
+        widget.fetchData(widget.uuid); // Initialize the Future once
   }
 
   @override
@@ -72,7 +75,17 @@ class _EstimateDetailState extends State<EstimateDetail> {
                     AppText.seeConv,
                     AppText.timingEstimate,
                     context,
-                    () {},
+                    (){
+                      if (estimateFromRequest.uuid == null) return;
+                      Navigator.pushNamed(
+                        context,
+                        '/artisan/see_conv',
+                        arguments: SeeConvArg(
+                            uuid: estimateFromRequest.uuid!,
+                            futureToFetchData:
+                                fetchSpecificConvArtisanFromEstimate),
+                      );
+                    },
                     () {},
                   ),
                   const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
@@ -119,7 +132,9 @@ class _EstimateDetailState extends State<EstimateDetail> {
                     maxLines: 13,
                   ),
                   const SizedBox(height: AppUIValue.spaceScreenToAny),
-                  ErrorVisibility(errorVisibility: errorVisibility, errorText: AppText.textFieldErrorCreateEstimate)
+                  ErrorVisibility(
+                      errorVisibility: errorVisibility,
+                      errorText: AppText.textFieldErrorCreateEstimate)
                 ],
               ),
             );
@@ -129,35 +144,69 @@ class _EstimateDetailState extends State<EstimateDetail> {
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ErrorVisibility(errorVisibility: errorVisibilityModify, errorText: AppText.textFieldEstimateModify,color: Colors.green),
+          ErrorVisibility(
+              errorVisibility: errorVisibilityModify,
+              errorText: AppText.textFieldEstimateModify,
+              color: Colors.green),
           rowBottomBar(
             context,
-                () {_modify();},
-                () {_delete();},
+            () {
+              _modify();
+            },
+            () {
+              _delete();
+            },
           ),
         ],
       ),
     );
   }
 
-  void _modify(){
+  void _modify() {
     setState(() {
       errorVisibility = false;
       errorVisibilityModify = false;
     });
-    if(estimateFromRequest.price == null || estimateFromRequest.price! < 0 || estimateFromRequest.description == '' || estimateFromRequest.description == null){
+    if (estimateFromRequest.price == null ||
+        estimateFromRequest.price! < 0 ||
+        estimateFromRequest.description == '' ||
+        estimateFromRequest.description == null) {
       setState(() {
         errorVisibility = true;
       });
       return;
     }
-    setState(() {
-      errorVisibilityModify = true;
-    });
-    patchEstimateArtisan(estimateFromRequest);
+    showDialog(
+      context: context, // Pass the context from your widget
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(AppText.recapDialogEstimateModify),
+          content: Text(AppText.recapDialogEstimateModifyContent),
+          actions: [
+            TextButton(
+              child: Text(AppText.cancel),
+              onPressed: () {
+                Navigator.of(context)
+                    .pop(); // Close the dialog without doing anything
+              },
+            ),
+            TextButton(
+              child: Text(AppText.confirm),
+              onPressed: () async {
+                setState(() {
+                  errorVisibilityModify = true;
+                });
+                patchEstimateArtisan(estimateFromRequest);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
-  void _delete()async{
+  void _delete() async {
     showDialog(
       context: context, // Pass the context from your widget
       builder: (BuildContext context) {
@@ -168,17 +217,18 @@ class _EstimateDetailState extends State<EstimateDetail> {
             TextButton(
               child: Text(AppText.cancel),
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog without doing anything
+                Navigator.of(context)
+                    .pop(); // Close the dialog without doing anything
               },
             ),
             TextButton(
               child: Text(AppText.confirm),
-              onPressed: ()async{
+              onPressed: () async {
                 await deleteEstimateArtisan(estimateFromRequest.uuid);
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   '/in_progress/artisan',
-                      (Route<dynamic> route) => false,
+                  (Route<dynamic> route) => false,
                 );
               },
             ),

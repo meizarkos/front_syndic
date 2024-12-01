@@ -4,6 +4,7 @@ import 'package:front_syndic/api_handler/work_request/fetch_work_request_detail.
 import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/all_conv.dart';
 import '../../../api_handler/conversation/post_conv.dart';
+import '../../../api_handler/estimate/get_estimate_detail.dart';
 import '../../../models/to_screen/artisan_detail_work_request.dart';
 import '../../../models/to_screen/council_work_request_detail.dart';
 
@@ -41,6 +42,7 @@ class AllConvArtisanForWorkRequest extends StatelessWidget {
           );
         },
       goToMeeting: (String? no){},
+      goToEstimate: (String? no){},
     );
   }
 }
@@ -74,6 +76,15 @@ class AllConvArtisan extends StatelessWidget {
             arguments: SeeConvArg(
               uuid: id,
               futureToFetchData: fetchTimingDetailArtisanFromConv,
+            )
+        );
+      },
+      goToEstimate: (String? id) {
+        if(id == null) return;
+        Navigator.pushReplacementNamed(context,'/estimate/artisan/detail',
+            arguments: SeeConvArg(
+              uuid: id,
+              futureToFetchData: fetchEstimateDetailArtisanFromEstimate,
             )
         );
       },
@@ -121,6 +132,9 @@ class AllConvCouncil extends StatelessWidget {
               onGoBack: ()=>{ Navigator.pop(context)},
             )
         );
+      },
+      goToEstimate: (String? id) {
+
       },
     );
   }
