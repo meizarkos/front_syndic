@@ -5,11 +5,13 @@ class ErrorVisibility extends StatelessWidget {
   const ErrorVisibility({
     super.key,
     required this.errorVisibility,
-    required this.errorText
+    required this.errorText,
+    this.color = AppColors.mainErrorColor,
   });
 
   final bool errorVisibility;
   final String errorText;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,9 @@ class ErrorVisibility extends StatelessWidget {
         child: Center(
           child: Text(
             errorText,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
-              color: AppColors.mainErrorColor,
+              color: color,
             ),
           ),
         ),

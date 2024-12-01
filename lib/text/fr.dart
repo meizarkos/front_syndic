@@ -151,6 +151,8 @@ class AppText {
   static const String euro = '€';
   static const String estimateDetailTitle = 'Détail du devis';
   static const String noDescriptionEstimate = 'Pas de description pour ce devis';
+  static const String textFieldErrorCreateEstimate = 'Le prix et la description sont obligatories';
+  static const String textFieldEstimateModify = 'Votre devis a bien été modifié';
 
   /* Timing Estimate */
   static const String timingEstimate = 'Date travaux';

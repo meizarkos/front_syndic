@@ -1,5 +1,3 @@
-
-
 import '../../core_value.dart';
 import '../../models/estimate/estimate.dart';
 import '../request.dart';
@@ -10,7 +8,6 @@ Future<Estimate?> fetchEstimateDetail(String route) async {
     final record = Estimate.fromJson(response.data);
     return record;
   } catch(e) {
-    print(e);
     return null;
   }
 }

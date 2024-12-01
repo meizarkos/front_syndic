@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
+import 'package:front_syndic/widget/visibility/error.dart';
 
-import '../../../color.dart';
+import '../../../api_handler/estimate/delete_estimate.dart';
+import '../../../api_handler/estimate/patch_estimate.dart';
 import '../../../models/estimate/estimate.dart';
 import '../../../text/fr.dart';
 import '../../../widget/button/row_bottom_bar.dart';
@@ -25,9 +27,21 @@ class EstimateDetail extends StatefulWidget {
 }
 
 class _EstimateDetailState extends State<EstimateDetail> {
+
   final TextEditingController _controllerDesc = TextEditingController();
   final TextEditingController _controllerPrice = TextEditingController();
   final TextEditingController _controllerCommentary = TextEditingController();
+  Estimate estimateFromRequest = Estimate();
+  bool errorVisibilityModify = false;
+  bool errorVisibility  =  false;
+
+  late Future<Estimate?> _futureEstimate; // Store the Future in a state variable
+
+  @override
+  void initState() {
+    super.initState();
+    _futureEstimate = widget.fetchData(widget.uuid); // Initialize the Future once
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +49,18 @@ class _EstimateDetailState extends State<EstimateDetail> {
       appBar: appBarBackButton(context, title: AppText.estimateDetailTitle),
       body: SingleChildScrollView(
         child: FutureBuilder(
-          future: widget.fetchData(widget.uuid),
+          future: _futureEstimate,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError || snapshot.data == null) {
               return const Center(child: Text(AppText.apiErrorText));
             }
-            final estimate = snapshot.data! as Estimate;
+            final estimate = snapshot.data!;
             _controllerCommentary.text = estimate.commentary ?? '';
             _controllerDesc.text = estimate.description ?? '';
             _controllerPrice.text = estimate.price.toString();
+            estimateFromRequest = estimate;
             return Padding(
               padding: EdgeInsets.all(AppUIValue.spaceScreenToAny),
               child: Column(
@@ -74,9 +89,9 @@ class _EstimateDetailState extends State<EstimateDetail> {
                     onChanged: (value) {
                       try {
                         final price = double.parse(value);
-                        estimate.price = price;
+                        estimateFromRequest.price = price;
                       } catch (e) {
-                        estimate.price = -1;
+                        estimateFromRequest.price = -1;
                         return;
                       }
                     },
@@ -88,7 +103,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
                     controller: _controllerDesc,
                     decoration: textFieldMainDeco(AppText.descEstimate),
                     onChanged: (value) {
-                      estimate.description = value;
+                      estimateFromRequest.description = value;
                     },
                     minLines: 5,
                     maxLines: 13,
@@ -98,22 +113,78 @@ class _EstimateDetailState extends State<EstimateDetail> {
                     controller: _controllerCommentary,
                     decoration: textFieldMainDeco(AppText.commentary),
                     onChanged: (value) {
-                      estimate.commentary = value;
+                      estimateFromRequest.commentary = value;
                     },
                     minLines: 5,
                     maxLines: 13,
                   ),
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
+                  ErrorVisibility(errorVisibility: errorVisibility, errorText: AppText.textFieldErrorCreateEstimate)
                 ],
               ),
             );
           },
         ),
       ),
-      bottomNavigationBar: rowBottomBar(
-        context,
-        () {},
-        () {},
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ErrorVisibility(errorVisibility: errorVisibilityModify, errorText: AppText.textFieldEstimateModify,color: Colors.green),
+          rowBottomBar(
+            context,
+                () {_modify();},
+                () {_delete();},
+          ),
+        ],
       ),
+    );
+  }
+
+  void _modify(){
+    setState(() {
+      errorVisibility = false;
+      errorVisibilityModify = false;
+    });
+    if(estimateFromRequest.price == null || estimateFromRequest.price! < 0 || estimateFromRequest.description == '' || estimateFromRequest.description == null){
+      setState(() {
+        errorVisibility = true;
+      });
+      return;
+    }
+    setState(() {
+      errorVisibilityModify = true;
+    });
+    patchEstimateArtisan(estimateFromRequest);
+  }
+
+  void _delete()async{
+    showDialog(
+      context: context, // Pass the context from your widget
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(AppText.recapDialogTitle),
+          content: Text(AppText.recapDialogDelete),
+          actions: [
+            TextButton(
+              child: Text(AppText.cancel),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog without doing anything
+              },
+            ),
+            TextButton(
+              child: Text(AppText.confirm),
+              onPressed: ()async{
+                await deleteEstimateArtisan(estimateFromRequest.uuid);
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/in_progress/artisan',
+                      (Route<dynamic> route) => false,
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

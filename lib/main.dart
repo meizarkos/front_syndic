@@ -104,6 +104,18 @@ class MyApp extends StatelessWidget {
             }
             break;
 
+          case '/timing/artisan/detail'  :
+            final arguments = settings.arguments;
+            if(arguments is SeeConvArg){
+              return MaterialPageRoute(
+                builder: (context) => TimingDetailArtisan(
+                  timingUuid: arguments.uuid,
+                  fetchTimingDetail: arguments.futureToFetchData,
+                ),
+              );
+            }
+            break;
+
           case '/work_requests/timings':
             final arguments = settings.arguments;
             if (arguments is String) {
