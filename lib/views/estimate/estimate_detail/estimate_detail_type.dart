@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/views/estimate/estimate_artisan/estimate_detail_artisan.dart';
+import 'package:front_syndic/views/estimate/estimate_detail/estimate_detail.dart';
 
-class EstimateDetailArtisan extends StatelessWidget {
-  const EstimateDetailArtisan({
+class EstimateDetailCouncil extends StatelessWidget {
+  const EstimateDetailCouncil({
     super.key,
     required this.fetchData,
     required this.uuid,
@@ -14,8 +14,8 @@ class EstimateDetailArtisan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EstimateDetail(
-        fetchData: fetchData,
-        uuid: uuid,
+      fetchData: fetchData,
+      uuid: uuid,
     );
   }
 }

@@ -5,6 +5,7 @@ import '../request.dart';
 Future<List<Conversation>?> fetchConversation(String route) async {
   try{
     final response = await request(url: route, method: "GET");
+    print(response.data);
     final records = (response.data as List)
         .map((recordJson) => Conversation.fromJson(recordJson))
         .toList();
@@ -53,4 +54,8 @@ Future<List<Conversation>?> fetchSpecificConvArtisanFromEstimate(String? uuid) a
   return await fetchConversation('${APIValue.artisan}all_conv_artisan_from_estimate/$uuid');
 }
 
+Future<List<Conversation>?> fetchSpecificConvCouncilFromEstimate(String? uuid) async {
+  if(uuid == null) return null;
+  return await fetchConversation('${APIValue.unionCouncil}all_conv_council_from_estimate/$uuid');
+}
 

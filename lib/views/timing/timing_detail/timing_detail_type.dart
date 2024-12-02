@@ -4,6 +4,7 @@ import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail.dart';
 
 import '../../../api_handler/conversation/fetch_conversation.dart';
+import '../../../api_handler/estimate/get_estimate_detail.dart';
 import '../../../api_handler/timing/refuse_timing_detail.dart';
 import '../../../models/council/council.dart';
 import '../../../models/union/union.dart';
@@ -30,10 +31,10 @@ class TimingDetailCouncil extends StatelessWidget {
         );
       },
       routeToEstimateDetail:  (String? uuid) {
-        /*if(uuid == null) return;
-        Navigator.pushNamed(context, '/council/see_conv',
-            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncilFromTiming)
-        );*/
+        if(uuid == null) return;
+        Navigator.pushNamed(context, '/estimate/council/detail',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchEstimateDetailCouncilFromTiming)
+        );
       },
       routeToRefuse: (String? uuid) async{
         if(uuid == null) return;
@@ -79,10 +80,10 @@ class TimingDetailArtisan extends StatelessWidget {
         );
       },
       routeToEstimateDetail:  (String? uuid) {
-        /*if(uuid == null) return;
-        Navigator.pushNamed(context, '/artisan/see_conv',
-        arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvArtisanFromTiming)
-        );*/
+        if(uuid == null) return;
+        Navigator.pushNamed(context, '/estimate/artisan/detail',
+        arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchEstimateDetailArtisanFromTiming)
+        );
       },
       routeToRefuse: (String? uuid)async{
         await refuseTimingDetailArtisan(uuid);

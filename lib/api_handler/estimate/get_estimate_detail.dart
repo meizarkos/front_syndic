@@ -17,7 +17,33 @@ Future<Estimate?> fetchEstimateDetailArtisan(String? id) async {
   return await fetchEstimateDetail('${APIValue.artisan}estimate_detail_artisan/$id');
 }
 
-Future<Estimate?> fetchEstimateDetailArtisanFromEstimate(String? id) async {
+Future<Estimate?> fetchEstimateDetailArtisanFromConversation(String? id) async {
   if(id == null) return null;
   return await fetchEstimateDetail('${APIValue.artisan}estimate_detail_artisan_from_conversation/$id');
+}
+
+Future<Estimate?> fetchEstimateDetailArtisanFromTiming(String? id) async {
+  if(id == null) return null;
+  return await fetchEstimateDetail('${APIValue.artisan}estimate_detail_artisan_from_timing/$id');
+}
+
+Future<Estimate?> fetchEstimateDetailCouncil(String? id) async {
+  if(id == null) return null;
+  return await fetchEstimateDetail('${APIValue.unionCouncil}estimate_detail_council/$id');
+}
+
+
+Future<Estimate?> fetchEstimateDetailCouncilFromTiming(String? id) async {
+  if(id == null) return null;
+  return await fetchEstimateDetail('${APIValue.unionCouncil}estimate_detail_council_from_timing/$id');
+}
+
+Future<Estimate?> fetchEstimateDetailCouncilFromTimingEstimate(String? id) async {
+  if(id == null) return null;
+  return await fetchEstimateDetail('${APIValue.unionCouncil}estimate_detail_council_from_timing_estimate/$id');
+}
+
+Future<Estimate?> fetchEstimateDetailCouncilFromConversation(String? id) async {
+  if(id == null) return null;
+  return await fetchEstimateDetail('${APIValue.unionCouncil}estimate_detail_council_from_conversation/$id');
 }

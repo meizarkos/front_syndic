@@ -155,6 +155,11 @@ class AppText {
   static const String noDescriptionEstimate = 'Pas de description pour ce devis';
   static const String textFieldErrorCreateEstimate = 'Le prix et la description sont obligatories';
   static const String textFieldEstimateModify = 'Votre devis a bien été modifié';
+  static const String estimateNotValidateShowDialog = "Cette étape se débloquera quand le devis sera validé";
+  static const String estimateValidate = "Devis accepté";
+  static const String estimateWaitingForUnion = "En attente de validation par le syndicat";
+  static const String estimateWaitingForCouncil = "En attente de validation par le conseil syndical";
+  static const String estimateWaitingForUser = "En attente de validation par le propriétaire";
 
   /* Timing Estimate */
   static const String timingEstimate = 'Date travaux';

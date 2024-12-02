@@ -84,7 +84,7 @@ class AllConvArtisan extends StatelessWidget {
         Navigator.pushReplacementNamed(context,'/estimate/artisan/detail',
             arguments: SeeConvArg(
               uuid: id,
-              futureToFetchData: fetchEstimateDetailArtisanFromEstimate,
+              futureToFetchData: fetchEstimateDetailArtisanFromConversation,
             )
         );
       },
@@ -134,7 +134,13 @@ class AllConvCouncil extends StatelessWidget {
         );
       },
       goToEstimate: (String? id) {
-
+        if(id == null) return;
+        Navigator.pushNamed(context,'/estimate/council/detail',
+            arguments: SeeConvArg(
+              uuid: id,
+              futureToFetchData: fetchEstimateDetailCouncilFromConversation,
+            )
+        );
       },
     );
   }

@@ -6,16 +6,19 @@ import 'package:front_syndic/widget/visibility/error.dart';
 
 import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../api_handler/estimate/delete_estimate.dart';
+import '../../../api_handler/estimate/get_estimate_detail.dart';
 import '../../../api_handler/estimate/patch_estimate.dart';
 import '../../../models/estimate/estimate.dart';
 import '../../../text/fr.dart';
 import '../../../widget/button/row_bottom_bar.dart';
 import '../../../widget/button/row_of_nav_button.dart';
 import '../../../widget/decoration/text_field_deco_main.dart';
+import '../../../widget/handle_status/alert_to_display.dart';
+import '../../../widget/handle_status/text_to_display_based_on_status.dart';
 import '../../../widget/text_style/text_style_main_color.dart';
 
-class EstimateDetail extends StatefulWidget {
-  const EstimateDetail({
+class EstimateDetailArtisan extends StatefulWidget {
+  const EstimateDetailArtisan({
     super.key,
     required this.fetchData,
     required this.uuid,
@@ -25,10 +28,10 @@ class EstimateDetail extends StatefulWidget {
   final String? uuid;
 
   @override
-  State<EstimateDetail> createState() => _EstimateDetailState();
+  State<EstimateDetailArtisan> createState() => _EstimateDetailArtisanState();
 }
 
-class _EstimateDetailState extends State<EstimateDetail> {
+class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
   final TextEditingController _controllerDesc = TextEditingController();
   final TextEditingController _controllerPrice = TextEditingController();
   final TextEditingController _controllerCommentary = TextEditingController();
@@ -42,8 +45,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
   @override
   void initState() {
     super.initState();
-    _futureEstimate =
-        widget.fetchData(widget.uuid); // Initialize the Future once
+    _futureEstimate = widget.fetchData(widget.uuid); // Initialize the Future once
   }
 
   @override
@@ -86,7 +88,11 @@ class _EstimateDetailState extends State<EstimateDetail> {
                                 fetchSpecificConvArtisanFromEstimate),
                       );
                     },
-                    () {},
+                    () {
+                      handleStatus(estimateFromRequest.status, estimateFromRequest.statusGoal, context,
+                          () {print('aaaaaa');}
+                      );
+                    },
                   ),
                   const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
                   Center(
@@ -95,6 +101,8 @@ class _EstimateDetailState extends State<EstimateDetail> {
                       style: getTextStyleMainColor(AppUIValue.sizeFontTitle),
                     ),
                   ),
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
+                  textEstimateStatus(estimateFromRequest.status, estimateFromRequest.statusGoal, context),
                   const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
                   TextField(
                     controller: _controllerPrice,
@@ -176,6 +184,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
       });
       return;
     }
+    if(estimateFromRequest.uuid == null) return;
     showDialog(
       context: context, // Pass the context from your widget
       builder: (BuildContext context) {
@@ -196,8 +205,11 @@ class _EstimateDetailState extends State<EstimateDetail> {
                 setState(() {
                   errorVisibilityModify = true;
                 });
-                patchEstimateArtisan(estimateFromRequest);
-                Navigator.pop(context);
+                await patchEstimateArtisan(estimateFromRequest);
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                Navigator.pushNamed(context, '/estimate/artisan/detail',
+                    arguments: SeeConvArg(uuid: estimateFromRequest.uuid!, futureToFetchData: fetchEstimateDetailArtisan));
               },
             ),
           ],
@@ -237,4 +249,6 @@ class _EstimateDetailState extends State<EstimateDetail> {
       },
     );
   }
+
+
 }
