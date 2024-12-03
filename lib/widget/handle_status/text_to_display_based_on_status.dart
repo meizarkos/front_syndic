@@ -11,7 +11,7 @@ String textStatusEstimate(int? status, int? statusGoal){
   if(status == 3){
     return AppText.estimateWaitingForUnion;
   }
-  if(status == 4){
+  if(status == 5){
     return AppText.estimateWaitingForCouncil;
   }
   if(status == 1){

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:front_syndic/color.dart';
 import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
+import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
 import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../core_value.dart';
@@ -8,7 +10,7 @@ import '../../../text/fr.dart';
 import '../../../widget/button/row_of_nav_button.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
 import '../../../widget/handle_status/alert_to_display.dart';
-import '../../../widget/handle_status/text_to_display_based_on_status.dart';
+import '../../../widget/handle_status/text_based_on_user.dart';
 import '../../../widget/header/app_bar_back_button.dart';
 import '../../../widget/text_style/text_style_main_color.dart';
 
@@ -17,10 +19,14 @@ class EstimateDetail extends StatefulWidget {
     super.key,
     required this.fetchData,
     required this.uuid,
+    required this.role,
+    required this.patchStatus
   });
 
   final Function(String?) fetchData;
   final String? uuid;
+  final String role;
+  final Function(String?) patchStatus;
 
   @override
   State<EstimateDetail> createState() => _EstimateDetailState();
@@ -69,7 +75,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
                                   arguments: SeeConvArg(uuid: estimateFromRequest.uuid!, futureToFetchData: fetchSpecificConvCouncilFromEstimate));
                             },
                             (){
-                              handleStatus(estimateFromRequest.status, estimateFromRequest.statusGoal, context,
+                              goToTiming(estimateFromRequest.status, estimateFromRequest.statusGoal, context,
                                       () {}
                               );
                             },
@@ -82,7 +88,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
                         ),
                       ),
                       const SizedBox(height: AppUIValue.spaceScreenToAny),
-                      textEstimateStatus(estimateFromRequest.status, estimateFromRequest.statusGoal, context),
+                      textEstimateStatusUser(estimateFromRequest.status, estimateFromRequest.statusGoal, context, widget.role),
                       const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
                       Text(
                         estimate.price == null ? AppText.noPriceEstimate : '${AppText.createEstimatePrice}: ${estimate.price} ${AppText.euro}',
@@ -117,7 +123,17 @@ class _EstimateDetailState extends State<EstimateDetail> {
                           estimateFromRequest.commentary ?? AppText.noCommentary,
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
-                      )
+                      ),
+                      const SizedBox(height: AppUIValue.spaceScreenToAny * 3),
+                      Center(
+                        child: elevatedButtonAndTextColor(
+                            AppColors.mainBackgroundColor,
+                            handleText(),
+                            context,
+                            handleButton(),
+                            AppColors.mainTextColor,
+                        ),
+                      ),
                     ],
                   ),
                 );
@@ -125,5 +141,33 @@ class _EstimateDetailState extends State<EstimateDetail> {
         ),
       ),
     );
+  }
+
+  String handleText(){
+    if(estimateFromRequest.status == estimateFromRequest.statusGoal){
+      return AppText.estimateAlreadyAccept;
+    }
+    if(widget.role == RoleBasedText.council && estimateFromRequest.status == 3){
+      return AppText.estimateAlreadyAccept;
+    }
+    if(widget.role == RoleBasedText.union && estimateFromRequest.status == 5){
+      return AppText.estimateAlreadyAccept;
+    }
+    return AppText.validate;
+  }
+
+  VoidCallback handleButton(){
+    if(estimateFromRequest.status == estimateFromRequest.statusGoal){
+      return (){};
+    }
+    if(widget.role == RoleBasedText.council && estimateFromRequest.status == 3){
+      return (){};
+    }
+    if(widget.role == RoleBasedText.union && estimateFromRequest.status == 5){
+      return (){};
+    }
+    return ()async{
+      widget.patchStatus(estimateFromRequest.uuid);
+    };
   }
 }

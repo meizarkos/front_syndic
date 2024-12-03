@@ -89,7 +89,7 @@ class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
                       );
                     },
                     () {
-                      handleStatus(estimateFromRequest.status, estimateFromRequest.statusGoal, context,
+                      goToTiming(estimateFromRequest.status, estimateFromRequest.statusGoal, context,
                           () {print('aaaaaa');}
                       );
                     },

@@ -20,6 +20,7 @@ class AppText {
   static const String to = 'Au';
   static const String from = 'du';
   static const String one = 'Un';
+  static const String validate = 'Valider';
 
   /* General not found */
   static const String noCategoryFound = 'Pas de catégorie';
@@ -157,9 +158,11 @@ class AppText {
   static const String textFieldEstimateModify = 'Votre devis a bien été modifié';
   static const String estimateNotValidateShowDialog = "Cette étape se débloquera quand le devis sera validé";
   static const String estimateValidate = "Devis accepté";
+  static const String estimateAlreadyAccept = "Devis déjà accepté";
   static const String estimateWaitingForUnion = "En attente de validation par le syndicat";
   static const String estimateWaitingForCouncil = "En attente de validation par le conseil syndical";
   static const String estimateWaitingForUser = "En attente de validation par le propriétaire";
+  static const String estimateWaitingForYou = "En attente de votre validation";
 
   /* Timing Estimate */
   static const String timingEstimate = 'Date travaux';

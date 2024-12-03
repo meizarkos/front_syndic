@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../text/fr.dart';
 
-void handleStatus(int? status, int? statusGoal, BuildContext context, Function pushToEstimateTiming){
+void goToTiming(int? status, int? statusGoal, BuildContext context, Function pushToEstimateTiming){
   if(status == statusGoal){
     pushToEstimateTiming();
   }
