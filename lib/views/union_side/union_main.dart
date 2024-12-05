@@ -6,7 +6,7 @@ import 'package:front_syndic/widget/search_bar/search_bar.dart';
 
 import '../../api_handler/co_owner/get_co_owner_of_union.dart';
 import '../../models/co_owner/co_owner.dart';
-import 'co_owner_cell/co_owner_cell.dart';
+import '../co_owner/co_owner_cell/co_owner_cell.dart';
 
 class UnionMain extends StatefulWidget {
   const UnionMain({super.key});
@@ -77,7 +77,7 @@ class _UnionMainState extends State<UnionMain> {
                         }
                         return GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context,'/co_owner_main', arguments: dataFiltered[index].uuid);
+                            Navigator.pushNamed(context,'/co_owner_main', arguments: dataFiltered[index].councilId);
                           },
                           child: CoOwnerCell(
                             title: dataFiltered[index].name,

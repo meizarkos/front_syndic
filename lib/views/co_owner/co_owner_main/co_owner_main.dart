@@ -4,7 +4,7 @@ import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/co_owner/co_owner.dart';
 import 'package:front_syndic/models/estimate/estimate.dart';
 import 'package:front_syndic/utils/date_to_string/date.dart';
-import 'package:front_syndic/views/union_side/co_owner_main/row_of_text_and_icon.dart';
+import 'package:front_syndic/views/co_owner/co_owner_main/row_of_text_and_icon.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
 import '../../../color.dart';

@@ -13,7 +13,7 @@ import 'package:front_syndic/views/estimate/estimate_detail/estimate_detail_type
 import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
-import 'package:front_syndic/views/union_side/co_owner_main/co_owner_main.dart';
+import 'package:front_syndic/views/co_owner/co_owner_main/co_owner_main.dart';
 import 'package:front_syndic/views/union_side/union_main.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time.dart';
