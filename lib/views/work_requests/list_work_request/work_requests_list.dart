@@ -3,19 +3,22 @@ import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/selector_row.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_request_cell.dart';
 
-import '../../../api_handler/work_request/fetch_work_request_detail.dart';
-import '../../../api_handler/work_request/get_work_request.dart';
 import '../../../../models/work_request/work_request.dart';
 import '../../../../text/fr.dart';
 import '../../../../widget/button/add_floating_button.dart';
 import '../../../../widget/search_bar/search_bar.dart';
-import '../../../models/to_screen/council_work_request_detail.dart';
-import '../../../models/work_request/create_work_request.dart';
 
 class WorkRequestsList extends StatefulWidget {
   const WorkRequestsList({
     super.key,
+    required this.futureList,
+    required this.goDoDetail,
+    this.addWorkRequest,
   });
+
+  final List<Future<List<WorkRequest>?> Function()> futureList;
+  final Function goDoDetail;
+  final VoidCallback? addWorkRequest;
 
   @override
   State<WorkRequestsList> createState() => _WorkRequestsListState();
@@ -23,7 +26,6 @@ class WorkRequestsList extends StatefulWidget {
 
 class _WorkRequestsListState extends State<WorkRequestsList> {
   final List<String> _workRequests = [AppText.workRequestsPending, AppText.workRequestsHistory];
-  final futureList = [fetchWorkRequestFromCoOwnerPending, fetchWorkRequestFromCoOwnerPast];
   String searchValue = '';
   int indexSelected = 0;
 
@@ -61,7 +63,7 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                   ),
                   const SizedBox(height: 15),
                   FutureBuilder(
-                    future: futureList[indexSelected](),
+                    future: widget.futureList[indexSelected](),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
@@ -82,22 +84,7 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                                 return const SizedBox(height: 15);
                               }
                               return GestureDetector(
-                                onTap: () {
-                                  if(dataFiltered[index].uuid == null) return;
-                                  Navigator.pushNamed(context,'/work_requests/detail',
-                                      arguments: CouncilWorkRequestDetail(
-                                          uuid: dataFiltered[index].uuid!,
-                                          futureToFetchData: fetchWorkRequestDetailCouncil,
-                                          onGoBack: ()=>{
-                                            Navigator.pushNamedAndRemoveUntil(
-                                              context,
-                                              '/co_owner/work_requests', // The new route
-                                                  (Route<dynamic> route) => false, // Remove all previous routes
-                                            )
-                                          },
-                                      ),
-                                  );
-                                },
+                                onTap: ()=>widget.goDoDetail(dataFiltered[index].uuid),
                                 child: WorkRequestCell(
                                   title: dataFiltered[index].title,
                                   subtitle: dataFiltered[index].description,
@@ -114,10 +101,7 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
               ),
             )
         ),
-        floatingActionButton: addFloatingButton(()async {
-          var createWorkRequest = CreateWorkRequest([],WorkRequest(),null);
-          Navigator.pushNamed(context, '/work_requests/title_and_desc',arguments: createWorkRequest);
-        }),
+        floatingActionButton: addFloatingButton(widget.addWorkRequest),
     );
   }
 

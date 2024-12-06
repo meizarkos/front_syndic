@@ -8,7 +8,7 @@ class AppUIValue{
 }
 
 class APIValue{
-  static const String baseUnion = 'union/';
+  static const String union = 'union/';
   static const String unionCouncil = 'union_and_council/';
   static const String artisan = 'artisan/';
 }

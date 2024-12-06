@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/api_handler/co_owner/get_main_data_co_owner.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/co_owner/co_owner.dart';
 import 'package:front_syndic/models/estimate/estimate.dart';
 import 'package:front_syndic/utils/date_to_string/date.dart';
-import 'package:front_syndic/views/co_owner/co_owner_main/row_of_text_and_icon.dart';
+import 'package:front_syndic/views/co_owner/co_owner_detail/row_of_text_and_icon.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
 import '../../../color.dart';
@@ -19,17 +18,27 @@ import 'column_of_text_button.dart';
 
 const spaceInsideColumn = 25.0;
 
-class CoOwnerMain extends StatelessWidget {
-  const CoOwnerMain({
+class CoOwnerDetail extends StatefulWidget {
+  const CoOwnerDetail({
     super.key,
+    required this.fetchData,
+    required this.uuid,
   });
 
+  final Future<Map<String, dynamic>> Function(String?) fetchData;
+  final String? uuid;
+
+  @override
+  State<CoOwnerDetail> createState() => _CoOwnerDetailState();
+}
+
+class _CoOwnerDetailState extends State<CoOwnerDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: FutureBuilder(
-          future: fetchCoOwnerMainData(),
+          future: widget.fetchData(widget.uuid),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());

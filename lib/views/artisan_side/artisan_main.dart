@@ -66,7 +66,7 @@ class _ArtisanMainState extends State<ArtisanMain> {
             ),
           ),
           FutureBuilder(
-            future: fetchAllWorkRequest(),
+            future: fetchAllWorkRequestArtisan(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());

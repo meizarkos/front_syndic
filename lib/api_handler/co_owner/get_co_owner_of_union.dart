@@ -4,7 +4,7 @@ import '../request.dart';
 
 Future<List<CoOwner>?> fetchAllCoOwnersFromUnion() async {
   try{
-    final response = await request(url: '${APIValue.baseUnion}get_co_owners', method: "GET");
+    final response = await request(url: '${APIValue.union}get_co_owners', method: "GET");
     final records = (response.data as List)
         .map((recordJson) => CoOwner.fromJson(recordJson))
         .toList();

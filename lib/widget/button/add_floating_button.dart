@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../text/fr.dart';
 
-Align addFloatingButton(VoidCallback goTo){
+SingleChildRenderObjectWidget addFloatingButton(VoidCallback? goTo){
+  if(goTo == null){
+    return SizedBox();
+  }
   return Align(
     alignment: Alignment.bottomCenter,
     child: FloatingActionButton.extended(

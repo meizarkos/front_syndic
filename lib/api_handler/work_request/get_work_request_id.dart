@@ -2,7 +2,7 @@ import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/work_request/work_request.dart';
 import '../request.dart';
 
-Future<List<WorkRequest>?> fetchWorkRequestFromCoOwner(String route) async {
+Future<List<WorkRequest>?> fetchWorkRequestFromParticularOrCouncil(String route) async {
   try{
     final response = await request(url: route, method: "GET");
     final records = (response.data as List)
@@ -15,9 +15,9 @@ Future<List<WorkRequest>?> fetchWorkRequestFromCoOwner(String route) async {
 }
 
 Future<List<WorkRequest>?> fetchWorkRequestFromCoOwnerPending() async {
-  return await fetchWorkRequestFromCoOwner('${APIValue.unionCouncil}work_requests');
+  return await fetchWorkRequestFromParticularOrCouncil('${APIValue.unionCouncil}work_requests');
 }
 
 Future<List<WorkRequest>?> fetchWorkRequestFromCoOwnerPast() async {
-  return await fetchWorkRequestFromCoOwner('${APIValue.unionCouncil}work_requests_past');
+  return await fetchWorkRequestFromParticularOrCouncil('${APIValue.unionCouncil}work_requests_past');
 }
