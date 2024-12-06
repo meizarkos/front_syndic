@@ -4,11 +4,10 @@ import 'package:front_syndic/api_handler/request_with_body.dart';
 import 'package:front_syndic/models/timing/timing.dart';
 import 'package:front_syndic/models/work_request/create_work_request.dart';
 import 'package:front_syndic/models/work_request/work_request.dart';
-import 'package:intl/intl.dart';
 import '../../core_value.dart';
 import '../../utils/date_to_string/date.dart';
 
-Future<void> postWorkRequest(CreateWorkRequest createWorkRequest) async {
+Future<void> postWorkRequest(CreateWorkRequest createWorkRequest,String route) async {
 
   List<String> dateFormatted = [];
 
@@ -24,6 +23,7 @@ Future<void> postWorkRequest(CreateWorkRequest createWorkRequest) async {
   }
 
   var body = jsonEncode({
+    AttributesWorkRequest.councilId: createWorkRequest.workRequest.councilId,
     AttributesWorkRequest.title: createWorkRequest.workRequest.title,
     AttributesWorkRequest.description: createWorkRequest.workRequest.description,
     AttributesWorkRequest.category: createWorkRequest.workRequest.category,
@@ -35,13 +35,23 @@ Future<void> postWorkRequest(CreateWorkRequest createWorkRequest) async {
 
   try {
     final response = await requestWithBody(
-        url: '${APIValue.unionCouncil}work_request',
+        url: route,
         method: "POST",
         body: body
     );
+    print(response);
     return;
   }
   catch (e) {
+    print(e);
     return;
   }
+}
+
+Future<void> postWorkRequestCouncil(CreateWorkRequest createWorkRequest) async {
+  return postWorkRequest(createWorkRequest, '${APIValue.unionCouncil}work_request');
+}
+
+Future<void> postWorkRequestUnion(CreateWorkRequest createWorkRequest) async {
+  return postWorkRequest(createWorkRequest, '${APIValue.union}work_request_union');
 }

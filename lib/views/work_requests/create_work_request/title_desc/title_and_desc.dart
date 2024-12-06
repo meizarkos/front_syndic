@@ -7,17 +7,19 @@ import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../../models/work_request/create_work_request.dart';
-import '../../../text/fr.dart';
-import '../../../widget/button/elevated_button_opacity.dart';
+import '../../../../models/work_request/create_work_request.dart';
+import '../../../../text/fr.dart';
+import '../../../../widget/button/elevated_button_opacity.dart';
 
 class TitleAndDesc extends StatefulWidget {
   const TitleAndDesc({
     super.key,
     required this.createWorkRequest,
+    required this.route,
   });
 
   final CreateWorkRequest createWorkRequest;
+  final String route;
 
   @override
   State<TitleAndDesc> createState() => _TitleAndDescState();
@@ -88,7 +90,7 @@ class _TitleAndDescState extends State<TitleAndDesc> {
                   }
                   widget.createWorkRequest.workRequest.title = titleValue;
                   widget.createWorkRequest.workRequest.description = descriptionValue;
-                  final permission = await _checkPermissions();
+                  /*final permission = await _checkPermissions();
                   if(!permission){
                     return;
                   }
@@ -98,7 +100,8 @@ class _TitleAndDescState extends State<TitleAndDesc> {
                     _goToCategory();
                     return;
                   }
-                  _goToCamera();
+                  _goToCamera();*/
+                  _goToCategory();
                 },
                 AppColors.mainTextColor
               ),
@@ -115,7 +118,7 @@ class _TitleAndDescState extends State<TitleAndDesc> {
   }
 
   void _goToCategory() {
-    Navigator.pushNamed(context, '/work_requests/category',arguments: widget.createWorkRequest);
+    Navigator.pushNamed(context, widget.route,arguments: widget.createWorkRequest);
   }
 
   void _goToCamera() {

@@ -4,29 +4,31 @@ import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/utils/string_handler/handle_string.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 
-import '../../../color.dart';
-import '../../../models/work_request/create_work_request.dart';
-import '../../../text/fr.dart';
-import '../../../widget/button/elevated_button_opacity.dart';
-import '../../../widget/decoration/decoration_round_main_color.dart';
-import 'chose_time/cell_time.dart';
+import '../../../../color.dart';
+import '../../../../models/work_request/create_work_request.dart';
+import '../../../../text/fr.dart';
+import '../../../../widget/button/elevated_button_opacity.dart';
+import '../../../../widget/decoration/decoration_round_main_color.dart';
+import '../chose_time/cell_time.dart';
 
 const double spaceTitleDesc = 20;
 const double spaceCate = 20;
 
-class RecapWorkRequest extends StatefulWidget {
-  const RecapWorkRequest({
+class RecapForCreateWorkRequest extends StatefulWidget {
+  const RecapForCreateWorkRequest({
     super.key,
     required this.createWorkRequest,
+    required this.onPost,
   });
 
   final CreateWorkRequest createWorkRequest;
+  final Function(CreateWorkRequest) onPost;
 
   @override
-  State<RecapWorkRequest> createState() => _RecapWorkRequestState();
+  State<RecapForCreateWorkRequest> createState() => _RecapForCreateWorkRequestState();
 }
 
-class _RecapWorkRequestState extends State<RecapWorkRequest> {
+class _RecapForCreateWorkRequestState extends State<RecapForCreateWorkRequest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,7 +104,7 @@ class _RecapWorkRequestState extends State<RecapWorkRequest> {
                   AppColors.mainBackgroundColor,
                   AppText.save,
                   context,
-                  _onSave,
+                  ()=>widget.onPost(widget.createWorkRequest),
                   AppColors.mainTextColor,
                 ),
               )
@@ -117,15 +119,6 @@ class _RecapWorkRequestState extends State<RecapWorkRequest> {
     return Divider(
       color: Colors.grey,  // Couleur de la ligne
       thickness: 2,        // Épaisseur de la ligne
-    );
-  }
-
-  void _onSave() async{
-    await postWorkRequest(widget.createWorkRequest);
-    Navigator.pushNamedAndRemoveUntil(
-        context,
-        '/co_owner/work_requests',
-          (Route<dynamic> route) => false,
     );
   }
 }

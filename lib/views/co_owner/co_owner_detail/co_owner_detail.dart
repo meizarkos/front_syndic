@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/co_owner/co_owner.dart';
 import 'package:front_syndic/models/estimate/estimate.dart';
+import 'package:front_syndic/models/work_request/create_work_request.dart';
 import 'package:front_syndic/utils/date_to_string/date.dart';
 import 'package:front_syndic/views/co_owner/co_owner_detail/row_of_text_and_icon.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
@@ -94,7 +95,8 @@ class _CoOwnerDetailState extends State<CoOwnerDetail> {
                                       AppUIValue.opacityActionButton),
                                   AppText.buttonCreateARequest,
                                   context,
-                                  () => goTo(context,'/co_owner_work_request')),
+                                  ()=>goToCreateWorkRequest(context)
+                              ),
                             ),
                             const SizedBox(height: 10),
                             SizedBox(
@@ -185,5 +187,15 @@ class _CoOwnerDetailState extends State<CoOwnerDetail> {
       return res;
     }
     return fromStringToDateTimeString("${timingsEstimate?[0].dateStart} ${timingsEstimate?[0].timeStart}");
+  }
+
+  void goToCreateWorkRequest(BuildContext context) {
+        goTo(context,'union/work_requests/title_and_desc',
+            arguments: CreateWorkRequest(
+              [],
+              WorkRequest(councilId: widget.uuid),
+              null,
+            ),
+        );
   }
 }

@@ -14,9 +14,11 @@ class ChoseDateTime extends StatefulWidget {
   const ChoseDateTime({
     super.key,
     required this.createWorkRequest,
+    required this.route,
   });
 
   final CreateWorkRequest createWorkRequest;
+  final String route;
 
   @override
   State<ChoseDateTime> createState() => _ChoseDateTimeState();
@@ -141,6 +143,6 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
       });
       return;
     }
-    Navigator.pushNamed(context, '/work_requests/recap', arguments: widget.createWorkRequest);
+    Navigator.pushNamed(context, widget.route, arguments: widget.createWorkRequest);
   }
 }

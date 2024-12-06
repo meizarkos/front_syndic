@@ -15,13 +15,16 @@ import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/union_side/co_owner_list.dart';
-import 'package:front_syndic/views/work_requests/create_work_request/category.dart';
+import 'package:front_syndic/views/work_requests/create_work_request/category/category_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time.dart';
-import 'package:front_syndic/views/work_requests/create_work_request/recap.dart';
+import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time_type.dart';
+import 'package:front_syndic/views/work_requests/create_work_request/recap/recap_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/take_picture.dart';
-import 'package:front_syndic/views/work_requests/create_work_request/title_and_desc.dart';
+import 'package:front_syndic/views/work_requests/create_work_request/title_desc/title_and_desc.dart';
+import 'package:front_syndic/views/work_requests/create_work_request/title_desc/title_and_desc_type.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_request_type.dart';
 import 'package:front_syndic/views/work_requests/patch/recap.dart';
+import 'package:front_syndic/views/work_requests/patch/recap_type.dart';
 import 'package:front_syndic/views/work_requests/patch/timing_recap.dart';
 
 import 'models/to_screen/artisan_detail_work_request.dart';
@@ -93,12 +96,21 @@ class MyApp extends StatelessWidget {
             break;
           case '/work_requests/detail':
             final arguments = settings.arguments;
-            if (arguments is CouncilWorkRequestDetail) {
+            if (arguments is String?) {
               return MaterialPageRoute(
-                builder: (context) => RecapPatchWorkRequest(
-                  workRequestUuid: arguments.uuid,
-                  fetchDetailWorkRequest: arguments.futureToFetchData,
-                  onBack: arguments.onGoBack,
+                builder: (context) => RecapWorkRequestCouncil(
+                  workRequestUuid: arguments
+                ),
+              );
+            }
+            break;
+
+          case 'union/work_requests/detail':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => RecapWorkRequestUnion(
+                    workRequestUuid: arguments
                 ),
               );
             }
@@ -196,7 +208,7 @@ class MyApp extends StatelessWidget {
             final arguments = settings.arguments;
             if (arguments is CreateWorkRequest) {
               return MaterialPageRoute(
-                builder: (context) => TitleAndDesc(
+                builder: (context) => TitleAndDescCouncil(
                   createWorkRequest: arguments,
                 ),
               );
@@ -217,7 +229,7 @@ class MyApp extends StatelessWidget {
             final arguments = settings.arguments;
             if (arguments is CreateWorkRequest) {
               return MaterialPageRoute(
-                builder: (context) => WorkRequestCategory(
+                builder: (context) => CategoryCouncil(
                   createWorkRequest: arguments,
                 ),
               );
@@ -228,7 +240,7 @@ class MyApp extends StatelessWidget {
             final arguments = settings.arguments;
             if (arguments is CreateWorkRequest) {
               return MaterialPageRoute(
-                builder: (context) => ChoseDateTime(
+                builder: (context) => ChoseDateTimeCouncil(
                   createWorkRequest: arguments,
                 ),
               );
@@ -239,7 +251,51 @@ class MyApp extends StatelessWidget {
             final arguments = settings.arguments;
             if (arguments is CreateWorkRequest) {
               return MaterialPageRoute(
-                builder: (context) => RecapWorkRequest(
+                builder: (context) => RecapCouncilWorkRequest(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case 'union/work_requests/recap':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => RecapUnionWorkRequest(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case 'union/work_requests/chose_date_time':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => ChoseDateTimeUnion(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case 'union/work_requests/category':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => CategoryUnion(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case 'union/work_requests/title_and_desc':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => TitleAndDescUnion(
                   createWorkRequest: arguments,
                 ),
               );

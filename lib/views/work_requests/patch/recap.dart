@@ -15,11 +15,13 @@ class RecapPatchWorkRequest extends StatefulWidget {
     required this.workRequestUuid,
     required this.fetchDetailWorkRequest,
     required this.onBack,
+    required this.onDelete,
   });
 
   final String? workRequestUuid;
   final Function(String?) fetchDetailWorkRequest;
   final VoidCallback onBack;
+  final Function(String?) onDelete;
 
   @override
   State<RecapPatchWorkRequest> createState() => _RecapPatchWorkRequestState();
@@ -275,14 +277,9 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
             ),
             TextButton(
               child: Text(AppText.confirm),
-              onPressed: (){
-                delete();
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  '/co_owner/work_requests',
-                      (Route<dynamic> route) => false,
-                );
-              },
+              onPressed: () {
+                widget.onDelete(widget.workRequestUuid);
+              }
             ),
           ],
         );

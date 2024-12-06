@@ -1,20 +1,21 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 
-import '../../../models/work_request/create_work_request.dart';
-import '../../../text/fr.dart';
-import '../../../widget/visibility/error.dart';
+import '../../../../models/work_request/create_work_request.dart';
+import '../../../../text/fr.dart';
+import '../../../../widget/visibility/error.dart';
 
 class WorkRequestCategory extends StatefulWidget {
   const WorkRequestCategory({
     super.key,
     required this.createWorkRequest,
+    required this.route,
   });
 
   final CreateWorkRequest createWorkRequest;
+  final String route;
 
   @override
   State<WorkRequestCategory> createState() => _WorkRequestCategoryState();
@@ -104,7 +105,7 @@ class _WorkRequestCategoryState extends State<WorkRequestCategory> {
       });
     } else {
       widget.createWorkRequest.workRequest.category = category!;
-      Navigator.pushNamed(context, '/work_requests/chose_date_time', arguments: widget.createWorkRequest);
+      Navigator.pushNamed(context, widget.route, arguments: widget.createWorkRequest);
     }
   }
 }

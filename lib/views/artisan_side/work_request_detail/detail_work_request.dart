@@ -10,7 +10,7 @@ import '../../../widget/button/elevated_button_opacity.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
 import '../../../widget/header/app_bar_back_button.dart';
 import '../../work_requests/create_work_request/chose_time/cell_time.dart';
-import '../../work_requests/create_work_request/recap.dart';
+import '../../work_requests/create_work_request/recap/recap.dart';
 
 class DetailWorkRequestArtisanSide extends StatefulWidget {
   const DetailWorkRequestArtisanSide({
