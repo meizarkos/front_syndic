@@ -59,3 +59,12 @@ Future<List<Conversation>?> fetchSpecificConvCouncilFromEstimate(String? uuid) a
   return await fetchConversation('${APIValue.unionCouncil}all_conv_council_from_estimate/$uuid');
 }
 
+Future<List<Conversation>?> fetchFirstConvUnion() async {
+  return await fetchConversation('${APIValue.union}first_conv_union');
+}
+
+Future<List<Conversation>?> fetchSpecificConvUnion(String? uuid) async {
+  if(uuid == null) return null;
+  return await fetchConversation('${APIValue.union}all_conv_union/$uuid');
+}
+

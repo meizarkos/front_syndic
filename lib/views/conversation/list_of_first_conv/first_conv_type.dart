@@ -32,3 +32,16 @@ class FirstConvArtisan extends StatelessWidget {
   }
 }
 
+class FirstConvUnion extends StatelessWidget {
+  const FirstConvUnion({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FirstConv(
+      title: AppText.titleCouncilMessage,
+      future: fetchFirstConvArtisan(),
+      routeToDetailConv: '/artisan/see_conv',
+    );
+  }
+}
+

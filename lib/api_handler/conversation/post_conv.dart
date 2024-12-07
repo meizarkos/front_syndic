@@ -31,6 +31,10 @@ Future<Conversation?> postConvCouncil(String? uuid,String conversation) async {
   return await postConv(uuid, conversation,'${APIValue.unionCouncil}conversation_council/$uuid');
 }
 
+Future<Conversation?> postConvUnion(String? uuid,String conversation) async {
+  return await postConv(uuid, conversation,'${APIValue.union}conversation_union/$uuid');
+}
+
 
 
 

@@ -70,3 +70,26 @@ class PostMeetingCouncil extends StatelessWidget {
     );
   }
 }
+
+
+class PostMeetingUnion extends StatelessWidget {
+  const PostMeetingUnion({
+    super.key,
+    required this.uuid,
+  });
+
+  final String uuid;
+
+  @override
+  Widget build(BuildContext context) {
+    return PostMeeting(
+      uuid: uuid,
+      routeAllConv: (String uuid){
+        Navigator.pushNamed(context, 'union/specific_conv',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvUnion)
+        );
+      },
+      postMeeting: postTimingFromConvUnion,
+    );
+  }
+}

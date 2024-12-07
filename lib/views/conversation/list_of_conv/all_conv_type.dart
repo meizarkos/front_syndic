@@ -146,5 +146,55 @@ class AllConvCouncil extends StatelessWidget {
   }
 }
 
+class AllConvUnion extends StatelessWidget {
+  const AllConvUnion({
+    super.key,
+    required this.id,
+    required this.future,
+  });
+
+  final Function(String) future;
+  final String id;
+
+  @override
+  Widget build(BuildContext context) {
+    return SeeConv(
+      uuid: id,
+      futureForGetConv: future(id),
+      futureForPostConv: postConvUnion,
+      route: 'union/post_meeting',
+      sideText: SideConv.union,
+      goToMeeting: (String? id) {
+        /*if(id == null) return;
+        Navigator.pushNamed(context,'/council/timing_detail',
+            arguments: SeeConvArg(
+              uuid: id,
+              futureToFetchData: fetchTimingDetailCouncilFromConversation,
+            )
+        );*/
+      },
+      goToRequest: (String? id) {
+        /*if(id == null) return;
+        Navigator.pushNamed(context,'/work_requests/detail',
+            arguments: CouncilWorkRequestDetail(
+              uuid: id,
+              futureToFetchData: fetchWorkRequestDetailCouncilFromConversation,
+              onGoBack: ()=>{ Navigator.pop(context)},
+            )
+        );*/
+      },
+      goToEstimate: (String? id) {
+        /*if(id == null) return;
+        Navigator.pushNamed(context,'/estimate/council/detail',
+            arguments: SeeConvArg(
+              uuid: id,
+              futureToFetchData: fetchEstimateDetailCouncilFromConversation,
+            )
+        );*/
+      },
+    );
+  }
+}
+
 
 

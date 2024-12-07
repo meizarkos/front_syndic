@@ -116,6 +116,29 @@ class MyApp extends StatelessWidget {
             }
             break;
 
+          case 'union/specific_conv':
+            final arguments = settings.arguments;
+            if (arguments is SeeConvArg) {
+              return MaterialPageRoute(
+                builder: (context) => AllConvUnion(
+                    id : arguments.uuid,
+                    future: arguments.futureToFetchData,
+                ),
+              );
+            }
+            break;
+
+          case 'union/post_meeting':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => PostMeetingUnion(
+                  uuid: arguments,
+                ),
+              );
+            }
+            break;
+
           case '/council/timing_detail':
             final arguments = settings.arguments;
             if (arguments is SeeConvArg) {

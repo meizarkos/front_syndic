@@ -33,3 +33,7 @@ Future<void> postTimingFromConvCouncil(String? uuid,Timing timing) async {
   await postTiming(uuid, timing,'${APIValue.unionCouncil}timing_council/$uuid');
 }
 
+Future<void> postTimingFromConvUnion(String? uuid,Timing timing) async {
+  await postTiming(uuid, timing,'${APIValue.union}timing_union/$uuid');
+}
+
