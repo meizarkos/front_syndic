@@ -16,14 +16,11 @@ import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/union_side/co_owner_list.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category/category_type.dart';
-import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/recap/recap_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/take_picture.dart';
-import 'package:front_syndic/views/work_requests/create_work_request/title_desc/title_and_desc.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/title_desc/title_and_desc_type.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_request_type.dart';
-import 'package:front_syndic/views/work_requests/patch/recap.dart';
 import 'package:front_syndic/views/work_requests/patch/recap_type.dart';
 import 'package:front_syndic/views/work_requests/patch/timing_recap.dart';
 
@@ -81,6 +78,7 @@ class MyApp extends StatelessWidget {
         "/co_owner_main": (context) => const CoOwnerDetailCouncil(),
         '/in_progress/council/conversation': (context) => const InProgressCouncilConversation(),
         '/in_progress/artisan':(context)=> const InProgressArtisanConversation(),
+        '/in_progress/union':(context)=> const InProgressUnion(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
@@ -96,10 +94,13 @@ class MyApp extends StatelessWidget {
             break;
           case '/work_requests/detail':
             final arguments = settings.arguments;
-            if (arguments is String?) {
+            if (arguments is CouncilWorkRequestDetail) {
               return MaterialPageRoute(
                 builder: (context) => RecapWorkRequestCouncil(
-                  workRequestUuid: arguments
+                  workRequestUuid: arguments.uuid,
+                  fetchWorkRequestDetail: arguments.futureToFetchData,
+                  onBack: arguments.onBack,
+                  onDelete: arguments.onDelete,
                 ),
               );
             }
@@ -123,6 +124,18 @@ class MyApp extends StatelessWidget {
                 builder: (context) => AllConvUnion(
                     id : arguments.uuid,
                     future: arguments.futureToFetchData,
+                ),
+              );
+            }
+            break;
+
+          case 'union/detail_timing':
+            final arguments = settings.arguments;
+            if (arguments is SeeConvArg) {
+              return MaterialPageRoute(
+                builder: (context) => TimingDetailUnion(
+                  timingUuid : arguments.uuid,
+                  fetchTimingDetail: arguments.futureToFetchData,
                 ),
               );
             }

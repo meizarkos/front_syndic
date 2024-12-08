@@ -7,6 +7,8 @@ import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/divider/divider.dart';
 
+import 'all_conv_type.dart';
+
 class SeeConv extends StatefulWidget {
   const SeeConv({
     super.key,
@@ -132,7 +134,8 @@ class _SeeConvState extends State<SeeConv> {
                   message: conv.message,
                   createdAt: conv.createdAt,
                   fromYou: conv.side == widget.sideText ? true : false,
-                  side: conv.side ?? 'other',
+                  side: conv.side ?? SideConv.other,
+                  sideText: widget.sideText,
                 );
               },
             ),

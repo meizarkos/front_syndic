@@ -8,31 +8,23 @@ class RecapWorkRequestCouncil extends StatelessWidget {
   const RecapWorkRequestCouncil({
     super.key,
     required this.workRequestUuid,
+    required this.fetchWorkRequestDetail,
+    required this.onBack,
+    required this.onDelete,
   });
 
   final String? workRequestUuid;
+  final Function(String?) fetchWorkRequestDetail;
+  final Function() onBack;
+  final Function(String?) onDelete;
 
   @override
   Widget build(BuildContext context) {
     return RecapPatchWorkRequest(
-      workRequestUuid: workRequestUuid,
-      fetchDetailWorkRequest: fetchWorkRequestDetailCouncil,
-      onBack: ()=>{
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/co_owner/work_requests', // The new route
-              (Route<dynamic> route) => false, // Remove all previous routes
-        )
-      },
-      onDelete: (String? uuid)async{
-        if(uuid == null) return;
-        await deleteWorkRequesDetail(uuid);
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/co_owner/work_requests',
-          (Route<dynamic> route) => false,
-        );
-      },
+      uuid: workRequestUuid,
+      fetchDetailWorkRequest: fetchWorkRequestDetail,
+      onBack: onBack,
+      onDelete: onDelete,
     );
   }
 }
@@ -48,7 +40,7 @@ class RecapWorkRequestUnion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RecapPatchWorkRequest(
-      workRequestUuid: workRequestUuid,
+      uuid: workRequestUuid,
       fetchDetailWorkRequest: fetchWorkRequestDetailCouncil,
       onBack: ()=>{
         Navigator.pushNamedAndRemoveUntil(

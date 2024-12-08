@@ -26,3 +26,7 @@ Future<List<Timing>?> fetchTimingsCouncil() async {
 Future<List<Timing>?> fetchTimingsArtisan() async {
   return await fetchTimings('${APIValue.artisan}all_meetings_artisan');
 }
+
+Future<List<Timing>?> fetchTimingsUnion() async {
+  return await fetchTimings('${APIValue.union}all_meetings_union');
+}

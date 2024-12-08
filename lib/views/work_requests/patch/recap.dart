@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/api_handler/work_request/delete_work_request.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/text/fr.dart';
@@ -12,13 +11,13 @@ import '../../../widget/visibility/error.dart';
 class RecapPatchWorkRequest extends StatefulWidget {
   const RecapPatchWorkRequest({
     super.key,
-    required this.workRequestUuid,
+    required this.uuid,
     required this.fetchDetailWorkRequest,
     required this.onBack,
     required this.onDelete,
   });
 
-  final String? workRequestUuid;
+  final String? uuid;
   final Function(String?) fetchDetailWorkRequest;
   final VoidCallback onBack;
   final Function(String?) onDelete;
@@ -152,7 +151,7 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, '/work_requests/timings',
-                        arguments: widget.workRequestUuid);
+                        arguments: workRequestStatic.uuid);
                   },
                   child: Center(
                     child: Text(
@@ -219,12 +218,12 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
   }
 
   Future<void> fetchData() async {
-    if(widget.workRequestUuid == null){
+    if(widget.uuid == null){
       Navigator.pop(context);
       return;
     }
     try {
-      final res = await widget.fetchDetailWorkRequest(widget.workRequestUuid!);
+      final res = await widget.fetchDetailWorkRequest(widget.uuid!);
       if (res == null) {
         apiErrorVisibility = true;
         return;
@@ -257,7 +256,8 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
         errorVisibility = false;
         successVisibility = true;
       });
-      await patchWorkRequesDetail(widget.workRequestUuid!, workRequestStatic);
+      if(workRequestStatic.uuid == null) return;
+      await patchWorkRequestDetail(workRequestStatic.uuid!, workRequestStatic);
     }
   }
 
@@ -278,16 +278,12 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
             TextButton(
               child: Text(AppText.confirm),
               onPressed: () {
-                widget.onDelete(widget.workRequestUuid);
+                widget.onDelete(workRequestStatic.uuid);
               }
             ),
           ],
         );
       },
     );
-  }
-
-  Future<void> delete()async{
-    await deleteWorkRequesDetail(widget.workRequestUuid!);
   }
 }

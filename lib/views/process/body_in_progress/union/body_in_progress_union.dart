@@ -6,7 +6,6 @@ import '../../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../../api_handler/estimate/get_estimate_detail.dart';
 import '../../../../api_handler/timing/get_timing_detail.dart';
 import '../../../../api_handler/timing/get_timings.dart';
-import '../../../../api_handler/timing_estimate/get_timing_estimate.dart';
 import '../../../../models/to_screen/see_conv_arg.dart';
 import '../function_access_param.dart';
 
@@ -25,7 +24,7 @@ class BodyInProgressUnionConversation extends StatelessWidget {
         goToDetail: (uuid) => {
           Navigator.pushNamed(
             context,
-            '/council/see_conv',
+            'union/specific_conv',
             arguments: SeeConvArg(
               uuid: uuid,
               futureToFetchData: fetchSpecificConvUnion,
@@ -42,8 +41,8 @@ class BodyInProgressUnionConversation extends StatelessWidget {
   }
 }
 
-class BodyInProgressCouncilTiming extends StatelessWidget {
-  const BodyInProgressCouncilTiming({
+class BodyInProgressUnionTiming extends StatelessWidget {
+  const BodyInProgressUnionTiming({
     super.key,
     required this.searchValue,
   });
@@ -53,7 +52,7 @@ class BodyInProgressCouncilTiming extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BodyInProgress(
-      future: fetchTimingsCouncil(),
+      future: fetchTimingsUnion(),
       goToDetail: (uuid) => {
         Navigator.pushNamed(
           context,
@@ -73,8 +72,8 @@ class BodyInProgressCouncilTiming extends StatelessWidget {
   }
 }
 
-class BodyInProgressCouncilEstimate extends StatelessWidget {
-  const BodyInProgressCouncilEstimate({
+class BodyInProgressUnionEstimate extends StatelessWidget {
+  const BodyInProgressUnionEstimate({
     super.key,
     required this.searchValue,
   });
@@ -84,7 +83,7 @@ class BodyInProgressCouncilEstimate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BodyInProgress(
-      future: fetchAllEstimateCouncil(),
+      future: fetchAllEstimateUnion(),
       goToDetail: (uuid) => {
         Navigator.pushNamed(
           context,
@@ -106,7 +105,7 @@ class BodyInProgressCouncilEstimate extends StatelessWidget {
   }
 }
 
-class BodyInProgressCouncilTimingEstimate extends StatelessWidget {
+/*class BodyInProgressCouncilTimingEstimate extends StatelessWidget {
   const BodyInProgressCouncilTimingEstimate({
     super.key,
     required this.searchValue,
@@ -135,4 +134,4 @@ class BodyInProgressCouncilTimingEstimate extends StatelessWidget {
       descStyle: Theme.of(context).textTheme.displayMedium,
     );
   }
-}
+}*/

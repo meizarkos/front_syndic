@@ -31,3 +31,8 @@ Future<WorkRequest?> fetchWorkRequestDetailCouncilFromConversation(String? uuid)
   if(uuid == null) return null;
   return fetchWorkRequestDetail('${APIValue.unionCouncil}work_request_detail_from_conv/$uuid');
 }
+
+Future<WorkRequest?> fetchWorkRequestDetailUnionFromConversation(String? uuid) async {
+  if(uuid == null) return null;
+  return fetchWorkRequestDetail('${APIValue.unionCouncil}work_request_detail_from_conv/$uuid');
+}

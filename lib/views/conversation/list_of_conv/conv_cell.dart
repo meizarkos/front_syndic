@@ -14,12 +14,14 @@ class ConvCell extends StatelessWidget {
     required this.createdAt,
     required this.fromYou,
     required this.side,
+    required this.sideText,
   });
 
   final String? message;
   final String? createdAt;
   final bool fromYou;
   final String side;
+  final String sideText;
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +70,23 @@ class ConvCell extends StatelessWidget {
     if(fromYou){
       return AppColors.mainBackgroundColor;
     }
-    else if(SideConv.artisan == side || SideConv.other == side){
+    else if(sideText == SideConv.artisan){
+      return Colors.grey[300]!;
+    }
+    else if(sideText == SideConv.other){
+      if(side == SideConv.union){
+        return Colors.orangeAccent;
+      }
+      return Colors.grey[300]!;
+    }
+    else if(sideText == SideConv.union){
+      if(side == SideConv.other){
+        return Colors.orangeAccent;
+      }
       return Colors.grey[300]!;
     }
     else{
-      return Colors.orangeAccent;
+      return Colors.grey[300]!;
     }
   }
 }

@@ -3,6 +3,7 @@ import 'package:front_syndic/views/process/body_in_progress/council/body_in_prog
 
 import '../../../text/fr.dart';
 import '../body_in_progress/artisan/body_in_progress_artisan.dart';
+import '../body_in_progress/union/body_in_progress_union.dart';
 
 Widget topScreenRouteHandlerCouncil(String searchValue,String category){
   if(category == AppText.conversation){
@@ -35,6 +36,24 @@ Widget topScreenRouteHandlerArtisan(String searchValue,String category){
   else if(category == AppText.timingEstimate){
     return BodyInProgressArtisanTimingEstimate(searchValue: searchValue);
   }
+  else{
+    return Container();
+  }
+}
+
+Widget topScreenRouteHandlerUnion(String searchValue,String category){
+  if(category == AppText.conversation){
+    return BodyInProgressUnionConversation(searchValue: searchValue);
+  }
+  else if(category == AppText.timing){
+    return BodyInProgressUnionTiming(searchValue: searchValue);
+  }
+  else if(category == AppText.estimate){
+    return BodyInProgressUnionEstimate(searchValue: searchValue);
+  }
+  /*else if(category == AppText.timingEstimate){
+    return BodyInProgressArtisanTimingEstimate(searchValue: searchValue);
+  }*/
   else{
     return Container();
   }

@@ -5,6 +5,7 @@ import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/all_conv.dart';
 import '../../../api_handler/conversation/post_conv.dart';
 import '../../../api_handler/estimate/get_estimate_detail.dart';
+import '../../../api_handler/work_request/delete_work_request.dart';
 import '../../../models/to_screen/artisan_detail_work_request.dart';
 import '../../../models/to_screen/council_work_request_detail.dart';
 
@@ -129,7 +130,16 @@ class AllConvCouncil extends StatelessWidget {
             arguments: CouncilWorkRequestDetail(
               uuid: id,
               futureToFetchData: fetchWorkRequestDetailCouncilFromConversation,
-              onGoBack: ()=>{ Navigator.pop(context)},
+              onBack: ()=>{ Navigator.pop(context)},
+              onDelete: (String? uuid)async{
+                if(uuid == null) return;
+                await deleteWorkRequesDetail(uuid);
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/co_owner/work_requests',
+                      (Route<dynamic> route) => false,
+                );
+              },
             )
         );
       },
@@ -165,23 +175,32 @@ class AllConvUnion extends StatelessWidget {
       route: 'union/post_meeting',
       sideText: SideConv.union,
       goToMeeting: (String? id) {
-        /*if(id == null) return;
-        Navigator.pushNamed(context,'/council/timing_detail',
+        if(id == null) return;
+        Navigator.pushNamed(context,'union/detail_timing',
             arguments: SeeConvArg(
               uuid: id,
-              futureToFetchData: fetchTimingDetailCouncilFromConversation,
+              futureToFetchData: fetchTimingDetailUnionFromConversation,
             )
-        );*/
+        );
       },
       goToRequest: (String? id) {
-        /*if(id == null) return;
-        Navigator.pushNamed(context,'/work_requests/detail',
+        if(id == null) return;
+        Navigator.pushNamed(context,'union/work_requests/detail',
             arguments: CouncilWorkRequestDetail(
               uuid: id,
               futureToFetchData: fetchWorkRequestDetailCouncilFromConversation,
-              onGoBack: ()=>{ Navigator.pop(context)},
+              onBack: ()=>{ Navigator.pop(context)},
+              onDelete: (String? uuid)async{
+                if(uuid == null) return;
+                await deleteWorkRequesDetail(uuid);
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/union/work_requests',
+                      (Route<dynamic> route) => false,
+                );
+              },
             )
-        );*/
+        );
       },
       goToEstimate: (String? id) {
         /*if(id == null) return;

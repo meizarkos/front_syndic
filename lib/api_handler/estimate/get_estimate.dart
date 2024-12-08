@@ -23,3 +23,7 @@ Future<List<Estimate>?> fetchAllEstimateCouncil() async {
 Future<List<Estimate>?> fetchAllEstimateArtisan() async {
   return await fetchEstimate('${APIValue.artisan}all_estimates_artisan');
 }
+
+Future<List<Estimate>?> fetchAllEstimateUnion() async {
+  return await fetchEstimate('${APIValue.union}all_estimates_union');
+}

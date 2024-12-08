@@ -173,7 +173,6 @@ class AppText {
   static const List<String> inProgressListCouncil = [
     conversation,
     timing,
-    estimate,
-    timingEstimate
+    estimate
   ];
 }

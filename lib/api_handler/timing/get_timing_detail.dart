@@ -37,3 +37,14 @@ Future<Timing?> fetchTimingDetailArtisanFromConv(String? uuid) async {
   if(uuid == null) return null;
   return await fetchTimingDetail('${APIValue.artisan}timing_detail_artisan_from_conv/$uuid');
 }
+
+
+Future<Timing?> fetchTimingDetailUnion(String? uuid) async {
+  if(uuid == null) return null;
+  return await fetchTimingDetail('${APIValue.union}timing_detail_union/$uuid');
+}
+
+Future<Timing?> fetchTimingDetailUnionFromConversation(String? uuid) async {
+  if(uuid == null) return null;
+  return await fetchTimingDetail('${APIValue.union}timing_detail_union_from_conversation/$uuid');
+}

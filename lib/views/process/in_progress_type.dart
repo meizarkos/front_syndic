@@ -79,3 +79,40 @@ class _InProgressArtisanConversationState extends State<InProgressArtisanConvers
   }
 }
 
+
+class InProgressUnion extends StatefulWidget {
+  const InProgressUnion({super.key});
+
+  @override
+  State<InProgressUnion> createState() => _InProgressUnionState();
+}
+
+class _InProgressUnionState extends State<InProgressUnion> {
+  var searchValue = '';
+  var category = AppText.conversation;
+
+  @override
+  Widget build(BuildContext context) {
+    return InProgressMain(
+      top : TopScreenInProgressUnion(
+        onChangedSearchValue: _searchValueChange,
+        category: category,
+        onCategoryChanged: _categoryChange,
+      ),
+      body : topScreenRouteHandlerUnion(searchValue,category),
+    );
+  }
+
+  void _searchValueChange(String value) {
+    setState(() {
+      searchValue = value;
+    });
+  }
+
+  void _categoryChange(String value) {
+    setState(() {
+      category = value;
+    });
+  }
+}
+

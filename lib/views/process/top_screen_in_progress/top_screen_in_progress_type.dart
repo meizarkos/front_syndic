@@ -58,3 +58,32 @@ class _TopScreenInProgressArtisanState extends State<TopScreenInProgressArtisan>
   }
 }
 
+
+class TopScreenInProgressUnion extends StatefulWidget {
+  const TopScreenInProgressUnion({
+    super.key,
+    required this.onChangedSearchValue,
+    required this.category,
+    required this.onCategoryChanged,
+  });
+
+  final Function(String) onChangedSearchValue;
+  final String category;
+  final Function(String) onCategoryChanged;
+
+  @override
+  State<TopScreenInProgressUnion> createState() => _TopScreenInProgressUnionState();
+}
+
+class _TopScreenInProgressUnionState extends State<TopScreenInProgressUnion> {
+
+  @override
+  Widget build(BuildContext context) {
+    return TopScreenInProgress(
+      onChangedSearchValue: widget.onChangedSearchValue,
+      onCategoryChanged: widget.onCategoryChanged,
+      listOfCategory: AppText.inProgressListCouncil,
+    );
+  }
+}
+
