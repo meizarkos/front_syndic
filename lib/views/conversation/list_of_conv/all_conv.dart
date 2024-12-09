@@ -161,7 +161,7 @@ class _SeeConvState extends State<SeeConv> {
               icon: const Icon(Icons.send),
               onPressed: () async {
                 final conv = await widget.futureForPostConv(
-                  widget.uuid,
+                  _conversations[0].uuid,
                   _messageController.text,
                 );
                 if (conv == null) {

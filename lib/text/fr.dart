@@ -135,7 +135,8 @@ class AppText {
   static const String phoneContact = 'Votre numéro de contact est :';
   static const String contactUs = "pour plus d'informations";
   static const String contactez = 'Contactez';
-  static const String contactUnion = "Si vous n'êtes pas à l'origine de cette demande adressez vous à votre conseil syndical :";
+  static const String contactUnion = "Si vous n'êtes pas à l'origine de cette demande adressez vous à votre syndicat :";
+  static const String contactCouncil = "Si vous n'êtes pas à l'origine de cette demande adressez vous à votre conseil syndical :";
 
   /* Timing Detail */
   static const String seeConv = 'Message';

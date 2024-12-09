@@ -108,10 +108,13 @@ class MyApp extends StatelessWidget {
 
           case 'union/work_requests/detail':
             final arguments = settings.arguments;
-            if (arguments is String?) {
+            if (arguments is CouncilWorkRequestDetail) {
               return MaterialPageRoute(
                 builder: (context) => RecapWorkRequestUnion(
-                    workRequestUuid: arguments
+                    workRequestUuid: arguments.uuid,
+                    fetchWorkRequestDetail: arguments.futureToFetchData,
+                    onBack: arguments.onBack,
+                    onDelete: arguments.onDelete,
                 ),
               );
             }
@@ -128,6 +131,17 @@ class MyApp extends StatelessWidget {
               );
             }
             break;
+
+          case '/estimate/union/detail':
+            final arguments = settings.arguments;
+            if (arguments is SeeConvArg) {
+              return MaterialPageRoute(
+                builder: (context) => EstimateDetailUnion(
+                  fetchData: arguments.futureToFetchData,
+                  uuid: arguments.uuid,
+                ),
+              );
+            }
 
           case 'union/detail_timing':
             final arguments = settings.arguments;

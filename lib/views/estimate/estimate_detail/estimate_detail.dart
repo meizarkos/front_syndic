@@ -20,13 +20,15 @@ class EstimateDetail extends StatefulWidget {
     required this.fetchData,
     required this.uuid,
     required this.role,
-    required this.patchStatus
+    required this.patchStatus,
+    required this.goToConv,
   });
 
   final Function(String?) fetchData;
   final String? uuid;
   final String role;
   final Function(String?) patchStatus;
+  final Function(String?) goToConv;
 
   @override
   State<EstimateDetail> createState() => _EstimateDetailState();
@@ -69,11 +71,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
                         AppText.seeConv,
                         AppText.timingEstimate,
                         context,
-                            (){
-                              if(estimateFromRequest.uuid == null) return;
-                              Navigator.pushNamed(context, '/council/see_conv',
-                                  arguments: SeeConvArg(uuid: estimateFromRequest.uuid!, futureToFetchData: fetchSpecificConvCouncilFromEstimate));
-                            },
+                          ()=>widget.goToConv(estimateFromRequest.uuid),
                             (){
                               goToTiming(estimateFromRequest.status, estimateFromRequest.statusGoal, context,
                                       () {}

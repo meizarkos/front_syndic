@@ -47,3 +47,18 @@ Future<Estimate?> fetchEstimateDetailCouncilFromConversation(String? id) async {
   if(id == null) return null;
   return await fetchEstimateDetail('${APIValue.unionCouncil}estimate_detail_council_from_conversation/$id');
 }
+
+Future<Estimate?> fetchEstimateDetailUnion(String? id) async {
+  if(id == null) return null;
+  return await fetchEstimateDetail('${APIValue.union}estimate_detail_union/$id');
+}
+
+Future<Estimate?> fetchEstimateDetailUnionFromConversation(String? id) async {
+  if(id == null) return null;
+  return await fetchEstimateDetail('${APIValue.union}estimate_detail_union_from_conv/$id');
+}
+
+Future<Estimate?> fetchEstimateDetailUnionFromTiming(String? id) async {
+  if(id == null) return null;
+  return await fetchEstimateDetail('${APIValue.union}estimate_detail_union_from_timing/$id');
+}

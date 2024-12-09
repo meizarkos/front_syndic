@@ -133,7 +133,7 @@ class AllConvCouncil extends StatelessWidget {
               onBack: ()=>{ Navigator.pop(context)},
               onDelete: (String? uuid)async{
                 if(uuid == null) return;
-                await deleteWorkRequesDetail(uuid);
+                await deleteWorkRequestDetail(uuid);
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   '/co_owner/work_requests',
@@ -192,7 +192,7 @@ class AllConvUnion extends StatelessWidget {
               onBack: ()=>{ Navigator.pop(context)},
               onDelete: (String? uuid)async{
                 if(uuid == null) return;
-                await deleteWorkRequesDetail(uuid);
+                await deleteWorkRequestDetail(uuid);
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   '/union/work_requests',
@@ -203,13 +203,13 @@ class AllConvUnion extends StatelessWidget {
         );
       },
       goToEstimate: (String? id) {
-        /*if(id == null) return;
-        Navigator.pushNamed(context,'/estimate/council/detail',
+        if(id == null) return;
+        Navigator.pushNamed(context,'/estimate/union/detail',
             arguments: SeeConvArg(
               uuid: id,
-              futureToFetchData: fetchEstimateDetailCouncilFromConversation,
+              futureToFetchData: fetchEstimateDetailUnionFromConversation,
             )
-        );*/
+        );
       },
     );
   }

@@ -87,10 +87,10 @@ class BodyInProgressUnionEstimate extends StatelessWidget {
       goToDetail: (uuid) => {
         Navigator.pushNamed(
           context,
-          '/estimate/council/detail',
+          '/estimate/union/detail',
           arguments: SeeConvArg(
             uuid: uuid,
-            futureToFetchData: fetchEstimateDetailCouncil,
+            futureToFetchData: fetchEstimateDetailUnion,
           ),
         )
       },

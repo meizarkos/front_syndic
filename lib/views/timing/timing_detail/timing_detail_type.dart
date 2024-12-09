@@ -122,31 +122,35 @@ class TimingDetailUnion extends StatelessWidget {
     return TimingDetail(
       routeToConv: (String? uuid) {
         if(uuid == null) return;
-        Navigator.pushReplacementNamed(context, '/artisan/see_conv',
-            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvArtisanFromTiming)
+        Navigator.pushNamed(context, 'union/specific_conv',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvUnionFromTiming)
         );
       },
       routeToEstimateDetail:  (String? uuid) {
         if(uuid == null) return;
-        Navigator.pushNamed(context, '/estimate/artisan/detail',
-            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchEstimateDetailArtisanFromTiming)
+        Navigator.pushNamed(context, '/estimate/union/detail',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchEstimateDetailUnionFromTiming)
         );
       },
       routeToRefuse: (String? uuid)async{
-        await refuseTimingDetailArtisan(uuid);
+        await refuseTimingDetailUnion(uuid);
         if(uuid == null) return;
-        Navigator.pushReplacementNamed(context, '/artisan/see_conv',
-            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvArtisanFromTiming)
+        Navigator.pushReplacementNamed(context, 'union/specific_conv',
+            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvUnionFromTiming)
         );
       },
       future: fetchTimingDetail(timingUuid),
       getYou: (dynamic){
-        final artisan = dynamic.artisan as Artisan?;
-        return "${AppText.phoneContact} ${artisan?.phone ?? AppText.noPhone}";
+        final union = dynamic.union as UnionApi?;
+        return "${AppText.phoneContact} ${union?.phone ?? AppText.noPhone}";
       },
       getClient: (dynamic) {
-        final  council = dynamic.council as Council?;
-        return "${AppText.contactez} ${toUpperFirst(council?.lastName ?? '')} ${toLowerFirst(AppText.to)} ${council?.phone ?? AppText.noPhone} ${AppText.contactUs}";
+        final artisan = dynamic.artisan as Artisan?;
+        return "${AppText.contactez} ${artisan?.companyName ?? ''} ${toLowerFirst(AppText.to)} ${artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
+      },
+      getUnion: (dynamic) {
+        final council = dynamic.council as Council?;
+        return "${AppText.contactCouncil} ${council?.phone ?? AppText.noPhone}";
       },
       isArtisan: false,
     );

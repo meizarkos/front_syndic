@@ -15,3 +15,8 @@ Future<void> patchEstimateCouncil(String? uuid) async {
   if(uuid == null) return;
   return await patchEstimateRequest('${APIValue.unionCouncil}change_status_estimate_council/$uuid');
 }
+
+Future<void> patchEstimateUnion(String? uuid) async {
+  if(uuid == null) return;
+  return await patchEstimateRequest('${APIValue.union}change_status_estimate_union/$uuid');
+}

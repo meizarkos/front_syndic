@@ -4,6 +4,7 @@ import 'package:front_syndic/core_value.dart';
 Future<void> refuseTimingDetail(String route)async{
   try{
       final response = await request(url: route, method: "PATCH");
+      print(response.data);
       return;
   }
   catch(e){
@@ -23,4 +24,12 @@ Future<void> refuseTimingDetailArtisan(String? uuid)async{
     return;
   }
   await refuseTimingDetail('${APIValue.artisan}timing_refuse_artisan/$uuid');
+}
+
+Future<void> refuseTimingDetailUnion(String? uuid)async{
+
+  if(uuid == null){
+    return;
+  }
+  await refuseTimingDetail('${APIValue.union}timing_refuse_union/$uuid');
 }
