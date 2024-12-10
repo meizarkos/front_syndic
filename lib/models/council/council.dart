@@ -11,15 +11,15 @@ class AttributesCouncil{
 }
 
 class Council{
- final String? uuid;
- final String? lastName;
- final String? firstName;
- final String? phone;
- final String? unionId;
- final String? createdAt;
- final String? updatedAt;
+  String? uuid;
+  String? lastName;
+  String? firstName;
+  String? phone;
+  String? unionId;
+  String? createdAt;
+  String? updatedAt;
 
- const Council({
+ Council({
    this.uuid,
    this.lastName,
    this.firstName,

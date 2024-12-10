@@ -15,6 +15,9 @@ import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/union_side/co_owner_list.dart';
+import 'package:front_syndic/views/union_side/create_council/adress/chose_adress_type.dart';
+import 'package:front_syndic/views/union_side/create_council/chose_name_size.dart';
+import 'package:front_syndic/views/union_side/create_council/contact_info_council.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category/category_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/recap/recap_type.dart';
@@ -24,6 +27,7 @@ import 'package:front_syndic/views/work_requests/list_work_request/work_request_
 import 'package:front_syndic/views/work_requests/patch/recap_type.dart';
 import 'package:front_syndic/views/work_requests/patch/timing_recap.dart';
 
+import 'models/council/createCouncil.dart';
 import 'models/to_screen/artisan_detail_work_request.dart';
 import 'models/to_screen/council_work_request_detail.dart';
 import 'models/to_screen/see_conv_arg.dart';
@@ -161,6 +165,39 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (context) => PostMeetingUnion(
                   uuid: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/union/create_council/adress':
+            final arguments = settings.arguments;
+            if (arguments is CreateCouncil) {
+              return MaterialPageRoute(
+                builder: (context) => ChoseAdressCreateCouncil(
+                  createCouncil: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/union/create_council/name':
+            final arguments = settings.arguments;
+            if (arguments is CreateCouncil) {
+              return MaterialPageRoute(
+                builder: (context) => ChoseName(
+                  createCouncil: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/union/create_council/contact_info':
+            final arguments = settings.arguments;
+            if (arguments is CreateCouncil) {
+              return MaterialPageRoute(
+                builder: (context) => ContactInfoCouncil(
+                  createCouncil: arguments,
                 ),
               );
             }

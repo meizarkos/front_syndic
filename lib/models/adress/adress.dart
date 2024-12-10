@@ -11,17 +11,17 @@ class AttributesAdress {
 }
 
 class Adress{
-  final String? uuid;
-  final String? country;
-  final String? city;
-  final String? street;
-  final String? postalCode;
-  final String? region;
-  final String? comment;
-  final String? createdAt;
-  final String? updatedAt;
+   String? uuid;
+   String? country;
+   String? city;
+   String? street;
+   String? postalCode;
+   String? region;
+   String? comment;
+   String? createdAt;
+   String? updatedAt;
 
-  const Adress({
+  Adress({
     this.uuid,
     this.country,
     this.city,

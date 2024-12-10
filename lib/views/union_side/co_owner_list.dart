@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/core_value.dart';
+import 'package:front_syndic/models/council/createCouncil.dart';
 import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/button/add_floating_button.dart';
 import 'package:front_syndic/widget/search_bar/search_bar.dart';
 
 import '../../api_handler/co_owner/get_co_owner_of_union.dart';
+import '../../models/adress/adress.dart';
 import '../../models/co_owner/co_owner.dart';
+import '../../models/council/council.dart';
 import '../co_owner/co_owner_cell/co_owner_cell.dart';
 
 class UnionMain extends StatefulWidget {
@@ -96,7 +99,8 @@ class _UnionMainState extends State<UnionMain> {
         ),
       ),
       floatingActionButton: addFloatingButton(() {
-        //Navigator.pushNamed(context, '/add_co_owner');
+        final createCouncil = CreateCouncil(adress: Adress(), council: Council(), coOwner: CoOwner());
+        Navigator.pushNamed(context, '/union/create_council/name', arguments: createCouncil);
       }),
     );
   }

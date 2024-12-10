@@ -176,4 +176,22 @@ class AppText {
     timing,
     estimate
   ];
+
+  /* Adress */
+  static const String choseAdress = 'Choisir une adresse';
+  static const String choseCountry = 'Pays';
+  static const String region = 'Région';
+  static const String postalCode = 'Code postal';
+  static const String street = 'Rue';
+  static const String city = 'Ville';
+  static const String comment = 'Commentaire';
+  static const String adressCreationError = 'Veuillez remplir tous les champs';
+
+  /* Create Council */
+  static const String infoCoOwner = 'Informations de la copropriété';
+  static const String infoCouncil = 'Informations du conseil syndical';
+  static const String name = 'Nom';
+  static const String lotNumber = 'Nombre de lots';
+  static const String phoneCouncil = 'Téléphone du conseil';
+  static const String firstName = 'Prénom';
 }

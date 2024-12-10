@@ -4,6 +4,7 @@ class AttributesCoOwner {
   static String uuid = 'uuid';
   static String name = 'name';
   static String adressId = 'adress_id';
+  static String lotSize = 'lot_size';
   static String unionId = 'union_id';
   static String councilId = 'council_id';
   static String createdAt = 'created_at';
@@ -11,19 +12,21 @@ class AttributesCoOwner {
 }
 
 class CoOwner{
-  final String? uuid;
-  final String? name;
-  final String? adressId;
-  final String? unionId;
-  final String? councilId;
-  final Adress? adress;
-  final String? createdAt;
-  final String? updatedAt;
+   String? uuid;
+   String? name;
+   int? lotSize;
+   String? adressId;
+   String? unionId;
+   String? councilId;
+   Adress? adress;
+   String? createdAt;
+   String? updatedAt;
 
 
-  const CoOwner({
+  CoOwner({
     this.uuid,
     this.name,
+    this.lotSize,
     this.adressId,
     this.unionId,
     this.councilId,
@@ -36,6 +39,7 @@ class CoOwner{
     return CoOwner(
       uuid: json[AttributesCoOwner.uuid],
       name: json[AttributesCoOwner.name],
+      lotSize: json[AttributesCoOwner.lotSize],
       adressId: json[AttributesCoOwner.adressId],
       unionId: json[AttributesCoOwner.unionId],
       councilId: json[AttributesCoOwner.councilId],
