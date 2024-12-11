@@ -7,6 +7,7 @@ class CreateCouncil{
   Council council;
   CoOwner coOwner;
   String? email;
+  String? password;
 
   CreateCouncil({
     required this.adress,

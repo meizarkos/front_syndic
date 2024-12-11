@@ -133,11 +133,25 @@ class _ChoseAdressState extends State<ChoseAdress> {
                         errorVisibility = true;
                       });
                     }else{
-                      widget.onRegister();
+                      if(_commentController!.text.isEmpty){
+                        widget.adress.comment = null;
+                      }
+                      final adress = Adress(
+                        country: widget.adress.country,
+                        region: widget.adress.region,
+                        postalCode: widget.adress.postalCode,
+                        city: widget.adress.city,
+                        street: widget.adress.street,
+                        comment: widget.adress.comment,
+                      );
+                      widget.onRegister(adress);
                     }
                   },
                   AppColors.mainTextColor,
               ),
+              TextField(
+
+              )
             ],
           ),
         ),

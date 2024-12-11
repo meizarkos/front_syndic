@@ -29,6 +29,7 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
   TextEditingController? _lastNameController;
 
   bool errorVisibility = false;
+  String errorText = AppText.adressCreationError;
 
   @override
   void initState(){
@@ -98,7 +99,7 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
                 ]
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
-              ErrorVisibility(errorVisibility: errorVisibility, errorText: AppText.adressCreationError),
+              ErrorVisibility(errorVisibility: errorVisibility, errorText: errorText),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               elevatedButtonAndTextColor(
                   AppColors.mainBackgroundColor,
@@ -114,6 +115,32 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
     );
   }
 
+  bool isValidEmail(String email) {
+    final emailRegExp = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',);
+
+    return emailRegExp.hasMatch(email);
+  }
+
   void save(){
+    if(widget.createCouncil.email == null || widget.createCouncil.email == '' || widget.createCouncil.council.phone == null || widget.createCouncil.council.phone == '' || widget.createCouncil.council.lastName == null || widget.createCouncil.council.lastName == '' || widget.createCouncil.council.firstName == null || widget.createCouncil.council.firstName == ''){
+      setState(() {
+        errorText = AppText.adressCreationError;
+        errorVisibility = true;
+      });
+    }
+    else if(!isValidEmail(widget.createCouncil.email!)){
+      setState(() {
+        errorText = AppText.emailFormatError;
+        errorVisibility = true;
+      });
+    }
+    else{
+      setState(() {
+        errorVisibility = false;
+      });
+      Navigator.pushNamed(context, '/union/create_council/adress',
+        arguments: widget.createCouncil
+      );
+    }
   }
 }

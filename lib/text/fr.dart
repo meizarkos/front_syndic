@@ -194,4 +194,7 @@ class AppText {
   static const String lotNumber = 'Nombre de lots';
   static const String phoneCouncil = 'Téléphone du conseil';
   static const String firstName = 'Prénom';
+  static const String adress = 'Adresse';
+  static const String emailFormatError = 'Format de l\'email incorrect';
+  static const String createATemporaryPassword = 'Créer un mot de passe temporaire';
 }

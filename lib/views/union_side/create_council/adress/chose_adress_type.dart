@@ -17,7 +17,7 @@ class ChoseAdressCreateCouncil extends StatelessWidget {
     return ChoseAdress(
         onRegister: (Adress address)=>{
           createCouncil.adress = address,
-          Navigator.pushNamed(context, '/create_council/confirm', arguments: createCouncil)
+          Navigator.pushNamed(context, '/union/create_council/confirm', arguments: createCouncil)
         },
         adress: createCouncil.adress,
     );

@@ -17,6 +17,7 @@ import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart'
 import 'package:front_syndic/views/union_side/co_owner_list.dart';
 import 'package:front_syndic/views/union_side/create_council/adress/chose_adress_type.dart';
 import 'package:front_syndic/views/union_side/create_council/chose_name_size.dart';
+import 'package:front_syndic/views/union_side/create_council/confirm.dart';
 import 'package:front_syndic/views/union_side/create_council/contact_info_council.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category/category_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time_type.dart';
@@ -180,6 +181,16 @@ class MyApp extends StatelessWidget {
               );
             }
             break;
+
+          case '/union/create_council/confirm':
+            final arguments = settings.arguments;
+            if(arguments is CreateCouncil){
+              return MaterialPageRoute(
+                builder: (context) => ConfirmCreationCouncilUnion(
+                  createCouncil: arguments,
+                ),
+              );
+            }
 
           case '/union/create_council/name':
             final arguments = settings.arguments;

@@ -7,7 +7,7 @@ class AttributesCouncil{
  static const String phone = 'phone';
  static const String unionId = 'union_id';
  static const String createdAt = 'created_at';
- static const String updatedAt = 'upadated_at';
+ static const String updatedAt = 'updated_at';
 }
 
 class Council{
