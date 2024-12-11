@@ -15,9 +15,9 @@ Widget topScreenRouteHandlerCouncil(String searchValue,String category){
   else if(category == AppText.estimate){
     return BodyInProgressCouncilEstimate(searchValue: searchValue);
   }
-  else if(category == AppText.timingEstimate){
+  /*else if(category == AppText.timingEstimate){
     return BodyInProgressCouncilTimingEstimate(searchValue: searchValue);
-  }
+  }*/
   else{
     return Container();
   }
@@ -33,9 +33,9 @@ Widget topScreenRouteHandlerArtisan(String searchValue,String category){
   else if(category == AppText.estimate){
     return BodyInProgressArtisanEstimate(searchValue: searchValue);
   }
-  else if(category == AppText.timingEstimate){
+  /*else if(category == AppText.timingEstimate){
     return BodyInProgressArtisanTimingEstimate(searchValue: searchValue);
-  }
+  }*/
   else{
     return Container();
   }

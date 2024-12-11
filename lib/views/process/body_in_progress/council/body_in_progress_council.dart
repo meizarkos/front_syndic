@@ -106,7 +106,7 @@ class BodyInProgressCouncilEstimate extends StatelessWidget {
   }
 }
 
-class BodyInProgressCouncilTimingEstimate extends StatelessWidget {
+/*class BodyInProgressCouncilTimingEstimate extends StatelessWidget {
   const BodyInProgressCouncilTimingEstimate({
     super.key,
     required this.searchValue,
@@ -135,4 +135,4 @@ class BodyInProgressCouncilTimingEstimate extends StatelessWidget {
       descStyle: Theme.of(context).textTheme.displayMedium,
     );
   }
-}
+}*/

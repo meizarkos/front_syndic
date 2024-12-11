@@ -103,7 +103,7 @@ class BodyInProgressArtisanEstimate extends StatelessWidget {
   }
 }
 
-class BodyInProgressArtisanTimingEstimate extends StatelessWidget {
+/*class BodyInProgressArtisanTimingEstimate extends StatelessWidget {
   const BodyInProgressArtisanTimingEstimate({
     super.key,
     required this.searchValue,
@@ -132,4 +132,4 @@ class BodyInProgressArtisanTimingEstimate extends StatelessWidget {
       descStyle: Theme.of(context).textTheme.displayMedium,
     );
   }
-}
+}*/

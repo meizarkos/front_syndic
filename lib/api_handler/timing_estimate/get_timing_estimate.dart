@@ -17,6 +17,7 @@ Future<List<TimingEstimate>?> fetchTimings(String route) async {
 }
 
 
-Future<List<TimingEstimate>?> fetchTimingEstimateCouncil() async {
-  return await fetchTimings('${APIValue.unionCouncil}all_timings_estimates_council');
+Future<List<TimingEstimate>?> fetchTimingEstimateCouncil(String? uuid) async {
+  if(uuid == null)return null;
+  return await fetchTimings('${APIValue.unionCouncil}all_timings_estimates_council/$uuid');
 }
