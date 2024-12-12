@@ -8,6 +8,7 @@ import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../api_handler/estimate/delete_estimate.dart';
 import '../../../api_handler/estimate/get_estimate_detail.dart';
 import '../../../api_handler/estimate/patch_estimate.dart';
+import '../../../api_handler/timing_estimate/get_timing_estimate.dart';
 import '../../../models/estimate/estimate.dart';
 import '../../../text/fr.dart';
 import '../../../widget/button/row_bottom_bar.dart';
@@ -89,8 +90,14 @@ class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
                       );
                     },
                     () {
-                      goToTiming(estimateFromRequest.status, estimateFromRequest.statusGoal, context,
-                          () {print('aaaaaa');}
+                      if (estimateFromRequest.uuid == null) return;
+                      Navigator.pushNamed(
+                        context,
+                        'artisan/timing_estimate',
+                        arguments: SeeConvArg(
+                            uuid: estimateFromRequest.uuid!,
+                            futureToFetchData: fetchTimingEstimateArtisan
+                        ),
                       );
                     },
                   ),

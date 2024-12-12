@@ -14,6 +14,7 @@ import 'package:front_syndic/views/estimate/estimate_detail/estimate_detail_type
 import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
+import 'package:front_syndic/views/timing_estimate/timing_estimate_type.dart';
 import 'package:front_syndic/views/union_side/co_owner_list.dart';
 import 'package:front_syndic/views/union_side/create_council/adress/chose_adress_type.dart';
 import 'package:front_syndic/views/union_side/create_council/chose_name_size.dart';
@@ -244,6 +245,18 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (context) => RecapTimingChange(
                   uuid: arguments,
+                ),
+              );
+            }
+            break;
+
+          case 'artisan/timing_estimate':
+            final arguments = settings.arguments;
+            if (arguments is SeeConvArg) {
+              return MaterialPageRoute(
+                builder: (context) => TimingEstimateArtisan(
+                  fetchData: arguments.futureToFetchData,
+                  uuid: arguments.uuid,
                 ),
               );
             }
