@@ -17,7 +17,8 @@ class CreateTimingEstimate extends StatefulWidget {
 
   final TimingEstimate timingEstimate;
   final Function() onBack; //must be a pushReplacement
-  final Function() onRegister; //must be a pushReplacement
+  final Future<void> Function(TimingEstimate)
+      onRegister; //must be a pushReplacement
 
   @override
   State<CreateTimingEstimate> createState() => _CreateTimingEstimateState();
@@ -95,7 +96,7 @@ class _CreateTimingEstimateState extends State<CreateTimingEstimate> {
                     AppColors.mainBackgroundColor,
                     AppText.save,
                     context,
-                    widget.onRegister,
+                    () => widget.onRegister(widget.timingEstimate),
                     AppColors.mainTextColor,
                   ),
                   const SizedBox(height: 35),
