@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/models/estimate/estimate.dart';
+import 'package:front_syndic/models/timing/timing_estimate.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
 import 'package:front_syndic/views/artisan_side/work_request_detail/detail_work_request.dart';
 import 'package:front_syndic/views/co_owner/co_owner_detail/co_owner_detail_type.dart';
@@ -14,7 +15,8 @@ import 'package:front_syndic/views/estimate/estimate_detail/estimate_detail_type
 import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
-import 'package:front_syndic/views/timing_estimate/timing_estimate_type.dart';
+import 'package:front_syndic/views/timing_estimate/create_timing_estimate/create_timing_estimate_type.dart';
+import 'package:front_syndic/views/timing_estimate/list_timing_estimate/timing_estimate_type.dart';
 import 'package:front_syndic/views/union_side/co_owner_list.dart';
 import 'package:front_syndic/views/union_side/create_council/adress/chose_adress_type.dart';
 import 'package:front_syndic/views/union_side/create_council/chose_name_size.dart';
@@ -291,6 +293,17 @@ class MyApp extends StatelessWidget {
                 ),
               );
             }
+
+          case '/artisan/create_timing_estimate':
+            final arguments = settings.arguments;
+            if(arguments is TimingEstimate){
+              return MaterialPageRoute(
+                builder: (context) => CreateTimingEstimateArtisan(
+                  timingEstimate: arguments,
+                ),
+              );
+            }
+            break;
 
           case '/artisan/see_conv':
             final arguments = settings.arguments;

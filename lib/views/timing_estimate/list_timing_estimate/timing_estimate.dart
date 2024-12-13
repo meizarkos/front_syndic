@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 
-import '../../core_value.dart';
-import '../../models/timing/timing_estimate.dart';
-import '../../widget/button/add_floating_button.dart';
-import '../../widget/divider/divider.dart';
+import '../../../core_value.dart';
+import '../../../models/timing/timing_estimate.dart';
+import '../../../widget/button/add_floating_button.dart';
+import '../../../widget/divider/divider.dart';
 import 'cell_timing_estimate.dart';
 
 class TimingEstimateView extends StatefulWidget {
@@ -13,14 +13,16 @@ class TimingEstimateView extends StatefulWidget {
     super.key,
     required this.fetchData,
     required this.uuid,
-    required this.valueOfValidation, //1 , 2 , 4
+    //required this.valueOfValidation, //1 , 2 , 4
     required this.valueValidateByYou, //all value where the timing is validated by you (length = 3)
+    required this.routeToPost,
   });
 
   final Function(String?) fetchData;
   final String? uuid;
-  final int valueOfValidation;
+  //final int valueOfValidation;
   final List<int> valueValidateByYou;
+  final String routeToPost;
 
   @override
   State<TimingEstimateView> createState() => _TimingEstimateViewState();
@@ -133,7 +135,10 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
         },
       ),
       floatingActionButton: addFloatingButton(() {
-        Navigator.pushNamed(context, '');
+        final TimingEstimate timingEstimate = TimingEstimate(
+          estimateId: widget.uuid,
+        );
+        Navigator.pushReplacementNamed(context, widget.routeToPost, arguments: timingEstimate);
       }),
     );
   }

@@ -21,7 +21,7 @@ Future<Map<String, dynamic>> fetchCoOwnerMainData(String route) async {
     if(records["estimate"] != null) {
       estimate = Estimate.fromJson(records["estimate"]);
     }
-    var timingEstimate = const TimingEstimate();
+    var timingEstimate = TimingEstimate();
     if(records["timing_estimate"] != null) {
       timingEstimate = TimingEstimate.fromJson(records["timing_estimate"]);
     }

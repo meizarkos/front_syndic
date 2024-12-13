@@ -19,24 +19,24 @@ class AttributesTimingEstimate {
 }
 
 class TimingEstimate{
-  final String? uuid;
-  final String? dateStart;
-  final String? timeStart;
-  final String? dateEnd;
-  final int? status;
-  final int? statusGoal;
-  final String? workRequestId;
-  final WorkRequest? workRequest;
-  final String? estimateId;
-  final String? artisanId;
-  final String? councilId;
-  final String? unionId;
-  final String? userId;
-  final String? createdAt;
-  final String? updatedAt;
+   String? uuid;
+   String? dateStart;
+   String? timeStart;
+   String? dateEnd;
+   int? status;
+   int? statusGoal;
+   String? workRequestId;
+   WorkRequest? workRequest;
+   String? estimateId;
+   String? artisanId;
+   String? councilId;
+   String? unionId;
+   String? userId;
+   String? createdAt;
+   String? updatedAt;
 
 
-  const TimingEstimate({
+  TimingEstimate({
     this.uuid,
     this.dateStart,
     this.timeStart,

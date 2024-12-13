@@ -171,6 +171,10 @@ class AppText {
   static const String timingEstimateNotYetValidate = 'Pas encore validé';
   static const String timingEstimateValidate = 'Validé';
   static const String timingEstimateValidateByYou = 'Validé par vous';
+  static const String createAWorkStart = 'Créer une date de travaux';
+  static const String dateAndHourOfStart = 'Date et heure de début';
+  static const String dateOfEnd = 'Date de fin';
+  static const String createEstimateTimingTextChoice = 'Vous avez choisi';
 
   /* In Progress */
   static const String inProgress = 'Affaire en cours';

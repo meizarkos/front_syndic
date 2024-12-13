@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../models/timing/timing_estimate.dart';
-import '../../widget/decoration/decoration_round_main_color.dart';
+import '../../../models/timing/timing_estimate.dart';
+import '../../../widget/decoration/decoration_round_main_color.dart';
 
 class CellTimingEstimate extends StatelessWidget {
   const CellTimingEstimate({

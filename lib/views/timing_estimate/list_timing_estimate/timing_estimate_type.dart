@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/views/timing_estimate/timing_estimate.dart';
-
-import '../../models/timing/timing_estimate.dart';
+import 'package:front_syndic/views/timing_estimate/list_timing_estimate/timing_estimate.dart';
 
 class TimingEstimateArtisan extends StatelessWidget {
   const TimingEstimateArtisan({
@@ -18,8 +16,9 @@ class TimingEstimateArtisan extends StatelessWidget {
     return TimingEstimateView(
       fetchData: fetchData,
       uuid: uuid,
-      valueOfValidation: 1,
+      //valueOfValidation: 1,
       valueValidateByYou: [1,3,5], //all value where the timing is validated by you
+      routeToPost:  '/artisan/create_timing_estimate',
     );
   }
 }
