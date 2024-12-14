@@ -87,6 +87,7 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                       return CellTimingEstimate(
                         timingEstimate: timingEstimate,
                         isValidate: false,
+                        isAtYou: false,
                       );
                     }),
                   divider(1, Colors.black),
@@ -106,6 +107,7 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                       return CellTimingEstimate(
                         timingEstimate: timingEstimate,
                         isValidate: true,
+                        isAtYou: true,
                       );
                     }),
                   divider(1, Colors.black),
@@ -125,6 +127,7 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                       return CellTimingEstimate(
                         timingEstimate: timingEstimate,
                         isValidate: true,
+                        isAtYou: false,
                       );
                     }),
                   divider(1, Colors.black),

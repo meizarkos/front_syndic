@@ -173,6 +173,8 @@ class AppText {
   static const String timingEstimateValidateByYou = 'Validé par vous';
   static const String createAWorkStart = 'Créer une date de travaux';
   static const String dateAndHourOfStart = 'Date et heure de début';
+  static const String workStart = 'Début le';
+  static const String workEnd = 'Fin des travaux';
   static const String dateOfEnd = 'Date de fin';
   static const String createEstimateTimingTextChoice = 'Vous avez choisi';
 
