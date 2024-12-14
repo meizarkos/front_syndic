@@ -12,18 +12,16 @@ class CellTimingEstimate extends StatelessWidget {
     super.key,
     required this.timingEstimate,
     required this.isValidate,
-    required this.isAtYou,
     required this.onValidate,
-    required this.onDelete,
     required this.onRefuse,
+    required this.onDelete,
   });
 
   final TimingEstimate timingEstimate;
   final bool isValidate;
-  final bool isAtYou;
   final Function(String?) onValidate;
-  final Function(String?) onDelete;
   final Function(String?) onRefuse;
+  final Function(String?) onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +40,7 @@ class CellTimingEstimate extends StatelessWidget {
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               Text(
-                  '${AppText.workEnd}: ${AppText.le} ${formatStringToApiDate(timingEstimate.dateStart, 'dd/MM/yyyy') ?? AppText.noDate}',
+                  '${AppText.workEnd}: ${AppText.le} ${formatStringToApiDate(timingEstimate.dateEnd, 'dd/MM/yyyy') ?? ''}',
                   style: Theme.of(context).textTheme.displaySmall
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
@@ -50,26 +48,30 @@ class CellTimingEstimate extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   if(isValidate)
-                    IconButton(
-                        onPressed: ()=>{},
-                        icon: Icon(Icons.delete),
+                    GestureDetector(
+                      onTap: ()=>{
+                        onRefuse(timingEstimate.uuid)
+                      },
+                      child: SvgPicture.asset(
+                        'assets/close.svg',
+                        colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                        width: 20.0,
+                        height: 20.0,
+                      ),
                     ),
                   if(!isValidate)
                     IconButton(
-                      onPressed: ()=>{},
+                      onPressed: ()=>{
+                        onValidate(timingEstimate.uuid)
+                      },
                       icon: Icon(Icons.check),
                     ),
-                  const SizedBox(width: AppUIValue.spaceScreenToAny),
-                  if(isAtYou)
-                    GestureDetector(
-                      onTap: ()=>{},
-                      child: SvgPicture.asset(
-                      'assets/close.svg',
-                      colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
-                      width: 20.0,
-                      height: 20.0,
-                      ),
-                    ),
+                  IconButton(
+                    onPressed: ()=>{
+                      onDelete(timingEstimate.uuid)
+                    },
+                    icon: Icon(Icons.delete),
+                  ),
                 ],
               )
             ],

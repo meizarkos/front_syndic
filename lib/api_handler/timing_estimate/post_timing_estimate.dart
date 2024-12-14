@@ -12,7 +12,6 @@ Future<void> postTimingEstimate(String route,TimingEstimate timingEstimate) asyn
       AttributesTimingEstimate.dateEnd: timingEstimate.dateEnd,
     });
     final response = await requestWithBody(url: route, method: "POST",body: body);
-    print('response: $response');
     return;
   } catch(e) {
     return;

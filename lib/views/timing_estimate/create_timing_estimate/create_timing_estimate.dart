@@ -125,7 +125,7 @@ class _CreateTimingEstimateState extends State<CreateTimingEstimate> {
   void onDateEndChanged(DateTime date) {
     setState(() {
       selectedDateEnd = date;
-      widget.timingEstimate.dateEnd = '${date.year}-${date.month}-${date.day}';
+      widget.timingEstimate.dateEnd = '${selectedDateEnd.year}-${selectedDateEnd.month}-${selectedDateEnd.day}';
     });
   }
 

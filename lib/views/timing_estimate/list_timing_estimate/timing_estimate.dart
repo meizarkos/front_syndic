@@ -16,6 +16,9 @@ class TimingEstimateView extends StatefulWidget {
     //required this.valueOfValidation, //1 , 2 , 4
     required this.valueValidateByYou, //all value where the timing is validated by you (length = 3)
     required this.routeToPost,
+    required this.onAccept,
+    required this.onRefuse,
+    required this.onDelete,
   });
 
   final Function(String?) fetchData;
@@ -23,6 +26,9 @@ class TimingEstimateView extends StatefulWidget {
   //final int valueOfValidation;
   final List<int> valueValidateByYou;
   final String routeToPost;
+  final Function(String?) onAccept;
+  final Function(String?) onRefuse;
+  final Function(String?) onDelete;
 
   @override
   State<TimingEstimateView> createState() => _TimingEstimateViewState();
@@ -82,14 +88,8 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                     _viewNotValidate,
                   ),
                   const SizedBox(height: AppUIValue.spaceScreenToAny),
-                  if (noValidation.isNotEmpty && _viewNotValidate)
-                    ...noValidation.map((timingEstimate) {
-                      return CellTimingEstimate(
-                        timingEstimate: timingEstimate,
-                        isValidate: false,
-                        isAtYou: false,
-                      );
-                    }),
+                  listOfTimingEstimate(_viewNotValidate, noValidation, isValidate: false),
+
                   divider(1, Colors.black),
                   const SizedBox(height: AppUIValue.spaceScreenToAny),
                   getListTitle(
@@ -102,14 +102,8 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                     _viewValidateByYou,
                   ),
                   const SizedBox(height: AppUIValue.spaceScreenToAny),
-                  if (validateByYou.isNotEmpty && _viewValidateByYou)
-                    ...validateByYou.map((timingEstimate) {
-                      return CellTimingEstimate(
-                        timingEstimate: timingEstimate,
-                        isValidate: true,
-                        isAtYou: true,
-                      );
-                    }),
+                  listOfTimingEstimate(_viewValidateByYou, validateByYou),
+
                   divider(1, Colors.black),
                   const SizedBox(height: AppUIValue.spaceScreenToAny),
                   getListTitle(
@@ -122,14 +116,8 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                     _viewAllValidate,
                   ),
                   const SizedBox(height: AppUIValue.spaceScreenToAny),
-                  if (validateByAll.isNotEmpty && _viewAllValidate)
-                    ...validateByAll.map((timingEstimate) {
-                      return CellTimingEstimate(
-                        timingEstimate: timingEstimate,
-                        isValidate: true,
-                        isAtYou: false,
-                      );
-                    }),
+                  listOfTimingEstimate(_viewAllValidate, validateByAll),
+
                   divider(1, Colors.black),
                 ],
               ),
@@ -171,5 +159,32 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
         ],
       ),
     );
+  }
+
+  Widget listOfTimingEstimate(bool toDisplay , List<TimingEstimate> timingsEstimate,{bool isValidate = true}) {
+    if (timingsEstimate.isNotEmpty && toDisplay){
+        final res = timingsEstimate.map((timingEstimate) {
+        return CellTimingEstimate(
+            timingEstimate: timingEstimate,
+            isValidate: isValidate,
+            onValidate: (String? uuid) {
+              widget.onAccept(uuid);
+            },
+            onRefuse: (String? uuid) {
+              widget.onRefuse(uuid);
+            },
+            onDelete: (String? uuid) {
+              widget.onDelete(uuid);
+            },
+          );
+        }).toList();
+        return ListView(
+          key: UniqueKey(),
+          shrinkWrap: true, // Allow the ListView to fit its contents
+          physics: const NeverScrollableScrollPhysics(), // Disable internal scrolling if needed
+          children: res,
+        );
+    }
+    return SizedBox.shrink();
   }
 }

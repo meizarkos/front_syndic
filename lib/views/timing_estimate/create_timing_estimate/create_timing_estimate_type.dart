@@ -38,3 +38,70 @@ class CreateTimingEstimateArtisan extends StatelessWidget {
     );
   }
 }
+
+class CreateTimingEstimateCouncil extends StatelessWidget {
+  const CreateTimingEstimateCouncil({
+    super.key,
+    required this.timingEstimate,
+  });
+
+  final TimingEstimate timingEstimate;
+
+  @override
+  Widget build(BuildContext context) {
+    return CreateTimingEstimate(
+      timingEstimate: timingEstimate,
+      onBack: (){
+        goToTimingEstimate(context);
+      },
+      onRegister: (TimingEstimate timingEstimate)async{
+        //call API to create timing estimate
+        await postTimingEstimateCouncil(timingEstimate);
+        goToTimingEstimate(context);
+      },
+    );
+  }
+
+  void goToTimingEstimate(BuildContext context){
+    if(timingEstimate.estimateId == null) return;
+    Navigator.pushReplacementNamed(
+      context,
+      '/council/timing_estimate',
+      arguments: SeeConvArg(uuid: timingEstimate.estimateId!, futureToFetchData: fetchTimingEstimateCouncil),
+    );
+  }
+}
+
+
+class CreateTimingEstimateUnion extends StatelessWidget {
+  const CreateTimingEstimateUnion({
+    super.key,
+    required this.timingEstimate,
+  });
+
+  final TimingEstimate timingEstimate;
+
+  @override
+  Widget build(BuildContext context) {
+    return CreateTimingEstimate(
+      timingEstimate: timingEstimate,
+      onBack: (){
+        goToTimingEstimate(context);
+      },
+      onRegister: (TimingEstimate timingEstimate)async{
+        //call API to create timing estimate
+        await postTimingEstimateUnion(timingEstimate);
+        goToTimingEstimate(context);
+      },
+    );
+  }
+
+  void goToTimingEstimate(BuildContext context){
+    if(timingEstimate.estimateId == null) return;
+    Navigator.pushReplacementNamed(
+      context,
+      '/union/timing_estimate',
+      arguments: SeeConvArg(uuid: timingEstimate.estimateId!, futureToFetchData: fetchTimingEstimateUnion),
+    );
+  }
+}

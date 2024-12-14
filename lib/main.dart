@@ -496,6 +496,50 @@ class MyApp extends StatelessWidget {
             }
             break;
 
+          case '/council/timing_estimate':
+            final arguments = settings.arguments;
+            if (arguments is SeeConvArg) {
+              return MaterialPageRoute(
+                builder: (context) => TimingEstimateCouncil(
+                  fetchData: arguments.futureToFetchData,
+                  uuid: arguments.uuid,
+                ),
+              );
+            }
+            break;
+
+          case  '/council/create_timing_estimate':
+            final arguments = settings.arguments;
+            if(arguments is TimingEstimate){
+              return MaterialPageRoute(
+                builder: (context) => CreateTimingEstimateCouncil(
+                  timingEstimate : arguments,
+                ),
+              );
+            }
+
+          case '/union/timing_estimate':
+            final arguments = settings.arguments;
+            if (arguments is SeeConvArg) {
+              return MaterialPageRoute(
+                builder: (context) => TimingEstimateUnion(
+                  fetchData: arguments.futureToFetchData,
+                  uuid: arguments.uuid,
+                ),
+              );
+            }
+            break;
+
+          case '/union/create_timing_estimate':
+            final arguments = settings.arguments;
+            if(arguments is TimingEstimate){
+              return MaterialPageRoute(
+                builder: (context) => CreateTimingEstimateUnion(
+                  timingEstimate : arguments,
+                ),
+              );
+            }
+
           case '/council/post_meeting':
             final arguments = settings.arguments;
             if (arguments is String) {

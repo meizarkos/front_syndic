@@ -24,3 +24,8 @@ Future<List<TimingEstimate>?> fetchTimingEstimateArtisan(String? uuid) async {
   if(uuid == null)return null;
   return await fetchTimings('${APIValue.artisan}all_timings_estimates_artisan/$uuid');
 }
+
+Future<List<TimingEstimate>?> fetchTimingEstimateUnion(String? uuid) async {
+  if(uuid == null)return null;
+  return await fetchTimings('${APIValue.union}all_timings_estimates_union/$uuid');
+}
