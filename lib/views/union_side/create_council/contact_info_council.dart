@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/text/fr.dart';
@@ -103,11 +105,11 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               ErrorVisibility(errorVisibility: errorVisibility, errorText: errorText),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
-              elevatedButtonAndTextColor(
+              elevatedButtonFuture(
                   AppColors.mainBackgroundColor,
                   AppText.save,
                   context,
-                      () {save();},
+                  ()async =>await save(),
                   AppColors.mainTextColor
               )
             ],
@@ -123,23 +125,37 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
     return emailRegExp.hasMatch(email);
   }
 
-  void save()async{
-    print(isUse);
-    if(isUse){return;}
-    isUse = true;
+  Future<void> save()async{
+
+    if(isUse){
+      return;
+    }
+
+    setState(() {
+      isUse = true;
+    });
+
+    Timer(Duration(seconds: 3), () {
+      if (mounted) {
+        setState(() {
+          isUse = false;
+        });
+      }
+    });
+
     if(widget.createCouncil.email == null || widget.createCouncil.email == '' || widget.createCouncil.council.phone == null || widget.createCouncil.council.phone == '' || widget.createCouncil.council.lastName == null || widget.createCouncil.council.lastName == '' || widget.createCouncil.council.firstName == null || widget.createCouncil.council.firstName == ''){
       setState(() {
         errorText = AppText.adressCreationError;
         errorVisibility = true;
       });
-      isUse = false;
+      return;
     }
     else if(!isValidEmail(widget.createCouncil.email!)){
       setState(() {
         errorText = AppText.emailFormatError;
         errorVisibility = true;
       });
-      isUse = false;
+      return;
     }
     final emailIsUnique = await isEmailUnique(widget.createCouncil.email!, (){
       setState(() {
@@ -148,15 +164,14 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
       });
     });
     if(!emailIsUnique){
-      isUse = false;
       return;
     }
     setState(() {
       errorVisibility = false;
     });
-    isUse = false;
     Navigator.pushNamed(context, '/union/create_council/adress',
       arguments: widget.createCouncil
     );
+    return;
   }
 }

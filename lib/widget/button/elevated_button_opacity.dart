@@ -40,3 +40,23 @@ ElevatedButton elevatedButtonAndTextColor(Color backgroundColor, String buttonTe
     ),
   );
 }
+
+ElevatedButton elevatedButtonFuture(Color backgroundColor, String buttonText, BuildContext context,Future<void> Function() goTo,Color textColor) {
+  return ElevatedButton(
+    onPressed: ()async=>await goTo(),
+    style: ElevatedButton.styleFrom(
+      backgroundColor: backgroundColor, // Background color with opacity
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      textStyle: Theme.of(context).textTheme.displayMedium,
+      elevation: AppUIValue.elevation,
+      shadowColor: Colors.black.withOpacity(AppUIValue.opacityActionButtonShadow),
+    ),
+    child: Text(
+      buttonText,
+      style: TextStyle(
+        fontSize: 16,
+        color: textColor,
+      ),
+    ),
+  );
+}
