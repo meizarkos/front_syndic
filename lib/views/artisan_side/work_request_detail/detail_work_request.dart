@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../color.dart';
 import '../../../core_value.dart';
 import '../../../models/estimate/estimate.dart';
+import '../../../models/to_screen/see_conv_arg.dart';
 import '../../../models/work_request/work_request.dart';
 import '../../../text/fr.dart';
 import '../../../utils/string_handler/handle_string.dart';
@@ -139,10 +141,9 @@ class _DetailWorkRequestArtisanSideState extends State<DetailWorkRequestArtisanS
     if(widget.workRequestUuid == null){
       return;
     }
-    Navigator.pushNamed(context, '/in_progress/artisan');
-    /*Navigator.pushNamed(context, '/work_requests/artisan/first_conv',
-        arguments: SeeConvArg(uuid : workRequestUuid!, futureToFetchData: fetchConversationFromWorkRequest));
-    */
+    Navigator.pushNamed(context, '/work_requests/artisan/first_conv',
+        arguments: SeeConvArg(uuid : widget.workRequestUuid!, futureToFetchData: fetchConversationFromWorkRequest)
+    );
   }
 
   Divider divider() {

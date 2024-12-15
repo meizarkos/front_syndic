@@ -12,7 +12,7 @@ Future<Map<String, dynamic>> fetchCoOwnerMainData(String route) async {
     final records = response.data;
     final coOwner = CoOwner.fromJson(records["co_owner"]);
 
-    var workRequest = WorkRequest();
+    /*var workRequest = WorkRequest();
     if(records["work_request"] != null) {
       workRequest = WorkRequest.fromJson(records["work_request"]);
     }
@@ -28,14 +28,14 @@ Future<Map<String, dynamic>> fetchCoOwnerMainData(String route) async {
     var timing = Timing();
     if(records["timing"] != null) {
       timing = Timing.fromJson(records["timing"]);
-    }
+    }*/
 
     return {
       "co_owner": coOwner,
-      "work_request": workRequest,
+      /*"work_request": workRequest,
       "estimate": estimate,
       "timing_estimate": timingEstimate,
-      "timing": timing,
+      "timing": timing,*/
     };
   } catch(e) {
     return {};

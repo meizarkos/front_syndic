@@ -6,13 +6,16 @@ import 'package:front_syndic/models/work_request/create_work_request.dart';
 import 'package:front_syndic/utils/date_to_string/date.dart';
 import 'package:front_syndic/views/co_owner/co_owner_detail/row_of_text_and_icon.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
+import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 
 import '../../../color.dart';
+import '../../../models/adress/adress.dart';
 import '../../../models/timing/timing.dart';
 import '../../../models/timing/timing_estimate.dart';
 import '../../../models/work_request/work_request.dart';
 import '../../../text/fr.dart';
 import '../../../utils/string_handler/handle_string.dart';
+import '../../../widget/bottom/nav_bar_union.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
 import '../../../widget/text_style/text_style_main_color.dart';
 import 'column_of_text_button.dart';
@@ -37,6 +40,7 @@ class _CoOwnerDetailState extends State<CoOwnerDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBarBackButton(context, title: AppText.infoCoOwner),
       body: SingleChildScrollView(
         child: FutureBuilder(
           future: widget.fetchData(widget.uuid),
@@ -49,10 +53,12 @@ class _CoOwnerDetailState extends State<CoOwnerDetail> {
               return const Center(child: Text(AppText.apiNoResult));
             } else {
               final coOwner = snapshot.data?["co_owner"] as CoOwner?;
-              final workRequest = snapshot.data?["work_request"] as WorkRequest?;
+              final adress = coOwner?.adress;
+              final council = coOwner?.council;
+              /*final workRequest = snapshot.data?["work_request"] as WorkRequest?;
               final estimate = snapshot.data?["estimate"] as Estimate?;
               final timingEstimate = snapshot.data?["timing_estimate"] as TimingEstimate?;
-              final timing = snapshot.data?["timing"] as Timing?;
+              final timing = snapshot.data?["timing"] as Timing?;*/
               return Column(
                 children: [
                   const SizedBox(height: 40),
@@ -76,17 +82,25 @@ class _CoOwnerDetailState extends State<CoOwnerDetail> {
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: spaceInsideColumn),
-                            rowOfTextAndIcon(
-                                'assets/co_owner.svg',
-                                coOwner?.adress?.city,
-                                AppText.noStringNameForCownerSubtitle,
-                                context),
+                            Text(
+                              '${adress?.country ?? ''}\n\n${adress?.city ?? ''}, ${adress?.street ?? ''}',
+                              style: Theme.of(context).textTheme.displayMedium,
+                              textAlign: TextAlign.center,
+                            ),
                             const SizedBox(height: spaceInsideColumn),
                             rowOfTextAndIcon(
-                                'assets/location.svg',
-                                coOwner?.adress?.street,
-                                AppText.noStringNameForCownerSubtitle,
-                                context),
+                                'assets/co_owner.svg',
+                                coOwner?.lotSize?.toString() ?? '',
+                                context
+                            ),
+                            const SizedBox(height: spaceInsideColumn),
+                            Text(
+                              '${AppText.infoCouncil}:\n'
+                                  '${council?.firstName ?? ''} ${council?.lastName ?? ''}\n\n'
+                                  '${AppText.contact}: ${council?.phone ?? AppText.noPhone}',
+                              style: Theme.of(context).textTheme.displaySmall,
+                              textAlign: TextAlign.center,
+                            ),
                             const SizedBox(height: spaceInsideColumn),
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.9,
@@ -113,7 +127,7 @@ class _CoOwnerDetailState extends State<CoOwnerDetail> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  /*const SizedBox(height: 25),
                   Center(
                     child: columnOfTextButton(
                         AppText.titleMeeting,
@@ -159,7 +173,7 @@ class _CoOwnerDetailState extends State<CoOwnerDetail> {
                       context,
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 25),*/
                 ],
               );
             }

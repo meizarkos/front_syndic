@@ -7,6 +7,7 @@ import '../../api_handler/work_request/fetch_work_request_detail.dart';
 import '../../models/to_screen/artisan_detail_work_request.dart';
 import '../../models/work_request/work_request.dart';
 import '../../text/fr.dart';
+import '../../widget/bottom/nav_bar_artisan.dart';
 import '../../widget/search_bar/search_bar.dart';
 
 class ArtisanMain extends StatefulWidget {
@@ -110,6 +111,7 @@ class _ArtisanMainState extends State<ArtisanMain> {
           ),
         ],
       ),
+      bottomNavigationBar: bottomNavigationBarArtisan(context, 1),
     );
   }
 

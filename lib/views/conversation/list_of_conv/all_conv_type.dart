@@ -44,6 +44,7 @@ class AllConvArtisanForWorkRequest extends StatelessWidget {
         },
       goToMeeting: (String? no){},
       goToEstimate: (String? no){},
+      isFromWorkRequest: true,
     );
   }
 }

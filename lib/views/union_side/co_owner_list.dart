@@ -9,6 +9,7 @@ import '../../api_handler/co_owner/get_co_owner_of_union.dart';
 import '../../models/adress/adress.dart';
 import '../../models/co_owner/co_owner.dart';
 import '../../models/council/council.dart';
+import '../../widget/bottom/nav_bar_union.dart';
 import '../co_owner/co_owner_cell/co_owner_cell.dart';
 
 class UnionMain extends StatefulWidget {
@@ -80,9 +81,7 @@ class _UnionMainState extends State<UnionMain> {
                         }
                         return GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context,'/in_progress/union');
-                            //Navigator.pushNamed(context,'/union/work_requests');
-                            //Navigator.pushNamed(context,'/union/co_owner_detail', arguments: dataFiltered[index].councilId);
+                            Navigator.pushNamed(context,'/union/co_owner_detail', arguments: dataFiltered[index].councilId);
                           },
                           child: CoOwnerCell(
                             title: dataFiltered[index].name,
@@ -102,6 +101,7 @@ class _UnionMainState extends State<UnionMain> {
         final createCouncil = CreateCouncil(adress: Adress(), council: Council(), coOwner: CoOwner());
         Navigator.pushNamed(context, '/union/create_council/name', arguments: createCouncil);
       }),
+      bottomNavigationBar: bottomNavigationBarUnion(context, 2),
     );
   }
 

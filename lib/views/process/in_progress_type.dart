@@ -4,6 +4,9 @@ import 'package:front_syndic/views/process/top_screen_in_progress/top_screen_in_
 import 'package:front_syndic/views/process/top_screen_in_progress/top_screen_route_handler.dart';
 
 import '../../text/fr.dart';
+import '../../widget/bottom/nav_bar_artisan.dart';
+import '../../widget/bottom/nav_bar_council.dart';
+import '../../widget/bottom/nav_bar_union.dart';
 
 class InProgressCouncilConversation extends StatefulWidget {
   const InProgressCouncilConversation({super.key});
@@ -25,6 +28,7 @@ class _InProgressCouncilConversationState extends State<InProgressCouncilConvers
         onCategoryChanged: _categoryChange,
       ),
       body : topScreenRouteHandlerCouncil(searchValue,category),
+      bottomBar : bottomNavigationBarCouncil(context,0),
     );
   }
 
@@ -63,6 +67,7 @@ class _InProgressArtisanConversationState extends State<InProgressArtisanConvers
         onCategoryChanged: _categoryChange,
       ),
       body : topScreenRouteHandlerArtisan(searchValue,category),
+      bottomBar : bottomNavigationBarArtisan(context,0),
     );
   }
 
@@ -100,6 +105,7 @@ class _InProgressUnionState extends State<InProgressUnion> {
         onCategoryChanged: _categoryChange,
       ),
       body : topScreenRouteHandlerUnion(searchValue,category),
+      bottomBar : bottomNavigationBarUnion(context,0),
     );
   }
 

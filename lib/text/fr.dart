@@ -2,6 +2,13 @@ class AppText {
   /* General API */
   static const String apiErrorText = 'Une erreur est survenue';
   static const String apiNoResult = 'Pas de résultat';
+  static const String emailAlreadyExist = 'Email déjà existant';
+
+  /* Nav bar */
+  static const String home = 'Accueil';
+  static const String workRequest = 'Demandes';
+  static const String invoice = 'Facture';
+  static const String copro = 'Copro';
 
   /*General*/
   static const String commentary = 'Commentaire';

@@ -7,10 +7,12 @@ class InProgressMain extends StatefulWidget {
     super.key,
     required this.top,
     required this.body,
+    required this.bottomBar,
   });
 
   final Widget top;
   final Widget body;
+  final BottomNavigationBar bottomBar;
 
   @override
   State<InProgressMain> createState() => _InProgressMainState();
@@ -32,7 +34,8 @@ class _InProgressMainState extends State<InProgressMain> {
             child: widget.body,
           ),
         ],
-      )
+      ),
+      bottomNavigationBar: widget.bottomBar,
     );
   }
 }

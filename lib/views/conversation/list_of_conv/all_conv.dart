@@ -20,6 +20,7 @@ class SeeConv extends StatefulWidget {
     required this.goToRequest,
     required this.goToMeeting,
     required this.goToEstimate,
+    this.isFromWorkRequest = false,
   });
 
   final String uuid;
@@ -30,6 +31,7 @@ class SeeConv extends StatefulWidget {
   final Function(String?) goToRequest;
   final Function(String?) goToMeeting;
   final Function(String?) goToEstimate;
+  final bool isFromWorkRequest;
 
 
   @override
@@ -86,7 +88,7 @@ class _SeeConvState extends State<SeeConv> {
                   AppText.createAMeeting,
                   ()=>{
                     Navigator.pushNamed(context, widget.route,
-                      arguments: _conversations[0].uuid ?? widget.uuid,
+                      arguments: choseId(),
                     )
                   },
                   color: AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
@@ -95,13 +97,7 @@ class _SeeConvState extends State<SeeConv> {
                 const SizedBox(width: 10),
                 createButton(
                   AppText.seeWorkRequest,
-                      ()=>{
-                       if(_conversations[0].uuid != null){
-                         widget.goToRequest(_conversations[0].uuid),
-                       }
-                       else{widget.goToRequest(widget.uuid),}
-
-                      }
+                  ()=>{widget.goToRequest(choseId())},
                 ),
                 const SizedBox(width: 10),
                 createButton(
@@ -161,7 +157,7 @@ class _SeeConvState extends State<SeeConv> {
               icon: const Icon(Icons.send),
               onPressed: () async {
                 final conv = await widget.futureForPostConv(
-                  _conversations[0].uuid,
+                  choseId(),
                   _messageController.text,
                 );
                 if (conv == null) {
@@ -188,5 +184,15 @@ class _SeeConvState extends State<SeeConv> {
       onPressed,
       textColor,
     );
+  }
+
+  String? choseId(){
+    if(widget.isFromWorkRequest){
+      return widget.uuid;
+    }
+    else if(_conversations.isNotEmpty && _conversations[0].uuid != null){
+      return _conversations[0].uuid;
+    }
+    return widget.uuid;
   }
 }

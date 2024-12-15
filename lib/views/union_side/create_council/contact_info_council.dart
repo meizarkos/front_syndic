@@ -5,6 +5,7 @@ import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
+import '../../../api_handler/council/check_email_is_unique.dart';
 import '../../../core_value.dart';
 import '../../../models/council/createCouncil.dart';
 import '../../../widget/decoration/text_filed_deco_no_counter.dart';
@@ -29,6 +30,7 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
   TextEditingController? _lastNameController;
 
   bool errorVisibility = false;
+  bool isUse = false;
   String errorText = AppText.adressCreationError;
 
   @override
@@ -105,7 +107,7 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
                   AppColors.mainBackgroundColor,
                   AppText.save,
                   context,
-                  save,
+                      () {save();},
                   AppColors.mainTextColor
               )
             ],
@@ -121,26 +123,40 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
     return emailRegExp.hasMatch(email);
   }
 
-  void save(){
+  void save()async{
+    print(isUse);
+    if(isUse){return;}
+    isUse = true;
     if(widget.createCouncil.email == null || widget.createCouncil.email == '' || widget.createCouncil.council.phone == null || widget.createCouncil.council.phone == '' || widget.createCouncil.council.lastName == null || widget.createCouncil.council.lastName == '' || widget.createCouncil.council.firstName == null || widget.createCouncil.council.firstName == ''){
       setState(() {
         errorText = AppText.adressCreationError;
         errorVisibility = true;
       });
+      isUse = false;
     }
     else if(!isValidEmail(widget.createCouncil.email!)){
       setState(() {
         errorText = AppText.emailFormatError;
         errorVisibility = true;
       });
+      isUse = false;
     }
-    else{
+    final emailIsUnique = await isEmailUnique(widget.createCouncil.email!, (){
       setState(() {
-        errorVisibility = false;
+        errorText = AppText.emailAlreadyExist;
+        errorVisibility = true;
       });
-      Navigator.pushNamed(context, '/union/create_council/adress',
-        arguments: widget.createCouncil
-      );
+    });
+    if(!emailIsUnique){
+      isUse = false;
+      return;
     }
+    setState(() {
+      errorVisibility = false;
+    });
+    isUse = false;
+    Navigator.pushNamed(context, '/union/create_council/adress',
+      arguments: widget.createCouncil
+    );
   }
 }

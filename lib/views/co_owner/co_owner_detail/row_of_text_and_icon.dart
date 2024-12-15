@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../utils/string_handler/handle_string.dart';
 
-Row rowOfTextAndIcon(String path, String? toPrint, String optionnal, BuildContext context) {
+Row rowOfTextAndIcon(String path, String toPrint, BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
@@ -14,9 +14,10 @@ Row rowOfTextAndIcon(String path, String? toPrint, String optionnal, BuildContex
       ),
       const SizedBox(width: 20),
       Text(
-        trimText(stringNullOrDefaultValue(toPrint, optionnal),15),
+        toPrint,
         style: Theme.of(context).textTheme.labelMedium,
         textAlign: TextAlign.center,
+        maxLines: 6,
       ),
     ],
   );

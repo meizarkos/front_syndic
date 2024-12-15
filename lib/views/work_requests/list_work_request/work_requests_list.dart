@@ -13,12 +13,14 @@ class WorkRequestsList extends StatefulWidget {
     super.key,
     required this.futureList,
     required this.goDoDetail,
+    required this.bottomBar,
     this.addWorkRequest,
   });
 
   final List<Future<List<WorkRequest>?> Function()> futureList;
   final Function goDoDetail;
   final VoidCallback? addWorkRequest;
+  final BottomNavigationBar? bottomBar;
 
   @override
   State<WorkRequestsList> createState() => _WorkRequestsListState();
@@ -102,6 +104,7 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
             )
         ),
         floatingActionButton: addFloatingButton(widget.addWorkRequest),
+        bottomNavigationBar: widget.bottomBar,
     );
   }
 
