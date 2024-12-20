@@ -42,6 +42,33 @@ class AppText {
   static const String loginLabelTextEmail = 'Email';
   static const String loginLabelTextPassword = 'Mot de passe';
   static const String loginErrorText = 'Mauvais identifiants';
+  static const String siretNumberWrongSize = 'Le numéro de SIRET doit contenir 14 chiffres';
+  static const String identification = 'Identification';
+
+  /*Register */
+
+  static const String accountTypeTitle = 'Type de compte';
+  static const String artisan = 'Artisan';
+  static const String council = 'Conseil syndical';
+  static const String union = 'Syndicat';
+  static const String unionInfo = 'Informations du syndicat';
+  static const String unionName = 'Nom du syndicat';
+  static const String unionLastName = 'Votre nom';
+  static const String unionFirstName = 'Votre prénom';
+  static const String unionPhone = 'Téléphone';
+  static const String unionSiret = 'Votre numéro de SIRET';
+  static const String siretNumber = 'SIRET : ';
+  static const String confirmPasswd = 'Confirmer le mot de passe';
+  static const String passWdNoMatch = 'Les mots de passe ne correspondent pas';
+  static const String noNameUnion = 'Pas de nom de syndicat trouvé';
+  static const String noAdministratorName = 'Pas de prénom trouvé';
+  static const String noAdministratorFirstName = 'Pas de nom trouvé';
+  static const String noSiretNumber = 'Pas de numéro de SIRET trouvé';
+  static const String contactMode = 'Mode de contact :';
+  static const String email = 'Email :';
+  static const String noEmail = 'Pas d\'email trouvé';
+  static const String phone = 'Téléphone :';
+  static const String administratorUnion = 'Gérer par :';
 
   /* UnionMainStrings */
   static const String noStringNameForCowner = 'Nom introuvable';

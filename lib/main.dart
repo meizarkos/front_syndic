@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:front_syndic/models/estimate/estimate.dart';
 import 'package:front_syndic/models/timing/timing_estimate.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
@@ -13,12 +14,17 @@ import 'package:front_syndic/views/estimate/create_estimate/set_price_and_commen
 import 'package:front_syndic/views/estimate/estimate_artisan/estimate_detail_type_artisan.dart';
 import 'package:front_syndic/views/estimate/estimate_detail/estimate_detail_type.dart';
 import 'package:front_syndic/views/login_register/login.dart';
+import 'package:front_syndic/views/login_register/register/chose_class.dart';
+import 'package:front_syndic/views/login_register/register/union/confirm.dart';
+import 'package:front_syndic/views/login_register/register/union/union_data.dart';
+import 'package:front_syndic/views/login_register/register/union/union_passwd_email.dart';
+import 'package:front_syndic/views/paiement/paiement.dart';
 import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/timing_estimate/create_timing_estimate/create_timing_estimate_type.dart';
 import 'package:front_syndic/views/timing_estimate/list_timing_estimate/timing_estimate_type.dart';
 import 'package:front_syndic/views/union_side/co_owner_list.dart';
-import 'package:front_syndic/views/union_side/create_council/adress/chose_adress_type.dart';
+import 'package:front_syndic/views/adress/chose_adress_type.dart';
 import 'package:front_syndic/views/union_side/create_council/chose_name_size.dart';
 import 'package:front_syndic/views/union_side/create_council/confirm.dart';
 import 'package:front_syndic/views/union_side/create_council/contact_info_council.dart';
@@ -35,10 +41,12 @@ import 'models/council/createCouncil.dart';
 import 'models/to_screen/artisan_detail_work_request.dart';
 import 'models/to_screen/council_work_request_detail.dart';
 import 'models/to_screen/see_conv_arg.dart';
+import 'models/union/create_union.dart';
 import 'models/work_request/create_work_request.dart';
 
-void main() {
+void main(){
   WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = 'pk_test_51QWlA5P3n22SAVzLvhdPoTDKJf1jk5NcN1JSf5D42zMnV6fNZylrfV5DdhqTU84acIcIFAk7MSunGXHyOH3EyBl200bjWz1ZG9';
   runApp(const MyApp());
 }
 
@@ -77,6 +85,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => const ConnectAll(),
+        '/register': (context) => const ChoseClass(),
         '/union_main': (context) => const UnionMain(),
         '/artisan_main': (context) => const ArtisanMain(),
         '/artisan_main/first_conv': (context) => const FirstConvArtisan(),
@@ -87,6 +96,7 @@ class MyApp extends StatelessWidget {
         '/in_progress/council/conversation': (context) => const InProgressCouncilConversation(),
         '/in_progress/artisan':(context)=> const InProgressArtisanConversation(),
         '/in_progress/union':(context)=> const InProgressUnion(),
+        '/paiement': (context) => const Paiement(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
@@ -100,6 +110,7 @@ class MyApp extends StatelessWidget {
               );
             }
             break;
+
           case '/work_requests/detail':
             final arguments = settings.arguments;
             if (arguments is CouncilWorkRequestDetail) {
@@ -158,6 +169,50 @@ class MyApp extends StatelessWidget {
                 builder: (context) => TimingDetailUnion(
                   timingUuid : arguments.uuid,
                   fetchTimingDetail: arguments.futureToFetchData,
+                ),
+              );
+            }
+            break;
+
+          case '/union/get_info':
+            final arguments = settings.arguments;
+            if (arguments is CreateUnion) {
+              return MaterialPageRoute(
+                builder: (context) => UnionData(
+                  createUnion: arguments,
+                ),
+              );
+            }
+            break;
+
+        case '/union/get_adress':
+          final arguments = settings.arguments;
+          if (arguments is CreateUnion) {
+            return MaterialPageRoute(
+              builder: (context) => ChoseAdressRegisterUnion(
+                createUnion: arguments,
+              ),
+            );
+          }
+          break;
+
+          case '/union/get_identification':
+            final arguments = settings.arguments;
+            if (arguments is CreateUnion) {
+              return MaterialPageRoute(
+                builder: (context) => UnionPasswdEmail(
+                  createUnion: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/union/confirm':
+            final arguments = settings.arguments;
+            if (arguments is CreateUnion) {
+              return MaterialPageRoute(
+                builder: (context) => ConfirmUnionCreation(
+                  createUnion: arguments,
                 ),
               );
             }

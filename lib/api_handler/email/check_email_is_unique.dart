@@ -11,7 +11,7 @@ Future<bool> isEmailUnique(String email, VoidCallback handleVisibility) async {
       'email': email
     });
 
-    final response = await requestWithBody(url: '${APIValue.union}is_email_unique', body: body, method: 'POST');
+    final response = await requestWithBody(url: 'is_email_unique', body: body, method: 'POST');
     if(response.statusCode != 200){
       handleVisibility();
       return false;

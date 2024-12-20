@@ -12,18 +12,18 @@ class AttributesUnion {
 }
 
 class UnionApi {
-  final int? id;
-  final String? name;
-  final String? uuid;
-  final String? administratorName;
-  final String? administratorFirstName;
-  final String? siretNumber;
-  final String? phone;
-  final String? adressId;
-  final String? createdAt;
-  final String? updatedAt;
+   int? id;
+   String? name;
+   String? uuid;
+   String? administratorName;
+   String? administratorFirstName;
+   String? siretNumber;
+   String? phone;
+   String? adressId;
+   String? createdAt;
+   String? updatedAt;
 
-  const UnionApi({
+   UnionApi({
     this.id,
     this.name,
     this.uuid,
