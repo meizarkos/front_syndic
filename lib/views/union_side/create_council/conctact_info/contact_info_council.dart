@@ -7,18 +7,20 @@ import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
-import '../../../api_handler/email/check_email_is_unique.dart';
-import '../../../core_value.dart';
-import '../../../models/council/createCouncil.dart';
-import '../../../widget/decoration/text_filed_deco_no_counter.dart';
+import '../../../../api_handler/email/check_email_is_unique.dart';
+import '../../../../core_value.dart';
+import '../../../../models/council/createCouncil.dart';
+import '../../../../widget/decoration/text_filed_deco_no_counter.dart';
 
 class ContactInfoCouncil extends StatefulWidget {
   const ContactInfoCouncil({
     super.key,
-    required this.createCouncil
+    required this.createCouncil,
+    required this.route,
   });
 
   final CreateCouncil createCouncil;
+  final String route;
 
   @override
   State<ContactInfoCouncil> createState() => _ContactInfoCouncilState();
@@ -126,7 +128,6 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
   }
 
   Future<void> save()async{
-
     if(isUse){
       return;
     }
@@ -169,9 +170,7 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
     setState(() {
       errorVisibility = false;
     });
-    Navigator.pushNamed(context, '/union/create_council/adress',
-      arguments: widget.createCouncil
-    );
+    Navigator.pushNamed(context, widget.route, arguments: widget.createCouncil);
     return;
   }
 }

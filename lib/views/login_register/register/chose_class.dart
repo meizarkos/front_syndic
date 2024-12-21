@@ -9,6 +9,9 @@ import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
 import '../../../models/adress/adress.dart';
+import '../../../models/co_owner/co_owner.dart';
+import '../../../models/council/council.dart';
+import '../../../models/council/createCouncil.dart';
 import '../../../widget/header/app_bar_back_button.dart';
 
 class ChoseClass extends StatelessWidget {
@@ -24,7 +27,9 @@ class ChoseClass extends StatelessWidget {
           children: [
             _classButton(AppText.artisan, context, ()=>{
             }),
-            _classButton(AppText.council, context, ()=>{
+            _classButton(AppText.council, context, (){
+              final createCouncil = CreateCouncil(council: Council(), adress: Adress(), coOwner: CoOwner());
+              Navigator.pushNamed(context, '/council/name',arguments: createCouncil);
             }),
             _classButton(AppText.union, context, (){
               final createUnion = CreateUnion(union: UnionApi(), adress: Adress());

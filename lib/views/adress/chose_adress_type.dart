@@ -44,3 +44,23 @@ class ChoseAdressRegisterUnion extends StatelessWidget {
     );
   }
 }
+
+class ChoseAdressRegisterCouncil extends StatelessWidget {
+  const ChoseAdressRegisterCouncil({
+    super.key,
+    required this.createCouncil,
+  });
+
+  final CreateCouncil createCouncil;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoseAdress(
+      onRegister: (Adress address)=>{
+        createCouncil.adress = address,
+        Navigator.pushNamed(context, 'council/get_passwd', arguments: createCouncil)
+      },
+      adress: createCouncil.adress,
+    );
+  }
+}

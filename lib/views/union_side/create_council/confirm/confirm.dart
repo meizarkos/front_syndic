@@ -6,9 +6,9 @@ import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
-import '../../../api_handler/council/post_council.dart';
-import '../../../models/council/createCouncil.dart';
-import '../../../widget/decoration/text_filed_deco_no_counter.dart';
+import '../../../../api_handler/council/post_council.dart';
+import '../../../../models/council/createCouncil.dart';
+import '../../../../widget/decoration/text_filed_deco_no_counter.dart';
 
 const _heightBetweenText = 5.0;
 

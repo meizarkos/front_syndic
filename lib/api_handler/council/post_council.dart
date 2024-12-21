@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/adress/adress.dart';
 import 'package:front_syndic/models/co_owner/co_owner.dart';
@@ -8,7 +9,7 @@ import 'package:front_syndic/models/council/createCouncil.dart';
 import '../../models/council/council.dart';
 import '../request_with_body.dart';
 
-Future<void> postCouncilUnion(CreateCouncil createCouncil)async{
+Future<Response<dynamic>?> postCouncil(CreateCouncil createCouncil, String route)async{
   try{
     final body = jsonEncode({
       "adress" : {
@@ -33,10 +34,23 @@ Future<void> postCouncilUnion(CreateCouncil createCouncil)async{
         AttributesCoOwner.lotSize : createCouncil.coOwner.lotSize,
       }
     });
-    final response = await requestWithBody(url: '${APIValue.union}register_council_from_union', method: "POST", body: body);
-    return;
+    final response = await requestWithBody(url: route, method: "POST", body: body);
+    return response;
   }
   catch(e){
-    return;
+    print(e);
+    return null;
   }
+}
+
+Future<void> postCouncilUnion(CreateCouncil createCouncil)async{
+  final response = await postCouncil(createCouncil, '${APIValue.union}register_council_from_union');
+}
+
+Future<String> registerCouncil(CreateCouncil createCouncil)async{
+  final response = await postCouncil(createCouncil, 'register_council');
+  if(response == null){
+    return '';
+  }
+  return response.data['token'];
 }

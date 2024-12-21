@@ -25,9 +25,11 @@ import 'package:front_syndic/views/timing_estimate/create_timing_estimate/create
 import 'package:front_syndic/views/timing_estimate/list_timing_estimate/timing_estimate_type.dart';
 import 'package:front_syndic/views/union_side/co_owner_list.dart';
 import 'package:front_syndic/views/adress/chose_adress_type.dart';
-import 'package:front_syndic/views/union_side/create_council/chose_name_size.dart';
-import 'package:front_syndic/views/union_side/create_council/confirm.dart';
-import 'package:front_syndic/views/union_side/create_council/contact_info_council.dart';
+import 'package:front_syndic/views/union_side/create_council/chose_name/chose_name_type.dart';
+import 'package:front_syndic/views/union_side/create_council/conctact_info/contact_info_type.dart';
+import 'package:front_syndic/views/union_side/create_council/confirm/confirm.dart';
+import 'package:front_syndic/views/union_side/create_council/confirm/confirm_council.dart';
+import 'package:front_syndic/views/union_side/create_council/create_password/council_passwd.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category/category_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/recap/recap_type.dart';
@@ -250,11 +252,22 @@ class MyApp extends StatelessWidget {
               );
             }
 
+          case 'council/confirm_register':
+            final arguments = settings.arguments;
+            if(arguments is CreateCouncil){
+              return MaterialPageRoute(
+                builder: (context) => CouncilConfirmRegister(
+                  createCouncil: arguments,
+                ),
+              );
+            }
+
+
           case '/union/create_council/name':
             final arguments = settings.arguments;
             if (arguments is CreateCouncil) {
               return MaterialPageRoute(
-                builder: (context) => ChoseName(
+                builder: (context) => UnionChoseNameCouncil(
                   createCouncil: arguments,
                 ),
               );
@@ -265,7 +278,40 @@ class MyApp extends StatelessWidget {
             final arguments = settings.arguments;
             if (arguments is CreateCouncil) {
               return MaterialPageRoute(
-                builder: (context) => ContactInfoCouncil(
+                builder: (context) => UnionContactInfoCouncil(
+                  createCouncil: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/council/name':
+            final arguments = settings.arguments;
+            if (arguments is CreateCouncil) {
+              return MaterialPageRoute(
+                builder: (context) => CouncilChoseName(
+                  createCouncil: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/council/info_contact':
+            final arguments = settings.arguments;
+            if (arguments is CreateCouncil) {
+              return MaterialPageRoute(
+                builder: (context) => CreateContactInfoCouncil(
+                  createCouncil: arguments,
+                ),
+              );
+            }
+            break;
+
+          case 'council/adress':
+            final arguments = settings.arguments;
+            if (arguments is CreateCouncil) {
+              return MaterialPageRoute(
+                builder: (context) => ChoseAdressRegisterCouncil(
                   createCouncil: arguments,
                 ),
               );
@@ -476,6 +522,17 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (context) => TitleAndDescUnion(
                   createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case 'council/get_passwd':
+            final arguments = settings.arguments;
+            if (arguments is CreateCouncil) {
+              return MaterialPageRoute(
+                builder: (context) => CouncilPasswd(
+                  createCouncil: arguments,
                 ),
               );
             }

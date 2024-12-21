@@ -4,18 +4,20 @@ import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
-import '../../../models/council/createCouncil.dart';
-import '../../../text/fr.dart';
-import '../../../widget/decoration/text_filed_deco_no_counter.dart';
-import '../../../widget/header/app_bar_back_button.dart';
+import '../../../../models/council/createCouncil.dart';
+import '../../../../text/fr.dart';
+import '../../../../widget/decoration/text_filed_deco_no_counter.dart';
+import '../../../../widget/header/app_bar_back_button.dart';
 
 class ChoseName extends StatefulWidget {
   const ChoseName({
     super.key,
     required this.createCouncil,
+    required this.route,
   });
 
   final CreateCouncil createCouncil;
+  final String route;
 
   @override
   State<ChoseName> createState() => _ChoseNameState();
@@ -104,7 +106,7 @@ class _ChoseNameState extends State<ChoseName> {
       setState(() {
         errorVisibility = false;
       });
-      Navigator.pushNamed(context, '/union/create_council/contact_info', arguments: widget.createCouncil);
+      Navigator.pushNamed(context, widget.route, arguments: widget.createCouncil);
     }
   }
 }
