@@ -14,6 +14,10 @@ import 'package:front_syndic/views/estimate/create_estimate/set_price_and_commen
 import 'package:front_syndic/views/estimate/estimate_artisan/estimate_detail_type_artisan.dart';
 import 'package:front_syndic/views/estimate/estimate_detail/estimate_detail_type.dart';
 import 'package:front_syndic/views/login_register/login.dart';
+import 'package:front_syndic/views/login_register/register/artisan/bank_info_view.dart';
+import 'package:front_syndic/views/login_register/register/artisan/email_passwd_artisan.dart';
+import 'package:front_syndic/views/login_register/register/artisan/info_artisan.dart';
+import 'package:front_syndic/views/login_register/register/artisan/recap.dart';
 import 'package:front_syndic/views/login_register/register/chose_class.dart';
 import 'package:front_syndic/views/login_register/register/union/confirm.dart';
 import 'package:front_syndic/views/login_register/register/union/union_data.dart';
@@ -39,6 +43,7 @@ import 'package:front_syndic/views/work_requests/list_work_request/work_request_
 import 'package:front_syndic/views/work_requests/patch/recap_type.dart';
 import 'package:front_syndic/views/work_requests/patch/timing_recap.dart';
 
+import 'models/artisan/createArtisan.dart';
 import 'models/council/createCouncil.dart';
 import 'models/to_screen/artisan_detail_work_request.dart';
 import 'models/to_screen/council_work_request_detail.dart';
@@ -112,6 +117,62 @@ class MyApp extends StatelessWidget {
               );
             }
             break;
+
+          case '/artisan/creation_info':
+            final arguments = settings.arguments;
+            if (arguments is CreateArtisan) {
+              return MaterialPageRoute(
+                builder: (context) => ArtisanInfo(
+                  createArtisan: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/artisan/bank_info':
+            final arguments = settings.arguments;
+            if (arguments is CreateArtisan) {
+              return MaterialPageRoute(
+                builder: (context) => BankInfoArtisan(
+                  createArtisan: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/artisan/get_passwd':
+            final arguments = settings.arguments;
+            if (arguments is CreateArtisan) {
+              return MaterialPageRoute(
+                builder: (context) => EmailPasswdArtisan(
+                  createArtisan: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/artisan/get_adress':
+            final arguments = settings.arguments;
+            if (arguments is CreateArtisan) {
+              return MaterialPageRoute(
+                builder: (context) => ChoseAdressRegisterArtisan(
+                  createArtisan: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/artisan/recap':
+            final arguments = settings.arguments;
+            if (arguments is CreateArtisan) {
+              return MaterialPageRoute(
+                builder: (context) => RecapArtisanRegister(
+                  createArtisan: arguments,
+                ),
+              );
+            }
+            break;
+
 
           case '/work_requests/detail':
             final arguments = settings.arguments;

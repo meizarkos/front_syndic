@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_syndic/models/artisan/createArtisan.dart';
 import 'package:front_syndic/models/union/create_union.dart';
 import 'package:front_syndic/views/adress/chose_adress.dart';
 
@@ -61,6 +62,26 @@ class ChoseAdressRegisterCouncil extends StatelessWidget {
         Navigator.pushNamed(context, 'council/get_passwd', arguments: createCouncil)
       },
       adress: createCouncil.adress,
+    );
+  }
+}
+
+class ChoseAdressRegisterArtisan extends StatelessWidget {
+  const ChoseAdressRegisterArtisan({
+    super.key,
+    required this.createArtisan,
+  });
+
+  final CreateArtisan createArtisan;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoseAdress(
+      onRegister: (Adress address)=>{
+        createArtisan.adress = address,
+        Navigator.pushNamed(context, '/artisan/get_passwd', arguments: createArtisan)
+      },
+      adress: createArtisan.adress,
     );
   }
 }

@@ -53,6 +53,7 @@ class AppText {
   static const String union = 'Syndicat';
   static const String unionInfo = 'Informations du syndicat';
   static const String unionName = 'Nom du syndicat';
+  static const String companyName = 'Nom de l\'entreprise';
   static const String unionLastName = 'Votre nom';
   static const String unionFirstName = 'Votre prénom';
   static const String unionPhone = 'Téléphone';
@@ -61,6 +62,7 @@ class AppText {
   static const String confirmPasswd = 'Confirmer le mot de passe';
   static const String passWdNoMatch = 'Les mots de passe ne correspondent pas';
   static const String noNameUnion = 'Pas de nom de syndicat trouvé';
+  static const String noCompanyName = 'Pas de nom d\'entreprise trouvé';
   static const String noAdministratorName = 'Pas de prénom trouvé';
   static const String noAdministratorFirstName = 'Pas de nom trouvé';
   static const String noSiretNumber = 'Pas de numéro de SIRET trouvé';
@@ -69,6 +71,10 @@ class AppText {
   static const String noEmail = 'Pas d\'email trouvé';
   static const String phone = 'Téléphone :';
   static const String administratorUnion = 'Gérer par :';
+  static const String iban = 'IBAN';
+  static const String bic = 'BIC';
+  static const String bankName = 'Nom de la banque';
+  static const String bankData = 'Informations bancaires';
 
   /* UnionMainStrings */
   static const String noStringNameForCowner = 'Nom introuvable';

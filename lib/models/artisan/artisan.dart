@@ -1,24 +1,31 @@
 class AttributesArtisan {
   static const uuid = 'uuid';
   static const companyName = 'company_name';
+  static const firstName = 'first_name';
+  static const lastName = 'last_name';
   static const siretNumber = 'siret_number';
   static const phone = 'phone';
   static const adressId = 'adress_id';
   static const createdAt = 'created_at';
   static const upadatedAt = 'upadated_at';
 }
-class Artisan{
-  final String? uuid;
-  final String? companyName;
-  final String? siretNumber;
-  final String? phone;
-  final String? adressId;
-  final String? createdAt;
-  final String? updatedAt;
 
-  const Artisan({
+class Artisan{
+   String? uuid;
+   String? companyName;
+   String? firstName;
+   String? lastName;
+   String? siretNumber;
+   String? phone;
+   String? adressId;
+   String? createdAt;
+   String? updatedAt;
+
+  Artisan({
     this.uuid,
     this.companyName,
+    this.firstName,
+    this.lastName,
     this.siretNumber,
     this.phone,
     this.adressId,
@@ -30,6 +37,8 @@ class Artisan{
     return Artisan(
       uuid: json[AttributesArtisan.uuid],
       companyName: json[AttributesArtisan.companyName],
+      firstName: json[AttributesArtisan.firstName],
+      lastName: json[AttributesArtisan.lastName],
       siretNumber: json[AttributesArtisan.siretNumber],
       phone: json[AttributesArtisan.phone],
       adressId: json[AttributesArtisan.adressId],
