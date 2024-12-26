@@ -32,23 +32,11 @@ class _UnionMainState extends State<UnionMain> {
             top: 40),
         child: Column(
           children: [
-            Row(
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.75,
-                  child: SearchBarCustom(
-                    onChanged: _searchValueChange,
-                  ),
-                ),
-                const SizedBox(width: 15),
-                IconButton(
-                  icon: const Icon(Icons.account_circle),
-                  iconSize: 40,
-                  onPressed: () {
-                    //Navigator.pop(context);
-                  },
-                ),
-              ],
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.75,
+              child: SearchBarCustom(
+                onChanged: _searchValueChange,
+              ),
             ),
             const SizedBox(height: 30),
             FutureBuilder(

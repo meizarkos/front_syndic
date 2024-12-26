@@ -23,6 +23,9 @@ class _TopScreenInProgressCouncilState extends State<TopScreenInProgressCouncil>
   @override
   Widget build(BuildContext context) {
     return TopScreenInProgress(
+        onAccountParameter: () {
+          Navigator.pushNamed(context, '/account');
+        },
         onChangedSearchValue: widget.onChangedSearchValue,
         onCategoryChanged: widget.onCategoryChanged,
         listOfCategory: AppText.inProgressListCouncil,
@@ -51,6 +54,9 @@ class _TopScreenInProgressArtisanState extends State<TopScreenInProgressArtisan>
   @override
   Widget build(BuildContext context) {
     return TopScreenInProgress(
+      onAccountParameter: () {
+        Navigator.pushNamed(context, '/account');
+      },
       onChangedSearchValue: widget.onChangedSearchValue,
       onCategoryChanged: widget.onCategoryChanged,
       listOfCategory: AppText.inProgressListCouncil,
@@ -80,6 +86,9 @@ class _TopScreenInProgressUnionState extends State<TopScreenInProgressUnion> {
   @override
   Widget build(BuildContext context) {
     return TopScreenInProgress(
+      onAccountParameter: () {
+        Navigator.pushNamed(context, '/account');
+      },
       onChangedSearchValue: widget.onChangedSearchValue,
       onCategoryChanged: widget.onCategoryChanged,
       listOfCategory: AppText.inProgressListCouncil,

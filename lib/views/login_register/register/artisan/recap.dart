@@ -118,7 +118,7 @@ class RecapArtisanRegister extends StatelessWidget {
       final token = await registerArtisan(createArtisan);
       if(token != ''){
         Credential.instance.token = token;
-        Navigator.pushNamedAndRemoveUntil(context, '/artisan_main', (route) => false);
+        //Navigator.pushNamedAndRemoveUntil(context, '/artisan_main', (route) => false);
       }
   }
 }

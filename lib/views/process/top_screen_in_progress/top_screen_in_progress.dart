@@ -7,11 +7,13 @@ import '../../../widget/search_bar/search_bar.dart';
 class TopScreenInProgress extends StatefulWidget {
   const TopScreenInProgress({
     super.key,
+    required this.onAccountParameter,
     required this.onChangedSearchValue,          //to factorize
     required this.onCategoryChanged,  //to factorize
     required this.listOfCategory,    //to factorize
   });
 
+  final Function() onAccountParameter;
   final Function(String) onChangedSearchValue;
   final Function(String) onCategoryChanged;
   final List<String> listOfCategory;
@@ -31,8 +33,21 @@ class _TopScreenInProgressState extends State<TopScreenInProgress> {
       height: 170,
       child: Column(
         children: [
-          SearchBarCustom(
-            onChanged: widget.onChangedSearchValue,
+          Row(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.75,
+                child: SearchBarCustom(
+                  onChanged: widget.onChangedSearchValue,
+                ),
+              ),
+              const SizedBox(width: 15),
+              IconButton(
+                icon: const Icon(Icons.account_circle),
+                iconSize: 40,
+                onPressed: widget.onAccountParameter,
+              ),
+            ],
           ),
           const SizedBox(height: 15),
           Row(

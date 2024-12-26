@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:front_syndic/api_handler/request_with_body.dart';
 import 'package:front_syndic/models/artisan/createArtisan.dart';
-import 'package:front_syndic/models/union/create_union.dart';
 
 Future<String> registerArtisan(CreateArtisan createArtisan) async{
   //token a stocker dans le storage
@@ -27,6 +26,11 @@ Future<String> registerArtisan(CreateArtisan createArtisan) async{
         "last_name": createArtisan.artisan.lastName,
         "siret_number": createArtisan.artisan.siretNumber,
         "phone": createArtisan.artisan.phone,
+      },
+      "bank_info":{
+        "iban": createArtisan.bankInfo.iban,
+        "bic": createArtisan.bankInfo.bic,
+        "bank_name": createArtisan.bankInfo.bankName,
       }
     });
     final response = await requestWithBody(url: 'register_artisan', method: "POST", body: body);

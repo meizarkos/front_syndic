@@ -34,8 +34,8 @@ class _EmailPasswdArtisanState extends State<EmailPasswdArtisan> {
   void initState(){
     super.initState();
     _emailController = TextEditingController(text: widget.createArtisan.email);
-    _passwdController = TextEditingController(text: '');
-    _confirmPasswdController = TextEditingController(text: '');
+    _passwdController = TextEditingController(text: widget.createArtisan.password);
+    _confirmPasswdController = TextEditingController(text: widget.createArtisan.password);
   }
 
   @override
