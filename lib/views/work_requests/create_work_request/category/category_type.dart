@@ -15,7 +15,7 @@ class CategoryCouncil extends StatelessWidget {
   Widget build(BuildContext context) {
     return WorkRequestCategory(
       createWorkRequest: createWorkRequest,
-      route : '/work_requests/chose_date_time'
+      route : '/work_requests/council/adress'
     );
   }
 }
@@ -32,7 +32,7 @@ class CategoryUnion extends StatelessWidget {
   Widget build(BuildContext context) {
     return WorkRequestCategory(
         createWorkRequest: createWorkRequest,
-        route : 'union/work_requests/chose_date_time'
+        route : 'union/work_requests/adress'
     );
   }
 }

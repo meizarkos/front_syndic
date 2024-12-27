@@ -83,7 +83,7 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                             itemCount: dataFiltered.length + 1,
                             itemBuilder: (context, index) {
                               if (index == dataFiltered.length) {
-                                return const SizedBox(height: 15);
+                                return const SizedBox(height: 50);
                               }
                               return GestureDetector(
                                 onTap: ()=>widget.goDoDetail(dataFiltered[index].uuid),

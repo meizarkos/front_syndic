@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:front_syndic/api_handler/request_with_body.dart';
 import 'package:front_syndic/models/artisan/createArtisan.dart';
 
+import '../../models/adress/adress.dart';
+
 Future<String> registerArtisan(CreateArtisan createArtisan) async{
   //token a stocker dans le storage
   // "/register_union"
@@ -19,6 +21,7 @@ Future<String> registerArtisan(CreateArtisan createArtisan) async{
         "street":createArtisan.adress.street,
         "postal_code":createArtisan.adress.postalCode,
         "region":createArtisan.adress.region,
+        AttributesAdress.comment : createArtisan.adress.comment,
       },
       "artisan":{
         "company_name": createArtisan.artisan.companyName,

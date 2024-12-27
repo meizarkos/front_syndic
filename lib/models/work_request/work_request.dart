@@ -12,6 +12,7 @@ class AttributesWorkRequest {
   static const councilId = 'council_id';
   static const unionId = 'union_id';
   static const userId = 'user_id';
+  static const adressId = 'adress_id';
   static const updatedAt = 'upadated_at';
   static const createdAt = 'created_at';
 }

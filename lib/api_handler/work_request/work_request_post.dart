@@ -5,6 +5,7 @@ import 'package:front_syndic/models/timing/timing.dart';
 import 'package:front_syndic/models/work_request/create_work_request.dart';
 import 'package:front_syndic/models/work_request/work_request.dart';
 import '../../core_value.dart';
+import '../../models/adress/adress.dart';
 import '../../utils/date_to_string/date.dart';
 
 Future<void> postWorkRequest(CreateWorkRequest createWorkRequest,String route) async {
@@ -27,6 +28,14 @@ Future<void> postWorkRequest(CreateWorkRequest createWorkRequest,String route) a
     AttributesWorkRequest.title: createWorkRequest.workRequest.title,
     AttributesWorkRequest.description: createWorkRequest.workRequest.description,
     AttributesWorkRequest.category: createWorkRequest.workRequest.category,
+    "adress":{
+      AttributesAdress.country : createWorkRequest.adress.country,
+      AttributesAdress.city : createWorkRequest.adress.city,
+      AttributesAdress.street : createWorkRequest.adress.street,
+      AttributesAdress.postalCode : createWorkRequest.adress.postalCode,
+      AttributesAdress.region :createWorkRequest.adress.region,
+      AttributesAdress.comment : createWorkRequest.adress.comment,
+    },
     "timings" : createWorkRequest.workRequest.timings?.map((timing) => {
       AttributesTiming.date: formatStringToApiDate(timing.date, "yyyy-MM-dd"),
       AttributesTiming.time: timing.time,

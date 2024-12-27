@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:front_syndic/api_handler/request_with_body.dart';
 import 'package:front_syndic/models/union/create_union.dart';
 
+import '../../models/adress/adress.dart';
+
 Future<String> registerUnion(CreateUnion createUnion) async{
   //token a stocker dans le storage
   // "/register_union"
@@ -19,6 +21,7 @@ Future<String> registerUnion(CreateUnion createUnion) async{
         "street":createUnion.adress.street,
         "postal_code":createUnion.adress.postalCode,
         "region":createUnion.adress.region,
+        AttributesAdress.comment : createUnion.adress.comment,
       },
       "union":{
         "administrator_name": createUnion.union.administratorName,

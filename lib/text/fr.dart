@@ -76,6 +76,9 @@ class AppText {
   static const String bankName = 'Nom de la banque';
   static const String bankData = 'Informations bancaires';
 
+  /* Adress */
+  static const String prefillAdress = 'Pré-remplir l\'adresse';
+
   /* UnionMainStrings */
   static const String noStringNameForCowner = 'Nom introuvable';
   static const String noStringNameForCownerSubtitle = 'Adresse inconnu';

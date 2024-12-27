@@ -14,10 +14,12 @@ class ChoseAdress extends StatefulWidget {
     super.key,
     required this.onRegister,
     required this.adress,
+    this.prefillAdress,
   });
 
   final Function onRegister;
   final Adress adress;
+  final Future<Adress?> Function()? prefillAdress;
 
   @override
   State<ChoseAdress> createState() => _ChoseAdressState();
@@ -123,6 +125,36 @@ class _ChoseAdressState extends State<ChoseAdress> {
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               ErrorVisibility(errorVisibility: errorVisibility, errorText: AppText.adressCreationError),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
+              widget.prefillAdress != null ? GestureDetector(
+                onTap: () async {
+                  try {
+                    final adress = await widget.prefillAdress!();
+                    if(adress != null){
+                      setState(() {
+                        _cityController!.text = adress.city ?? '';
+                        widget.adress.city = adress.city;
+                        _streetController!.text = adress.street ?? '';
+                        widget.adress.street = adress.street;
+                        _countryController!.text = adress.country ?? '';
+                        widget.adress.country = adress.country;
+                        _postalCodeController!.text = adress.postalCode ?? '';
+                        widget.adress.postalCode = adress.postalCode;
+                        _regionController!.text = adress.region ?? '';
+                        widget.adress.region = adress.region;
+                        _commentController!.text = adress.comment ?? '';
+                        widget.adress.comment = adress.comment;
+                      });
+                    }
+                  } catch (e) {
+                    print('Failed to prefill address: $e');
+                  }
+                },
+                child: Text(
+                  AppText.prefillAdress,
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ) : const SizedBox(),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
               elevatedButtonAndTextColor(
                AppColors.mainBackgroundColor,
                   AppText.save,
@@ -149,9 +181,6 @@ class _ChoseAdressState extends State<ChoseAdress> {
                   },
                   AppColors.mainTextColor,
               ),
-              TextField(
-
-              )
             ],
           ),
         ),

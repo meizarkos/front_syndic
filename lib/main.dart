@@ -522,6 +522,17 @@ class MyApp extends StatelessWidget {
             }
             break;
 
+          case '/work_requests/council/adress':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => CreateWorkRequestAdressCouncil(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
           case '/work_requests/chose_date_time':
             final arguments = settings.arguments;
             if (arguments is CreateWorkRequest) {
@@ -549,6 +560,17 @@ class MyApp extends StatelessWidget {
             if (arguments is CreateWorkRequest) {
               return MaterialPageRoute(
                 builder: (context) => RecapUnionWorkRequest(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case 'union/work_requests/adress':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => CreateWorkRequestAdressUnion(
                   createWorkRequest: arguments,
                 ),
               );
