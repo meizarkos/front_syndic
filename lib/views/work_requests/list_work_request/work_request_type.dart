@@ -23,7 +23,8 @@ class WorkRequestListCouncil extends StatelessWidget {
       futureList: [fetchWorkRequestFromCoOwnerPending, fetchWorkRequestFromCoOwnerPast],
       goDoDetail: (String? uuid){
         if(uuid == null) return;
-        Navigator.pushNamed(context,'/work_requests/detail',
+        Navigator.pushNamed(context, '/council/modify_demand',arguments: uuid);
+        /*Navigator.pushNamed(context,'/work_requests/detail',
           arguments: CouncilWorkRequestDetail(
             uuid : uuid,
             futureToFetchData: fetchWorkRequestDetailCouncil,
@@ -44,7 +45,7 @@ class WorkRequestListCouncil extends StatelessWidget {
               );
             },
           ),
-        );
+        );*/
       },
       bottomBar: bottomNavigationBarCouncil(context, 1),
       addWorkRequest: ()async {
@@ -66,7 +67,8 @@ class WorkRequestListUnion extends StatelessWidget {
       futureList: [fetchAllWorkRequestActiveUnion, fetchAllWorkRequestCompletedUnion],
       goDoDetail: (String? uuid){
         if(uuid == null) return;
-        Navigator.pushNamed(context,'union/work_requests/detail',
+        Navigator.pushNamed(context, '/union/modify_demand',arguments: uuid);
+        /*Navigator.pushNamed(context,'union/work_requests/detail',
           arguments: CouncilWorkRequestDetail(
             uuid : uuid,
             futureToFetchData: fetchWorkRequestDetailUnion,
@@ -87,7 +89,7 @@ class WorkRequestListUnion extends StatelessWidget {
               );
             },
           ),
-        );
+        );*/
       },
       bottomBar: bottomNavigationBarUnion(context, 1),
     );

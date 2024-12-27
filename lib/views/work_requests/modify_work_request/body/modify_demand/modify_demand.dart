@@ -3,24 +3,23 @@ import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/text/fr.dart';
 
-import '../../../api_handler/work_request/patch_work_request.dart';
-import '../../../models/work_request/work_request.dart';
-import '../../../widget/decoration/text_field_deco_main.dart';
-import '../../../widget/visibility/error.dart';
+import '../../../../../models/work_request/work_request.dart';
+import '../../../../../widget/decoration/text_field_deco_main.dart';
+import '../../../../../widget/visibility/error.dart';
 
 class RecapPatchWorkRequest extends StatefulWidget {
   const RecapPatchWorkRequest({
     super.key,
     required this.uuid,
     required this.fetchDetailWorkRequest,
-    required this.onBack,
     required this.onDelete,
+    required this.onPatchApi,
   });
 
-  final String? uuid;
-  final Function(String?) fetchDetailWorkRequest;
-  final VoidCallback onBack;
-  final Function(String?) onDelete;
+  final String uuid;
+  final Future<WorkRequest?> Function(String?) fetchDetailWorkRequest;
+  final Future<void> Function(String) onDelete;
+  final Function(String, WorkRequest) onPatchApi;
 
   @override
   State<RecapPatchWorkRequest> createState() => _RecapPatchWorkRequestState();
@@ -28,45 +27,36 @@ class RecapPatchWorkRequest extends StatefulWidget {
 
 class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
   WorkRequest workRequestStatic = WorkRequest();
+
   bool errorVisibility = false;
   bool successVisibility = false;
   bool apiErrorVisibility = false;
-  bool isLoading = true;
-  late TextEditingController titleController;
-  late TextEditingController descriptionController;
+
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    fetchData();
+    widget.fetchDetailWorkRequest(widget.uuid).then((value) => {
+      if(value != null){
+        setState(() {
+          workRequestStatic = value;
+          titleController = TextEditingController(text: workRequestStatic.title ?? '');
+          descriptionController = TextEditingController(text: workRequestStatic.description ?? '');
+        })
+      }
+      else{
+        setState(() {
+          apiErrorVisibility = true;
+        })
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
       return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: widget.onBack,
-          ),
-        ),
-        body: Column(
-          children: [
-            ErrorVisibility(
-                errorVisibility: apiErrorVisibility,
-                errorText: AppText.apiErrorText),
-          ],
-        ),
-      );
-    } else {
-      return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: widget.onBack,
-          ),
-        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
@@ -147,19 +137,6 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
                         ),
                       )),
                 ),
-                const SizedBox(height: 25),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/work_requests/timings',
-                        arguments: workRequestStatic.uuid);
-                  },
-                  child: Center(
-                    child: Text(
-                      AppText.recapGoToMeeting,
-                      style: Theme.of(context).textTheme.labelSmall,
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
@@ -214,30 +191,6 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
           ),
         ),
       );
-    }
-  }
-
-  Future<void> fetchData() async {
-    if(widget.uuid == null){
-      Navigator.pop(context);
-      return;
-    }
-    try {
-      final res = await widget.fetchDetailWorkRequest(widget.uuid!);
-      if (res == null) {
-        apiErrorVisibility = true;
-        return;
-      }
-      setState(() {
-        workRequestStatic = res;
-        isLoading = false;
-        titleController = TextEditingController(text: workRequestStatic.title);
-        descriptionController =
-            TextEditingController(text: workRequestStatic.description);
-      });
-    } catch (e) {
-      apiErrorVisibility = true;
-    }
   }
 
   void modify() async {
@@ -257,7 +210,7 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
         successVisibility = true;
       });
       if(workRequestStatic.uuid == null) return;
-      await patchWorkRequestDetail(workRequestStatic.uuid!, workRequestStatic);
+      await widget.onPatchApi(workRequestStatic.uuid!, workRequestStatic);
     }
   }
 
@@ -278,7 +231,8 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
             TextButton(
               child: Text(AppText.confirm),
               onPressed: () {
-                widget.onDelete(workRequestStatic.uuid);
+                if(workRequestStatic.uuid == null) return;
+                widget.onDelete(workRequestStatic.uuid!);
               }
             ),
           ],

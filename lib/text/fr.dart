@@ -79,6 +79,8 @@ class AppText {
   /* Adress */
   static const String prefillAdress = 'Pré-remplir l\'adresse';
 
+
+
   /* UnionMainStrings */
   static const String noStringNameForCowner = 'Nom introuvable';
   static const String noStringNameForCownerSubtitle = 'Adresse inconnu';
@@ -112,6 +114,9 @@ class AppText {
   /* WorkRequest */
   static const String workRequestsPending = 'En attente';
   static const String workRequestsHistory = 'Historique';
+  static const String adress = 'Adresse';
+  static const String demand = 'Demande';
+  static const String dispo = 'Dispo.';
 
   /* takePictureWorkRequest */
   static const String takePictureSkip = 'Passer cette étape';
@@ -141,7 +146,7 @@ class AppText {
   static const String createWorkRequestConfirm = 'Confirmer cette demande';
 
   /* Recap */
-  static const String recapError = 'Tous les champs sont obligatoieres';
+  static const String recapError = 'Tous les champs sont obligatoires';
   static const String recapGoToMeeting = 'Modifier mes disponibilitées';
   static const String recapSuccessModifying = 'Votre demande a bien été modifiée';
   static const String recapDialogDelete = "Confirmer la supression vous fera perdre toutes les données liées à l'affaire en cours, devis, rendez-vous et autres seront annulés/supprimés";
@@ -246,7 +251,6 @@ class AppText {
   static const String lotNumber = 'Nombre de lots';
   static const String phoneCouncil = 'Téléphone du conseil';
   static const String firstName = 'Prénom';
-  static const String adress = 'Adresse';
   static const String emailFormatError = 'Format de l\'email incorrect';
   static const String createATemporaryPassword = 'Créer un mot de passe temporaire';
 }
