@@ -16,8 +16,26 @@ class TimingRecapCouncil extends StatelessWidget {
   Widget build(BuildContext context) {
     return RecapTimingChange(
       uuid: workRequestUuid,
-      fetchAllTimingFromWorkRequest: fetchTimingFromWorkRequest,
-      patchAllTimingFromWorkRequest: patchTimingFromWorkRequest,
+      fetchAllTimingFromWorkRequest: fetchTimingFromWorkRequestCouncil,
+      patchAllTimingFromWorkRequest: patchTimingFromWorkRequestCouncil,
+    );
+  }
+}
+
+class TimingRecapUnion extends StatelessWidget {
+  const TimingRecapUnion({
+    super.key,
+    required this.workRequestUuid,
+  });
+
+  final String workRequestUuid;
+
+  @override
+  Widget build(BuildContext context) {
+    return RecapTimingChange(
+      uuid: workRequestUuid,
+      fetchAllTimingFromWorkRequest: fetchTimingFromWorkRequestUnion,
+      patchAllTimingFromWorkRequest: patchTimingFromWorkRequestUnion,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../text/fr.dart';
+import '../body/adress/modify_adress_type.dart';
 import '../body/dispo/timing_recap_type.dart';
 import '../body/modify_demand/modify_demand_type.dart';
 
@@ -12,9 +13,9 @@ Widget handlerBodyCouncil(String category,String workRequestUuid){
     return TimingRecapCouncil(workRequestUuid: workRequestUuid);
   }
   else if(category == AppText.adress){
-    return const Text('Adress');
+    return ModifyAdressWorkRequestCouncil(workRequestUuid: workRequestUuid);
   }
   else{
-    return const Text('Demand');
+    return RecapWorkRequestCouncil(workRequestUuid: workRequestUuid);
   }
 }

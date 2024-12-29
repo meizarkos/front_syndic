@@ -15,8 +15,12 @@ Future<List<Timing>?> fetchTimings(String route) async {
 }
 
 
-Future<List<Timing>?> fetchTimingFromWorkRequest(String uuid) async {
+Future<List<Timing>?> fetchTimingFromWorkRequestCouncil(String uuid) async {
   return await fetchTimings('${APIValue.unionCouncil}timings_detail/$uuid');
+}
+
+Future<List<Timing>?> fetchTimingFromWorkRequestUnion(String uuid) async {
+  return await fetchTimings('${APIValue.union}timings_detail_union/$uuid');
 }
 
 Future<List<Timing>?> fetchTimingsCouncil() async {

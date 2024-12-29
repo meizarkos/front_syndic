@@ -6,7 +6,7 @@ import 'package:front_syndic/models/timing/timing.dart';
 
 import '../../utils/date_to_string/date.dart';
 
-Future<void> patchTimingFromWorkRequest(String uuid,List<Timing>? timings) async {
+Future<void> patchTimingFromWorkRequest(String route,List<Timing>? timings) async {
   if(timings == null || timings.isEmpty){
     return;
   }
@@ -18,9 +18,17 @@ Future<void> patchTimingFromWorkRequest(String uuid,List<Timing>? timings) async
         AttributesTiming.time: timing.time,
       }).toList(),
     });
-    await requestWithBody(url: '${APIValue.unionCouncil}timings_detail/$uuid', method: "PATCH", body: body);
+    final res = await requestWithBody(url: route, method: "PATCH", body: body);
     return;
   } catch(e) {
     return;
   }
+}
+
+Future<void> patchTimingFromWorkRequestCouncil(String uuid,List<Timing>? timings) async {
+  return await patchTimingFromWorkRequest('${APIValue.unionCouncil}timings_detail/$uuid', timings);
+}
+
+Future<void> patchTimingFromWorkRequestUnion(String uuid,List<Timing>? timings) async {
+  return await patchTimingFromWorkRequest('${APIValue.union}timings_detail_union/$uuid', timings);
 }

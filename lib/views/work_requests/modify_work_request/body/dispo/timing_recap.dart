@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/utils/date_to_string/date.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
-import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 
 import '../../../../../../models/timing/timing.dart';
 import '../../../../../../text/fr.dart';
 import '../../../../../../widget/visibility/error.dart';
-import '../../../../../api_handler/timing/patch_timing_of_work_request.dart';
 import '../../../create_work_request/chose_time/cell_time.dart';
 
 class RecapTimingChange extends StatefulWidget {
@@ -100,14 +98,6 @@ class _RecapTimingChange extends State<RecapTimingChange> {
                 );
               }),
             const SizedBox(height: 35),
-            elevatedButtonAndTextColor(
-              AppColors.mainBackgroundColor,
-              AppText.save,
-              context,
-              _onSave,
-              AppColors.mainTextColor,
-            ),
-            const SizedBox(height: 20),
             Center(
               child: Visibility(
                   visible: successVisibility,
@@ -119,6 +109,15 @@ class _RecapTimingChange extends State<RecapTimingChange> {
                     ),
                   )),
             ),
+            const SizedBox(height: 20),
+            elevatedButtonAndTextColor(
+              AppColors.mainBackgroundColor,
+              AppText.save,
+              context,
+              _onSave,
+              AppColors.mainTextColor,
+            ),
+            const SizedBox(height: 50),
           ],
         ),
       ),
@@ -175,7 +174,7 @@ class _RecapTimingChange extends State<RecapTimingChange> {
       });
       return;
     }
-    patchTimingFromWorkRequest(widget.uuid, timings);
+    widget.patchAllTimingFromWorkRequest(widget.uuid, timings);
     setState(() {
       successVisibility = true;
       errorVisibility = false;

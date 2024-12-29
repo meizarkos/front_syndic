@@ -21,6 +21,14 @@ Future<Adress> fetchAdressUnion(String? councilId)async{
   return await fetchPrefillAdress('${APIValue.union}adress_council_by_id/$councilId');
 }
 
+Future<Adress> fetchAdressWorkRequestUnion(String workRequestUuid)async{
+  return await fetchPrefillAdress('${APIValue.union}adress_work_request_union/$workRequestUuid');
+}
+
+Future<Adress> fetchAdressWorkRequestCouncil(String workRequestUuid)async{
+  return await fetchPrefillAdress('${APIValue.unionCouncil}adress_work_request_council/$workRequestUuid');
+}
+
 Future<Adress> fetchAdressCouncil()async{
   return await fetchPrefillAdress('${APIValue.unionCouncil}adress_council');
 }
