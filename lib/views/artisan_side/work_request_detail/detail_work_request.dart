@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../color.dart';
 import '../../../core_value.dart';
-import '../../../models/estimate/estimate.dart';
 import '../../../models/to_screen/see_conv_arg.dart';
 import '../../../models/work_request/work_request.dart';
 import '../../../text/fr.dart';
@@ -85,6 +84,28 @@ class _DetailWorkRequestArtisanSideState extends State<DetailWorkRequestArtisanS
                   ),
                   const SizedBox(height: spaceTitleDesc),
                   divider(),
+                  const SizedBox(height: spaceTitleDesc),
+                  Text(
+                    AppText.adress,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  const SizedBox(height: spaceTitleDesc),
+                  Container(
+                    padding: EdgeInsets.all(AppUIValue.spaceScreenToAny),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: Text(
+                      "${data.adress?.country ?? ''}\n\n"
+                          "${data.adress?.city ?? ''}, ${data.adress?.region ?? ''}\n\n"
+                          "${data.adress?.street ?? ''}\n\n"
+                          "${data.adress?.comment ?? ''}",
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
+                  ),
+
                   const SizedBox(height: spaceCate),
                   Text(
                     AppText.category,
