@@ -105,7 +105,6 @@ class _DetailWorkRequestArtisanSideState extends State<DetailWorkRequestArtisanS
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
-
                   const SizedBox(height: spaceCate),
                   Text(
                     AppText.category,

@@ -55,7 +55,7 @@ class _TopScreenInProgressArtisanState extends State<TopScreenInProgressArtisan>
   Widget build(BuildContext context) {
     return TopScreenInProgress(
       onAccountParameter: () {
-        Navigator.pushNamed(context, '/account');
+        Navigator.pushNamed(context, '/artisan/account');
       },
       onChangedSearchValue: widget.onChangedSearchValue,
       onCategoryChanged: widget.onCategoryChanged,

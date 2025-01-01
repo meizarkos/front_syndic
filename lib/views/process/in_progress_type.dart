@@ -61,7 +61,7 @@ class _InProgressArtisanConversationState extends State<InProgressArtisanConvers
   @override
   Widget build(BuildContext context) {
     return InProgressMain(
-      top : TopScreenInProgressCouncil(
+      top : TopScreenInProgressArtisan(
         onChangedSearchValue: _searchValueChange,
         category: category,
         onCategoryChanged: _categoryChange,

@@ -160,6 +160,14 @@ class AppText {
   static const String workRequestArtisanSideSendFirstMessage = 'Contacter';
   static const String workRequestArtisanSideDisponibility = 'Disponibilitées';
 
+  /* Account */
+  static const String account = 'Votre compte';
+  static const String myData = 'Mes données';
+  static const String myAdress = "Changer d'adresse";
+  static const String myBank = 'Mes informations bancaires';
+  static const String myLogin = 'Changer de login';
+  static const String successfulModify = 'Modification réussie';
+
   /* WorkRequestMessage */
   static const String workRequestMessageHint = 'Type your message...';
   static const String workRequestNoMessage = 'No message';
