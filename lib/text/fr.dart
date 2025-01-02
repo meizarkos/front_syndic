@@ -28,6 +28,7 @@ class AppText {
   static const String from = 'du';
   static const String one = 'Un';
   static const String validate = 'Valider';
+  static const String successModify = 'Modification réussie';
 
   /* General not found */
   static const String noCategoryFound = 'Pas de catégorie';
@@ -161,12 +162,14 @@ class AppText {
   static const String workRequestArtisanSideDisponibility = 'Disponibilitées';
 
   /* Account */
+
   static const String account = 'Votre compte';
   static const String myData = 'Mes données';
   static const String myAdress = "Changer d'adresse";
   static const String myBank = 'Mes informations bancaires';
   static const String myLogin = 'Changer de login';
   static const String successfulModify = 'Modification réussie';
+  static const String emailCantBeEmpty = 'L\'email ne peut pas être vide';
 
   /* WorkRequestMessage */
   static const String workRequestMessageHint = 'Type your message...';

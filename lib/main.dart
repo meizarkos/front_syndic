@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:front_syndic/models/estimate/estimate.dart';
 import 'package:front_syndic/models/timing/timing_estimate.dart';
+import 'package:front_syndic/views/account/artisan/modify_adress_artisan.dart';
 import 'package:front_syndic/views/account/artisan/modify_artisan.dart';
+import 'package:front_syndic/views/account/artisan/modify_surf_artisan.dart';
 import 'package:front_syndic/views/account/chose_modify.dart';
 import 'package:front_syndic/views/account/chose_modify_type.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
@@ -108,6 +110,8 @@ class MyApp extends StatelessWidget {
         '/paiement': (context) => const Paiement(),
         '/artisan/account': (context) => const ChoseModifyTypeArtisan(),
         '/artisan/modify_artisan': (context) => const ModifyArtisan(),
+        '/artisan/modify_artisan_address': (context) => const ModifyAdressArtisan(),
+        '/artisan/modify_surf': (context) => const ModifySurfArtisan(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {

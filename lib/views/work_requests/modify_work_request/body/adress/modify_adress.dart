@@ -13,12 +13,12 @@ class ChoseAdressPatchWorkRequest extends StatefulWidget {
     super.key,
     required this.onRegister,
     required this.fetchAdress,
-    required this.workRequestUuid,
+    this.workRequestUuid,
   });
 
-  final Future<void> Function(String,Adress) onRegister;
-  final Future<Adress> Function(String) fetchAdress;
-  final String workRequestUuid;
+  final Future<void> Function(String?,Adress) onRegister;
+  final Future<Adress> Function(String?) fetchAdress;
+  final String? workRequestUuid;
 
   @override
   State<ChoseAdressPatchWorkRequest> createState() => _ChoseAdressPatchWorkRequestState();

@@ -31,9 +31,9 @@ class ChoseModifyTypeArtisan extends StatelessWidget {
     return ChoseModifyCategories(
       list: [
         textGo(context, AppText.myData, '/artisan/modify_artisan'),
-        textGo(context, AppText.myAdress, '/modify_artisan_address'),
+        textGo(context, AppText.myAdress, '/artisan/modify_artisan_address'),
         textGo(context, AppText.myBank, '/modify_artisan_phone'),
-        textGo(context,AppText.myLogin, '/modify_artisan_email'),
+        textGo(context,AppText.myLogin, '/artisan/modify_surf'),
       ],
     );
   }
