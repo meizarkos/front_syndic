@@ -47,7 +47,9 @@ class CoOwner{
       adressId: json[AttributesCoOwner.adressId],
       unionId: json[AttributesCoOwner.unionId],
       councilId: json[AttributesCoOwner.councilId],
-      adress: Adress.fromJson(json['adress']),
+      adress: json.containsKey('adress') && json['adress'] != null
+          ? Adress.fromJson(json['adress'])
+          : null,
       council: json.containsKey(AttributesCoOwner.council) && json[AttributesCoOwner.council] != null
           ? Council.fromJson(json[AttributesCoOwner.council])
           : null,

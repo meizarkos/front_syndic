@@ -170,6 +170,9 @@ class AppText {
   static const String myLogin = 'Changer de login';
   static const String successfulModify = 'Modification réussie';
   static const String emailCantBeEmpty = 'L\'email ne peut pas être vide';
+  static const String coOwnerName = 'Nom de la copropriété';
+  static const String lotSize = 'Nombre de lots';
+  static const String wrongInt = 'Veuillez entrer un nombre entier';
 
   /* WorkRequestMessage */
   static const String workRequestMessageHint = 'Type your message...';

@@ -16,3 +16,7 @@ Future<String> getEmail(String route) async {
 Future<String> getEmailArtisan()async{
   return await getEmail('${APIValue.artisan}email_surf_artisan');
 }
+
+Future<String> getEmailCouncil()async{
+  return await getEmail('${APIValue.unionCouncil}email_surf');
+}

@@ -22,3 +22,7 @@ Future<void> patchSurf(String route, Surf surf)async{
 Future<void> patchSurfArtisan(Surf surf)async{
   return await patchSurf('${APIValue.artisan}surf_artisan', surf);
 }
+
+Future<void> patchSurfCouncil(Surf surf)async{
+  return await patchSurf('${APIValue.unionCouncil}surf_council', surf);
+}

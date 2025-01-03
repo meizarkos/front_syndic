@@ -42,3 +42,7 @@ Future<Adress> fetchAdressCouncil()async{
 Future<Adress> fetchAdressArtisan(String? useless)async{
   return await fetchPrefillAdress('${APIValue.artisan}adress_artisan');
 }
+
+Future<Adress> fetchAdressCouncilForModification(String? useless)async{
+  return await fetchPrefillAdress('${APIValue.unionCouncil}adress_council');
+}

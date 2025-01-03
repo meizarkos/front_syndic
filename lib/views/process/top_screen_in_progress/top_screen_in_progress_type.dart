@@ -24,7 +24,7 @@ class _TopScreenInProgressCouncilState extends State<TopScreenInProgressCouncil>
   Widget build(BuildContext context) {
     return TopScreenInProgress(
         onAccountParameter: () {
-          Navigator.pushNamed(context, '/account');
+          Navigator.pushNamed(context, '/council/account');
         },
         onChangedSearchValue: widget.onChangedSearchValue,
         onCategoryChanged: widget.onCategoryChanged,

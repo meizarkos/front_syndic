@@ -38,3 +38,18 @@ class ChoseModifyTypeArtisan extends StatelessWidget {
     );
   }
 }
+
+class ChoseModifyTypeCouncil extends StatelessWidget {
+  const ChoseModifyTypeCouncil({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoseModifyCategories(
+      list: [
+        textGo(context, AppText.myData, '/council/modify_council'),
+        textGo(context, AppText.myAdress, '/council/modify_council_address'),
+        textGo(context,AppText.myLogin, '/council/modify_surf'),
+      ],
+    );
+  }
+}

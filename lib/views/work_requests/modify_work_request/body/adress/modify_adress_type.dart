@@ -35,7 +35,7 @@ class ModifyAdressWorkRequestCouncil extends StatelessWidget {
     return ChoseAdressPatchWorkRequest(
       workRequestUuid: workRequestUuid,
       fetchAdress: fetchAdressWorkRequestCouncil,
-      onRegister: patchAdressCouncil,
+      onRegister: patchAdressWorkRequestForCouncil,
     );
   }
 }

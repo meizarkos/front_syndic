@@ -7,6 +7,9 @@ import 'package:front_syndic/views/account/artisan/modify_artisan.dart';
 import 'package:front_syndic/views/account/artisan/modify_surf_artisan.dart';
 import 'package:front_syndic/views/account/chose_modify.dart';
 import 'package:front_syndic/views/account/chose_modify_type.dart';
+import 'package:front_syndic/views/account/council/modify_adress_council.dart';
+import 'package:front_syndic/views/account/council/modify_council.dart';
+import 'package:front_syndic/views/account/council/modify_surf_council.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
 import 'package:front_syndic/views/artisan_side/work_request_detail/detail_work_request.dart';
 import 'package:front_syndic/views/co_owner/co_owner_detail/co_owner_detail_type.dart';
@@ -112,6 +115,10 @@ class MyApp extends StatelessWidget {
         '/artisan/modify_artisan': (context) => const ModifyArtisan(),
         '/artisan/modify_artisan_address': (context) => const ModifyAdressArtisan(),
         '/artisan/modify_surf': (context) => const ModifySurfArtisan(),
+        '/council/account': (context) => const ChoseModifyTypeCouncil(),
+        '/council/modify_council': (context) => const ModifyCouncil(),
+        '/council/modify_council_address': (context) => const ModifyAdressCouncil(),
+        '/council/modify_surf': (context) => const ModifySurfCouncil(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
