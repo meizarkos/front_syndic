@@ -53,3 +53,18 @@ class ChoseModifyTypeCouncil extends StatelessWidget {
     );
   }
 }
+
+class ChoseModifyTypeUnion extends StatelessWidget {
+  const ChoseModifyTypeUnion({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoseModifyCategories(
+      list: [
+        textGo(context, AppText.myData, '/union/modify_account'),
+        textGo(context, AppText.myAdress, '/council/modify_council_address'),
+        textGo(context,AppText.myLogin, '/council/modify_surf'),
+      ],
+    );
+  }
+}

@@ -1,5 +1,4 @@
 class AttributesUnion {
-  static const String id = 'id';
   static const String name = 'name';
   static const String uuid = 'uuid';
   static const String administratorName = 'administrator_name';
@@ -12,7 +11,6 @@ class AttributesUnion {
 }
 
 class UnionApi {
-   int? id;
    String? name;
    String? uuid;
    String? administratorName;
@@ -24,7 +22,6 @@ class UnionApi {
    String? updatedAt;
 
    UnionApi({
-    this.id,
     this.name,
     this.uuid,
     this.administratorName,
@@ -38,7 +35,6 @@ class UnionApi {
 
   factory UnionApi.fromJson(Map<String, dynamic> json) {
     return UnionApi(
-      id: json[AttributesUnion.id],
       name: json[AttributesUnion.name],
       uuid: json[AttributesUnion.uuid],
       administratorName: json[AttributesUnion.administratorName],

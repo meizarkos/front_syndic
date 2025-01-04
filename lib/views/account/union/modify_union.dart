@@ -1,43 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
-import 'package:front_syndic/models/co_owner/co_owner.dart';
+import 'package:front_syndic/models/union/union.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/decoration/text_filed_deco_no_counter.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
 import '../../../../text/fr.dart';
 import '../../../../widget/header/app_bar_back_button.dart';
+import '../../../api_handler/union/get_union.dart';
+import '../../../api_handler/union/is_siret_unique.dart';
+import '../../../api_handler/union/patch_union.dart';
+import '../../../widget/text_format_input_textfield/space_four.dart';
 
-class ModifyCouncil extends StatefulWidget {
-  const ModifyCouncil ({
+class ModifyUnion extends StatefulWidget {
+  const ModifyUnion ({
     super.key,
-    required this.fetchData,
-    required this.patchData,
-    this.councilId,
-    this.showAppBar = true,
   });
 
-  final Future<CoOwner?> Function(String?) fetchData;
-  final Future<void> Function(String?,CoOwner) patchData;
-  final String? councilId;
-  final bool showAppBar;
-
   @override
-  State<ModifyCouncil > createState() => _ModifyCouncilState();
+  State<ModifyUnion > createState() => _ModifyUnionState();
 }
 
-class _ModifyCouncilState extends State<ModifyCouncil > {
+class _ModifyUnionState extends State<ModifyUnion > {
 
-  CoOwner coOwnerStatic = CoOwner();
+  UnionApi unionStatic = UnionApi();
+  String siretDefault = '';
 
   String errorText = AppText.recapError;
   bool errorVisibility = false;
   bool successVisibility = false;
   bool apiErrorVisibility = false;
 
-  TextEditingController councilNameController = TextEditingController();
-  TextEditingController lotSizeController = TextEditingController();
+  TextEditingController unionNameController = TextEditingController();
+  TextEditingController siretNumberController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -45,20 +41,19 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
   @override
   void initState() {
     super.initState();
-    widget.fetchData(widget.councilId).then((value) {
-      if(value == null || value.council == null){
-        setState(() {
-          apiErrorVisibility = true;
-        });
-        return;
-      }
+    getUnion().then((value) {
       setState(() {
-        coOwnerStatic = value;
-        councilNameController.text = value.name ?? '';
-        lotSizeController.text = value.lotSize.toString() ?? '';
-        firstNameController.text = value.council?.firstName ?? '';
-        lastNameController.text = value.council?.lastName ?? '';
-        phoneController.text = value.council?.phone ?? '';
+        if(value == null){
+          apiErrorVisibility = true;
+          return;
+        }
+        unionStatic = value;
+        siretDefault = value.siretNumber ?? '';
+        unionNameController.text = value.name ?? '';
+        siretNumberController.text = value.siretNumber ?? '';
+        firstNameController.text = value.administratorFirstName ?? '';
+        lastNameController.text = value.administratorName ?? '';
+        phoneController.text = value.phone ?? '';
       });
     });
   }
@@ -66,7 +61,7 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar : widget.showAppBar ? appBarBackButton(context, title : AppText.myData) : null,
+      appBar : appBarBackButton(context, title : AppText.myData),
       body: Column(
         children: [
           ErrorVisibility(errorVisibility: apiErrorVisibility, errorText: AppText.apiErrorText),
@@ -78,34 +73,30 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
               children: [
                 const SizedBox(height: AppUIValue.spaceScreenToAny),
                 TextField(
-                  controller: councilNameController,
-                  decoration: roundBorderTextFieldWithoutCounter(AppText.coOwnerName),
+                  controller: unionNameController,
+                  decoration: roundBorderTextFieldWithoutCounter(AppText.unionName),
                   onChanged: (value) {
-                    coOwnerStatic.name = value;
+                    unionStatic.name = value;
                   },
                   maxLength: 50,
                 ),
                 const SizedBox(height: AppUIValue.spaceScreenToAny),
                 TextField(
-                  controller: lotSizeController,
-                  decoration: roundBorderTextFieldWithoutCounter(AppText.lotSize),
+                  controller: siretNumberController,
+                  decoration: roundBorderTextFieldWithoutCounter(AppText.siretNumber),
                   onChanged: (value) {
-                    try{
-                      coOwnerStatic.lotSize = int.parse(value);
-                    }
-                    catch(e){
-                      coOwnerStatic.lotSize = -1;
-                    }
+                    unionStatic.siretNumber = value;
                   },
                   maxLines: 1,
-                  keyboardType: TextInputType.number,
+                  maxLength: 17,
+                  inputFormatters: [FourCharacterSpaceFormatter(),],
                 ),
                 const SizedBox(height: AppUIValue.spaceScreenToAny),
                 TextField(
                   controller: firstNameController,
                   decoration: roundBorderTextFieldWithoutCounter(AppText.firstName),
                   onChanged: (value) {
-                    coOwnerStatic.council?.firstName = value;
+                    unionStatic.administratorFirstName = value;
                   },
                   maxLength: 50,
                 ),
@@ -114,7 +105,7 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
                   controller: lastNameController,
                   decoration: roundBorderTextFieldWithoutCounter(AppText.name),
                   onChanged: (value) {
-                    coOwnerStatic.council?.lastName = value;
+                    unionStatic.administratorName = value;
                   },
                   maxLength: 50,
                 ),
@@ -123,7 +114,7 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
                   controller: phoneController,
                   decoration: roundBorderTextFieldWithoutCounter(AppText.phone),
                   onChanged: (value) {
-                    coOwnerStatic.council?.phone = value;
+                    unionStatic.phone = value;
                   },
                   maxLength: 20,
                   maxLines: 1,
@@ -137,7 +128,7 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
                       AppColors.mainBackgroundColor,
                       AppText.save,
                       context,
-                          ()async => await updateArtisan(),
+                          ()async => await updateUnion(),
                       AppColors.mainTextColor
                   ),
                 ),
@@ -149,13 +140,14 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
     );
   }
 
-  Future<void> updateArtisan()async {
+  Future<void> updateUnion()async {
+    unionStatic.siretNumber = unionStatic.siretNumber?.replaceAll(' ', '');
     if(
-    coOwnerStatic.name == null || coOwnerStatic.name == '' ||
-        coOwnerStatic.lotSize == null ||
-        coOwnerStatic.council?.firstName == null || coOwnerStatic.council?.firstName == '' ||
-        coOwnerStatic.council?.lastName == null || coOwnerStatic.council?.lastName == '' ||
-        coOwnerStatic.council?.phone == null || coOwnerStatic.council?.phone == ''
+    unionStatic.name == null || unionStatic.name == '' ||
+        unionStatic.siretNumber == null || unionStatic.siretNumber == '' ||
+        unionStatic.administratorName == null || unionStatic.administratorName == '' ||
+        unionStatic.administratorFirstName == null || unionStatic.administratorFirstName == '' ||
+        unionStatic.phone == null || unionStatic.phone == ''
     ){
       setState(() {
         errorText = AppText.recapError;
@@ -164,18 +156,39 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
       });
       return;
     }
-    else if(coOwnerStatic.lotSize == -1){
+    else if(unionStatic.siretNumber!.length != 14){
       setState(() {
-        errorText = AppText.wrongInt;
+        errorText = AppText.siretNumberWrongSize;
         successVisibility = false;
         errorVisibility = true;
       });
       return;
     }
+
+    if(siretDefault == unionStatic.siretNumber){
+      setState(() {
+        errorVisibility = false;
+        successVisibility = true;
+      });
+      await patchUnion(unionStatic);
+      return;
+    }
+
+    final isUnique = await isSiretUnique(unionStatic.siretNumber);
+
+    if(!isUnique){
+      setState(() {
+        errorText = AppText.uniqueSiretNumber;
+        successVisibility = false;
+        errorVisibility = true;
+      });
+      return;
+    }
+
     setState(() {
       errorVisibility = false;
       successVisibility = true;
     });
-    await widget.patchData(widget.councilId,coOwnerStatic);
+    await patchUnion(unionStatic);
   }
 }

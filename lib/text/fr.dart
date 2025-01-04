@@ -174,6 +174,7 @@ class AppText {
   static const String lotSize = 'Nombre de lots';
   static const String wrongInt = 'Veuillez entrer un nombre entier';
   static const String modifyTheseData = 'Modifier ces informations';
+  static const String uniqueSiretNumber = 'Le numéro de SIRET doit être unique';
 
   /* WorkRequestMessage */
   static const String workRequestMessageHint = 'Type your message...';

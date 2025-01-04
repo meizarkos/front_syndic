@@ -29,6 +29,7 @@ class ModifyCouncilForUnion extends StatelessWidget {
     return ModifyCouncil(
       fetchData: getCoOwnerFromUnion,
       patchData: patchCoOwnerFromUnion,
+      showAppBar: false,
       councilId: councilId,
     );
   }

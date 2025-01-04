@@ -87,7 +87,7 @@ class _TopScreenInProgressUnionState extends State<TopScreenInProgressUnion> {
   Widget build(BuildContext context) {
     return TopScreenInProgress(
       onAccountParameter: () {
-        Navigator.pushNamed(context, '/account');
+        Navigator.pushNamed(context, '/union/account');
       },
       onChangedSearchValue: widget.onChangedSearchValue,
       onCategoryChanged: widget.onCategoryChanged,

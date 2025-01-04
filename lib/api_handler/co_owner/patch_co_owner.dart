@@ -14,7 +14,6 @@ Future<void> patchCoOwner(String route,CoOwner coOwner) async {
       "phone": coOwner.council?.phone
     });
     final res = await requestWithBody(url: route, method: "PATCH", body: body);
-    print(res.data);
     return;
   }
   catch(e){

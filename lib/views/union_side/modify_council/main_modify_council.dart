@@ -35,7 +35,11 @@ class _MainModifyCouncilFromUnionState extends State<MainModifyCouncilFromUnion>
                 category: category,
               ),
             ),
-            handlerBodyForModifyCouncilFromUnion(category, widget.councilId),
+            SizedBox(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: handlerBodyForModifyCouncilFromUnion(category, widget.councilId),
+            )
           ],
         ),
       ),
