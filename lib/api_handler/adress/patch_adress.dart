@@ -22,7 +22,7 @@ Future<void> patchAdress(String route, Adress adress)async{
   }
 }
 
-Future<void> patchAdressUnion(String? workRequestUuid,Adress adress)async{
+Future<void> patchAdressWorkRequestFromUnion(String? workRequestUuid,Adress adress)async{
   if(workRequestUuid == null){
     return;
   }
@@ -36,6 +36,13 @@ Future<void> patchAdressWorkRequestForCouncil(String? workRequestUuid,Adress adr
   return await patchAdress("${APIValue.unionCouncil}adress_council/$workRequestUuid", adress);
 }
 
+Future<void> patchAdressCouncilFromUnion(String? councilId,Adress adress)async{
+  if(councilId == null){
+    return;
+  }
+  return await patchAdress("${APIValue.union}adress_council_from_union/$councilId", adress);
+}
+
 Future<void> patchAdressArtisan(String? useless,Adress adress)async{
   return await patchAdress("${APIValue.artisan}adress_artisan", adress);
 }
@@ -43,3 +50,4 @@ Future<void> patchAdressArtisan(String? useless,Adress adress)async{
 Future<void> patchAdressCouncil(String? useless,Adress adress)async{
   return await patchAdress("${APIValue.unionCouncil}adress_council", adress);
 }
+

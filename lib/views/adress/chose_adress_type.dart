@@ -105,7 +105,7 @@ class CreateWorkRequestAdressUnion extends StatelessWidget {
       },
       adress: createWorkRequest.adress,
       prefillAdress: ()async{
-        return await fetchAdressUnion(createWorkRequest.workRequest.councilId);
+        return await fetchAdressCouncilFromUnion(createWorkRequest.workRequest.councilId);
       },
     );
   }

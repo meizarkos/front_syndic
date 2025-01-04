@@ -13,8 +13,7 @@ Future<Adress> fetchPrefillAdress(String route) async {
   }
 }
 
-
-Future<Adress> fetchAdressUnion(String? councilId)async{
+Future<Adress> fetchAdressCouncilFromUnion(String? councilId)async{
   if(councilId == null){
     return Adress();
   }

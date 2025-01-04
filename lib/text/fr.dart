@@ -173,6 +173,7 @@ class AppText {
   static const String coOwnerName = 'Nom de la copropriété';
   static const String lotSize = 'Nombre de lots';
   static const String wrongInt = 'Veuillez entrer un nombre entier';
+  static const String modifyTheseData = 'Modifier ces informations';
 
   /* WorkRequestMessage */
   static const String workRequestMessageHint = 'Type your message...';

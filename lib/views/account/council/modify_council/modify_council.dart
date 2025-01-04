@@ -6,13 +6,20 @@ import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/decoration/text_filed_deco_no_counter.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
-import '../../../api_handler/co_owner/get_co_owner.dart';
-import '../../../api_handler/co_owner/patch_co_owner.dart';
-import '../../../text/fr.dart';
-import '../../../widget/header/app_bar_back_button.dart';
+import '../../../../text/fr.dart';
+import '../../../../widget/header/app_bar_back_button.dart';
 
 class ModifyCouncil extends StatefulWidget {
-  const ModifyCouncil ({super.key});
+  const ModifyCouncil ({
+    super.key,
+    required this.fetchData,
+    required this.patchData,
+    this.councilId,
+  });
+
+  final Future<CoOwner?> Function(String?) fetchData;
+  final Future<void> Function(String?,CoOwner) patchData;
+  final String? councilId;
 
   @override
   State<ModifyCouncil > createState() => _ModifyCouncilState();
@@ -36,7 +43,7 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
   @override
   void initState() {
     super.initState();
-    getCoOwner().then((value) {
+    widget.fetchData(widget.councilId).then((value) {
       if(value == null || value.council == null){
         setState(() {
           apiErrorVisibility = true;
@@ -167,6 +174,6 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
       errorVisibility = false;
       successVisibility = true;
     });
-    await patchCoOwner(coOwnerStatic);
+    await widget.patchData(widget.councilId,coOwnerStatic);
   }
 }

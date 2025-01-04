@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/co_owner/co_owner.dart';
-import 'package:front_syndic/models/estimate/estimate.dart';
 import 'package:front_syndic/models/work_request/create_work_request.dart';
 import 'package:front_syndic/utils/date_to_string/date.dart';
 import 'package:front_syndic/views/co_owner/co_owner_detail/row_of_text_and_icon.dart';
@@ -15,10 +14,8 @@ import '../../../models/timing/timing_estimate.dart';
 import '../../../models/work_request/work_request.dart';
 import '../../../text/fr.dart';
 import '../../../utils/string_handler/handle_string.dart';
-import '../../../widget/bottom/nav_bar_union.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
 import '../../../widget/text_style/text_style_main_color.dart';
-import 'column_of_text_button.dart';
 
 const spaceInsideColumn = 25.0;
 
@@ -127,18 +124,20 @@ class _CoOwnerDetailState extends State<CoOwnerDetail> {
                       ),
                     ),
                   ),
-                  /*const SizedBox(height: 25),
-                  Center(
-                    child: columnOfTextButton(
-                        AppText.titleMeeting,
-                        AppText.titleNextMeeting,
-                        stringNullOrDefaultValue(
-                            fromStringToDateTimeString("${timing?.date} ${timing?.time}"), AppText.noTimingFound),
-                        AppText.seeEstimate,
-                        () => goTo(context,'/in_progress/council/conversation'),
-                        context),
-                  ),
                   const SizedBox(height: 25),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.85,
+                    child: elevatedButtonAndTextColor(
+                        AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
+                        AppText.modifyTheseData,
+                        context,
+                        (){
+                          goTo(context,'/union/council_modify', arguments: widget.uuid);
+                        },
+                        Colors.black,
+                    ),
+                  ),
+                  /*const SizedBox(height: 25),
                   Center(
                     child: columnOfTextButton(
                         AppText.titleNextWorkMeeting,

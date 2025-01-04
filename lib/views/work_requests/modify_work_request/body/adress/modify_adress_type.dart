@@ -17,7 +17,7 @@ class ModifyAdressWorkRequestUnion extends StatelessWidget {
     return ChoseAdressPatchWorkRequest(
       workRequestUuid: workRequestUuid,
       fetchAdress: fetchAdressWorkRequestUnion,
-      onRegister: patchAdressUnion,
+      onRegister: patchAdressWorkRequestFromUnion,
     );
   }
 }

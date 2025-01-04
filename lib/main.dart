@@ -5,10 +5,9 @@ import 'package:front_syndic/models/timing/timing_estimate.dart';
 import 'package:front_syndic/views/account/artisan/modify_adress_artisan.dart';
 import 'package:front_syndic/views/account/artisan/modify_artisan.dart';
 import 'package:front_syndic/views/account/artisan/modify_surf_artisan.dart';
-import 'package:front_syndic/views/account/chose_modify.dart';
 import 'package:front_syndic/views/account/chose_modify_type.dart';
 import 'package:front_syndic/views/account/council/modify_adress_council.dart';
-import 'package:front_syndic/views/account/council/modify_council.dart';
+import 'package:front_syndic/views/account/council/modify_council/modify_council_type.dart';
 import 'package:front_syndic/views/account/council/modify_surf_council.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
 import 'package:front_syndic/views/artisan_side/work_request_detail/detail_work_request.dart';
@@ -42,13 +41,13 @@ import 'package:front_syndic/views/union_side/create_council/conctact_info/conta
 import 'package:front_syndic/views/union_side/create_council/confirm/confirm.dart';
 import 'package:front_syndic/views/union_side/create_council/confirm/confirm_council.dart';
 import 'package:front_syndic/views/union_side/create_council/create_password/council_passwd.dart';
+import 'package:front_syndic/views/union_side/modify_council/main_modify_council.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category/category_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/recap/recap_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/take_picture.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/title_desc/title_and_desc_type.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_request_type.dart';
-import 'package:front_syndic/views/work_requests/modify_work_request/body/dispo/timing_recap.dart';
 import 'package:front_syndic/views/work_requests/modify_work_request/recap_main_type.dart';
 
 import 'models/artisan/createArtisan.dart';
@@ -116,12 +115,24 @@ class MyApp extends StatelessWidget {
         '/artisan/modify_artisan_address': (context) => const ModifyAdressArtisan(),
         '/artisan/modify_surf': (context) => const ModifySurfArtisan(),
         '/council/account': (context) => const ChoseModifyTypeCouncil(),
-        '/council/modify_council': (context) => const ModifyCouncil(),
+        '/council/modify_council': (context) => const ModifyCouncilForCouncil(),
         '/council/modify_council_address': (context) => const ModifyAdressCouncil(),
         '/council/modify_surf': (context) => const ModifySurfCouncil(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
+
+          case '/union/council_modify':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => MainModifyCouncilFromUnion(
+                  councilId: arguments,
+                ),
+              );
+            }
+            break;
+
           case '/union/co_owner_detail':
             final arguments = settings.arguments;
             if (arguments is String?) {
