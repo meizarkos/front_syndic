@@ -26,3 +26,7 @@ Future<void> patchSurfArtisan(Surf surf)async{
 Future<void> patchSurfCouncil(Surf surf)async{
   return await patchSurf('${APIValue.unionCouncil}surf_council', surf);
 }
+
+Future<void> patchSurfUnion(Surf surf)async{
+  return await patchSurf('${APIValue.union}surf_union', surf);
+}

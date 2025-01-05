@@ -20,3 +20,7 @@ Future<String> getEmailArtisan()async{
 Future<String> getEmailCouncil()async{
   return await getEmail('${APIValue.unionCouncil}email_surf');
 }
+
+Future<String> getEmailUnion()async{
+  return await getEmail('${APIValue.union}email_surf_union');
+}

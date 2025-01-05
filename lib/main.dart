@@ -9,6 +9,8 @@ import 'package:front_syndic/views/account/chose_modify_type.dart';
 import 'package:front_syndic/views/account/council/modify_adress_council.dart';
 import 'package:front_syndic/views/account/council/modify_council/modify_council_type.dart';
 import 'package:front_syndic/views/account/council/modify_surf_council.dart';
+import 'package:front_syndic/views/account/union/modify_adress_union.dart';
+import 'package:front_syndic/views/account/union/modify_login_union.dart';
 import 'package:front_syndic/views/account/union/modify_union.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
 import 'package:front_syndic/views/artisan_side/work_request_detail/detail_work_request.dart';
@@ -121,6 +123,8 @@ class MyApp extends StatelessWidget {
         '/council/modify_surf': (context) => const ModifySurfCouncil(),
         '/union/account': (context) => const ChoseModifyTypeUnion(),
         '/union/modify_account': (context) => const ModifyUnion(),
+        '/union/modify_union_address': (context) => const ModifyAdressUnion(),
+        '/union/modify_surf': (context) => const ModifySurfUnion(),
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {

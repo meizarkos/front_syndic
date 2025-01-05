@@ -51,3 +51,7 @@ Future<void> patchAdressCouncil(String? useless,Adress adress)async{
   return await patchAdress("${APIValue.unionCouncil}adress_council", adress);
 }
 
+Future<void> patchAdressUnion(String? useless,Adress adress)async{
+  return await patchAdress("${APIValue.union}adress_union", adress);
+}
+

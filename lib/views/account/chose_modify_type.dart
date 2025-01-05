@@ -62,8 +62,8 @@ class ChoseModifyTypeUnion extends StatelessWidget {
     return ChoseModifyCategories(
       list: [
         textGo(context, AppText.myData, '/union/modify_account'),
-        textGo(context, AppText.myAdress, '/council/modify_council_address'),
-        textGo(context,AppText.myLogin, '/council/modify_surf'),
+        textGo(context, AppText.myAdress, '/union/modify_union_address'),
+        textGo(context,AppText.myLogin, '/union/modify_surf'),
       ],
     );
   }

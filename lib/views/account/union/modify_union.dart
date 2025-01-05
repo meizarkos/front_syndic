@@ -9,7 +9,6 @@ import 'package:front_syndic/widget/visibility/error.dart';
 import '../../../../text/fr.dart';
 import '../../../../widget/header/app_bar_back_button.dart';
 import '../../../api_handler/union/get_union.dart';
-import '../../../api_handler/union/is_siret_unique.dart';
 import '../../../api_handler/union/patch_union.dart';
 import '../../../widget/text_format_input_textfield/space_four.dart';
 
@@ -159,26 +158,6 @@ class _ModifyUnionState extends State<ModifyUnion > {
     else if(unionStatic.siretNumber!.length != 14){
       setState(() {
         errorText = AppText.siretNumberWrongSize;
-        successVisibility = false;
-        errorVisibility = true;
-      });
-      return;
-    }
-
-    if(siretDefault == unionStatic.siretNumber){
-      setState(() {
-        errorVisibility = false;
-        successVisibility = true;
-      });
-      await patchUnion(unionStatic);
-      return;
-    }
-
-    final isUnique = await isSiretUnique(unionStatic.siretNumber);
-
-    if(!isUnique){
-      setState(() {
-        errorText = AppText.uniqueSiretNumber;
         successVisibility = false;
         errorVisibility = true;
       });
