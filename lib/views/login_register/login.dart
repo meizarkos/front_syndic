@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/text/fr.dart';
+import 'package:front_syndic/views/login_register/show_new_passwd.dart';
 import 'package:front_syndic/widget/header/header_for_all.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
@@ -49,8 +50,8 @@ class _ConnectAllState extends State<ConnectAll> {
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(AppUIValue.textInputBorderRadius), // Set corner radius here
+                    borderRadius: BorderRadius.circular(AppUIValue
+                        .textInputBorderRadius), // Set corner radius here
                   ),
                   labelText: AppText.loginLabelTextEmail,
                 ),
@@ -70,8 +71,8 @@ class _ConnectAllState extends State<ConnectAll> {
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(AppUIValue.textInputBorderRadius), // Set corner radius here
+                    borderRadius: BorderRadius.circular(AppUIValue
+                        .textInputBorderRadius), // Set corner radius here
                   ),
                   labelText: AppText.loginLabelTextPassword,
                 ),
@@ -80,19 +81,23 @@ class _ConnectAllState extends State<ConnectAll> {
             ),
           ),
           ErrorVisibility(
-              errorVisibility: errorVisibility, errorText: AppText.loginErrorText
-          ),
+              errorVisibility: errorVisibility,
+              errorText: AppText.loginErrorText),
           Padding(
             padding: const EdgeInsets.all(10), // Add padding around the text
             child: Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  var res = await sendConnexionRequest(email, password, ()=>_handleErrorVisibility());
+                  var res = await sendConnexionRequest(
+                      email, password, () => _handleErrorVisibility());
                   _pushTo(res);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.mainBackgroundColor, // Background color
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20), // Button padding
+                  backgroundColor: AppColors.mainBackgroundColor,
+                  // Background color
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                  // Button padding
                   textStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -124,10 +129,27 @@ class _ConnectAllState extends State<ConnectAll> {
               Navigator.pushNamed(context, '/register');
             },
             child: Padding(
-              padding: const EdgeInsets.all(15.0), // Add padding around the text
+              padding: const EdgeInsets.all(15.0),
+              // Add padding around the text
               child: Center(
                 child: Text(
                   AppText.loginLinkToRegister,
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: AppUIValue.spaceScreenToAny),
+          GestureDetector(
+            onTap: () {
+              _enterPasswd(context);
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+              // Add padding around the text
+              child: Center(
+                child: Text(
+                  AppText.forgottenPasswd,
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
               ),
@@ -137,6 +159,7 @@ class _ConnectAllState extends State<ConnectAll> {
       ),
     );
   }
+
   void _handleErrorVisibility() {
     setState(() {
       errorVisibility = true;
@@ -144,16 +167,20 @@ class _ConnectAllState extends State<ConnectAll> {
   }
 
   void _pushTo(List<String?> response) {
-    if(response[1] == null){
+    if (response[1] == null) {
       return;
     }
-    if(response[0] == '0') {
-      print(response[1]!);
+    if (response[0] == '0') {
       Navigator.pushNamed(context, response[1]!);
-    }
-    else{
+    } else {
       return;
     }
   }
 
+  void _enterPasswd(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => const ShowNewPasswd(),
+    );
+  }
 }

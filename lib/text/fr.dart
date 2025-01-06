@@ -40,8 +40,11 @@ class AppText {
   static const String loginTitle = 'Connexion';
   static const String loginConnectionButtonText = 'Se connecter';
   static const String loginLinkToRegister = 'Pas encore de compte ? Inscrivez-vous';
+  static const String forgottenPasswd = 'Mot de passe oublié';
   static const String loginLabelTextEmail = 'Email';
   static const String loginLabelTextPassword = 'Mot de passe';
+  static const String enterEmail = 'Veuillez entrer un email';
+  static const String send = 'Envoyer';
   static const String loginErrorText = 'Mauvais identifiants';
   static const String siretNumberWrongSize = 'Le numéro de SIRET doit contenir 14 chiffres';
   static const String identification = 'Identification';
