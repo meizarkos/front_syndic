@@ -41,7 +41,6 @@ class _TopScreenInProgressState extends State<TopScreenInProgress> {
                   onChanged: widget.onChangedSearchValue,
                 ),
               ),
-              const SizedBox(width: 15),
               IconButton(
                 icon: const Icon(Icons.account_circle),
                 iconSize: 40,
@@ -49,26 +48,26 @@ class _TopScreenInProgressState extends State<TopScreenInProgress> {
               ),
             ],
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                '${AppText.workRequestArtisanSideFilterBy}         ',
-                style: Theme.of(context).textTheme.displayMedium,
+                '${AppText.workRequestArtisanSideFilterBy}  ',
+                style: Theme.of(context).textTheme.displaySmall,
               ),
               DropdownButton(
                 value: category,
                 isExpanded: false,
                 underline: Container(),
-                iconSize: 50,
+                iconSize: 35,
                 items: widget.listOfCategory.map((String value) {
                   return DropdownMenuItem(
                     value: value,
                     child: Text(
                         value,
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 14,
                         )
                     ),
                   );

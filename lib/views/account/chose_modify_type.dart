@@ -15,7 +15,7 @@ GestureDetector textGo(BuildContext context, String text, String route) {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
       ),

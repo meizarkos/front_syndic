@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
           displayMedium: TextStyle(
-            fontSize: 18,
+            fontSize: 17,
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
@@ -93,7 +93,7 @@ class MyApp extends StatelessWidget {
             color: Colors.black,
           ),
           labelSmall: TextStyle(
-            fontSize: 18,
+            fontSize: 14,
             color: Colors.blue,
             decoration: TextDecoration.underline, // Apply underline
           ),

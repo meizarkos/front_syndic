@@ -85,6 +85,7 @@ class _UnionDataState extends State<UnionData> {
                   onChanged: (value) {
                     widget.createUnion.union.phone = value;
                   },
+                  keyboardType: TextInputType.phone,
                   maxLength: 50,
                 ),
                 const SizedBox(height: AppUIValue.spaceScreenToAny),

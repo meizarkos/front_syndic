@@ -25,11 +25,16 @@ class _UnionMainState extends State<UnionMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(AppText.listCoOwneTitle),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.only(
             left: AppUIValue.spaceScreenToAny,
             right: AppUIValue.spaceScreenToAny,
-            top: 40),
+            top: AppUIValue.spaceScreenToAny
+        ),
         child: Column(
           children: [
             SizedBox(

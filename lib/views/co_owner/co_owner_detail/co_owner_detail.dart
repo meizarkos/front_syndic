@@ -74,7 +74,7 @@ class _CoOwnerDetailState extends State<CoOwnerDetail> {
                                   stringNullOrDefaultValue(coOwner?.name,
                                       AppText.noStringNameForCowner),
                                   11),
-                              style: getTextStyleMainColor(25.0),
+                              style: getTextStyleMainColor(19.0),
                               maxLines: 1,
                               textAlign: TextAlign.center,
                             ),

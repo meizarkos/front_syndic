@@ -22,6 +22,7 @@ class ChoseModifyCategories extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
               ...list,
             ],
           ),

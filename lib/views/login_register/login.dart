@@ -31,7 +31,7 @@ class _ConnectAllState extends State<ConnectAll> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(20.0), // Add padding around the text
+            padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny), // Add padding around the text
             child: Center(
               child: Text(
                 AppText.loginTitle,
@@ -40,7 +40,7 @@ class _ConnectAllState extends State<ConnectAll> {
             ),
           ), // Add padding around the text
           Padding(
-            padding: const EdgeInsets.all(15), // Add padding around the text
+            padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny), // Add padding around the text
             child: Center(
               child: TextField(
                 onChanged: (value) {
@@ -60,7 +60,7 @@ class _ConnectAllState extends State<ConnectAll> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(15), // Add padding around the text
+            padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny), // Add padding around the text
             child: Center(
               child: TextField(
                 obscureText: true,
@@ -83,6 +83,7 @@ class _ConnectAllState extends State<ConnectAll> {
           ErrorVisibility(
               errorVisibility: errorVisibility,
               errorText: AppText.loginErrorText),
+          const SizedBox(height: AppUIValue.spaceScreenToAny),
           Padding(
             padding: const EdgeInsets.all(10), // Add padding around the text
             child: Center(
@@ -95,12 +96,9 @@ class _ConnectAllState extends State<ConnectAll> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.mainBackgroundColor,
                   // Background color
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                  // Button padding
+                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                   textStyle: const TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.bold,
                   ),
                   elevation: AppUIValue.elevation,
                   shadowColor: Colors.black,
@@ -108,8 +106,7 @@ class _ConnectAllState extends State<ConnectAll> {
                 child: Text(
                   AppText.loginConnectionButtonText,
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
                     color: AppColors.mainTextColor,
                     shadows: [
                       BoxShadow(
@@ -124,6 +121,7 @@ class _ConnectAllState extends State<ConnectAll> {
               ),
             ),
           ),
+          const SizedBox(height: AppUIValue.spaceScreenToAny),
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, '/register');

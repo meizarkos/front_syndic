@@ -26,13 +26,13 @@ class CoOwnerCell extends StatelessWidget {
           children: [
             Text(
               trimText(stringNullOrDefaultValue(title, AppText.noStringNameForCowner),11),
-              style: getTextStyleMainColor(20.0),
+              style: getTextStyleMainColor(18.0),
               maxLines: 1,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: AppUIValue.spaceScreenToAny),
             Text(
-              trimText(stringNullOrDefaultValue(subtitle, AppText.noStringNameForCownerSubtitle),50),
+              trimText(stringNullOrDefaultValue(subtitle, AppText.noStringNameForCownerSubtitle),22),
               style: Theme.of(context).textTheme.labelMedium,
               textAlign: TextAlign.center,
             )

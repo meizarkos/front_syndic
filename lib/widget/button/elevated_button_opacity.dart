@@ -34,7 +34,7 @@ ElevatedButton elevatedButtonAndTextColor(Color backgroundColor, String buttonTe
     child: Text(
       buttonText,
       style: TextStyle(
-        fontSize: 16,
+        fontSize: 14,
         color: textColor,
       ),
     ),

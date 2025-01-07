@@ -23,20 +23,23 @@ class _ShowNewPasswdState extends State<ShowNewPasswd> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(AppText.enterEmail),
+      title: Text(
+          AppText.enterEmail,
+          style: Theme.of(context).textTheme.displaySmall,
+      ),
       content: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.2,
+        height: MediaQuery.of(context).size.height * 0.15,
         child: Column(
           children: [
             TextField(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: roundBorderTextFieldWithoutCounter(AppText.email),
+              decoration: roundBorderTextFieldWithoutCounter(AppText.emailWithoutAt),
+              style: Theme.of(context).textTheme.displaySmall,
               maxLength: 256,
             ),
             const SizedBox(height: AppUIValue.spaceScreenToAny),
             ErrorVisibility(errorVisibility: errorVisibilityEmail, errorText: errorTextEmail),
-            const SizedBox(height: AppUIValue.spaceScreenToAny),
           ],
         ),
       ),
@@ -46,6 +49,10 @@ class _ShowNewPasswdState extends State<ShowNewPasswd> {
             Navigator.of(context)
                 .pop(); // Close the dialog without doing anything
           },
+          style: TextButton.styleFrom(
+            textStyle : Theme.of(context).textTheme.displaySmall,
+            foregroundColor: Colors.black,
+          ),
           child: Text(AppText.cancel),
         ),
         TextButton(
@@ -68,6 +75,10 @@ class _ShowNewPasswdState extends State<ShowNewPasswd> {
               Navigator.of(context).pop();
             }
           },
+          style: TextButton.styleFrom(
+            textStyle : Theme.of(context).textTheme.displaySmall,
+            foregroundColor: Colors.black,
+          ),
           child: Text(AppText.send),
         ),
       ],
