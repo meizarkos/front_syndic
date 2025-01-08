@@ -15,6 +15,7 @@ void goToAndDeleteAll(BuildContext context, String route, int index, int selecte
 
 BottomNavigationBar bottomNavigationBarCouncil(BuildContext context, int selectedIndex) {
   return BottomNavigationBar(
+    type: BottomNavigationBarType.fixed,
     items: <BottomNavigationBarItem>[
        BottomNavigationBarItem(
         icon:Icon(Icons.home),

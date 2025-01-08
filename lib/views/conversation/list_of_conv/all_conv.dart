@@ -70,7 +70,7 @@ class _SeeConvState extends State<SeeConv> {
     }
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 120.0,
+        toolbarHeight: 100.0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
@@ -117,10 +117,6 @@ class _SeeConvState extends State<SeeConv> {
       body: Column(
         children: [
           const SizedBox(height: 5),
-          SizedBox(
-            width: MediaQuery.of(context).size.width, // Full width divider
-            child: divider(2, Colors.grey),
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: _conversations.length,

@@ -55,7 +55,7 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
       setState(() {
         coOwnerStatic = value;
         councilNameController.text = value.name ?? '';
-        lotSizeController.text = value.lotSize.toString() ?? '';
+        lotSizeController.text = value.lotSize?.toString() ?? '';
         firstNameController.text = value.council?.firstName ?? '';
         lastNameController.text = value.council?.lastName ?? '';
         phoneController.text = value.council?.phone ?? '';
@@ -67,84 +67,86 @@ class _ModifyCouncilState extends State<ModifyCouncil > {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar : widget.showAppBar ? appBarBackButton(context, title : AppText.myData) : null,
-      body: Column(
-        children: [
-          ErrorVisibility(errorVisibility: apiErrorVisibility, errorText: AppText.apiErrorText),
-          Padding(
-            padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: AppUIValue.spaceScreenToAny),
-                TextField(
-                  controller: councilNameController,
-                  decoration: roundBorderTextFieldWithoutCounter(AppText.coOwnerName),
-                  onChanged: (value) {
-                    coOwnerStatic.name = value;
-                  },
-                  maxLength: 50,
-                ),
-                const SizedBox(height: AppUIValue.spaceScreenToAny),
-                TextField(
-                  controller: lotSizeController,
-                  decoration: roundBorderTextFieldWithoutCounter(AppText.lotSize),
-                  onChanged: (value) {
-                    try{
-                      coOwnerStatic.lotSize = int.parse(value);
-                    }
-                    catch(e){
-                      coOwnerStatic.lotSize = -1;
-                    }
-                  },
-                  maxLines: 1,
-                  keyboardType: TextInputType.number,
-                ),
-                const SizedBox(height: AppUIValue.spaceScreenToAny),
-                TextField(
-                  controller: firstNameController,
-                  decoration: roundBorderTextFieldWithoutCounter(AppText.firstName),
-                  onChanged: (value) {
-                    coOwnerStatic.council?.firstName = value;
-                  },
-                  maxLength: 50,
-                ),
-                const SizedBox(height: AppUIValue.spaceScreenToAny),
-                TextField(
-                  controller: lastNameController,
-                  decoration: roundBorderTextFieldWithoutCounter(AppText.name),
-                  onChanged: (value) {
-                    coOwnerStatic.council?.lastName = value;
-                  },
-                  maxLength: 50,
-                ),
-                const SizedBox(height: AppUIValue.spaceScreenToAny),
-                TextField(
-                  controller: phoneController,
-                  decoration: roundBorderTextFieldWithoutCounter(AppText.phone),
-                  onChanged: (value) {
-                    coOwnerStatic.council?.phone = value;
-                  },
-                  maxLength: 20,
-                  maxLines: 1,
-                ),
-                const SizedBox(height: AppUIValue.spaceScreenToAny),
-                ErrorVisibility(errorVisibility: errorVisibility, errorText: errorText),
-                ErrorVisibility(errorVisibility: successVisibility, errorText: AppText.successfulModify,color: Colors.green,),
-                const SizedBox(height: AppUIValue.spaceScreenToAny),
-                Center(
-                  child: elevatedButtonAndTextColor(
-                      AppColors.mainBackgroundColor,
-                      AppText.save,
-                      context,
-                          ()async => await updateArtisan(),
-                      AppColors.mainTextColor
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ErrorVisibility(errorVisibility: apiErrorVisibility, errorText: AppText.apiErrorText),
+            Padding(
+              padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
+                  TextField(
+                    controller: councilNameController,
+                    decoration: roundBorderTextFieldWithoutCounter(AppText.coOwnerName),
+                    onChanged: (value) {
+                      coOwnerStatic.name = value;
+                    },
+                    maxLength: 50,
                   ),
-                ),
-              ],
-            ),
-          )
-        ],
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
+                  TextField(
+                    controller: lotSizeController,
+                    decoration: roundBorderTextFieldWithoutCounter(AppText.lotSize),
+                    onChanged: (value) {
+                      try{
+                        coOwnerStatic.lotSize = int.parse(value);
+                      }
+                      catch(e){
+                        coOwnerStatic.lotSize = -1;
+                      }
+                    },
+                    maxLines: 1,
+                    keyboardType: TextInputType.number,
+                  ),
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
+                  TextField(
+                    controller: firstNameController,
+                    decoration: roundBorderTextFieldWithoutCounter(AppText.firstName),
+                    onChanged: (value) {
+                      coOwnerStatic.council?.firstName = value;
+                    },
+                    maxLength: 50,
+                  ),
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
+                  TextField(
+                    controller: lastNameController,
+                    decoration: roundBorderTextFieldWithoutCounter(AppText.name),
+                    onChanged: (value) {
+                      coOwnerStatic.council?.lastName = value;
+                    },
+                    maxLength: 50,
+                  ),
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
+                  TextField(
+                    controller: phoneController,
+                    decoration: roundBorderTextFieldWithoutCounter(AppText.phone),
+                    onChanged: (value) {
+                      coOwnerStatic.council?.phone = value;
+                    },
+                    maxLength: 20,
+                    maxLines: 1,
+                  ),
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
+                  ErrorVisibility(errorVisibility: errorVisibility, errorText: errorText),
+                  ErrorVisibility(errorVisibility: successVisibility, errorText: AppText.successfulModify,color: Colors.green,),
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
+                  Center(
+                    child: elevatedButtonAndTextColor(
+                        AppColors.mainBackgroundColor,
+                        AppText.save,
+                        context,
+                            ()async => await updateArtisan(),
+                        AppColors.mainTextColor
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

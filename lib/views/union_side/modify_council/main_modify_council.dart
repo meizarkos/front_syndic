@@ -25,23 +25,17 @@ class _MainModifyCouncilFromUnionState extends State<MainModifyCouncilFromUnion>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarBackButton(context),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 100,
-              child: HeaderForModifyCouncilFromUnion(
-                onCategoryChange: onCategoryChange,
-                category: category,
-              ),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 100,
+            child: HeaderForModifyCouncilFromUnion(
+              onCategoryChange: onCategoryChange,
+              category: category,
             ),
-            SizedBox(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.6,
-              child: handlerBodyForModifyCouncilFromUnion(category, widget.councilId),
-            )
-          ],
-        ),
+          ),
+          Expanded(child:handlerBodyForModifyCouncilFromUnion(category, widget.councilId),)
+        ],
       ),
     );
   }

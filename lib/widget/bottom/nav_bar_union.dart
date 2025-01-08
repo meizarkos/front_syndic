@@ -4,6 +4,8 @@ import 'package:front_syndic/color.dart';
 
 import '../../text/fr.dart';
 
+const double iconSize = 18.0;
+
 void goToAndDeleteAll(BuildContext context, String route, int index, int selectedIndex) {
   if(index == selectedIndex) return;
   Navigator.pushNamedAndRemoveUntil(
@@ -15,28 +17,36 @@ void goToAndDeleteAll(BuildContext context, String route, int index, int selecte
 
 BottomNavigationBar bottomNavigationBarUnion(BuildContext context, int selectedIndex) {
   return BottomNavigationBar(
+    type: BottomNavigationBarType.fixed,
     items: <BottomNavigationBarItem>[
       BottomNavigationBarItem(
-        icon:Icon(Icons.home),
+        icon:Icon(
+            Icons.home,
+            size: iconSize,
+        ),
         label: AppText.home,
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset(
           'assets/tools.svg',
-          width: 24.0,
-          height: 24.0,
+          width: iconSize,
+          height: iconSize,
         ),
         label: AppText.workRequest,
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset(
           'assets/co_owner.svg',
+          width: iconSize,
+          height: iconSize,
         ),
         label: AppText.copro,
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset(
           'assets/invoice.svg',
+          width: iconSize,
+          height: iconSize,
         ),
         label: AppText.invoice,
       ),

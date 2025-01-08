@@ -30,10 +30,10 @@ class CoOwnerCell extends StatelessWidget {
               maxLines: 1,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: AppUIValue.spaceScreenToAny),
+            const SizedBox(height: AppUIValue.spaceScreenToAny*2),
             Text(
               trimText(stringNullOrDefaultValue(subtitle, AppText.noStringNameForCownerSubtitle),22),
-              style: Theme.of(context).textTheme.labelMedium,
+              style: Theme.of(context).textTheme.displaySmall,
               textAlign: TextAlign.center,
             )
           ],

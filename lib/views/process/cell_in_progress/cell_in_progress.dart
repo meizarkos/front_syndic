@@ -36,7 +36,7 @@ class CellInProgress extends StatelessWidget {
             children: [
               Text(
                   trimText(workRequestTitle, 25),
-                  style: getTextStyleMainColor(20)
+                  style: getTextStyleMainColor(18)
               ),
               const SizedBox(height: 15),
               Text(

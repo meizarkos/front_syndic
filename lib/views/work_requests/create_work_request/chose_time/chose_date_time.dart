@@ -4,6 +4,7 @@ import 'package:front_syndic/utils/date_to_string/date.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 
+import '../../../../core_value.dart';
 import '../../../../models/timing/timing.dart';
 import '../../../../models/work_request/create_work_request.dart';
 import '../../../../text/fr.dart';
@@ -55,7 +56,7 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
               errorVisibility: errorVisibility,
               errorText: AppText.createWorkRequestTimingWrong,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 5),
             GestureDetector(
               onTap: _choseTime,
               child: Text(
@@ -63,7 +64,7 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
                 style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             if (widget.createWorkRequest.workRequest.timings != null &&
                 widget.createWorkRequest.workRequest.timings!.isNotEmpty)
               ...widget.createWorkRequest.workRequest.timings!.map((date) {
@@ -80,14 +81,15 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
                   },
                 );
               }),
-            const SizedBox(height: 35),
+            const SizedBox(height: AppUIValue.spaceScreenToAny),
             elevatedButtonAndTextColor(
               AppColors.mainBackgroundColor,
               AppText.save,
               context,
               _onSave,
               AppColors.mainTextColor,
-            )
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

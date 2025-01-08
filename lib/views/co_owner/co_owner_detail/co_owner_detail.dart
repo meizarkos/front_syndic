@@ -81,7 +81,7 @@ class _CoOwnerDetailState extends State<CoOwnerDetail> {
                             const SizedBox(height: spaceInsideColumn),
                             Text(
                               '${adress?.country ?? ''}\n\n${adress?.city ?? ''}, ${adress?.street ?? ''}',
-                              style: Theme.of(context).textTheme.displayMedium,
+                              style: Theme.of(context).textTheme.displaySmall,
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: spaceInsideColumn),

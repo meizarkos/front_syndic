@@ -18,14 +18,11 @@ class RecapMain extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: MediaQuery.of(context).size.height * 0.18,
             width: double.infinity,
             child: top,
           ),
-          const SizedBox(height: AppUIValue.spaceScreenToAny),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.78,
-            width: double.infinity,
+          Expanded(
             child: bottom,
           )
         ],

@@ -60,10 +60,8 @@ class _DetailWorkRequestArtisanSideState extends State<DetailWorkRequestArtisanS
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    stringNullOrDefaultValue(
-                        data.title,
-                        AppText.apiNoResult),
-                    style: Theme.of(context).textTheme.headlineLarge,
+                    data.title ?? AppText.apiNoResult,
+                    style: Theme.of(context).textTheme.displayLarge,
                   ),
                   divider(),
                   const SizedBox(height: spaceCate),
@@ -76,9 +74,7 @@ class _DetailWorkRequestArtisanSideState extends State<DetailWorkRequestArtisanS
                     padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
                     decoration: decorationRoundMainColor(),
                     child: Text(
-                      stringNullOrDefaultValue(
-                          data.description,
-                          AppText.apiNoResult),
+                      data.description ?? AppText.apiNoResult,
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
@@ -100,22 +96,25 @@ class _DetailWorkRequestArtisanSideState extends State<DetailWorkRequestArtisanS
                     child: Text(
                       "${data.adress?.country ?? ''}\n\n"
                           "${data.adress?.city ?? ''}, ${data.adress?.region ?? ''}\n\n"
-                          "${data.adress?.street ?? ''}\n\n"
-                          "${data.adress?.comment ?? ''}",
+                          "${data.adress?.street ?? ''}"
+                          "${data.adress?.comment == null ? '' : "\n\n${data.adress?.comment ?? ''}"}",
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
                   const SizedBox(height: spaceCate),
-                  Text(
-                    AppText.category,
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                  const SizedBox(height: spaceTitleDesc),
-                  Text(
-                    stringNullOrDefaultValue(
-                        data.category,
-                        AppText.apiNoResult),
-                    style: Theme.of(context).textTheme.displaySmall,
+                  Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "${AppText.category} : ",
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
+                          TextSpan(
+                            text: data.category ?? AppText.apiNoResult,
+                            style: Theme.of(context).textTheme.displaySmall,
+                          ),
+                        ],
+                      ),
                   ),
                   const SizedBox(height: spaceTitleDesc),
                   divider(),

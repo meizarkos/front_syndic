@@ -41,19 +41,25 @@ class _ArtisanMainState extends State<ArtisanMain> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  AppText.workRequestArtisanSideFilterBy,
+                  "${AppText.workRequestArtisanSideFilterBy}  ",
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 Expanded(
                   child: DropdownButton(
                     value: category,
-                    isExpanded: true,
+                    isExpanded: false,
                     underline: Container(),
+                    iconSize: 35,
                     items:
                     AppText.listOfTaskCategoryWithNull.map((String value) {
                       return DropdownMenuItem(
                         value: value,
-                        child: Text(value),
+                        child: Text(
+                            value,
+                            style: TextStyle(
+                              fontSize: 14,
+                            )
+                        ),
                       );
                     }).toList(),
                     onChanged: (String? newValue) {

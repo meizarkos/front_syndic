@@ -41,72 +41,64 @@ class _TitleAndDescState extends State<TitleAndDesc> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarBackButton(context),
-      body: Padding(
-        padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              AppText.title,
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-            const SizedBox(height: 2),
-            TextField(
-              decoration: textFieldMainDeco(AppText.titlePlaceHolder),
-              onChanged: (value) {
-                titleValue = value;
-              },
-              maxLength: 50,
-            ),
-            const SizedBox(height: 15),
-            Text(
-              AppText.description,
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-            const SizedBox(height: 2),
-            TextField(
-              decoration : textFieldMainDeco(AppText.descriptionPlaceHolder),
-              onChanged: (value) {
-                descriptionValue = value;
-              },
-              maxLength: 1280,
-              maxLines: 10,
-            ),
-            const SizedBox(height: 7),
-            ErrorVisibility(errorVisibility: errorVisible, errorText: AppText.createTitleWorkErrorText),
-            const SizedBox(height: 7),
-            Center(
-              child: elevatedButtonAndTextColor(
-                AppColors.mainBackgroundColor,
-                AppText.save,
-                context,
-                () async {
-                  if(titleValue == null || titleValue == '' || descriptionValue == null || descriptionValue == ''){
-                    setState(() {
-                      errorVisible = true;
-                    });
-                    return;
-                  }
-                  widget.createWorkRequest.workRequest.title = titleValue;
-                  widget.createWorkRequest.workRequest.description = descriptionValue;
-                  /*final permission = await _checkPermissions();
-                  if(!permission){
-                    return;
-                  }
-                  final camera = await _getCamera();
-                  widget.createWorkRequest.camera = camera;
-                  if(widget.createWorkRequest.camera == null){
-                    _goToCategory();
-                    return;
-                  }
-                  _goToCamera();*/
-                  _goToCategory();
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                decoration: textFieldMainDeco(AppText.titlePlaceHolder),
+                onChanged: (value) {
+                  titleValue = value;
                 },
-                AppColors.mainTextColor
+                maxLength: 50,
               ),
-            ),
-          ],
+              const SizedBox(height: 15),
+              TextField(
+                decoration : textFieldMainDeco(AppText.description),
+                onChanged: (value) {
+                  descriptionValue = value;
+                },
+                maxLength: 1280,
+                maxLines: 10,
+              ),
+              const SizedBox(height: 7),
+              ErrorVisibility(errorVisibility: errorVisible, errorText: AppText.createTitleWorkErrorText),
+              const SizedBox(height: 7),
+              Center(
+                child: elevatedButtonAndTextColor(
+                  AppColors.mainBackgroundColor,
+                  AppText.save,
+                  context,
+                  () async {
+                    if(titleValue == null || titleValue == '' || descriptionValue == null || descriptionValue == ''){
+                      setState(() {
+                        errorVisible = true;
+                      });
+                      return;
+                    }
+                    widget.createWorkRequest.workRequest.title = titleValue;
+                    widget.createWorkRequest.workRequest.description = descriptionValue;
+                    /*final permission = await _checkPermissions();
+                    if(!permission){
+                      return;
+                    }
+                    final camera = await _getCamera();
+                    widget.createWorkRequest.camera = camera;
+                    if(widget.createWorkRequest.camera == null){
+                      _goToCategory();
+                      return;
+                    }
+                    _goToCamera();*/
+                    _goToCategory();
+                  },
+                  AppColors.mainTextColor
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

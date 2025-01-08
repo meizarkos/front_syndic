@@ -31,19 +31,28 @@ class CellWorkRequestArtisanSide extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                trimText(stringNullOrDefaultValue(title, AppText.noTitleForWork), 22),
-                style: getTextStyleMainColor(22.0),
+                trimText(title ?? AppText.noTitleForWork, 22),
+                style: getTextStyleMainColor(18.0),
                 maxLines: 1,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 35),
-              Text(
-                "${adress?.city} ${adress?.region}\n${adress?.street} ",
-                style: Theme.of(context).textTheme.displayMedium,
-                textAlign: TextAlign.center,
-                maxLines: 3,
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "${AppText.interventionPlace} \n",
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+                    TextSpan(
+                      text: "${adress?.city ?? ''}, ${adress?.region ?? ''}\n${adress?.street ??''}",
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
+                  ],
+                ),
+                  textAlign: TextAlign.center
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 30),
               Text(
                 trimText(stringNullOrDefaultValue(subtitle, AppText.noDescriptionWorkRequest), 100),
                 style: Theme.of(context).textTheme.displaySmall,

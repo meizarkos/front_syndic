@@ -22,13 +22,13 @@ class CreateWorkRequestCellTime extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
-      margin: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+      margin: const EdgeInsets.only(top: 10,right: AppUIValue.spaceScreenToAny,left: AppUIValue.spaceScreenToAny),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.black,
           width: 1,
         ),
-        color: Colors.grey,
+
         borderRadius: BorderRadius.circular(15),
       ),
       child: Row(
@@ -36,7 +36,7 @@ class CreateWorkRequestCellTime extends StatelessWidget {
         children: [
           Text(
             '${AppText.le} ${formatDateString(date)} ${AppText.at} ${formatTimeString(time)}',
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(context).textTheme.displaySmall,
           ),
           GestureDetector(
             onTap: onDelete,

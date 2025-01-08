@@ -44,7 +44,7 @@ class _RecapForCreateWorkRequestState extends State<RecapForCreateWorkRequest> {
                 stringNullOrDefaultValue(
                     widget.createWorkRequest.workRequest.title,
                     AppText.apiNoResult),
-                style: Theme.of(context).textTheme.headlineLarge,
+                style: Theme.of(context).textTheme.displayLarge,
               ),
               divider(),
               const SizedBox(height: spaceCate),
@@ -66,16 +66,19 @@ class _RecapForCreateWorkRequestState extends State<RecapForCreateWorkRequest> {
               const SizedBox(height: spaceTitleDesc),
               divider(),
               const SizedBox(height: spaceCate),
-              Text(
-                AppText.category,
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-              const SizedBox(height: spaceTitleDesc),
-              Text(
-                stringNullOrDefaultValue(
-                    widget.createWorkRequest.workRequest.category,
-                    AppText.apiNoResult),
-                style: Theme.of(context).textTheme.displaySmall,
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "${AppText.category}:    ", // First part of the text
+                      style: Theme.of(context).textTheme.displayMedium, // Apply displaySmall
+                    ),
+                    TextSpan(
+                      text: widget.createWorkRequest.workRequest.category ?? AppText.apiNoResult, // Second part of the text
+                      style: Theme.of(context).textTheme.displaySmall, // Apply displayMedium
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: spaceTitleDesc),
               divider(),

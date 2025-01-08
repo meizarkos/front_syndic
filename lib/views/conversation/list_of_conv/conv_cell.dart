@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/text/fr.dart';
-import 'package:front_syndic/utils/string_handler/handle_string.dart';
 
 import '../../../core_value.dart';
 import '../../../utils/date_to_string/date.dart';
@@ -29,12 +28,14 @@ class ConvCell extends StatelessWidget {
       mainAxisAlignment: fromYou ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+          padding: const EdgeInsets.only(left : AppUIValue.spaceScreenToAny, right: AppUIValue.spaceScreenToAny, bottom: 10),
           child: Column(
             crossAxisAlignment: fromYou ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+                padding: const EdgeInsets.only(left : AppUIValue.spaceScreenToAny, right : AppUIValue.spaceScreenToAny,
+                    top : AppUIValue.spaceScreenToAny/2, bottom : AppUIValue.spaceScreenToAny/2
+                ),
                 decoration: BoxDecoration(
                   color: _handleColorSide(),
                   borderRadius: BorderRadius.circular(10),
@@ -45,20 +46,20 @@ class ConvCell extends StatelessWidget {
                     maxWidth: MediaQuery.of(context).size.width * 0.6,
                   ),
                   child: Text(
-                    stringNullOrDefaultValue(message,AppText.workRequestNoMessage),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                    ),
+                    message ?? AppText.workRequestNoMessage,
+                    style: Theme.of(context).textTheme.displaySmall,
                     softWrap: true,
                     overflow: TextOverflow.visible,
                   ),
                 ),
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 1),
               Text(
                 fromDateTimeToConvString(createdAt),
-                style: Theme.of(context).textTheme.displaySmall,
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 9,
+                ),
               ),
             ],
           ),

@@ -31,21 +31,21 @@ class WorkRequestCell extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                trimText(stringNullOrDefaultValue(title, AppText.noTitleForWork), 22),
-                style: getTextStyleMainColor(22.0),
+                trimText(title ?? AppText.noTitleForWork, 22),
+                style: getTextStyleMainColor(18.0),
                 maxLines: 1,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 35),
+              const SizedBox(height: 20),
               Text(
-                stringNullOrDefaultValue(type, AppText.noCategoryFound),
+                type ?? AppText.noCategoryFound,
                 style: Theme.of(context).textTheme.displayMedium,
                 textAlign: TextAlign.center,
                 maxLines: 1,
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
               Text(
-                trimText(stringNullOrDefaultValue(subtitle, AppText.noDescriptionWorkRequest), 100),
+                trimText(subtitle ?? AppText.noDescriptionWorkRequest, 60),
                 style: Theme.of(context).textTheme.displaySmall,
                 textAlign: TextAlign.center,
               ),

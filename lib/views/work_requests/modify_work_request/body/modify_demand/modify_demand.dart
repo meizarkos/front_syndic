@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/text/fr.dart';
+import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
 import '../../../../../models/work_request/work_request.dart';
 import '../../../../../widget/decoration/text_field_deco_main.dart';
@@ -64,12 +65,6 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 25),
-                Text(
-                  AppText.title,
-                  style: Theme.of(context).textTheme.displayMedium,
-                ),
-                const SizedBox(height: 2),
                 TextField(
                   controller: titleController,
                   decoration: textFieldMainDeco(AppText.titlePlaceHolder),
@@ -79,11 +74,6 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
                   maxLength: 50,
                 ),
                 const SizedBox(height: 25),
-                Text(
-                  AppText.description,
-                  style: Theme.of(context).textTheme.displayMedium,
-                ),
-                const SizedBox(height: 2),
                 TextField(
                   controller: descriptionController,
                   decoration: textFieldMainDeco(AppText.descriptionPlaceHolder),
@@ -93,7 +83,7 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
                   maxLength: 1280,
                   maxLines: 10,
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: AppUIValue.spaceScreenToAny),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   margin: const EdgeInsets.only(
@@ -127,67 +117,55 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
                   errorText: AppText.recapError,
                 ),
                 Center(
-                  child: Visibility(
-                      visible: successVisibility,
-                      child: const Text(
-                        AppText.recapSuccessModifying,
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 18,
-                        ),
-                      )),
+                  child : ErrorVisibility(
+                    errorVisibility: successVisibility,
+                    errorText: AppText.recapSuccessModifying,
+                    color: Colors.green,
+                  ),
                 ),
+                const SizedBox(height: AppUIValue.spaceScreenToAny),
+                SizedBox(
+                  width: double.infinity,
+                  child: elevatedButtonAndTextColor(
+                    AppColors.mainBackgroundColor,
+                      AppText.modify,
+                      context,
+                      modify,
+                      AppColors.mainTextColor,
+                  ),
+                ),
+                const SizedBox(height: AppUIValue.spaceScreenToAny*2),
+                ElevatedButton(
+                  onPressed: () => {
+                    choiceDelete(),
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black, // Background color with opacity
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                    textStyle: Theme.of(context).textTheme.displayMedium,
+                    elevation: AppUIValue.elevation,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        AppText.delete,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                      SizedBox(width: 15),
+                      Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 25),
               ],
             ),
-          ),
-        ),
-        bottomNavigationBar: Container(
-          margin: const EdgeInsets.only(bottom: AppUIValue.spaceScreenToAny),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  child: FloatingActionButton.extended(
-                    backgroundColor: AppColors.rowBackgroundColor,
-                    onPressed: () => {
-                      modify(),
-                    },
-                    label: Text(
-                      AppText.modify,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                      ),
-                    ),
-                  )),
-              const SizedBox(width: 10),
-              SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  child: FloatingActionButton.extended(
-                    backgroundColor: Colors.black,
-                    onPressed: () => {
-                      choiceDelete(),
-                    },
-                    label: const Row(
-                      children: [
-                        Text(
-                          AppText.delete,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                        SizedBox(width: 25),
-                        Icon(
-                          Icons.delete,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ),
-              ),
-            ],
           ),
         ),
       );

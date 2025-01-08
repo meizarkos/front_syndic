@@ -25,24 +25,18 @@ class HeaderForModifyWorkRequest extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny * 2),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  _createGestureDetector(AppText.demand),
-                  const SizedBox(width: AppUIValue.spaceScreenToAny * 2),
-                  _createGestureDetector(AppText.dispo),
-                  const SizedBox(width: AppUIValue.spaceScreenToAny * 2),
-                  _createGestureDetector(AppText.adress),
-                ],
-              ),
-            ),
-          ],
+        padding: const EdgeInsets.only(left : AppUIValue.spaceScreenToAny),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              _createGestureDetector(AppText.demand),
+              const SizedBox(width: AppUIValue.spaceScreenToAny * 2),
+              _createGestureDetector(AppText.dispo),
+              const SizedBox(width: AppUIValue.spaceScreenToAny * 2),
+              _createGestureDetector(AppText.adress),
+            ],
+          ),
         ),
       ),
     );
@@ -56,7 +50,7 @@ class HeaderForModifyWorkRequest extends StatelessWidget {
       child: Text(
         value,
         style: TextStyle(
-            fontSize: 20, 
+            fontSize: 16,
             fontWeight: category == value ? FontWeight.bold : FontWeight.normal
         ),
       ),
