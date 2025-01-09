@@ -30,47 +30,44 @@ class _SetDescriptionEstimateState extends State<SetDescriptionEstimate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarBackButton(context),
-      body: Padding(
-          padding: EdgeInsets.all(AppUIValue.spaceScreenToAny),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                AppText.descEstimate,
-                style: Theme.of(context).textTheme.displaySmall,
-              ),
-              const SizedBox(height: 2),
-              TextField(
-                decoration : textFieldMainDeco(AppText.descEstimatePlaceHolder),
-                onChanged: (value) {
-                  descriptionValue = value;
-                },
-                maxLength: 1280,
-                maxLines: 10,
-              ),
-              const SizedBox(height: 10),
-              ErrorVisibility(errorVisibility: errorVisibility, errorText: AppText.createTitleWorkErrorText),
-              Center(
-                child: elevatedButtonAndTextColor(
-                    AppColors.mainBackgroundColor,
-                    AppText.save,
-                    context,
-                    (){
-                      if(descriptionValue.isEmpty){
-                        setState(() {
-                          errorVisibility = true;
-                        });
-                      } else {
-                        widget.estimate.description = descriptionValue;
-                        Navigator.pushNamed(context, '/artisan/create_estimate/price', arguments: widget.estimate);
-                      }
-                    },
-                    AppColors.mainTextColor,
+      body: SingleChildScrollView(
+        child: Padding(
+            padding: EdgeInsets.all(AppUIValue.spaceScreenToAny),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextField(
+                  decoration : textFieldMainDeco(AppText.descEstimatePlaceHolder),
+                  onChanged: (value) {
+                    descriptionValue = value;
+                  },
+                  maxLength: 1280,
+                  maxLines: 10,
                 ),
-              ),
-            ],
-          ),
+                const SizedBox(height: 10),
+                ErrorVisibility(errorVisibility: errorVisibility, errorText: AppText.createTitleWorkErrorText),
+                Center(
+                  child: elevatedButtonAndTextColor(
+                      AppColors.mainBackgroundColor,
+                      AppText.save,
+                      context,
+                      (){
+                        if(descriptionValue.isEmpty){
+                          setState(() {
+                            errorVisibility = true;
+                          });
+                        } else {
+                          widget.estimate.description = descriptionValue;
+                          Navigator.pushNamed(context, '/artisan/create_estimate/price', arguments: widget.estimate);
+                        }
+                      },
+                      AppColors.mainTextColor,
+                  ),
+                ),
+              ],
+            ),
+        ),
       ),
     );
   }

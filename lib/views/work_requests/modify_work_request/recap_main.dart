@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core_value.dart';
-
 class RecapMain extends StatelessWidget {
   const RecapMain({
     super.key,

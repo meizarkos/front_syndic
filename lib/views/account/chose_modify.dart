@@ -24,6 +24,17 @@ class ChoseModifyCategories extends StatelessWidget {
             children: [
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               ...list,
+              Divider(thickness: 2,color: Colors.black),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(context, '/');
+                },
+                child : Text(
+                  AppText.deconnect,
+                  style: Theme.of(context).textTheme.displayMedium,
+                )
+              )
             ],
           ),
       ),

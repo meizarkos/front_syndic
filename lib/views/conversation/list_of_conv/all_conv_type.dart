@@ -6,6 +6,7 @@ import 'package:front_syndic/views/conversation/list_of_conv/all_conv.dart';
 import '../../../api_handler/conversation/post_conv.dart';
 import '../../../api_handler/estimate/get_estimate_detail.dart';
 import '../../../api_handler/work_request/delete_work_request.dart';
+import '../../../api_handler/work_request/fetch_uuid_work_request/get_work_request_id_from_conv.dart';
 import '../../../models/to_screen/artisan_detail_work_request.dart';
 import '../../../models/to_screen/council_work_request_detail.dart';
 
@@ -125,24 +126,14 @@ class AllConvCouncil extends StatelessWidget {
             )
         );
       },
-      goToRequest: (String? id) {
+      goToRequest: (String? id) async{
         if(id == null) return;
-        Navigator.pushNamed(context,'/work_requests/detail',
-            arguments: CouncilWorkRequestDetail(
-              uuid: id,
-              futureToFetchData: fetchWorkRequestDetailCouncilFromConversation,
-              onBack: ()=>{ Navigator.pop(context)},
-              onDelete: (String? uuid)async{
-                if(uuid == null) return;
-                await deleteWorkRequestDetail(uuid);
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  '/co_owner/work_requests',
-                      (Route<dynamic> route) => false,
-                );
-              },
-            )
-        );
+        await fetchUuidWorkRequestCouncil(id).then((uuid){
+          if(uuid == null) return;
+          Navigator.pushNamed(context,'/council/modify_demand/from_conv',
+            arguments: uuid,
+          );
+        });
       },
       goToEstimate: (String? id) {
         if(id == null) return;
@@ -184,24 +175,14 @@ class AllConvUnion extends StatelessWidget {
             )
         );
       },
-      goToRequest: (String? id) {
+      goToRequest: (String? id) async{
         if(id == null) return;
-        Navigator.pushNamed(context,'union/work_requests/detail',
-            arguments: CouncilWorkRequestDetail(
-              uuid: id,
-              futureToFetchData: fetchWorkRequestDetailCouncilFromConversation,
-              onBack: ()=>{ Navigator.pop(context)},
-              onDelete: (String? uuid)async{
-                if(uuid == null) return;
-                await deleteWorkRequestDetail(uuid);
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  '/union/work_requests',
-                      (Route<dynamic> route) => false,
-                );
-              },
-            )
-        );
+        await fetchUuidWorkRequestUnion(id).then((uuid){
+          if(uuid == null) return;
+          Navigator.pushNamed(context,'/union/modify_demand/from_conv',
+            arguments: uuid,
+          );
+        });
       },
       goToEstimate: (String? id) {
         if(id == null) return;

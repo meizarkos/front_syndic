@@ -7,6 +7,7 @@ import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../api_handler/estimate/get_estimate_detail.dart';
 import '../../../api_handler/timing/refuse_timing_detail.dart';
 import '../../../models/council/council.dart';
+import '../../../models/timing/timing.dart';
 import '../../../models/union/union.dart';
 import '../../../text/fr.dart';
 import '../../../utils/string_handler/handle_string.dart';
@@ -44,17 +45,12 @@ class TimingDetailCouncil extends StatelessWidget {
         );
       },
       future: fetchTimingDetail(timingUuid),
-      getYou: (dynamic){
-        final council = dynamic.council as Council?;
-        return "${AppText.phoneContact} ${council?.phone ?? AppText.noPhone}";
-      },
-      getClient: (dynamic) {
-        final artisan = dynamic.artisan as Artisan?;
-        return "${AppText.contactez} ${artisan?.companyName ?? ''} ${toLowerFirst(AppText.to)} ${artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
-      },
-      getUnion: (dynamic) {
-        final union = dynamic.union as UnionApi?;
-        return "${AppText.contactUnion} ${union?.phone ?? AppText.noPhone}";
+      textContact: (Timing timing){
+        final contactArtisan = "${AppText.contactez} ${toUpperFirst(timing.artisan?.companyName ?? '')} ${toLowerFirst(AppText.to)} ${timing.artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
+        if(timing.union != null){
+          return "$contactArtisan\n\n${AppText.contactUnion} ${timing.union?.phone ?? AppText.noPhone}.";
+        }
+        return contactArtisan;
       },
     );
   }
@@ -93,13 +89,14 @@ class TimingDetailArtisan extends StatelessWidget {
         );
       },
       future: fetchTimingDetail(timingUuid),
-      getYou: (dynamic){
-        final artisan = dynamic.artisan as Artisan?;
-        return "${AppText.phoneContact} ${artisan?.phone ?? AppText.noPhone}";
-      },
-      getClient: (dynamic) {
-        final  council = dynamic.council as Council?;
-        return "${AppText.contactez} ${toUpperFirst(council?.lastName ?? '')} ${toLowerFirst(AppText.to)} ${council?.phone ?? AppText.noPhone} ${AppText.contactUs}";
+      textContact : (Timing timing){
+        if(timing.council != null){
+          return "${AppText.contactCouncilActive} ${toUpperFirst(timing.council?.lastName ?? '')} ${toUpperFirst(timing.council?.firstName ?? '')} ${toLowerFirst(AppText.to)} ${timing.council?.phone ?? AppText.noPhone}.\n\n"
+              "${timing.union != null ? "${AppText.contactUnionForArtisan} ${toUpperFirst(timing.union?.name ?? AppText.noNameUnion)} ${toLowerFirst(AppText.to)} ${timing.union?.phone ?? AppText.noPhone}." : ""}";
+
+        }
+        //case for user
+        return "";
       },
       isArtisan: true,
     );
@@ -140,17 +137,9 @@ class TimingDetailUnion extends StatelessWidget {
         );
       },
       future: fetchTimingDetail(timingUuid),
-      getYou: (dynamic){
-        final union = dynamic.union as UnionApi?;
-        return "${AppText.phoneContact} ${union?.phone ?? AppText.noPhone}";
-      },
-      getClient: (dynamic) {
-        final artisan = dynamic.artisan as Artisan?;
-        return "${AppText.contactez} ${artisan?.companyName ?? ''} ${toLowerFirst(AppText.to)} ${artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
-      },
-      getUnion: (dynamic) {
-        final council = dynamic.council as Council?;
-        return "${AppText.contactCouncil} ${council?.phone ?? AppText.noPhone}";
+      textContact: (Timing timing){
+        final contactArtisan = "${AppText.contactez} ${toUpperFirst(timing.artisan?.companyName ?? '')} ${toLowerFirst(AppText.to)} ${timing.artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
+        return "$contactArtisan\n\n${AppText.contactCouncil} ${timing.council?.phone ?? AppText.noPhone}";
       },
       isArtisan: false,
     );

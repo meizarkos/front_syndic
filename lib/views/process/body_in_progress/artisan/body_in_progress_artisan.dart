@@ -6,7 +6,6 @@ import '../../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../../api_handler/estimate/get_estimate_detail.dart';
 import '../../../../api_handler/timing/get_timing_detail.dart';
 import '../../../../api_handler/timing/get_timings.dart';
-import '../../../../api_handler/timing_estimate/get_timing_estimate.dart';
 import '../../../../models/to_screen/see_conv_arg.dart';
 import '../function_access_param.dart';
 
@@ -38,7 +37,8 @@ class BodyInProgressArtisanConversation extends StatelessWidget {
         descSize: 75,
         descStyle: Theme.of(context).textTheme.displaySmall,
         returnThirdText: getDateOfMessage,
-        thirdTextSize: 16);
+        thirdTextSize: 16
+    );
   }
 }
 

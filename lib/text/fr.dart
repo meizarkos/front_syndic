@@ -30,6 +30,7 @@ class AppText {
   static const String validate = 'Valider';
   static const String successModify = 'Modification réussie';
   static const String listCoOwneTitle = 'Mes copropriétaires';
+  static const String deconnect = 'Déconnexion';
 
   /* General not found */
   static const String noCategoryFound = 'Pas de catégorie';
@@ -204,11 +205,14 @@ class AppText {
   static const String phoneContact = 'Votre numéro de contact est :';
   static const String contactUs = "pour plus d'informations";
   static const String contactez = 'Contactez';
-  static const String contactUnion = "Si vous n'êtes pas à l'origine de cette demande adressez vous à votre syndicat :";
-  static const String contactCouncil = "Si vous n'êtes pas à l'origine de cette demande adressez vous à votre conseil syndical :";
+  static const String contactCouncilActive = 'Contactez le conseil syndical gérer par :';
+  static const String contactUnionForArtisan = 'Sinon contactez le syndicat : ';
+  static const String contactUnion = "Contacter votre syndicat pour en savoir plus au :";
+  static const String contactCouncil = "Si vous n'êtes pas à l'origine de cette demande adressez vous à ce conseil syndical :";
 
   /* Timing Detail */
   static const String seeConv = 'Message';
+  static const String seeConversation = 'Voir la conversation';
   static const String seeEstimateDetail = 'Voir le devis';
 
   /* Estimate */
@@ -274,4 +278,7 @@ class AppText {
   static const String firstName = 'Prénom';
   static const String emailFormatError = 'Format de l\'email incorrect';
   static const String createATemporaryPassword = 'Créer un mot de passe temporaire';
+
+  /*Text contact */
+  static Function(String ) contactText = (String name) => 'Contacter $name';
 }

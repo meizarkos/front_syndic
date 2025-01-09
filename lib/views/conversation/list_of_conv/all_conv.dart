@@ -7,6 +7,7 @@ import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/divider/divider.dart';
 
+import '../../../widget/cell_app_bar_in_progress/createButton.dart';
 import 'all_conv_type.dart';
 
 class SeeConv extends StatefulWidget {
@@ -70,7 +71,7 @@ class _SeeConvState extends State<SeeConv> {
     }
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100.0,
+        toolbarHeight: 80.0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
@@ -85,6 +86,7 @@ class _SeeConvState extends State<SeeConv> {
             child : Row(
               children: [
                 createButton(
+                  context,
                   AppText.createAMeeting,
                   ()=>{
                     Navigator.pushNamed(context, widget.route,
@@ -96,16 +98,19 @@ class _SeeConvState extends State<SeeConv> {
                 ),
                 const SizedBox(width: 10),
                 createButton(
+                  context,
                   AppText.seeWorkRequest,
                   ()=>{widget.goToRequest(choseId())},
                 ),
                 const SizedBox(width: 10),
                 createButton(
+                    context,
                   AppText.seeMeeting,
                     ()=>widget.goToMeeting(_conversations[0].uuid),
                 ),
                 const SizedBox(width: 10),
                 createButton(
+                  context,
                   AppText.seeEstimateDetail,
                   ()=>widget.goToEstimate(_conversations[0].uuid),
                 ),
@@ -116,7 +121,8 @@ class _SeeConvState extends State<SeeConv> {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 5),
+          divider(1,Colors.black),
+          const SizedBox(height: AppUIValue.spaceScreenToAny),
           Expanded(
             child: ListView.builder(
               itemCount: _conversations.length,
@@ -168,17 +174,6 @@ class _SeeConvState extends State<SeeConv> {
           ],
         ),
       ),
-    );
-  }
-
-  ElevatedButton createButton(String text, Function() onPressed,{Color color = AppColors.mainBackgroundColor,Color textColor = AppColors.mainTextColor}) {
-
-    return elevatedButtonAndTextColor(
-      color,
-      text,
-      context,
-      onPressed,
-      textColor,
     );
   }
 

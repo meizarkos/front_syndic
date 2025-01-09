@@ -11,7 +11,6 @@ class HeaderCouncil extends StatelessWidget {
 
   final String category;
   final Function(String) onCategoryChange;
-
   @override
   Widget build(BuildContext context) {
     return HeaderForModifyWorkRequest(
@@ -53,3 +52,48 @@ class HeaderUnion extends StatelessWidget {
     );
   }
 }
+
+class HeaderUnionFromConversation extends StatelessWidget {
+  const HeaderUnionFromConversation({
+    super.key,
+    required this.category,
+    required this.onCategoryChange,
+  });
+
+  final String category;
+  final Function(String) onCategoryChange;
+
+  @override
+  Widget build(BuildContext context) {
+    return HeaderForModifyWorkRequest(
+      category: category,
+      onChangedCategory: onCategoryChange,
+      onBack: ()=>{
+        Navigator.pop(context)
+      },
+    );
+  }
+}
+
+class HeaderCouncilFromConversation extends StatelessWidget {
+  const HeaderCouncilFromConversation({
+    super.key,
+    required this.category,
+    required this.onCategoryChange,
+  });
+
+  final String category;
+  final Function(String) onCategoryChange;
+
+  @override
+  Widget build(BuildContext context) {
+    return HeaderForModifyWorkRequest(
+      category: category,
+      onChangedCategory: onCategoryChange,
+      onBack: ()=>{
+        Navigator.pop(context)
+      },
+    );
+  }
+}
+

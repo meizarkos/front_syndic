@@ -51,6 +51,7 @@ import 'package:front_syndic/views/work_requests/create_work_request/recap/recap
 import 'package:front_syndic/views/work_requests/create_work_request/take_picture.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/title_desc/title_and_desc_type.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_request_type.dart';
+import 'package:front_syndic/views/work_requests/modify_work_request/recap_from_conv.dart';
 import 'package:front_syndic/views/work_requests/modify_work_request/recap_main_type.dart';
 
 import 'models/artisan/createArtisan.dart';
@@ -178,6 +179,16 @@ class MyApp extends StatelessWidget {
             if (arguments is String) {
               return MaterialPageRoute(
                 builder: (context) => RecapMainCouncil(
+                  workRequestUuid: arguments,
+                ),
+              );
+            }
+
+          case '/council/modify_demand/from_conv':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => RecapMainCouncilFromConversation(
                   workRequestUuid: arguments,
                 ),
               );
@@ -422,6 +433,17 @@ class MyApp extends StatelessWidget {
             if (arguments is String) {
               return MaterialPageRoute(
                 builder: (context) => RecapMainUnion(
+                  workRequestUuid: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/union/modify_demand/from_conv':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => RecapMainUnionFromConversation(
                   workRequestUuid: arguments,
                 ),
               );

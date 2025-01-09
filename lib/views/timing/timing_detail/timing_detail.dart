@@ -9,9 +9,8 @@ import '../../../text/fr.dart';
 import '../../../utils/date_to_string/date.dart';
 import '../../../utils/string_handler/handle_string.dart';
 import '../../../widget/button/elevated_button_opacity.dart';
-import '../../../widget/button/row_of_nav_button.dart';
+import '../../../widget/cell_app_bar_in_progress/createButton.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
-import '../../../widget/header/app_bar_back_button.dart';
 
 class TimingDetail extends StatefulWidget {
   const TimingDetail({
@@ -20,9 +19,9 @@ class TimingDetail extends StatefulWidget {
     required this.routeToEstimateDetail,
     required this.routeToRefuse,
     required this.future,
-    required this.getYou,
-    required this.getClient,
-    this.getUnion,
+    //required this.getClient,
+    required this.textContact,
+    //this.getUnion,
     this.isArtisan = false,
   });
 
@@ -30,9 +29,9 @@ class TimingDetail extends StatefulWidget {
   final Function(String?) routeToEstimateDetail;
   final Function(String?) routeToRefuse;
   final Future<Timing?> future;
-  final Function(dynamic) getYou;
-  final Function(dynamic) getClient;
-  final Function(dynamic)? getUnion;
+  //final Function(dynamic) getClient;
+  //final Function(dynamic)? getUnion;
+  final Function(Timing) textContact;
   final bool isArtisan;
 
   @override
@@ -40,99 +39,137 @@ class TimingDetail extends StatefulWidget {
 }
 
 class _TimingDetailState extends State<TimingDetail> {
+  Timing timing = Timing();
+
+  bool isLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.future.then((value) {
+      if (value != null) {
+        setState(() {
+          isLoaded = true;
+          timing = value;
+        });
+      } else {
+        return const Center(child: Text(AppText.apiErrorText));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if(!isLoaded) return const Center(child: CircularProgressIndicator());
     return Scaffold(
-      appBar: appBarBackButton(context, title: AppText.timing),
-      body: SingleChildScrollView(
-        child: FutureBuilder(
-          future: widget.future,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError || snapshot.data == null) {
-              return const Center(child: Text(AppText.apiErrorText));
-            }
-            final timing = snapshot.data!;
-            return Padding(
+      appBar: AppBar(
+        toolbarHeight: 80.0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.black,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Padding(
               padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
-              child: Column(
+              child: Row(
                 children: [
-                  const SizedBox(height: AppUIValue.spaceScreenToAny),
-                  rowOfNavButton(
-                    AppText.seeConv,
-                    AppText.seeEstimateDetail,
+                  createButton(
                     context,
+                    AppText.seeConversation,
                     () => widget.routeToConv(timing.uuid),
+                  ),
+                  const SizedBox(width: 10),
+                  createButton(
+                    context,
+                    AppText.seeEstimateDetail,
                     () => widget.routeToEstimateDetail(timing.uuid),
                   ),
-                  const SizedBox(height: 35),
-                  Center(
-                    child: Text(
-                      timing.workRequest?.title ?? AppText.noTitleForWork,
-                      style: getTextStyleMainColor(20),
-                    ),
+                ],
+              )),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+          child: Column(
+            children: [
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
+              Center(
+                child: Text(
+                  timing.workRequest?.title ?? AppText.noTitleForWork,
+                  style: getTextStyleMainColor(18),
+                ),
+              ),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
+              Card(
+                elevation: AppUIValue.elevation,
+                child: Container(
+                  padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+                  decoration: decorationRoundMainColor(),
+                  child: Column(
+                    children: [
+                      Text(
+                        '${AppText.meetingEstimateText} ${formatStringToApiDate(timing.date, 'dd/MM')} ${AppText.at} ${timing.time?.substring(0, 5).replaceAll(':', 'h') ?? ''}.',
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                      Text(
+                        "\n\n${AppText.interventionPlace}"
+                        "\n\n${timing.workRequest?.adress?.street ?? ''}, ${timing.workRequest?.adress?.city ?? ''}, ${timing.workRequest?.adress?.postalCode ?? ''}"
+                        "\n${timing.workRequest?.adress?.country?.toUpperCase() ?? ''} \n",
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 35),
-                  Text(
-                    '${AppText.one} ${toLowerFirst(AppText.timing)} ${AppText.create}',
+                ),
+              ),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
+              Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  // Define the width to constrain text justification
+                  child: Text(
+                    widget.textContact(timing),
                     style: Theme.of(context).textTheme.displaySmall,
+                    textAlign: TextAlign.justify,
                   ),
-                  const SizedBox(height: 35),
-                  Container(
-                    padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
-                    decoration: decorationRoundMainColor(),
-                    child: Column(
-                      children: [
-                        Text(
-                          '${AppText.meetingEstimateText} ${formatStringToApiDate(timing.date, 'dd/MM')} ${AppText.at} ${timing.time?.substring(0, 5).replaceAll(':', 'h') ?? ''}.',
-                          style: Theme.of(context).textTheme.displayMedium,
-                        ),
-                        Text(
-                          "\n\n${AppText.interventionPlace}"
-                          "\n\n${timing.workRequest?.adress?.street ?? ''}, ${timing.workRequest?.adress?.city ?? ''}, ${timing.workRequest?.adress?.postalCode ?? ''}"
-                          "\n${timing.workRequest?.adress?.country?.toUpperCase() ?? ''} \n",
-                          style: Theme.of(context).textTheme.displaySmall,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 35),
-                  Text(
-                    AppText.contactez,
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
-                    widget.getYou(timing),
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
+                ),
+              ),
+              /*Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  // Define the width to constrain text justification
+                  child: Text(
                     widget.getClient(timing),
                     style: Theme.of(context).textTheme.displaySmall,
+                    textAlign: TextAlign.justify,
                   ),
-                  if (widget.getUnion != null) ...[
-                    const SizedBox(height: 15),
-                    Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        // Define the width to constrain text justification
-                        child: Text(
-                          widget.getUnion!(timing),
-                          style: Theme.of(context).textTheme.displaySmall,
-                          textAlign: TextAlign.justify,
-                        ),
-                      ),
+                ),
+              ),*/
+              /*if (widget.getUnion != null) ...[
+                const SizedBox(height: AppUIValue.spaceScreenToAny*2),
+                Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    // Define the width to constrain text justification
+                    child: Text(
+                      widget.getUnion!(timing),
+                      style: Theme.of(context).textTheme.displaySmall,
+                      textAlign: TextAlign.justify,
                     ),
-                  ],
-                  const SizedBox(height: 40),
-                  inArtisanCase(timing),
-                ],
-              ),
-            );
-          },
+                  ),
+                ),
+              ],*/
+              const SizedBox(height: 40),
+              inArtisanCase(timing),
+            ],
+          ),
         ),
       ),
     );
@@ -148,37 +185,35 @@ class _TimingDetailState extends State<TimingDetail> {
         Colors.black,
       );
     } else {
-      return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: elevatedButtonAndTextColor(
-                AppColors.actionButtonColor
-                    .withOpacity(AppUIValue.opacityActionButton),
-                AppText.createEstimate,
+      return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Expanded(
+          child: elevatedButtonAndTextColor(
+            AppColors.actionButtonColor
+                .withOpacity(AppUIValue.opacityActionButton),
+            AppText.createEstimate,
+            context,
+            () {
+              final estimate = Estimate();
+              estimate.workRequestId = timing.workRequest?.uuid;
+              Navigator.pushNamed(
                 context,
-                () {
-                  final estimate = Estimate();
-                  estimate.workRequestId = timing.workRequest?.uuid;
-                  Navigator.pushNamed(
-                    context,
-                    '/artisan/create_estimate/description',
-                    arguments: estimate,
-                  );
-                },
-                Colors.black,
-              ),
-            ),
-            SizedBox(width: 10), // Add spacing between the buttons
-            Expanded(
-              child: elevatedButtonAndTextColor(
-                Colors.black,
-                AppText.refuse,
-                context,
-                () => widget.routeToRefuse(timing.uuid),
-                Colors.white,
-              ),
-            ),
+                '/artisan/create_estimate/description',
+                arguments: estimate,
+              );
+            },
+            Colors.black,
+          ),
+        ),
+        SizedBox(width: 10), // Add spacing between the buttons
+        Expanded(
+          child: elevatedButtonAndTextColor(
+            Colors.black,
+            AppText.refuse,
+            context,
+            () => widget.routeToRefuse(timing.uuid),
+            Colors.white,
+          ),
+        ),
       ]);
     }
   }

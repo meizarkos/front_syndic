@@ -56,7 +56,7 @@ class BodyInProgressUnionTiming extends StatelessWidget {
       goToDetail: (uuid) => {
         Navigator.pushNamed(
           context,
-          '/council/timing_detail',
+          'union/detail_timing',
           arguments: SeeConvArg(
             uuid: uuid,
             futureToFetchData: fetchTimingDetailCouncil,
