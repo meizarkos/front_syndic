@@ -23,13 +23,9 @@ class EstimateDetailCouncil extends StatelessWidget {
       fetchData: fetchData,
       uuid: uuid,
       role: RoleBasedText.council,
-      patchStatus: (String? id)async{
+      patchStatus: (String? id,VoidCallback changeText)async{
         if(uuid == null) return;
-        await patchEstimateCouncil(id);
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/estimate/council/detail',
-          arguments: SeeConvArg(uuid: uuid!, futureToFetchData: fetchData)
-        );
+        await patchEstimateCouncil(id,changeText);
       },
       goToConv: (String? id){
         if(id == null) return;
@@ -63,13 +59,9 @@ class EstimateDetailUnion extends StatelessWidget {
       fetchData: fetchData,
       uuid: uuid,
       role: RoleBasedText.union,
-      patchStatus: (String? id)async{
+      patchStatus: (String? id,VoidCallback changeText)async{
         if(uuid == null) return;
-        await patchEstimateCouncil(id);
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/estimate/union/detail',
-            arguments: SeeConvArg(uuid: uuid!, futureToFetchData: fetchData)
-        );
+        await patchEstimateCouncil(id,changeText);
       },
       goToConv: (String? id){
         if(id == null) return;

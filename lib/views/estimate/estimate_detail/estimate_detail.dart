@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
-import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
-import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../core_value.dart';
 import '../../../models/estimate/estimate.dart';
 import '../../../text/fr.dart';
-import '../../../widget/button/row_of_nav_button.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
-import '../../../widget/handle_status/alert_to_display.dart';
 import '../../../widget/handle_status/text_based_on_user.dart';
-import '../../../widget/header/app_bar_back_button.dart';
 import '../../../widget/text_style/text_style_main_color.dart';
+import '../common_app_bar.dart';
 
 class EstimateDetail extends StatefulWidget {
   const EstimateDetail({
@@ -28,7 +24,7 @@ class EstimateDetail extends StatefulWidget {
   final Function(String?) fetchData;
   final String? uuid;
   final String role;
-  final Function(String?) patchStatus;
+  final Function(String?,VoidCallback) patchStatus;
   final Function(String?) goToConv;
   final Function(String?) goToTiming;
 
@@ -40,6 +36,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
   late Future<Estimate?> _futureEstimate;
 
   Estimate estimateFromRequest = Estimate();
+  String validateEstimateText = '';
 
   @override
   void initState() {
@@ -51,7 +48,11 @@ class _EstimateDetailState extends State<EstimateDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarBackButton(context, title: AppText.estimateDetailTitle),
+      appBar: estimateAppBar(
+        context,
+        () => widget.goToConv(estimateFromRequest.uuid),
+        () => widget.goToTiming(estimateFromRequest.uuid),
+      ),
       body: SingleChildScrollView(
         child: FutureBuilder(
             future: _futureEstimate,
@@ -69,14 +70,6 @@ class _EstimateDetailState extends State<EstimateDetail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(height: AppUIValue.spaceScreenToAny),
-                    rowOfNavButton(
-                      AppText.seeConv,
-                      AppText.timingEstimate,
-                      context,
-                      () => widget.goToConv(estimateFromRequest.uuid),
-                      () => widget.goToTiming(estimateFromRequest.uuid),
-                    ),
                     const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
                     Center(
                       child: Text(
@@ -85,7 +78,8 @@ class _EstimateDetailState extends State<EstimateDetail> {
                       ),
                     ),
                     const SizedBox(height: AppUIValue.spaceScreenToAny),
-                    textEstimateStatusUser(estimateFromRequest.status,
+                    textEstimateStatusUser(
+                        estimateFromRequest.status,
                         estimateFromRequest.statusGoal, context, widget.role),
                     const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
                     Text(
@@ -116,25 +110,21 @@ class _EstimateDetailState extends State<EstimateDetail> {
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
                     const SizedBox(height: 2),
-                    Container(
-                      padding: EdgeInsets.all(AppUIValue.spaceScreenToAny),
-                      width: double.infinity,
-                      decoration: decorationRoundMainColor(),
-                      child: Text(
-                        estimateFromRequest.commentary ?? AppText.noCommentary,
-                        style: Theme.of(context).textTheme.displaySmall,
-                      ),
+                    Text(
+                      estimateFromRequest.commentary ?? AppText.noCommentary,
+                      style: Theme.of(context).textTheme.displaySmall,
                     ),
                     const SizedBox(height: AppUIValue.spaceScreenToAny * 3),
                     Center(
                       child: elevatedButtonAndTextColor(
                         AppColors.mainBackgroundColor,
-                        handleText(),
+                        validateEstimateText == '' ? handleText() : validateEstimateText,
                         context,
                         handleButton(),
                         AppColors.mainTextColor,
                       ),
                     ),
+
                   ],
                 ),
               );
@@ -158,6 +148,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
   }
 
   VoidCallback handleButton() {
+    // ignore the click if the user already validate the estimate
     if (estimateFromRequest.status == estimateFromRequest.statusGoal) {
       return () {};
     }
@@ -169,7 +160,11 @@ class _EstimateDetailState extends State<EstimateDetail> {
       return () {};
     }
     return () async {
-      widget.patchStatus(estimateFromRequest.uuid);
+      widget.patchStatus(estimateFromRequest.uuid,(){
+        setState(() {
+          validateEstimateText = AppText.estimateAlreadyAccept;
+        });
+      });
     };
   }
 }

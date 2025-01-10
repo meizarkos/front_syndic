@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
-import 'package:front_syndic/widget/header/app_bar_back_button.dart';
+import 'package:front_syndic/widget/button/deleteButton.dart';
+import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
 import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../api_handler/estimate/delete_estimate.dart';
-import '../../../api_handler/estimate/get_estimate_detail.dart';
 import '../../../api_handler/estimate/patch_estimate.dart';
 import '../../../api_handler/timing_estimate/get_timing_estimate.dart';
 import '../../../models/estimate/estimate.dart';
 import '../../../text/fr.dart';
-import '../../../widget/button/row_bottom_bar.dart';
-import '../../../widget/button/row_of_nav_button.dart';
+import '../../../widget/cell_app_bar_in_progress/createButton.dart';
 import '../../../widget/decoration/text_field_deco_main.dart';
-import '../../../widget/handle_status/alert_to_display.dart';
 import '../../../widget/handle_status/text_to_display_based_on_status.dart';
 import '../../../widget/text_style/text_style_main_color.dart';
+import '../common_app_bar.dart';
 
 class EstimateDetailArtisan extends StatefulWidget {
   const EstimateDetailArtisan({
@@ -46,13 +46,38 @@ class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
   @override
   void initState() {
     super.initState();
-    _futureEstimate = widget.fetchData(widget.uuid); // Initialize the Future once
+    _futureEstimate =
+        widget.fetchData(widget.uuid); // Initialize the Future once
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarBackButton(context, title: AppText.estimateDetailTitle),
+      appBar: estimateAppBar(
+        context,
+        () {
+          if (estimateFromRequest.uuid == null) return;
+          Navigator.pushNamed(
+            context,
+            '/artisan/see_conv',
+            arguments: SeeConvArg(
+              uuid: estimateFromRequest.uuid!,
+              futureToFetchData: fetchSpecificConvArtisanFromEstimate,
+            ),
+          );
+        },
+        () {
+          if (estimateFromRequest.uuid == null) return;
+          Navigator.pushNamed(
+            context,
+            'artisan/timing_estimate',
+            arguments: SeeConvArg(
+              uuid: estimateFromRequest.uuid!,
+              futureToFetchData: fetchTimingEstimateArtisan,
+            ),
+          );
+        },
+      ),
       body: SingleChildScrollView(
         child: FutureBuilder(
           future: _futureEstimate,
@@ -73,34 +98,6 @@ class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(height: AppUIValue.spaceScreenToAny),
-                  rowOfNavButton(
-                    AppText.seeConv,
-                    AppText.timingEstimate,
-                    context,
-                    (){
-                      if (estimateFromRequest.uuid == null) return;
-                      Navigator.pushNamed(
-                        context,
-                        '/artisan/see_conv',
-                        arguments: SeeConvArg(
-                            uuid: estimateFromRequest.uuid!,
-                            futureToFetchData:
-                                fetchSpecificConvArtisanFromEstimate),
-                      );
-                    },
-                    () {
-                      if (estimateFromRequest.uuid == null) return;
-                      Navigator.pushNamed(
-                        context,
-                        'artisan/timing_estimate',
-                        arguments: SeeConvArg(
-                            uuid: estimateFromRequest.uuid!,
-                            futureToFetchData: fetchTimingEstimateArtisan
-                        ),
-                      );
-                    },
-                  ),
                   const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
                   Center(
                     child: Text(
@@ -109,7 +106,8 @@ class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
                     ),
                   ),
                   const SizedBox(height: AppUIValue.spaceScreenToAny),
-                  textEstimateStatus(estimateFromRequest.status, estimateFromRequest.statusGoal, context),
+                  textEstimateStatus(estimateFromRequest.status,
+                      estimateFromRequest.statusGoal, context),
                   const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
                   TextField(
                     controller: _controllerPrice,
@@ -148,31 +146,39 @@ class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
                   ),
                   const SizedBox(height: AppUIValue.spaceScreenToAny),
                   ErrorVisibility(
-                      errorVisibility: errorVisibility,
-                      errorText: AppText.textFieldErrorCreateEstimate)
+                    errorVisibility: errorVisibility,
+                    errorText: AppText.textFieldErrorCreateEstimate,
+                  ),
+                  ErrorVisibility(
+                    errorVisibility: errorVisibilityModify,
+                    errorText: AppText.textFieldEstimateModify,
+                    color: Colors.green,
+                  ),
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
+                  SizedBox(
+                    width: double.infinity,
+                    child: elevatedButtonAndTextColor(
+                      AppColors.mainBackgroundColor,
+                      AppText.modify,
+                      context,
+                      () {
+                        _modify();
+                      },
+                      AppColors.mainTextColor,
+                    ),
+                  ),
+                  const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
+                  deleteButton(
+                    () {
+                      _delete();
+                    },
+                    context,
+                  ),
                 ],
               ),
             );
           },
         ),
-      ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ErrorVisibility(
-              errorVisibility: errorVisibilityModify,
-              errorText: AppText.textFieldEstimateModify,
-              color: Colors.green),
-          rowBottomBar(
-            context,
-            () {
-              _modify();
-            },
-            () {
-              _delete();
-            },
-          ),
-        ],
       ),
     );
   }
@@ -191,7 +197,7 @@ class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
       });
       return;
     }
-    if(estimateFromRequest.uuid == null) return;
+    if (estimateFromRequest.uuid == null) return;
     showDialog(
       context: context, // Pass the context from your widget
       builder: (BuildContext context) {
@@ -213,10 +219,7 @@ class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
                   errorVisibilityModify = true;
                 });
                 await patchEstimateArtisan(estimateFromRequest);
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
-                Navigator.pushNamed(context, '/estimate/artisan/detail',
-                    arguments: SeeConvArg(uuid: estimateFromRequest.uuid!, futureToFetchData: fetchEstimateDetailArtisan));
+                Navigator.pop(context);
               },
             ),
           ],
@@ -256,6 +259,4 @@ class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
       },
     );
   }
-
-
 }

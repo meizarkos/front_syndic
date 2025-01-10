@@ -29,6 +29,7 @@ class TimingDetail extends StatefulWidget {
   final Function(String?) routeToEstimateDetail;
   final Function(String?) routeToRefuse;
   final Future<Timing?> future;
+
   //final Function(dynamic) getClient;
   //final Function(dynamic)? getUnion;
   final Function(Timing) textContact;
@@ -60,7 +61,7 @@ class _TimingDetailState extends State<TimingDetail> {
 
   @override
   Widget build(BuildContext context) {
-    if(!isLoaded) return const Center(child: CircularProgressIndicator());
+    if (!isLoaded) return const Center(child: CircularProgressIndicator());
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80.0,
@@ -139,35 +140,11 @@ class _TimingDetailState extends State<TimingDetail> {
                   ),
                 ),
               ),
-              /*Align(
-                alignment: Alignment.center,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  // Define the width to constrain text justification
-                  child: Text(
-                    widget.getClient(timing),
-                    style: Theme.of(context).textTheme.displaySmall,
-                    textAlign: TextAlign.justify,
-                  ),
-                ),
-              ),*/
-              /*if (widget.getUnion != null) ...[
-                const SizedBox(height: AppUIValue.spaceScreenToAny*2),
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    // Define the width to constrain text justification
-                    child: Text(
-                      widget.getUnion!(timing),
-                      style: Theme.of(context).textTheme.displaySmall,
-                      textAlign: TextAlign.justify,
-                    ),
-                  ),
-                ),
-              ],*/
               const SizedBox(height: 40),
-              inArtisanCase(timing),
+              SizedBox(
+                  height: 115,
+                  child: inArtisanCase(timing),
+              ),
             ],
           ),
         ),
@@ -185,36 +162,43 @@ class _TimingDetailState extends State<TimingDetail> {
         Colors.black,
       );
     } else {
-      return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Expanded(
-          child: elevatedButtonAndTextColor(
-            AppColors.actionButtonColor
-                .withOpacity(AppUIValue.opacityActionButton),
-            AppText.createEstimate,
-            context,
-            () {
-              final estimate = Estimate();
-              estimate.workRequestId = timing.workRequest?.uuid;
-              Navigator.pushNamed(
-                context,
-                '/artisan/create_estimate/description',
-                arguments: estimate,
-              );
-            },
-            Colors.black,
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: elevatedButtonAndTextColor(
+              AppColors.actionButtonColor
+                  .withOpacity(AppUIValue.opacityActionButton),
+              AppText.createEstimate,
+              context,
+              () {
+                final estimate = Estimate();
+                estimate.workRequestId = timing.workRequest?.uuid;
+                Navigator.pushNamed(
+                  context,
+                  '/artisan/create_estimate/description',
+                  arguments: estimate,
+                );
+              },
+              Colors.black,
+            ),
           ),
-        ),
-        SizedBox(width: 10), // Add spacing between the buttons
-        Expanded(
-          child: elevatedButtonAndTextColor(
-            Colors.black,
-            AppText.refuse,
-            context,
-            () => widget.routeToRefuse(timing.uuid),
-            Colors.white,
+          SizedBox(
+            height: AppUIValue.spaceScreenToAny,
+          ), // Add spacing between the buttons
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: elevatedButtonAndTextColor(
+              Colors.black,
+              AppText.refuse,
+              context,
+              () => widget.routeToRefuse(timing.uuid),
+              Colors.white,
+            ),
           ),
-        ),
-      ]);
+        ],
+      );
     }
   }
 }

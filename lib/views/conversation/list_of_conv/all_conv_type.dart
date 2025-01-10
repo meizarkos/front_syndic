@@ -84,7 +84,7 @@ class AllConvArtisan extends StatelessWidget {
       },
       goToEstimate: (String? id) {
         if(id == null) return;
-        Navigator.pushReplacementNamed(context,'/estimate/artisan/detail',
+        Navigator.pushNamed(context,'/estimate/artisan/detail',
             arguments: SeeConvArg(
               uuid: id,
               futureToFetchData: fetchEstimateDetailArtisanFromConversation,

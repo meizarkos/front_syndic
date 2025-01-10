@@ -5,6 +5,7 @@ import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
 import '../../../../../models/work_request/work_request.dart';
+import '../../../../../widget/button/deleteButton.dart';
 import '../../../../../widget/decoration/text_field_deco_main.dart';
 import '../../../../../widget/visibility/error.dart';
 
@@ -135,34 +136,7 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
                   ),
                 ),
                 const SizedBox(height: AppUIValue.spaceScreenToAny*2),
-                ElevatedButton(
-                  onPressed: () => {
-                    choiceDelete(),
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black, // Background color with opacity
-                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                    textStyle: Theme.of(context).textTheme.displayMedium,
-                    elevation: AppUIValue.elevation,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        AppText.delete,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                      SizedBox(width: 15),
-                      Icon(
-                        Icons.delete,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                ),
+                deleteButton(() => choiceDelete(), context),
                 const SizedBox(height: 25),
               ],
             ),
