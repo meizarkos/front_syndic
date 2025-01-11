@@ -53,7 +53,7 @@ class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: estimateAppBar(
+      appBar: estimateAppBarArtisan(
         context,
         () {
           if (estimateFromRequest.uuid == null) return;

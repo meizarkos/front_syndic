@@ -102,6 +102,7 @@ class AppText {
   static const String titleMeeting = 'Mon prochain devis';
   static const String titleNextMeeting = 'Passage pour un devis le :';
   static const String seeEstimate = 'Voir mes rendez-vous';
+  static const String refuseEstimate = 'Refuser';
   static const String noTimingFound = 'Pas de rendez-vous fixé';
 
   static const String titleNextWorkMeeting = 'Mes prochains travaux';
@@ -239,7 +240,7 @@ class AppText {
   static const String estimateWaitingForYou = "En attente de votre validation";
 
   /* Timing Estimate */
-  static const String timingEstimate = 'Date travaux';
+  static const String timingEstimate = 'Voir les dates de travaux';
   static const String timingEstimateListTitle = 'Proposition de travaux du';
   static const String timingEstimateNotYetValidate = 'Pas encore validé';
   static const String timingEstimateValidate = 'Validé';

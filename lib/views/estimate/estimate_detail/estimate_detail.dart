@@ -17,6 +17,7 @@ class EstimateDetail extends StatefulWidget {
     required this.uuid,
     required this.role,
     required this.patchStatus,
+    required this.refuseEstimate,
     required this.goToConv,
     required this.goToTiming,
   });
@@ -25,6 +26,7 @@ class EstimateDetail extends StatefulWidget {
   final String? uuid;
   final String role;
   final Function(String?,VoidCallback) patchStatus;
+  final Function(String?,VoidCallback) refuseEstimate;
   final Function(String?) goToConv;
   final Function(String?) goToTiming;
 
@@ -36,7 +38,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
   late Future<Estimate?> _futureEstimate;
 
   Estimate estimateFromRequest = Estimate();
-  String validateEstimateText = '';
+  //String validateEstimateText = '';
 
   @override
   void initState() {
@@ -51,7 +53,6 @@ class _EstimateDetailState extends State<EstimateDetail> {
       appBar: estimateAppBar(
         context,
         () => widget.goToConv(estimateFromRequest.uuid),
-        () => widget.goToTiming(estimateFromRequest.uuid),
       ),
       body: SingleChildScrollView(
         child: FutureBuilder(
@@ -62,8 +63,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
               } else if (snapshot.hasError || snapshot.data == null) {
                 return const Center(child: Text(AppText.apiErrorText));
               }
-              final estimate = snapshot.data!;
-              estimateFromRequest = estimate;
+              estimateFromRequest =  snapshot.data!;
               return Padding(
                 padding: EdgeInsets.all(AppUIValue.spaceScreenToAny),
                 child: Column(
@@ -73,19 +73,22 @@ class _EstimateDetailState extends State<EstimateDetail> {
                     const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
                     Center(
                       child: Text(
-                        estimate.workRequest?.title ?? AppText.noTitleForWork,
+                        estimateFromRequest.workRequest?.title ?? AppText.noTitleForWork,
                         style: getTextStyleMainColor(AppUIValue.sizeFontTitle),
                       ),
                     ),
                     const SizedBox(height: AppUIValue.spaceScreenToAny),
                     textEstimateStatusUser(
                         estimateFromRequest.status,
-                        estimateFromRequest.statusGoal, context, widget.role),
+                        estimateFromRequest.statusGoal,
+                        context,
+                        widget.role,
+                    ),
                     const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
                     Text(
-                      estimate.price == null
+                      estimateFromRequest.price == null
                           ? AppText.noPriceEstimate
-                          : '${AppText.createEstimatePrice}: ${estimate.price} ${AppText.euro}',
+                          : '${AppText.createEstimatePrice}: ${estimateFromRequest.price} ${AppText.euro}',
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
                     const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
@@ -115,16 +118,56 @@ class _EstimateDetailState extends State<EstimateDetail> {
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                     const SizedBox(height: AppUIValue.spaceScreenToAny * 3),
+                    if(handleText() == AppText.validate)
                     Center(
                       child: elevatedButtonAndTextColor(
                         AppColors.mainBackgroundColor,
-                        validateEstimateText == '' ? handleText() : validateEstimateText,
+                        //validateEstimateText == '' ? handleText() :
+                        handleText(),
                         context,
                         handleButton(),
                         AppColors.mainTextColor,
                       ),
                     ),
-
+                    const SizedBox(height: AppUIValue.spaceScreenToAny),
+                    if(handleText() == AppText.estimateAlreadyAccept)
+                      Center(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: elevatedButtonAndTextColor(
+                            AppColors.mainBackgroundColor,
+                            AppText.timingEstimate,
+                            context,
+                                () {
+                              widget.goToTiming(estimateFromRequest.uuid);
+                            },
+                            AppColors.mainTextColor,
+                          ),
+                        ),
+                      ),
+                    const SizedBox(height: AppUIValue.spaceScreenToAny*3),
+                    if(handleText() == AppText.estimateAlreadyAccept)
+                        Center(
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            child: elevatedButtonAndTextColor(
+                                Colors.black,
+                                AppText.refuseEstimate,
+                                context,
+                                (){
+                                  widget.refuseEstimate(estimateFromRequest.uuid,()async{
+                                    var estimateStatic = await widget.fetchData(widget.uuid);
+                                    setState((){
+                                      //validateEstimateText = AppText.validate;
+                                      estimateFromRequest.status = estimateStatic.status;
+                                    });
+                                  });
+                                },
+                                Colors.white,
+                            ),
+                          ),
+                        ),
+                    const SizedBox(height: AppUIValue.spaceScreenToAny),
                   ],
                 ),
               );
@@ -160,9 +203,11 @@ class _EstimateDetailState extends State<EstimateDetail> {
       return () {};
     }
     return () async {
-      widget.patchStatus(estimateFromRequest.uuid,(){
+      widget.patchStatus(estimateFromRequest.uuid,()async{
+        var estimateStatic = await widget.fetchData(widget.uuid);
         setState(() {
-          validateEstimateText = AppText.estimateAlreadyAccept;
+          //validateEstimateText = AppText.estimateAlreadyAccept;
+          estimateFromRequest.status = estimateStatic.status;
         });
       });
     };

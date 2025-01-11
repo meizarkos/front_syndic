@@ -4,7 +4,34 @@ import '../../core_value.dart';
 import '../../text/fr.dart';
 import '../../widget/cell_app_bar_in_progress/createButton.dart';
 
-AppBar estimateAppBar(BuildContext context, VoidCallback conv, VoidCallback date) {
+AppBar estimateAppBar(BuildContext context, VoidCallback conv ) {
+  return AppBar(
+    toolbarHeight: 80.0,
+    leading: IconButton(
+      icon: Icon(Icons.arrow_back),
+      color: Colors.black,
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    ),
+    title: SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+          padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+          child: Row(
+            children: [
+              createButton(
+                context,
+                AppText.seeConversation,
+                conv,
+              ),
+            ],
+          )),
+    ),
+  );
+}
+
+AppBar estimateAppBarArtisan(BuildContext context, VoidCallback conv, VoidCallback timing) {
   return AppBar(
     toolbarHeight: 80.0,
     leading: IconButton(
@@ -23,7 +50,7 @@ AppBar estimateAppBar(BuildContext context, VoidCallback conv, VoidCallback date
               createButton(
                 context,
                 AppText.timingEstimate,
-                date,
+                timing,
               ),
               const SizedBox(width: 10),
               createButton(
