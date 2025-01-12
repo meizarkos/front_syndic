@@ -1,18 +1,29 @@
-import 'package:front_syndic/api_handler/timing_estimate/refuse_timing_estimate.dart';
 
 import '../../core_value.dart';
+import '../request.dart';
+
+
+Future<void> acceptTimingEstimate(String route)async{
+  try{
+    final responsse = await request(url: route, method: 'PATCH');
+    return;
+  }
+  catch(e){
+    return;
+  }
+}
 
 Future<void> acceptTimingEstimateArtisan(String? uuid)async{
   if(uuid == null) return;
-  await refuseTimingEstimate('${APIValue.artisan}accept_timing_estimate_artisan/$uuid');
+  await acceptTimingEstimate('${APIValue.artisan}accept_timing_estimate_artisan/$uuid');
 }
 
 Future<void> acceptTimingEstimateCouncil(String? uuid)async{
   if(uuid == null) return;
-  await refuseTimingEstimate('${APIValue.unionCouncil}accept_timing_estimate_council/$uuid');
+  await acceptTimingEstimate('${APIValue.unionCouncil}accept_timing_estimate_council/$uuid');
 }
 
 Future<void> acceptTimingEstimateUnion(String? uuid)async{
   if(uuid == null) return;
-  await refuseTimingEstimate('${APIValue.union}accept_timing_estimate_union/$uuid');
+  await acceptTimingEstimate('${APIValue.union}accept_timing_estimate_union/$uuid');
 }

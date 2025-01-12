@@ -5,6 +5,13 @@ class RoleBasedText{
   static const String union = 'union';
   static const String council = 'council';
   static const String user = 'user';
+  static const String artisan = 'artisan';
+}
+
+class ValidateByYou{
+  static const List<int> artisan = [1,3,5,7];
+  static const List<int> council = [2,3,6,7];
+  static const List<int> union = [4,5,6,7];
 }
 
 String textStatusEstimate(int? status, int? statusGoal,String role){
@@ -46,4 +53,52 @@ Text textEstimateStatusUser(int? status, int? statusGoal, BuildContext context,S
     textStatusEstimate(status, statusGoal,role),
     style: Theme.of(context).textTheme.displaySmall,
   );
+}
+
+String timingEstimateHandleValidation(int? status, int? statusGoal,String role){
+  if(status == null || statusGoal == null){
+    return '';
+  }
+
+  if(status == statusGoal){
+    return AppText.validTimingEstimate;
+  }
+
+  String res = '';
+
+  if(role == RoleBasedText.union){
+    if(!ValidateByYou.union.contains(status)){
+      res += '${AppText.estimateWaitingForYou}\n';
+    }
+    if(!ValidateByYou.council.contains(status)){
+      res += '${AppText.estimateWaitingForCouncil}\n';
+    }
+    if(!ValidateByYou.artisan.contains(status)){
+      res += AppText.estimateWaitingForArtisan;
+    }
+  }
+  else if(role == RoleBasedText.council){
+    if(!ValidateByYou.council.contains(status)){
+      res += '${AppText.estimateWaitingForYou}\n';
+    }
+    if(!ValidateByYou.union.contains(status)){
+      res += '${AppText.estimateWaitingForUnion}\n';
+    }
+    if(!ValidateByYou.artisan.contains(status)){
+      res += AppText.estimateWaitingForArtisan;
+    }
+  }
+  else if(role == RoleBasedText.artisan){
+    if(!ValidateByYou.artisan.contains(status)){
+      res += '${AppText.estimateWaitingForYou}\n';
+    }
+    if(!ValidateByYou.union.contains(status)){
+      res += '${AppText.estimateWaitingForUnion}\n';
+    }
+    if(!ValidateByYou.council.contains(status)){
+      res += AppText.estimateWaitingForCouncil;
+    }
+  }
+
+  return res;
 }

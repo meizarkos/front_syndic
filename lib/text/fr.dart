@@ -107,6 +107,7 @@ class AppText {
 
   static const String titleNextWorkMeeting = 'Mes prochains travaux';
   static const String titleTimingEstimate = 'Passage pour les travaux le :';
+  static const String noTimingEstimate = "Aucune date n'a été proposé, ou elles ont toutes été refusées.";
   static const String buttonTextWorkMeeting = 'Voir mes dates de travaux';
 
   static const String titleNextWork = 'Mes demandes';
@@ -235,6 +236,7 @@ class AppText {
   static const String estimateValidate = "Devis accepté";
   static const String estimateAlreadyAccept = "Devis déjà accepté";
   static const String estimateWaitingForUnion = "En attente de validation par le syndicat";
+  static const String estimateWaitingForArtisan = "En attente de validation par l'artisan";
   static const String estimateWaitingForCouncil = "En attente de validation par le conseil syndical";
   static const String estimateWaitingForUser = "En attente de validation par le propriétaire";
   static const String estimateWaitingForYou = "En attente de votre validation";
@@ -251,6 +253,14 @@ class AppText {
   static const String workEnd = 'Fin des travaux';
   static const String dateOfEnd = 'Date de fin';
   static const String createEstimateTimingTextChoice = 'Vous avez choisi';
+  static const String dateStartForTimingOfWorkRequest = 'Début des travaux le';
+  static const String dateEndForTimingOfWorkRequest = 'Fin des travaux prévu le';
+  static const String noDateStartForTimingEstimate = 'Pas de date de début pour les travaux';
+  static const String noHourStartForTimingEstimate = 'Pas d\'heure de début pour les travaux';
+  static const String noDateEndForTimingEstimate = 'Pas de date de fin pour les travaux';
+  static const String validTimingEstimate = 'Demande de travaux validé par tous';
+  static const String refuseTimingEstimate = 'Refuser une date de travaux';
+  static const String refuseTimingEstimateText = 'Refuser cette date de travaux la supprimera et remettra le processus de validation à zéro';
 
   /* In Progress */
   static const String inProgress = 'Affaire en cours';
