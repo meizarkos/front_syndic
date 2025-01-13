@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/conv_cell.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/conversation/conversation.dart';
 import 'package:front_syndic/text/fr.dart';
-import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/divider/divider.dart';
 
 import '../../../widget/cell_app_bar_in_progress/createButton.dart';
@@ -46,6 +46,7 @@ class _SeeConvState extends State<SeeConv> {
 
   List<Conversation> _conversations = [];
   bool isLoading = true;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -55,6 +56,12 @@ class _SeeConvState extends State<SeeConv> {
         setState(() {
           isLoading = false;
           _conversations = value;
+        });
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          _scrollController.animateTo(
+            _scrollController.position.maxScrollExtent + 500,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeOut,);
         });
       }
     });
@@ -82,7 +89,7 @@ class _SeeConvState extends State<SeeConv> {
         title: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Padding(
-            padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+            padding: const EdgeInsets.all(8.0),
             child : Row(
               children: [
                 createButton(
@@ -122,9 +129,9 @@ class _SeeConvState extends State<SeeConv> {
       body: Column(
         children: [
           divider(1,Colors.black),
-          const SizedBox(height: AppUIValue.spaceScreenToAny),
           Expanded(
             child: ListView.builder(
+              controller: _scrollController,
               itemCount: _conversations.length,
               itemBuilder: (context, index) {
                 final conv = _conversations[index];
@@ -169,12 +176,19 @@ class _SeeConvState extends State<SeeConv> {
                 setState(() {
                   _conversations.add(conv);
                 });
+                _scrollController.animateTo(_scrollController.position.maxScrollExtent + 500, duration: Duration(milliseconds: 300), curve: Curves.ease);
               },
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) { // Check if the controller is attached
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    }
   }
 
   String? choseId(){

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
+import '../../../core_value.dart';
 import '../../../models/timing/timing_estimate.dart';
 import '../../../text/fr.dart';
 import '../../../utils/date_to_string/date.dart';
@@ -43,67 +44,81 @@ class _CreateTimingEstimateState extends State<CreateTimingEstimate> {
         onPressed: widget.onBack,
       )),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              AppText.dateAndHourOfStart,
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-            const SizedBox(height: 15),
-            CalendarDatePicker(
-              initialDate: selectedDate,
-              firstDate: firstDate,
-              lastDate: lastDate,
-              onDateChanged: onDateChanged,
-            ),
-            const SizedBox(height: 20),
-            GestureDetector(
-              onTap: _choseTime,
-              child: Text(
-                '${AppText.createWorkRequestTiming} ${fromCalendarToString(selectedDate.day, selectedDate.month, selectedDate.year)}',
-                style: Theme.of(context).textTheme.labelSmall,
+        child: Padding(
+          padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+          child: Column(
+            children: [
+              Text(
+                AppText.dateAndHourOfStart,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
-            ),
-            const SizedBox(height: 35),
-            Text(
-              _noDateOrTime(),
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-            const SizedBox(height: 35),
-            Visibility(
-              visible: showDateEnd,
-              child: Column(
-                children: [
-                  Text(
-                    AppText.dateOfEnd,
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                  const SizedBox(height: 15),
-                  CalendarDatePicker(
-                    key: calendarKey,
-                    initialDate: selectedDateEnd,
-                    firstDate: selectedDate,
-                    lastDate: lastDate,
-                    onDateChanged: onDateEndChanged,
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
-                    _noDateEnd(),
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                  const SizedBox(height: 35),
-                  elevatedButtonAndTextColor(
-                    AppColors.mainBackgroundColor,
-                    AppText.save,
-                    context,
-                    () => widget.onRegister(widget.timingEstimate),
-                    AppColors.mainTextColor,
-                  ),
-                  const SizedBox(height: 35),
-                ],
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
+              CalendarDatePicker(
+                initialDate: selectedDate,
+                firstDate: firstDate,
+                lastDate: lastDate,
+                onDateChanged: onDateChanged,
               ),
-            ),
-          ],
+              GestureDetector(
+                onTap: _choseTime,
+                child: Text(
+                  '${AppText.createWorkRequestTiming} ${fromCalendarToString(selectedDate.day, selectedDate.month, selectedDate.year)}',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ),
+              const SizedBox(height: 35),
+              Text(
+                _noDateOrTime(),
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
+              Divider(
+                color: Colors.black,
+                thickness: 2,
+              ),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
+              Visibility(
+                visible: showDateEnd,
+                child: Column(
+                  children: [
+                    Text(
+                      AppText.dateOfEnd,
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+                    const SizedBox(height: 15),
+                    CalendarDatePicker(
+                      key: calendarKey,
+                      initialDate: selectedDateEnd,
+                      firstDate: selectedDate,
+                      lastDate: lastDate,
+                      onDateChanged: onDateEndChanged,
+                    ),
+                    const SizedBox(height: 15),
+                    Text(
+                      _noDateEnd(),
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
+                    const SizedBox(height: 35),
+                    elevatedButtonAndTextColor(
+                      AppColors.mainBackgroundColor,
+                      AppText.save,
+                      context,
+                      () {
+                        widget.timingEstimate.dateStart = formatStringToApiDate(widget.timingEstimate.dateStart, 'yyyy-MM-dd');
+                        widget.timingEstimate.dateEnd = formatStringToApiDate(widget.timingEstimate.dateEnd, 'yyyy-MM-dd');
+                        if(widget.timingEstimate.dateStart == null || widget.timingEstimate.dateEnd == null){
+                          return;
+                        }
+                        widget.onRegister(widget.timingEstimate);
+                      },
+                      AppColors.mainTextColor,
+                    ),
+                    const SizedBox(height: 35),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -169,7 +184,9 @@ class _CreateTimingEstimateState extends State<CreateTimingEstimate> {
 
   String _noDateEnd() {
     if (widget.timingEstimate.dateEnd == null) {
-      return AppText.noDateForWork;
+      setState(() {
+        widget.timingEstimate.dateEnd = widget.timingEstimate.dateStart;
+      });
     }
     return '${AppText.createEstimateTimingTextChoice} ${toLowerFirst(AppText.le)} ${formatStringToApiDate(widget.timingEstimate.dateEnd, 'dd/MM/yyyy')}';
   }

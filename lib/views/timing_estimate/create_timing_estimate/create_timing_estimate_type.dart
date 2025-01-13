@@ -22,7 +22,6 @@ class CreateTimingEstimateArtisan extends StatelessWidget {
           goToTimingEstimate(context);
         },
         onRegister: (TimingEstimate timingEstimate)async{
-          //call API to create timing estimate
           await postTimingEstimateArtisan(timingEstimate);
           goToTimingEstimate(context);
         },
