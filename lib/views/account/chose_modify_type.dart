@@ -14,10 +14,7 @@ GestureDetector textGo(BuildContext context, String text, String route) {
       margin: EdgeInsets.only(bottom : AppUIValue.spaceScreenToAny * 3),
       child: Text(
         text,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
+        style: Theme.of(context).textTheme.displaySmall,
       ),
     ),
   );

@@ -8,7 +8,7 @@ import 'package:front_syndic/widget/visibility/error.dart';
 
 import '../../../../models/artisan/createArtisan.dart';
 import '../../../../widget/decoration/text_filed_deco_no_counter.dart';
-import '../../../../widget/text_format_input_textfield/space_four.dart';
+import '../../../../widget/text_format_input_textfield/customSpaceFormatter.dart';
 
 class ArtisanInfo extends StatefulWidget {
   const ArtisanInfo({
@@ -83,6 +83,7 @@ class _ArtisanInfoState extends State<ArtisanInfo> {
               TextField(
                 controller: _phoneController,
                 decoration: roundBorderTextFieldWithoutCounter(AppText.unionPhone),
+                inputFormatters: [CustomCharacterSpaceFormatter(interval: 2)],
                 onChanged: (value) {
                   widget.createArtisan.artisan.phone = value;
                 },
@@ -93,11 +94,11 @@ class _ArtisanInfoState extends State<ArtisanInfo> {
               TextField(
                 controller: _siretNumberController,
                 decoration: roundBorderTextFieldWithoutCounter(AppText.unionSiret),
-                inputFormatters: [FourCharacterSpaceFormatter()],
+                inputFormatters: [CustomCharacterSpaceFormatter(interval: 4)],
                 onChanged: (value) {
                   widget.createArtisan.artisan.siretNumber = value;
                 },
-                maxLength: 50,
+                maxLength: 17,
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
@@ -119,10 +120,12 @@ class _ArtisanInfoState extends State<ArtisanInfo> {
 
   void save(){
     final artisan = widget.createArtisan.artisan;
+
     if(artisan.companyName != null && artisan.firstName != null && artisan.lastName != null && artisan.phone != null && artisan.siretNumber != null &&
         artisan.companyName != '' && artisan.firstName != '' && artisan.lastName != ''  && artisan.phone != ''  && artisan.siretNumber != '' ){
 
       widget.createArtisan.artisan.siretNumber = artisan.siretNumber!.replaceAll(' ', '');
+      widget.createArtisan.artisan.phone = artisan.phone!.replaceAll(' ', '');
 
       if(artisan.siretNumber!.length != 14){
         setState(() {

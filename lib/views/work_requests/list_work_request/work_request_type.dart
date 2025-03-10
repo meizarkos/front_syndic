@@ -20,32 +20,10 @@ class WorkRequestListCouncil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WorkRequestsList(
-      futureList: [fetchWorkRequestFromCoOwnerPending, fetchWorkRequestFromCoOwnerPast],
+      fetchWorkRequests: fetchWorkRequestFromCoOwnerPending,//, fetchWorkRequestFromCoOwnerPast],
       goDoDetail: (String? uuid){
         if(uuid == null) return;
         Navigator.pushNamed(context, '/council/modify_demand',arguments: uuid);
-        /*Navigator.pushNamed(context,'/work_requests/detail',
-          arguments: CouncilWorkRequestDetail(
-            uuid : uuid,
-            futureToFetchData: fetchWorkRequestDetailCouncil,
-            onBack: ()=>{
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/co_owner/work_requests', // The new route
-                (Route<dynamic> route) => false, // Remove all previous routes
-              )
-            },
-            onDelete: (String? uuid)async{
-              if(uuid == null) return;
-              await deleteWorkRequestDetail(uuid);
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/co_owner/work_requests',
-                (Route<dynamic> route) => false,
-              );
-            },
-          ),
-        );*/
       },
       bottomBar: bottomNavigationBarCouncil(context, 1),
       addWorkRequest: ()async {
@@ -64,32 +42,10 @@ class WorkRequestListUnion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WorkRequestsList(
-      futureList: [fetchAllWorkRequestActiveUnion, fetchAllWorkRequestCompletedUnion],
+      fetchWorkRequests: fetchAllWorkRequestActiveUnion,//, fetchAllWorkRequestCompletedUnion],
       goDoDetail: (String? uuid){
         if(uuid == null) return;
         Navigator.pushNamed(context, '/union/modify_demand',arguments: uuid);
-        /*Navigator.pushNamed(context,'union/work_requests/detail',
-          arguments: CouncilWorkRequestDetail(
-            uuid : uuid,
-            futureToFetchData: fetchWorkRequestDetailUnion,
-            onBack: ()=>{
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/union/work_requests',
-                    (Route<dynamic> route) => false,
-              )
-            },
-            onDelete: (String? uuid)async{
-              if(uuid == null) return;
-              await deleteWorkRequestDetail(uuid);
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/union/work_requests',
-                    (Route<dynamic> route) => false,
-              );
-            },
-          ),
-        );*/
       },
       bottomBar: bottomNavigationBarUnion(context, 1),
     );

@@ -7,7 +7,7 @@ import '../../../../text/fr.dart';
 import '../../../../widget/button/elevated_button_opacity.dart';
 import '../../../../widget/decoration/text_filed_deco_no_counter.dart';
 import '../../../../widget/header/app_bar_back_button.dart';
-import '../../../../widget/text_format_input_textfield/space_four.dart';
+import '../../../../widget/text_format_input_textfield/customSpaceFormatter.dart';
 import '../../../../widget/visibility/error.dart';
 
 class BankInfoArtisan extends StatefulWidget {
@@ -50,7 +50,7 @@ class _BankInfoArtisanState extends State<BankInfoArtisan> {
               TextField(
                 controller: _ibanController,
                 decoration: roundBorderTextFieldWithoutCounter(AppText.iban),
-                inputFormatters: [FourCharacterSpaceFormatter()],
+                inputFormatters: [CustomCharacterSpaceFormatter(interval: 4)],
                 onChanged: (value) {
                   widget.createArtisan.bankInfo.iban = value;
                 },

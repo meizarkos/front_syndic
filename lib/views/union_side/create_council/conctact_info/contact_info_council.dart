@@ -11,6 +11,7 @@ import '../../../../api_handler/email/check_email_is_unique.dart';
 import '../../../../core_value.dart';
 import '../../../../models/council/createCouncil.dart';
 import '../../../../widget/decoration/text_filed_deco_no_counter.dart';
+import '../../../../widget/text_format_input_textfield/customSpaceFormatter.dart';
 
 class ContactInfoCouncil extends StatefulWidget {
   const ContactInfoCouncil({
@@ -69,6 +70,7 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
               TextField(
                 controller: _phoneController,
                 decoration : roundBorderTextFieldWithoutCounter(AppText.phoneCouncil),
+                inputFormatters: [CustomCharacterSpaceFormatter(interval: 2)],
                 onChanged: (value) {
                   widget.createCouncil.council.phone = value;
                 },
@@ -170,6 +172,7 @@ class _ContactInfoCouncilState extends State<ContactInfoCouncil> {
     setState(() {
       errorVisibility = false;
     });
+    widget.createCouncil.council.phone = widget.createCouncil.council.phone!.replaceAll(' ', '');
     Navigator.pushNamed(context, widget.route, arguments: widget.createCouncil);
     return;
   }

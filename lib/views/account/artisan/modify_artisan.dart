@@ -5,7 +5,7 @@ import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/artisan/artisan.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/decoration/text_filed_deco_no_counter.dart';
-import 'package:front_syndic/widget/text_format_input_textfield/space_four.dart';
+import 'package:front_syndic/widget/text_format_input_textfield/customSpaceFormatter.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
 import '../../../api_handler/artisan/update_artisan.dart';
@@ -85,7 +85,7 @@ class _ModifyArtisanState extends State<ModifyArtisan> {
                     artisanStatic.siretNumber = value;
                   },
                   inputFormatters: [
-                    FourCharacterSpaceFormatter(),
+                    CustomCharacterSpaceFormatter(interval: 4),
                   ],
                   maxLength: 17,
                   maxLines: 1,

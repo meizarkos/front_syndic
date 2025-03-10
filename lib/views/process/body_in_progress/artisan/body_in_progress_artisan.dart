@@ -34,7 +34,7 @@ class BodyInProgressArtisanConversation extends StatelessWidget {
         searchValue: searchValue,
         returnWorkRequestTitle: getTitleWorkRequest,
         returnDesc: getMessage,
-        descSize: 75,
+        descSize: 60,
         descStyle: Theme.of(context).textTheme.displaySmall,
         returnThirdText: getDateOfMessage,
         thirdTextSize: 16
@@ -68,7 +68,7 @@ class BodyInProgressArtisanTiming extends StatelessWidget {
       returnWorkRequestTitle: getTitleAndAddPrefix,
       returnDesc: getDateMeeting,
       descSize: 50,
-      descStyle: Theme.of(context).textTheme.displayMedium,
+      descStyle: Theme.of(context).textTheme.displaySmall,
     );
   }
 }

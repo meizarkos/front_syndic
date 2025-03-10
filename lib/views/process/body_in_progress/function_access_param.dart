@@ -1,12 +1,13 @@
 import '../../../text/fr.dart';
 import '../../../utils/date_to_string/date.dart';
+import '../../../utils/string_handler/handle_string.dart';
 
 String getTitleWorkRequest(dynamic data){
   return data.workRequest?.title ?? AppText.noTitleForWork;
 }
 
 String getTitleAndAddPrefix(dynamic data){
-  return '${AppText.for_} ${getTitleWorkRequest(data)}';
+  return getTitleWorkRequest(data);
 }
 
 String getMessage(dynamic data){
@@ -29,7 +30,7 @@ String getDateMeeting(dynamic data){
     return AppText.noDate;
   }
 
-  return '${AppText.timing} ${AppText.le} ${formatStringToApiDate(date,'dd/MM')} ${AppText.at} ${time.substring(0,5)}';
+  return '${AppText.timing} ${toLowerFirst(AppText.le)} ${formatStringToApiDate(date,'dd/MM')} ${AppText.at} ${time.substring(0,5)}';
 }
 
 String getDateMeetingEstimate(dynamic data){

@@ -10,7 +10,7 @@ import '../../../../text/fr.dart';
 import '../../../../widget/header/app_bar_back_button.dart';
 import '../../../api_handler/union/get_union.dart';
 import '../../../api_handler/union/patch_union.dart';
-import '../../../widget/text_format_input_textfield/space_four.dart';
+import '../../../widget/text_format_input_textfield/customSpaceFormatter.dart';
 
 class ModifyUnion extends StatefulWidget {
   const ModifyUnion ({
@@ -88,7 +88,7 @@ class _ModifyUnionState extends State<ModifyUnion > {
                   },
                   maxLines: 1,
                   maxLength: 17,
-                  inputFormatters: [FourCharacterSpaceFormatter(),],
+                  inputFormatters: [CustomCharacterSpaceFormatter(interval: 4),],
                 ),
                 const SizedBox(height: AppUIValue.spaceScreenToAny),
                 TextField(

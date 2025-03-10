@@ -9,7 +9,7 @@ TextStyle getTextStyleMainColor(double fontSize){
     color: AppColors.mainTextColor,
     shadows: [
       BoxShadow(
-        color: Colors.black.withOpacity(0.5),
+        color: Colors.white.withOpacity(0.5),
         blurRadius: 1,
         spreadRadius: 1,
         blurStyle: BlurStyle.inner,

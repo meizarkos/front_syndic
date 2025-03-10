@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/core_value.dart';
-import 'package:front_syndic/views/work_requests/list_work_request/selector_row.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_request_cell.dart';
 
 import '../../../../models/work_request/work_request.dart';
@@ -11,13 +9,13 @@ import '../../../../widget/search_bar/search_bar.dart';
 class WorkRequestsList extends StatefulWidget {
   const WorkRequestsList({
     super.key,
-    required this.futureList,
+    required this.fetchWorkRequests,
     required this.goDoDetail,
     required this.bottomBar,
     this.addWorkRequest,
   });
 
-  final List<Future<List<WorkRequest>?> Function()> futureList;
+  final Future<List<WorkRequest>?> Function() fetchWorkRequests;
   final Function goDoDetail;
   final VoidCallback? addWorkRequest;
   final BottomNavigationBar? bottomBar;
@@ -27,9 +25,8 @@ class WorkRequestsList extends StatefulWidget {
 }
 
 class _WorkRequestsListState extends State<WorkRequestsList> {
-  final List<String> _workRequests = [AppText.workRequestsPending, AppText.workRequestsHistory];
+  //final List<String> _workRequests = [AppText.workRequestsPending, AppText.workRequestsHistory];
   String searchValue = '';
-  int indexSelected = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +36,8 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
               height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
-                  const SizedBox(height: 25),
-                  Padding(
+                  const SizedBox(height: 50),
+                  /*Padding(
                     padding: const EdgeInsets.only(left: AppUIValue.spaceScreenToAny, top : 25),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -55,17 +52,15 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                         );
                       }).toList(),
                     ),
-                  ),
-                  const SizedBox(height: 15),
+                  ),*/
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: SearchBarCustom(
                       onChanged: _searchValueChange,
                     ),
                   ),
-                  const SizedBox(height: 15),
                   FutureBuilder(
-                    future: widget.futureList[indexSelected](),
+                    future: widget.fetchWorkRequests(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
@@ -86,7 +81,9 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                                 return const SizedBox(height: 50);
                               }
                               return GestureDetector(
-                                onTap: ()=>widget.goDoDetail(dataFiltered[index].uuid),
+                                onTap: ()=>{
+                                  widget.goDoDetail(dataFiltered[index].uuid),
+                                },
                                 child: WorkRequestCell(
                                   title: dataFiltered[index].title,
                                   subtitle: dataFiltered[index].description,
@@ -108,11 +105,11 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
     );
   }
 
-  void _changeSelected(String title) {
+  /*void _changeSelected(String title) {
     setState(() {
       indexSelected = _workRequests.indexOf(title);
     });
-  }
+  }*/
   void _searchValueChange(String value) {
     setState(() {
       searchValue = value;
