@@ -32,7 +32,6 @@ import 'package:front_syndic/views/login_register/register/chose_class.dart';
 import 'package:front_syndic/views/login_register/register/union/confirm.dart';
 import 'package:front_syndic/views/login_register/register/union/union_data.dart';
 import 'package:front_syndic/views/login_register/register/union/union_passwd_email.dart';
-import 'package:front_syndic/views/paiement/paiement.dart';
 import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/timing_estimate/create_timing_estimate/create_timing_estimate_type.dart';
@@ -113,7 +112,6 @@ class MyApp extends StatelessWidget {
         '/in_progress/council/conversation': (context) => const InProgressCouncilConversation(),
         '/in_progress/artisan':(context)=> const InProgressArtisanConversation(),
         '/in_progress/union':(context)=> const InProgressUnion(),
-        '/paiement': (context) => const Paiement(),
         '/artisan/account': (context) => const ChoseModifyTypeArtisan(),
         '/artisan/modify_artisan': (context) => const ModifyArtisan(),
         '/artisan/modify_artisan_address': (context) => const ModifyAdressArtisan(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/models/adress/adress.dart';
 import 'package:front_syndic/text/fr.dart';
@@ -6,6 +7,7 @@ import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/text_style/text_style_main_color.dart';
 
+import '../../../api_handler/paiement/paiement_council.dart';
 import '../../../core_value.dart';
 import '../../../models/timing/timing_estimate.dart';
 import '../../../utils/date_to_string/date.dart';
@@ -13,7 +15,6 @@ import '../../../widget/button/add_floating_button.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
 import '../../../widget/dialog/show_dialog_text.dart';
 import '../../../widget/handle_status/text_based_on_user.dart';
-import '../../estimate/common_app_bar.dart';
 
 class TimingEstimateView extends StatefulWidget {
   const TimingEstimateView({
@@ -25,6 +26,7 @@ class TimingEstimateView extends StatefulWidget {
     required this.onAccept,
     required this.onRefuse,
     required this.role,
+    this.apiPaiement,
   });
 
   final Function(String?) fetchData;
@@ -34,6 +36,7 @@ class TimingEstimateView extends StatefulWidget {
   final Function(String?) onAccept;
   final Function(String?) onRefuse;
   final String role;
+  final Function(int amount,String currency)? apiPaiement;
 
   @override
   State<TimingEstimateView> createState() => _TimingEstimateViewState();
@@ -114,21 +117,30 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                   timingEstimateStatic?.statusGoal,
                   widget.role,
                 ),
-                style: Theme.of(context).textTheme.displaySmall,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .displaySmall,
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
               Text(
                 "${AppText.dateStartForTimingOfWorkRequest} :",
-                style: Theme.of(context).textTheme.displayMedium,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .displayMedium,
               ),
               const SizedBox(height: 10),
               Text(
                 (formatStringToApiDate(
-                            timingEstimateStatic?.dateStart, 'dd/MM/yyyy') ??
-                        AppText.noDateStartForTimingEstimate) +
+                    timingEstimateStatic?.dateStart, 'dd/MM/yyyy') ??
+                    AppText.noDateStartForTimingEstimate) +
                     " ${AppText.at} " +
                     formatTimeString(timingEstimateStatic?.timeStart),
-                style: Theme.of(context).textTheme.displaySmall,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .displaySmall,
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               Container(
@@ -139,15 +151,21 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                   children: [
                     Text(
                       AppText.interventionPlace,
-                      style: Theme.of(context).textTheme.displayMedium,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .displayMedium,
                     ),
                     const SizedBox(height: AppUIValue.spaceScreenToAny),
                     Text(
                       "${adress?.country ?? ''}\n"
-                      "${adress?.city ?? ''}, ${adress?.postalCode ?? ''}\n"
-                      "${adress?.street ?? ''}\n"
-                      "${adress?.comment ?? ''}",
-                      style: Theme.of(context).textTheme.displaySmall,
+                          "${adress?.city ?? ''}, ${adress?.postalCode ?? ''}\n"
+                          "${adress?.street ?? ''}\n"
+                          "${adress?.comment ?? ''}",
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .displaySmall,
                     ),
                   ],
                 ),
@@ -155,26 +173,35 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               Text(
                 "${AppText.dateEndForTimingOfWorkRequest} :",
-                style: Theme.of(context).textTheme.displayMedium,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .displayMedium,
               ),
               const SizedBox(height: 10),
               Text(
                 formatStringToApiDate(
-                        timingEstimateStatic?.dateEnd, 'dd/MM/yyyy') ??
+                    timingEstimateStatic?.dateEnd, 'dd/MM/yyyy') ??
                     AppText.noDateEndForTimingEstimate,
-                style: Theme.of(context).textTheme.displaySmall,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .displaySmall,
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
               if (!widget.valueValidateByYou
                   .contains(timingEstimateStatic?.status))
                 Center(
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.5,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.5,
                     child: elevatedButtonAndTextColor(
                       AppColors.mainBackgroundColor,
                       AppText.validate,
                       context,
-                      () {
+                          () {
                         widget.onAccept(timingEstimateStatic?.uuid);
                       },
                       AppColors.mainTextColor,
@@ -184,24 +211,49 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               Center(
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width * 0.5,
                   child: elevatedButtonAndTextColor(
                     AppColors.actionButtonColor
                         .withOpacity(AppUIValue.opacityActionButton),
                     AppText.refuse,
                     context,
-                    ()=>showMyAlert(
-                        context,
-                        AppText.refuseTimingEstimate,
-                        AppText.refuseTimingEstimateText,
-                        () {
-                          widget.onRefuse(timingEstimateStatic?.uuid);
-                        }
-                    ),
+                        () =>
+                        showMyAlert(
+                            context,
+                            AppText.refuseTimingEstimate,
+                            AppText.refuseTimingEstimateText,
+                                () {
+                              widget.onRefuse(timingEstimateStatic?.uuid);
+                            }
+                        ),
                     Colors.black,
                   ),
                 ),
               ),
+              if (timingEstimateStatic?.status == timingEstimateStatic?.statusGoal && widget.apiPaiement != null) ...[
+                const SizedBox(height: AppUIValue.spaceScreenToAny*2),
+                Center(
+                  child: SizedBox(
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.5,
+                    child: elevatedButtonAndTextColor(
+                      AppColors.mainBackgroundColor,
+                      AppText.payment,
+                      context,
+                      () {
+                        makePayment();
+                      },
+                      // Ensure it's a function reference
+                      AppColors.mainTextColor,
+                    ),
+                  ),
+                ),
+              ],
             ],
           ),
         ),
@@ -209,4 +261,48 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
     );
   }
 
+  Future<String?> createPaymentIntent(int amount, String currency) async {
+    try {
+      return await widget.apiPaiement!(amount, currency);
+    } catch (err) {
+      throw Exception(err);
+    }
+  }
+
+  Future<void> makePayment() async {
+    var price = timingEstimateStatic?.estimate?.price;
+    if (price == null) {
+      return;
+    }
+    var priceCents = (price * 100).toInt();
+    try {
+      var paymentIntent = await createPaymentIntent(priceCents, 'EUR'); //API call
+
+      if(paymentIntent == null){
+        return;
+      }
+
+      await Stripe.instance
+          .initPaymentSheet(
+          paymentSheetParameters: SetupPaymentSheetParameters(
+              paymentIntentClientSecret: paymentIntent,
+              style: ThemeMode.light,
+              merchantDisplayName: 'Ikay')
+      );
+
+      //STEP 3: Display Payment sheet
+      await displayPaymentSheet();
+    } catch (err) {
+      throw Exception(err);
+    }
+  }
+
+  Future<void> displayPaymentSheet() async {
+    try {
+      await Stripe.instance.presentPaymentSheet();
+    }
+    catch (e) {
+      print('$e');
+    }
+  }
 }

@@ -21,6 +21,7 @@ class AppText {
   static const String cancel = 'Annuler';
   static const String confirm = 'Confirmer';
   static const String refuse = 'Refuser';
+  static const String payment = 'Paiement';
   static const String at = 'à';
   static const String le = 'Le';
   static const String for_ = 'Pour : ';
