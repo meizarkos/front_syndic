@@ -36,4 +36,5 @@ flutter:
     - assets/arrow.svg
     - assets/tools.svg
     - assets/invoice.svg
+    - assets/message.svg
   uses-material-design: true

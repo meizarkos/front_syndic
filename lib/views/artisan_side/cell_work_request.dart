@@ -10,11 +10,13 @@ import '../../widget/text_style/text_style_main_color.dart';
 class CellWorkRequestArtisanSide extends StatelessWidget {
   const CellWorkRequestArtisanSide({
     super.key,
+    required this.category,
     required this.title,
     required this.subtitle,
     required this.adress,
   });
 
+  final String? category;
   final String? title;
   final String? subtitle;
   final Adress? adress;
@@ -27,7 +29,12 @@ class CellWorkRequestArtisanSide extends StatelessWidget {
         elevation: AppUIValue.elevation,
         child: Container(
           decoration: decorationRoundMainColor(),
-          padding: const EdgeInsets.all(30),
+          padding: const EdgeInsets.only(
+            left: AppUIValue.spaceScreenToAny,
+            right: AppUIValue.spaceScreenToAny,
+            top: 5,
+            bottom: AppUIValue.spaceScreenToAny,
+          ),
           child: Column(
             children: [
               Text(
@@ -36,7 +43,7 @@ class CellWorkRequestArtisanSide extends StatelessWidget {
                 maxLines: 1,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 35),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
               Text.rich(
                 TextSpan(
                   children: [
@@ -52,7 +59,13 @@ class CellWorkRequestArtisanSide extends StatelessWidget {
                 ),
                   textAlign: TextAlign.center
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
+              Text(
+                category ?? AppText.noCategoryFound,
+                style: Theme.of(context).textTheme.displayMedium,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
               Text(
                 trimText(stringNullOrDefaultValue(subtitle, AppText.noDescriptionWorkRequest), 100),
                 style: Theme.of(context).textTheme.displaySmall,

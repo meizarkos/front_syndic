@@ -23,11 +23,11 @@ BottomNavigationBar bottomNavigationBarArtisan(BuildContext context, int selecte
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset(
-          'assets/tools.svg',
+          'assets/message.svg',
           width: 24.0,
           height: 24.0,
         ),
-        label: AppText.workRequest,
+        label: AppText.conversationNavTitle,
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset(
@@ -39,10 +39,10 @@ BottomNavigationBar bottomNavigationBarArtisan(BuildContext context, int selecte
     currentIndex: selectedIndex,
     onTap: (int index)=>{
       if(index == 0){
-        goToAndDeleteAll(context, '/in_progress/artisan', 0, selectedIndex)
+        goToAndDeleteAll(context, '/artisan_main',0, selectedIndex)
       }
       else if(index == 1){
-        goToAndDeleteAll(context, '/artisan_main',1, selectedIndex)
+        goToAndDeleteAll(context, '/artisan/conversation', 1, selectedIndex)
       }
       else if(index == 2){
         goToAndDeleteAll(context, '/artisan/invoice',2, selectedIndex)

@@ -67,7 +67,7 @@ class _InProgressArtisanConversationState extends State<InProgressArtisanConvers
         onCategoryChanged: _categoryChange,
       ),
       body : topScreenRouteHandlerArtisan(searchValue,category),
-      bottomBar : bottomNavigationBarArtisan(context,0),
+      bottomBar : bottomNavigationBarArtisan(context,1),
     );
   }
 
@@ -105,7 +105,7 @@ class _InProgressUnionState extends State<InProgressUnion> {
         onCategoryChanged: _categoryChange,
       ),
       body : topScreenRouteHandlerUnion(searchValue,category),
-      bottomBar : bottomNavigationBarUnion(context,0),
+      bottomBar : bottomNavigationBarUnion(context,2),
     );
   }
 

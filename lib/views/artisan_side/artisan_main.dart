@@ -25,99 +25,120 @@ class _ArtisanMainState extends State<ArtisanMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(height: 50),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: SearchBarCustom(
-              onChanged: _searchValueChange,
-            ),
-          ),
-          const SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+      appBar: AppBar(
+        title: const Text(AppText.workRequestTitle),
+        centerTitle: true,
+      ),
+      body: Container(
+        margin: const EdgeInsets.only(
+            left: AppUIValue.spaceScreenToAny,
+            right: AppUIValue.spaceScreenToAny,
+        ),
+        child: Column(
+          children: [
+            const SizedBox(height: AppUIValue.spaceScreenToAny),
+            Row(
               children: [
-                Text(
-                  "${AppText.workRequestArtisanSideFilterBy}  ",
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-                Expanded(
-                  child: DropdownButton(
-                    value: category,
-                    isExpanded: false,
-                    underline: Container(),
-                    iconSize: 35,
-                    items:
-                    AppText.listOfTaskCategoryWithNull.map((String value) {
-                      return DropdownMenuItem(
-                        value: value,
-                        child: Text(
-                            value,
-                            style: TextStyle(
-                              fontSize: 14,
-                            )
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        category = newValue;
-                      });
-                    },
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  child: SearchBarCustom(
+                    onChanged: _searchValueChange,
                   ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.account_circle),
+                  iconSize: 40,
+                  onPressed: ()=>{
+                    Navigator.pushNamed(context, '/artisan/account')
+                  },
                 ),
               ],
             ),
-          ),
-          FutureBuilder(
-            future: fetchAllWorkRequestArtisan(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError || snapshot.data == null) {
-                return const Center(child: Text(AppText.apiErrorText));
-              } else if (snapshot.data!.isEmpty) {
-                return const Center(child: Text(AppText.apiNoResult));
-              } else {
-                final dataFiltered = filteredData(snapshot.data);
-                if (dataFiltered == null || dataFiltered.isEmpty) {
-                  return const Center(child: Text(AppText.apiNoResult));
-                }
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: dataFiltered.length + 1,
-                    itemBuilder: (context, index) {
-                      if (index == dataFiltered.length) {
-                        return const SizedBox(height: 15);
-                      }
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/work_requests/artisan/detail",
-                                arguments: ArtisanWorkRequestDetailArg(
-                                    workRequestUuid:dataFiltered[index].uuid,
-                                    futureToFetchData: fetchWorkRequestDetailArtisan,
-                                    showContact: true,
-                                ),
-                            );
-                        },
-                        child: CellWorkRequestArtisanSide(
-                          title: dataFiltered[index].title,
-                          subtitle: dataFiltered[index].description,
-                          adress: dataFiltered[index].adress,
-                        ),
-                      );
-                    },
+            Padding(
+              padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "${AppText.workRequestArtisanSideFilterBy}  ",
+                    style: Theme.of(context).textTheme.displaySmall,
                   ),
-                );
-              }
-            },
-          ),
-        ],
+                  Expanded(
+                    child: DropdownButton(
+                      value: category,
+                      isExpanded: false,
+                      underline: Container(),
+                      iconSize: 35,
+                      items:
+                      AppText.listOfTaskCategoryWithNull.map((String value) {
+                        return DropdownMenuItem(
+                          value: value,
+                          child: Text(
+                              value,
+                              style: TextStyle(
+                                fontSize: 14,
+                              )
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          category = newValue;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            FutureBuilder(
+              future: fetchAllWorkRequestArtisan(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError || snapshot.data == null) {
+                  return const Center(child: Text(AppText.apiErrorText));
+                } else if (snapshot.data!.isEmpty) {
+                  return const Center(child: Text(AppText.apiNoResult));
+                } else {
+                  final dataFiltered = filteredData(snapshot.data);
+                  if (dataFiltered == null || dataFiltered.isEmpty) {
+                    return const Center(child: Text(AppText.apiNoResult));
+                  }
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: dataFiltered.length + 1,
+                      itemBuilder: (context, index) {
+                        if (index == dataFiltered.length) {
+                          return const SizedBox(height: 15);
+                        }
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/work_requests/artisan/detail",
+                                  arguments: ArtisanWorkRequestDetailArg(
+                                      workRequestUuid:dataFiltered[index].uuid,
+                                      futureToFetchData: fetchWorkRequestDetailArtisan,
+                                      showContact: true,
+                                  ),
+                              );
+                          },
+                          child: CellWorkRequestArtisanSide(
+                            title: dataFiltered[index].title,
+                            subtitle: dataFiltered[index].description,
+                            adress: dataFiltered[index].adress,
+                            category: dataFiltered[index].category,
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }
+              },
+            ),
+          ],
+        ),
       ),
-      bottomNavigationBar: bottomNavigationBarArtisan(context, 1),
+      bottomNavigationBar: bottomNavigationBarArtisan(context, 0),
     );
   }
 

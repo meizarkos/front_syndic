@@ -36,11 +36,11 @@ BottomNavigationBar bottomNavigationBarUnion(BuildContext context, int selectedI
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset(
-          'assets/co_owner.svg',
+          'assets/message.svg',
           width: iconSize,
           height: iconSize,
         ),
-        label: AppText.copro,
+        label: AppText.conversationNavTitle,
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset(
@@ -54,13 +54,13 @@ BottomNavigationBar bottomNavigationBarUnion(BuildContext context, int selectedI
     currentIndex: selectedIndex,
     onTap: (int index)=>{
       if(index == 0){
-        goToAndDeleteAll(context, '/in_progress/union', 0, selectedIndex)
+        goToAndDeleteAll(context, '/union_main',0, selectedIndex)
       }
       else if(index == 1){
         goToAndDeleteAll(context, '/union/work_requests',1, selectedIndex)
       }
       else if(index == 2){
-          goToAndDeleteAll(context, '/union_main',2, selectedIndex)
+          goToAndDeleteAll(context, '/union/conversation', 2, selectedIndex)
       }
       else if(index == 3){
           goToAndDeleteAll(context, '/union/invoice',3, selectedIndex)
@@ -70,3 +70,6 @@ BottomNavigationBar bottomNavigationBarUnion(BuildContext context, int selectedI
     unselectedItemColor: Colors.grey,
   );
 }
+
+
+// /in_progress/union

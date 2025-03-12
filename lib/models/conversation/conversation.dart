@@ -11,6 +11,7 @@ class AttributesConversation{
   static const String unionId = 'union_id';
   static const String councilId = 'council_id';
   static const String userId = 'user_id';
+  static const String state = 'state';
   static const String updatedAt = 'upadated_at';
   static const String createdAt = 'created_at';
 }
@@ -26,6 +27,7 @@ class Conversation {
   String? councilId;
   String? userId;
   WorkRequest? workRequest;
+  String? state;
   String? updatedAt;
   String? createdAt;
 
@@ -40,6 +42,7 @@ class Conversation {
     this.unionId,
     this.councilId,
     this.userId,
+    this.state,
     this.updatedAt,
     this.createdAt,
   });
@@ -55,6 +58,7 @@ class Conversation {
     unionId = json[AttributesConversation.unionId];
     councilId = json[AttributesConversation.councilId];
     userId = json[AttributesConversation.userId];
+    state = json[AttributesConversation.state] ?? '';
     updatedAt = json[AttributesConversation.updatedAt];
     createdAt = json[AttributesConversation.createdAt];
   }

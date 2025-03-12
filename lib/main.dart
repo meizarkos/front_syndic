@@ -15,6 +15,7 @@ import 'package:front_syndic/views/account/union/modify_union.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
 import 'package:front_syndic/views/artisan_side/work_request_detail/detail_work_request.dart';
 import 'package:front_syndic/views/co_owner/co_owner_detail/co_owner_detail_type.dart';
+import 'package:front_syndic/views/conversation/conversation_in_progress/conversation_in_progress_type.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/all_conv_type.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/all_post_meeting_type.dart';
 import 'package:front_syndic/views/conversation/list_of_first_conv/first_conv_type.dart';
@@ -36,7 +37,7 @@ import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/timing_estimate/create_timing_estimate/create_timing_estimate_type.dart';
 import 'package:front_syndic/views/timing_estimate/list_timing_estimate/timing_estimate_type.dart';
-import 'package:front_syndic/views/union_side/co_owner_list.dart';
+import 'package:front_syndic/views/union_side/union_home.dart';
 import 'package:front_syndic/views/adress/chose_adress_type.dart';
 import 'package:front_syndic/views/union_side/create_council/chose_name/chose_name_type.dart';
 import 'package:front_syndic/views/union_side/create_council/conctact_info/contact_info_type.dart';
@@ -103,7 +104,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => const ConnectAll(),
         '/register': (context) => const ChoseClass(),
         '/union_main': (context) => const UnionMain(),
+        '/union/conversation': (context) => const ConversationInProgressUnion(),
         '/artisan_main': (context) => const ArtisanMain(),
+        '/artisan/conversation': (context) => const ConversationInProgressArtisan(),
         '/artisan_main/first_conv': (context) => const FirstConvArtisan(),
         '/co_owner/work_requests': (context) => const WorkRequestListCouncil(),
         '/union/work_requests': (context) => const WorkRequestListUnion(),

@@ -37,11 +37,22 @@ class _UnionMainState extends State<UnionMain> {
         ),
         child: Column(
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.75,
-              child: SearchBarCustom(
-                onChanged: _searchValueChange,
-              ),
+            Row(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  child: SearchBarCustom(
+                    onChanged: _searchValueChange,
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.account_circle),
+                  iconSize: 40,
+                  onPressed: ()=>{
+                    Navigator.pushNamed(context, '/union/account')
+                  },
+                ),
+              ],
             ),
             const SizedBox(height: 30),
             FutureBuilder(
@@ -94,7 +105,7 @@ class _UnionMainState extends State<UnionMain> {
         final createCouncil = CreateCouncil(adress: Adress(), council: Council(), coOwner: CoOwner());
         Navigator.pushNamed(context, '/union/create_council/name', arguments: createCouncil);
       }),
-      bottomNavigationBar: bottomNavigationBarUnion(context, 2),
+      bottomNavigationBar: bottomNavigationBarUnion(context, 0),
     );
   }
 

@@ -8,7 +8,10 @@ class AppText {
   static const String home = 'Accueil';
   static const String workRequest = 'Demandes';
   static const String invoice = 'Facture';
-  static const String copro = 'Copro';
+  static const String conversationNavTitle = 'Messages';
+
+  /* Title */
+  static const String workRequestTitle = 'Demandes à pourvoir';
 
   /*General*/
   static const String commentary = 'Commentaire';
@@ -30,7 +33,7 @@ class AppText {
   static const String one = 'Un';
   static const String validate = 'Valider';
   static const String successModify = 'Modification réussie';
-  static const String listCoOwneTitle = 'Mes copropriétaires';
+  static const String listCoOwneTitle = 'Mes copropriétées';
   static const String deconnect = 'Déconnexion';
 
   /* General not found */
@@ -53,7 +56,6 @@ class AppText {
   static const String identification = 'Identification';
 
   /*Register */
-
   static const String accountTypeTitle = 'Type de compte';
   static const String artisan = 'Artisan';
   static const String council = 'Conseil syndical';
@@ -264,6 +266,7 @@ class AppText {
   static const String refuseTimingEstimateText = 'Refuser cette date de travaux la supprimera et remettra le processus de validation à zéro';
 
   /* In Progress */
+  static const String convTitle = 'Mes messages';
   static const String inProgress = 'Affaire en cours';
   static const List<String> inProgressListCouncil = [
     conversation,
