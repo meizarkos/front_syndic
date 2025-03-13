@@ -23,7 +23,7 @@ BottomNavigationBar bottomNavigationBarCouncil(BuildContext context, int selecte
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset(
-          'assets/tools.svg',
+          'assets/message.svg',
           width: 24.0,
           height: 24.0,
         ),
@@ -39,10 +39,10 @@ BottomNavigationBar bottomNavigationBarCouncil(BuildContext context, int selecte
     currentIndex: selectedIndex,
     onTap: (int index)=>{
       if(index == 0){
-        goToAndDeleteAll(context, '/in_progress/council/conversation', 0, selectedIndex)
+        goToAndDeleteAll(context, '/council_main',0, selectedIndex)
       }
       else if(index == 1){
-        goToAndDeleteAll(context, '/co_owner/work_requests',1, selectedIndex)
+        goToAndDeleteAll(context, '/council/conversation', 1, selectedIndex)
       }
       else if(index == 2){
           goToAndDeleteAll(context, '/co_owner/invoice',2, selectedIndex)

@@ -28,7 +28,7 @@ class _InProgressCouncilConversationState extends State<InProgressCouncilConvers
         onCategoryChanged: _categoryChange,
       ),
       body : topScreenRouteHandlerCouncil(searchValue,category),
-      bottomBar : bottomNavigationBarCouncil(context,0),
+      bottomBar : bottomNavigationBarCouncil(context,1),
     );
   }
 

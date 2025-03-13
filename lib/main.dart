@@ -19,6 +19,7 @@ import 'package:front_syndic/views/conversation/conversation_in_progress/convers
 import 'package:front_syndic/views/conversation/list_of_conv/all_conv_type.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/all_post_meeting_type.dart';
 import 'package:front_syndic/views/conversation/list_of_first_conv/first_conv_type.dart';
+import 'package:front_syndic/views/council_side/council_main.dart';
 import 'package:front_syndic/views/estimate/create_estimate/recap_estimate.dart';
 import 'package:front_syndic/views/estimate/create_estimate/set_description_estimate.dart';
 import 'package:front_syndic/views/estimate/create_estimate/set_price_and_commentary.dart';
@@ -108,7 +109,8 @@ class MyApp extends StatelessWidget {
         '/artisan_main': (context) => const ArtisanMain(),
         '/artisan/conversation': (context) => const ConversationInProgressArtisan(),
         '/artisan_main/first_conv': (context) => const FirstConvArtisan(),
-        '/co_owner/work_requests': (context) => const WorkRequestListCouncil(),
+        '/council_main': (context) => const CouncilMain(),
+        '/council/conversation': (context) => const ConversationInProgressCouncil(),
         '/union/work_requests': (context) => const WorkRequestListUnion(),
         '/first_conv_council': (context) => const FirstConvCouncil(),
         "/co_owner_main": (context) => const CoOwnerDetailCouncil(),

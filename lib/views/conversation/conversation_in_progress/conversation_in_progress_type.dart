@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/views/conversation/conversation_in_progress/conversation_in_progress.dart';
 import 'package:front_syndic/widget/bottom/nav_bar_artisan.dart';
+import 'package:front_syndic/widget/bottom/nav_bar_council.dart';
 
 import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../models/to_screen/see_conv_arg.dart';
@@ -46,6 +47,28 @@ class ConversationInProgressArtisan extends StatelessWidget {
         },
         fetchConversationInProgress: fetchFirstConvArtisan(),
         bottomNavigationBar: bottomNavigationBarArtisan(context, 1)
+    );
+  }
+}
+
+class ConversationInProgressCouncil extends StatelessWidget {
+  const ConversationInProgressCouncil({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ConversationInProgress(
+        goToConvDetail: (uuid) => {
+          Navigator.pushNamed(
+            context,
+            '/council/see_conv',
+            arguments: SeeConvArg(
+              uuid: uuid,
+              futureToFetchData: fetchSpecificConvCouncil,
+            ),
+          )
+        },
+        fetchConversationInProgress: fetchFirstConvCouncil(),
+        bottomNavigationBar: bottomNavigationBarCouncil(context, 1)
     );
   }
 }

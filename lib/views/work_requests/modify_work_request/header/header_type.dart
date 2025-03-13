@@ -19,7 +19,7 @@ class HeaderCouncil extends StatelessWidget {
       onBack: ()=>{
         Navigator.pushNamedAndRemoveUntil(
           context,
-          '/co_owner/work_requests', // The new route
+          '/council_main', // The new route
               (Route<dynamic> route) => false, // Remove all previous routes
         )
       },
