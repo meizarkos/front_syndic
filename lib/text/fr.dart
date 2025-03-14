@@ -245,6 +245,7 @@ class AppText {
   static const String estimateWaitingForYou = "En attente de votre validation";
 
   /* Timing Estimate */
+  static const String timingEstimateTitle = 'Date des travaux';
   static const String timingEstimate = 'Voir les dates de travaux';
   static const String timingEstimateListTitle = 'Proposition de travaux du';
   static const String timingEstimateNotYetValidate = 'Pas encore validé';

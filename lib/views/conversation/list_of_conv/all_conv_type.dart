@@ -16,40 +16,6 @@ class SideConv{
   static const union = 'union';
 }
 
-class AllConvArtisanForWorkRequest extends StatelessWidget {
-  const AllConvArtisanForWorkRequest({
-    super.key,
-    required this.future,
-    required this.id,
-  });
-
-  final Function(String) future;
-  final String id;
-
-  @override
-  Widget build(BuildContext context) {
-    return SeeConv(
-      uuid: id,
-      futureForGetConv: future(id),
-      futureForPostConv: postFirstConvArtisanWorkRequest,
-      route: '/work_requests/artisan/post_meeting',
-      sideText: SideConv.artisan,
-      goToRequest: (String? id) {
-        Navigator.pushNamed(context,'/work_requests/artisan/detail',
-            arguments: ArtisanWorkRequestDetailArg(
-              futureToFetchData: fetchWorkRequestDetailArtisan,
-              workRequestUuid: id,
-              showContact: true,
-            )
-          );
-        },
-      goToMeeting: (String? no){},
-      goToEstimate: (String? no){},
-      isFromWorkRequest: true,
-    );
-  }
-}
-
 class AllConvArtisan extends StatelessWidget {
   const AllConvArtisan({
     super.key,

@@ -42,26 +42,53 @@ class TimingDetail extends StatefulWidget {
 class _TimingDetailState extends State<TimingDetail> {
   Timing timing = Timing();
 
-  bool isLoaded = false;
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
     widget.future.then((value) {
-      if (value != null) {
+      setState(() {
+        isLoading = false;
+      });
+      if (value?.uuid != null) {
         setState(() {
-          isLoaded = true;
-          timing = value;
+          timing = value!;
         });
-      } else {
-        return const Center(child: Text(AppText.apiErrorText));
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!isLoaded) return const Center(child: CircularProgressIndicator());
+    if (isLoading) {
+      return Scaffold(
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+    if(isLoading == false && timing.uuid == null) { // create a meeting
+      return Scaffold(
+        body: Center(
+          child: elevatedButtonAndTextColor(
+            AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
+            AppText.createAMeeting,
+            context,
+            () {
+              final timing = Timing();
+              timing.workRequestId = 'workRequestId';
+              Navigator.pushNamed(
+                context,
+                '/artisan/create_meeting',
+                arguments: timing,
+              );
+            },
+            Colors.black,
+          ),
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80.0,

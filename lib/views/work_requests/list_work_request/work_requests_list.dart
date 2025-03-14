@@ -5,6 +5,7 @@ import '../../../../models/work_request/work_request.dart';
 import '../../../../text/fr.dart';
 import '../../../../widget/button/add_floating_button.dart';
 import '../../../../widget/search_bar/search_bar.dart';
+import '../../../core_value.dart';
 
 class WorkRequestsList extends StatefulWidget {
   const WorkRequestsList({
@@ -31,12 +32,17 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text(AppText.titleNextWork),
+          centerTitle: true,
+          toolbarHeight: 50,
+        ),
         body: SingleChildScrollView(
             child: SizedBox(
               height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 20),
                   /*Padding(
                     padding: const EdgeInsets.only(left: AppUIValue.spaceScreenToAny, top : 25),
                     child: Row(
@@ -59,6 +65,7 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                       onChanged: _searchValueChange,
                     ),
                   ),
+                  const SizedBox(height: AppUIValue.spaceScreenToAny),
                   FutureBuilder(
                     future: widget.fetchWorkRequests(),
                     builder: (context, snapshot) {
@@ -78,7 +85,7 @@ class _WorkRequestsListState extends State<WorkRequestsList> {
                             itemCount: dataFiltered.length + 1,
                             itemBuilder: (context, index) {
                               if (index == dataFiltered.length) {
-                                return const SizedBox(height: 50);
+                                return const SizedBox(height: 150);
                               }
                               return GestureDetector(
                                 onTap: ()=>{

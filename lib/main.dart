@@ -13,6 +13,7 @@ import 'package:front_syndic/views/account/union/modify_adress_union.dart';
 import 'package:front_syndic/views/account/union/modify_login_union.dart';
 import 'package:front_syndic/views/account/union/modify_union.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
+import 'package:front_syndic/views/artisan_side/work_request_detail/first_contact_artisan.dart';
 import 'package:front_syndic/views/artisan_side/work_request_detail/detail_work_request.dart';
 import 'package:front_syndic/views/co_owner/co_owner_detail/co_owner_detail_type.dart';
 import 'package:front_syndic/views/conversation/conversation_in_progress/conversation_in_progress_type.dart';
@@ -699,9 +700,8 @@ class MyApp extends StatelessWidget {
             final arguments = settings.arguments;
             if (arguments is SeeConvArg) {
               return MaterialPageRoute(
-                builder: (context) => AllConvArtisanForWorkRequest(
-                  id: arguments.uuid,
-                  future: arguments.futureToFetchData,
+                builder: (context) => FirstContactArtisan(
+                  uuid: arguments.uuid,
                 ),
               );
             }
