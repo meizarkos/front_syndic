@@ -36,6 +36,7 @@ import 'package:front_syndic/views/login_register/register/union/confirm.dart';
 import 'package:front_syndic/views/login_register/register/union/union_data.dart';
 import 'package:front_syndic/views/login_register/register/union/union_passwd_email.dart';
 import 'package:front_syndic/views/process/in_progress_type.dart';
+import 'package:front_syndic/views/timing/create_timing/create_timing_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/timing_estimate/create_timing_estimate/create_timing_estimate_type.dart';
 import 'package:front_syndic/views/timing_estimate/list_timing_estimate/timing_estimate_type.dart';
@@ -256,11 +257,21 @@ class MyApp extends StatelessWidget {
 
           case 'union/detail_timing':
             final arguments = settings.arguments;
-            if (arguments is SeeConvArg) {
+            if (arguments is String?) {
               return MaterialPageRoute(
                 builder: (context) => TimingDetailUnion(
-                  timingUuid : arguments.uuid,
-                  fetchTimingDetail: arguments.futureToFetchData,
+                  convUuid : arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/union/create_timing':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => CreateTimingUnion(
+                  convUuid: arguments,
                 ),
               );
             }
@@ -410,11 +421,10 @@ class MyApp extends StatelessWidget {
 
           case '/council/timing_detail':
             final arguments = settings.arguments;
-            if (arguments is SeeConvArg) {
+            if (arguments is String?) {
               return MaterialPageRoute(
                 builder: (context) => TimingDetailCouncil(
-                  timingUuid: arguments.uuid,
-                  fetchTimingDetail: arguments.futureToFetchData,
+                  convUuid: arguments,
                 ),
               );
             }
@@ -422,11 +432,10 @@ class MyApp extends StatelessWidget {
 
           case '/timing/artisan/detail':
             final arguments = settings.arguments;
-            if(arguments is SeeConvArg){
+            if(arguments is String?){
               return MaterialPageRoute(
                 builder: (context) => TimingDetailArtisan(
-                  timingUuid: arguments.uuid,
-                  fetchTimingDetail: arguments.futureToFetchData,
+                  convUuid: arguments,
                 ),
               );
             }
@@ -449,6 +458,17 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (context) => RecapMainUnionFromConversation(
                   workRequestUuid: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/artisan/create_timing':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => CreateTimingArtisan(
+                  convUuid: arguments,
                 ),
               );
             }
@@ -725,6 +745,17 @@ class MyApp extends StatelessWidget {
                 builder: (context) => AllConvCouncil(
                   id : arguments.uuid,
                   future: arguments.futureToFetchData,
+                ),
+              );
+            }
+            break;
+
+          case '/council/create_timing':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => CreateTimingCouncil(
+                  convUuid: arguments,
                 ),
               );
             }

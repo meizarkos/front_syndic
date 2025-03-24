@@ -17,6 +17,7 @@ class SeeConv extends StatefulWidget {
   const SeeConv({
     super.key,
     required this.uuid,
+    required this.routeToBack,
     required this.futureForGetConv,
     required this.futureForPostConv,
     required this.route,
@@ -28,6 +29,7 @@ class SeeConv extends StatefulWidget {
   });
 
   final String uuid;
+  final VoidCallback routeToBack;
   final Future<List<Conversation>?> futureForGetConv;
   final Function futureForPostConv;
   final String route;
@@ -86,7 +88,13 @@ class _SeeConvState extends State<SeeConv> {
         });
       },
       child: Scaffold(
-        appBar: appBarBackButton(context,title: _conversations[0].workRequest?.title ?? AppText.conversation),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: widget.routeToBack,
+          ),
+          title: Text(_conversations[0].workRequest?.title ?? AppText.conversation),
+        ),
         body: Stack(
           children: [
             Column(

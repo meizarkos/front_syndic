@@ -179,6 +179,29 @@ String formatTimeString(String? timeString) {
   return DateFormat("HH : mm").format(parsedTime).replaceAll(':', 'h'); // Convert to desired time format
 }
 
+String formatTimeStringForApi(String? timeString, String formatExit) {
+  if(timeString == null){
+    return DateErrorStrings.noDateFound;
+  }
+  DateTime? parsedTime;
+  List<String> formats = ["HH:mm", "H:m", "HH:m", "H:mm",'HH:mm:ss']; // Define possible time formats
+
+  for (String format in formats) {
+    try {
+      parsedTime = DateFormat(format).parseStrict(timeString);
+      break;
+    } catch (e) {
+      continue;
+    }
+  }
+
+  if (parsedTime == null) {
+    return "Invalid time format";
+  }
+
+  return DateFormat(formatExit).format(parsedTime);
+}
+
 String fromDateTimeToConvString(String? date){
   if(date == null){
     return DateErrorStrings.noDateFound;

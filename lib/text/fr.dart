@@ -203,6 +203,9 @@ class AppText {
 
   /* Timing */
   static const String timing = 'Rendez-vous';
+  static const String noTimingWaiting = 'Pas de rendez-vous en attente, créez en un';
+  static const String noTimingSelection = "Vous n'avez rien sélectionné";
+  static const String timingSelection = 'Vous avez sélectionné le';
   static const String timingListTitle = 'Vos rendez-vous';
   static const String create = 'a été fixé :';
   static const String meetingEstimateText = 'Rencontrez vous pour faire un devis le';
