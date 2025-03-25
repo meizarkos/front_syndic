@@ -20,9 +20,8 @@ Future<void> postEstimate(String route,Estimate estimate) async {
 }
 
 Future<void> postEstimateArtisan(Estimate estimate) async {
-  print(estimate.workRequestId);
-  if(estimate.workRequestId == null) {
+  if(estimate.conversationId == null) {
     return;
   }
-  return await postEstimate('${APIValue.artisan}estimate_artisan/${estimate.workRequestId}',estimate);
+  return await postEstimate('${APIValue.artisan}estimate_artisan/${estimate.conversationId}',estimate);
 }

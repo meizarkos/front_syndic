@@ -15,6 +15,7 @@ class AttributesEstimate{
   static const unionId = 'union_id';
   static const councilId = 'council_id';
   static const userId = 'user_id';
+  static const conversationId = 'conversation_id';
   static const createdAt = 'created_at';
   static const updatedAt = 'upadated_at';
 }
@@ -33,6 +34,7 @@ class Estimate {
   String? unionId;
   String? councilId;
   String? userId;
+  String? conversationId;
   String? createdAt;
   String? updatedAt;
 
@@ -50,6 +52,7 @@ class Estimate {
     this.unionId,
     this.councilId,
     this.userId,
+    this.conversationId,
     this.updatedAt,
     this.createdAt,
   });

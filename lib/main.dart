@@ -24,7 +24,7 @@ import 'package:front_syndic/views/council_side/council_main.dart';
 import 'package:front_syndic/views/estimate/create_estimate/recap_estimate.dart';
 import 'package:front_syndic/views/estimate/create_estimate/set_description_estimate.dart';
 import 'package:front_syndic/views/estimate/create_estimate/set_price_and_commentary.dart';
-import 'package:front_syndic/views/estimate/estimate_artisan/estimate_detail_type_artisan.dart';
+import 'package:front_syndic/views/estimate/estimate_artisan/estimate_detail_artisan.dart';
 import 'package:front_syndic/views/estimate/estimate_detail/estimate_detail_type.dart';
 import 'package:front_syndic/views/login_register/login.dart';
 import 'package:front_syndic/views/login_register/register/artisan/bank_info_view.dart';
@@ -234,11 +234,10 @@ class MyApp extends StatelessWidget {
 
           case 'union/specific_conv':
             final arguments = settings.arguments;
-            if (arguments is SeeConvArg) {
+            if (arguments is String) {
               return MaterialPageRoute(
                 builder: (context) => AllConvUnion(
-                    id : arguments.uuid,
-                    future: arguments.futureToFetchData,
+                    id : arguments,
                 ),
               );
             }
@@ -246,11 +245,10 @@ class MyApp extends StatelessWidget {
 
           case '/estimate/union/detail':
             final arguments = settings.arguments;
-            if (arguments is SeeConvArg) {
+            if (arguments is String?) {
               return MaterialPageRoute(
                 builder: (context) => EstimateDetailUnion(
-                  fetchData: arguments.futureToFetchData,
-                  uuid: arguments.uuid,
+                  convUuid: arguments,
                 ),
               );
             }
@@ -529,11 +527,10 @@ class MyApp extends StatelessWidget {
 
           case '/artisan/see_conv':
             final arguments = settings.arguments;
-            if (arguments is SeeConvArg) {
+            if (arguments is String) {
               return MaterialPageRoute(
                 builder: (context) => AllConvArtisan(
-                  id: arguments.uuid,
-                  future: arguments.futureToFetchData,
+                  id: arguments,
                 ),
               );
             }
@@ -683,22 +680,20 @@ class MyApp extends StatelessWidget {
 
           case '/estimate/artisan/detail':
             final arguments = settings.arguments;
-            if(arguments is SeeConvArg){
+            if(arguments is String?){
               return MaterialPageRoute(
-                builder: (context) => EstimateDetailArtisanType(
-                  fetchData: arguments.futureToFetchData,
-                  uuid: arguments.uuid,
+                builder: (context) => EstimateDetailArtisan(
+                  convUuid: arguments,
                 ),
               );
             }
 
           case '/estimate/council/detail':
             final arguments = settings.arguments;
-            if(arguments is SeeConvArg){
+            if(arguments is String?){
               return MaterialPageRoute(
                 builder: (context) => EstimateDetailCouncil(
-                  fetchData: arguments.futureToFetchData,
-                  uuid: arguments.uuid,
+                  convUuid: arguments
                 ),
               );
             }
@@ -740,11 +735,10 @@ class MyApp extends StatelessWidget {
 
           case '/council/see_conv':
             final arguments = settings.arguments;
-            if (arguments is SeeConvArg) {
+            if (arguments is String) {
               return MaterialPageRoute(
                 builder: (context) => AllConvCouncil(
-                  id : arguments.uuid,
-                  future: arguments.futureToFetchData,
+                  id : arguments
                 ),
               );
             }

@@ -6,11 +6,6 @@ import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/conversation/conversation.dart';
 import 'package:front_syndic/text/fr.dart';
-import 'package:front_syndic/widget/divider/divider.dart';
-import 'package:front_syndic/widget/header/app_bar_back_button.dart';
-
-import '../../../widget/button/elevated_button_opacity.dart';
-import '../../../widget/cell_app_bar_in_progress/createButton.dart';
 import 'all_conv_type.dart';
 
 class SeeConv extends StatefulWidget {
@@ -20,24 +15,22 @@ class SeeConv extends StatefulWidget {
     required this.routeToBack,
     required this.futureForGetConv,
     required this.futureForPostConv,
-    required this.route,
     required this.sideText,
     required this.goToRequest,
     required this.goToMeeting,
     required this.goToEstimate,
-    this.isFromWorkRequest = false,
+    required this.goToTimingEstimate,
   });
 
   final String uuid;
   final VoidCallback routeToBack;
   final Future<List<Conversation>?> futureForGetConv;
   final Function futureForPostConv;
-  final String route;
   final String sideText;
   final Function(String?) goToRequest;
   final Function(String?) goToMeeting;
   final Function(String?) goToEstimate;
-  final bool isFromWorkRequest;
+  final Function(String?) goToTimingEstimate;
 
   @override
   State<SeeConv> createState() => _SeeConvState();
@@ -93,7 +86,8 @@ class _SeeConvState extends State<SeeConv> {
             icon: const Icon(Icons.arrow_back, color: Colors.black),
             onPressed: widget.routeToBack,
           ),
-          title: Text(_conversations[0].workRequest?.title ?? AppText.conversation),
+          title: Text(
+              _conversations[0].workRequest?.title ?? AppText.conversation),
         ),
         body: Stack(
           children: [
@@ -147,44 +141,44 @@ class _SeeConvState extends State<SeeConv> {
                               AppText.seeWorkRequest,
                               Icon(
                                 Icons.work,
-                                color: Colors.black, // Change this to any color you want
+                                color: Colors.black,
+                                // Change this to any color you want
                                 size: 15, // Optional: Adjust the size
                               ),
                               () => widget.goToRequest(choseId()),
                             ),
                             const SizedBox(height: 10),
                             createAButtonAndIcon(
-                                AppText.timing,
-                                Icon(
-                                  Icons.schedule,
-                                  color: Colors.black, // Change this to any color you want
-                                  size: 15, // Optional: Adjust the size
-                                ),
-                                () => widget.goToMeeting(_conversations[0].uuid)
+                              AppText.timing,
+                              Icon(
+                                Icons.schedule,
+                                color: Colors.black,
+                                // Change this to any color you want
+                                size: 15, // Optional: Adjust the size
+                              ),
+                              () => widget.goToMeeting(_conversations[0].uuid),
                             ),
                             const SizedBox(height: 10),
                             createAButtonAndIcon(
-                                AppText.estimate,
-                                Icon(
-                                  Icons.money,
-                                  color: Colors.black, // Change this to any color you want
-                                  size: 15, // Optional: Adjust the size
-                                ),
-                                () => widget.goToEstimate(_conversations[0].uuid)
+                              AppText.estimate,
+                              Icon(
+                                Icons.money,
+                                color: Colors.black,
+                                // Change this to any color you want
+                                size: 15, // Optional: Adjust the size
+                              ),
+                              () => widget.goToEstimate(_conversations[0].uuid),
                             ),
                             const SizedBox(height: 10),
                             createAButtonAndIcon(
-                                AppText.timingEstimateTitle,
-                                SvgPicture.asset(
-                                  'assets/tools.svg',
-                                  width: 15,
-                                  height: 15,
-                                ),
-                                () => Navigator.pushNamed(
-                                  context,
-                                  widget.route,
-                                  arguments: choseId(),
-                                ),
+                              AppText.timingEstimateTitle,
+                              SvgPicture.asset(
+                                'assets/tools.svg',
+                                width: 15,
+                                height: 15,
+                              ),
+                              () => widget
+                                  .goToTimingEstimate(_conversations[0].uuid),
                             ),
                           ],
                         ),
@@ -254,15 +248,18 @@ class _SeeConvState extends State<SeeConv> {
     }
   }
 
-  ElevatedButton createAButtonAndIcon(String name, Widget icon, Function() goTo) {
+  ElevatedButton createAButtonAndIcon(
+      String name, Widget icon, Function() goTo) {
     return ElevatedButton(
       onPressed: goTo,
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.mainBackgroundColor, // Background color with opacity
+        backgroundColor: AppColors.mainBackgroundColor,
+        // Background color with opacity
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         textStyle: Theme.of(context).textTheme.displayMedium,
         elevation: AppUIValue.elevation,
-        shadowColor: Colors.black.withOpacity(AppUIValue.opacityActionButtonShadow),
+        shadowColor:
+            Colors.black.withOpacity(AppUIValue.opacityActionButtonShadow),
       ),
       child: Row(
         children: [
@@ -281,9 +278,7 @@ class _SeeConvState extends State<SeeConv> {
   }
 
   String? choseId() {
-    if (widget.isFromWorkRequest) {
-      return widget.uuid;
-    } else if (_conversations.isNotEmpty && _conversations[0].uuid != null) {
+    if (_conversations.isNotEmpty && _conversations[0].uuid != null) {
       return _conversations[0].uuid;
     }
     return widget.uuid;

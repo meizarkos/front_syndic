@@ -232,6 +232,8 @@ class AppText {
   static const String descEstimate = 'Description des travaux';
   static const String descEstimatePlaceHolder = 'Description de vos travaux';
   static const String estimate = 'Devis';
+  static const String noEstimate = 'Pas de devis pour le moment créez en un';
+  static const String noEstimateWaiting = "L'artisan que vous avez contacté n'a pas encore crée de devis";
   static const String noPriceEstimate = 'Pas de prix trouvée';
   static const String euro = '€';
   static const String estimateDetailTitle = 'Détail du devis';

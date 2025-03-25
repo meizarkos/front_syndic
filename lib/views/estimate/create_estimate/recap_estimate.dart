@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
+import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
+import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../api_handler/estimate/post_estimate.dart';
 import '../../../models/estimate/estimate.dart';
 import '../../../text/fr.dart';
@@ -83,9 +85,15 @@ class _RecapEstimateState extends State<RecapEstimate> {
       ),
     );
   }
-  
+
   void _save() async{
+   if(widget.estimate.conversationId == null){
+     return;
+   }
    await postEstimateArtisan(widget.estimate);
-   Navigator.pushNamedAndRemoveUntil(context,'/in_progress/artisan', (Route<dynamic> route) => false);
+   Navigator.pop(context);
+   Navigator.pop(context);
+   Navigator.pop(context);
+   Navigator.pushReplacementNamed(context,'/estimate/artisan/detail',arguments: widget.estimate.conversationId!);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/api_handler/timing/get_timing_detail.dart';
+import 'package:front_syndic/api_handler/conversation/fetch_conversation.dart';
 import 'package:front_syndic/api_handler/work_request/fetch_work_request_detail.dart';
 import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/all_conv.dart';
@@ -18,16 +18,15 @@ class AllConvArtisan extends StatelessWidget {
   const AllConvArtisan({
     super.key,
     required this.id,
-    required this.future,
   });
-
-  final Function(String) future;
   final String id;
 
   @override
   Widget build(BuildContext context) {
     return SeeConv(
       uuid: id,
+      futureForGetConv: fetchSpecificConvArtisan(id),
+      futureForPostConv: postConvArtisan,
       routeToBack: () {
         Navigator.pop(context);
         Navigator.pushReplacementNamed(context, '/artisan/conversation');
@@ -50,15 +49,10 @@ class AllConvArtisan extends StatelessWidget {
       goToEstimate: (String? id) {
         if(id == null) return;
         Navigator.pushNamed(context,'/estimate/artisan/detail',
-            arguments: SeeConvArg(
-              uuid: id,
-              futureToFetchData: fetchEstimateDetailArtisanFromConversation,
-            )
+            arguments: id
         );
       },
-      futureForGetConv: future(id),
-      futureForPostConv: postConvArtisan,
-      route: '/artisan/post_meeting',
+      goToTimingEstimate: (String? id) {},
       sideText: SideConv.artisan,
     );
   }
@@ -68,29 +62,19 @@ class AllConvUnion extends StatelessWidget {
   const AllConvUnion({
     super.key,
     required this.id,
-    required this.future,
   });
 
-  final Function(String) future;
   final String id;
 
   @override
   Widget build(BuildContext context) {
     return SeeConv(
       uuid: id,
+      futureForGetConv: fetchSpecificConvUnion(id),
+      futureForPostConv: postConvUnion,
       routeToBack: () {
         Navigator.pop(context);
         Navigator.pushReplacementNamed(context, '/union/conversation');
-      },
-      futureForGetConv: future(id),
-      futureForPostConv: postConvUnion,
-      route: 'union/post_meeting',
-      sideText: SideConv.union,
-      goToMeeting: (String? id) {
-        if(id == null) return;
-        Navigator.pushNamed(context,'union/detail_timing',
-            arguments: id
-        );
       },
       goToRequest: (String? id) async{
         if(id == null) return;
@@ -101,15 +85,20 @@ class AllConvUnion extends StatelessWidget {
           );
         });
       },
+      goToMeeting: (String? id) {
+        if(id == null) return;
+        Navigator.pushNamed(context,'union/detail_timing',
+            arguments: id
+        );
+      },
       goToEstimate: (String? id) {
         if(id == null) return;
         Navigator.pushNamed(context,'/estimate/union/detail',
-            arguments: SeeConvArg(
-              uuid: id,
-              futureToFetchData: fetchEstimateDetailUnionFromConversation,
-            )
+            arguments: id
         );
       },
+      goToTimingEstimate: (String? id) {},
+      sideText: SideConv.union,
     );
   }
 }
@@ -118,29 +107,19 @@ class AllConvCouncil extends StatelessWidget {
   const AllConvCouncil({
     super.key,
     required this.id,
-    required this.future,
   });
 
-  final Function(String) future;
   final String id;
 
   @override
   Widget build(BuildContext context) {
     return SeeConv(
       uuid: id,
+      futureForGetConv: fetchSpecificConvCouncil(id),
+      futureForPostConv: postConvCouncil,
       routeToBack: () {
         Navigator.pop(context);
         Navigator.pushReplacementNamed(context, '/council/conversation');
-      },
-      futureForGetConv: future(id),
-      futureForPostConv: postConvCouncil,
-      route: '/council/post_meeting',
-      sideText: SideConv.other,
-      goToMeeting: (String? id) {
-        if(id == null) return;
-        Navigator.pushNamed(context,'/council/timing_detail',
-            arguments: id
-        );
       },
       goToRequest: (String? id) async{
         if(id == null) return;
@@ -151,15 +130,20 @@ class AllConvCouncil extends StatelessWidget {
           );
         });
       },
+      goToMeeting: (String? id) {
+        if(id == null) return;
+        Navigator.pushNamed(context,'/council/timing_detail',
+            arguments: id
+        );
+      },
       goToEstimate: (String? id) {
         if(id == null) return;
         Navigator.pushNamed(context,'/estimate/council/detail',
-            arguments: SeeConvArg(
-              uuid: id,
-              futureToFetchData: fetchEstimateDetailCouncilFromConversation,
-            )
+            arguments: id
         );
       },
+      goToTimingEstimate: (String? id) {},
+      sideText: SideConv.other,
     );
   }
 }

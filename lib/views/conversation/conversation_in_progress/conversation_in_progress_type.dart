@@ -7,28 +7,6 @@ import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../models/to_screen/see_conv_arg.dart';
 import '../../../widget/bottom/nav_bar_union.dart';
 
-class ConversationInProgressUnion extends StatelessWidget {
-  const ConversationInProgressUnion({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ConversationInProgress(
-        goToConvDetail: (uuid) => {
-          Navigator.pushNamed(
-            context,
-            'union/specific_conv',
-            arguments: SeeConvArg(
-              uuid: uuid,
-              futureToFetchData: fetchSpecificConvUnion,
-            ),
-          )
-        },
-        fetchConversationInProgress: fetchFirstConvUnion(),
-        bottomNavigationBar: bottomNavigationBarUnion(context, 2)
-    );
-  }
-}
-
 class ConversationInProgressArtisan extends StatelessWidget {
   const ConversationInProgressArtisan({super.key});
 
@@ -39,14 +17,30 @@ class ConversationInProgressArtisan extends StatelessWidget {
           Navigator.pushNamed(
             context,
             '/artisan/see_conv',
-            arguments: SeeConvArg(
-              uuid: uuid,
-              futureToFetchData: fetchSpecificConvArtisan,
-            ),
+            arguments: uuid,
           )
         },
         fetchConversationInProgress: fetchFirstConvArtisan(),
         bottomNavigationBar: bottomNavigationBarArtisan(context, 1)
+    );
+  }
+}
+
+class ConversationInProgressUnion extends StatelessWidget {
+  const ConversationInProgressUnion({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ConversationInProgress(
+        goToConvDetail: (uuid) => {
+          Navigator.pushNamed(
+            context,
+            'union/specific_conv',
+            arguments: uuid,
+          )
+        },
+        fetchConversationInProgress: fetchFirstConvUnion(),
+        bottomNavigationBar: bottomNavigationBarUnion(context, 2)
     );
   }
 }
@@ -61,10 +55,7 @@ class ConversationInProgressCouncil extends StatelessWidget {
           Navigator.pushNamed(
             context,
             '/council/see_conv',
-            arguments: SeeConvArg(
-              uuid: uuid,
-              futureToFetchData: fetchSpecificConvCouncil,
-            ),
+            arguments: uuid,
           )
         },
         fetchConversationInProgress: fetchFirstConvCouncil(),
