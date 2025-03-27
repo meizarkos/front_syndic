@@ -29,11 +29,44 @@ class CreateTimingEstimateArtisan extends StatelessWidget {
   }
 
   void goToTimingEstimate(BuildContext context){
-    if(timingEstimate.estimateId == null) return;
+    if(timingEstimate.conversationId == null) return;
     Navigator.pushReplacementNamed(
       context,
       '/artisan/timing_estimate',
-      arguments: timingEstimate.estimateId!,
+      arguments: timingEstimate.conversationId!,
+    );
+  }
+}
+
+class CreateTimingEstimateUnion extends StatelessWidget {
+  const CreateTimingEstimateUnion({
+    super.key,
+    required this.timingEstimate,
+  });
+
+  final TimingEstimate timingEstimate;
+
+  @override
+  Widget build(BuildContext context) {
+    return CreateTimingEstimate(
+      timingEstimate: timingEstimate,
+      onBack: (){
+        goToTimingEstimate(context);
+      },
+      onRegister: (TimingEstimate timingEstimate)async{
+        //call API to create timing estimate
+        await postTimingEstimateUnion(timingEstimate);
+        goToTimingEstimate(context);
+      },
+    );
+  }
+
+  void goToTimingEstimate(BuildContext context){
+    if(timingEstimate.conversationId == null) return;
+    Navigator.pushReplacementNamed(
+      context,
+      '/union/timing_estimate',
+      arguments: timingEstimate.conversationId!,
     );
   }
 }
@@ -62,45 +95,14 @@ class CreateTimingEstimateCouncil extends StatelessWidget {
   }
 
   void goToTimingEstimate(BuildContext context){
-    if(timingEstimate.estimateId == null) return;
+    if(timingEstimate.conversationId == null) return;
     Navigator.pushReplacementNamed(
       context,
       '/council/timing_estimate',
-      arguments: SeeConvArg(uuid: timingEstimate.estimateId!, futureToFetchData: fetchTimingEstimateCouncil),
+      arguments: timingEstimate.conversationId!,
     );
   }
 }
 
 
-class CreateTimingEstimateUnion extends StatelessWidget {
-  const CreateTimingEstimateUnion({
-    super.key,
-    required this.timingEstimate,
-  });
 
-  final TimingEstimate timingEstimate;
-
-  @override
-  Widget build(BuildContext context) {
-    return CreateTimingEstimate(
-      timingEstimate: timingEstimate,
-      onBack: (){
-        goToTimingEstimate(context);
-      },
-      onRegister: (TimingEstimate timingEstimate)async{
-        //call API to create timing estimate
-        await postTimingEstimateUnion(timingEstimate);
-        goToTimingEstimate(context);
-      },
-    );
-  }
-
-  void goToTimingEstimate(BuildContext context){
-    if(timingEstimate.estimateId == null) return;
-    Navigator.pushReplacementNamed(
-      context,
-      '/union/timing_estimate',
-      arguments: SeeConvArg(uuid: timingEstimate.estimateId!, futureToFetchData: fetchTimingEstimateUnion),
-    );
-  }
-}

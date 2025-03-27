@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/api_handler/conversation/fetch_conversation.dart';
 import 'package:front_syndic/api_handler/work_request/fetch_work_request_detail.dart';
-import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/all_conv.dart';
 import '../../../api_handler/conversation/post_conv.dart';
-import '../../../api_handler/estimate/get_estimate_detail.dart';
 import '../../../api_handler/work_request/fetch_uuid_work_request/get_work_request_id_from_conv.dart';
 import '../../../models/to_screen/artisan_detail_work_request.dart';
 
@@ -102,7 +100,12 @@ class AllConvUnion extends StatelessWidget {
             arguments: id
         );
       },
-      goToTimingEstimate: (String? id) {},
+      goToTimingEstimate: (String? id) {
+        if(id == null) return;
+        Navigator.pushNamed(context,'/union/timing_estimate',
+            arguments: id
+        );
+      },
       sideText: SideConv.union,
     );
   }
@@ -147,7 +150,12 @@ class AllConvCouncil extends StatelessWidget {
             arguments: id
         );
       },
-      goToTimingEstimate: (String? id) {},
+      goToTimingEstimate: (String? id) {
+        if(id == null) return;
+        Navigator.pushNamed(context,'/council/timing_estimate',
+            arguments: id
+        );
+      },
       sideText: SideConv.other,
     );
   }

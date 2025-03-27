@@ -12,18 +12,17 @@ Future<TimingEstimate?> fetchTimings(String route) async {
   }
 }
 
-
-Future<TimingEstimate?> fetchTimingEstimateCouncil(String? uuid) async {
-  if(uuid == null)return null;
-  return await fetchTimings('${APIValue.unionCouncil}all_timings_estimates_council/$uuid');
+Future<TimingEstimate?> fetchTimingEstimateArtisan(String? convUuid) async {
+  if(convUuid == null)return null;
+  return await fetchTimings('${APIValue.artisan}timing_estimate_detail_from_conv_artisan/$convUuid');
 }
 
-Future<TimingEstimate?> fetchTimingEstimateArtisan(String? uuid) async {
-  if(uuid == null)return null;
-  return await fetchTimings('${APIValue.artisan}all_timings_estimates_artisan/$uuid');
+Future<TimingEstimate?> fetchTimingEstimateUnion(String? convUuid) async {
+  if(convUuid == null)return null;
+  return await fetchTimings('${APIValue.union}timing_estimate_detail_from_conv_union/$convUuid');
 }
 
-Future<TimingEstimate?> fetchTimingEstimateUnion(String? uuid) async {
-  if(uuid == null)return null;
-  return await fetchTimings('${APIValue.union}all_timings_estimates_union/$uuid');
+Future<TimingEstimate?> fetchTimingEstimateCouncil(String? convUuid) async {
+  if(convUuid == null)return null;
+  return await fetchTimings('${APIValue.unionCouncil}timing_estimate_detail_from_conv_council/$convUuid');
 }

@@ -12,6 +12,7 @@ Future<void> postTimingEstimate(String route,TimingEstimate timingEstimate) asyn
       AttributesTimingEstimate.dateEnd: timingEstimate.dateEnd,
     });
     final response = await requestWithBody(url: route, method: "POST",body: body);
+    print(response);
     return;
   } catch(e) {
     return;
@@ -19,13 +20,13 @@ Future<void> postTimingEstimate(String route,TimingEstimate timingEstimate) asyn
 }
 
 Future<void> postTimingEstimateArtisan(TimingEstimate timingEstimate) async {
-  return postTimingEstimate('${APIValue.artisan}timing_estimate_artisan/${timingEstimate.estimateId}', timingEstimate);
+  return postTimingEstimate('${APIValue.artisan}timing_estimate_artisan/${timingEstimate.conversationId}', timingEstimate);
 }
 
 Future<void> postTimingEstimateUnion(TimingEstimate timingEstimate) async {
-  return postTimingEstimate('${APIValue.union}timing_estimate_union/${timingEstimate.estimateId}', timingEstimate);
+  return postTimingEstimate('${APIValue.union}timing_estimate_union/${timingEstimate.conversationId}', timingEstimate);
 }
 
 Future<void> postTimingEstimateCouncil(TimingEstimate timingEstimate) async {
-  return postTimingEstimate('${APIValue.unionCouncil}timing_estimate_council/${timingEstimate.estimateId}', timingEstimate);
+  return postTimingEstimate('${APIValue.unionCouncil}timing_estimate_council/${timingEstimate.conversationId}', timingEstimate);
 }

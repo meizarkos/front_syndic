@@ -25,6 +25,7 @@ class TimingEstimateView extends StatefulWidget {
     required this.onAccept,
     required this.onRefuse,
     required this.role,
+    required this.goBack,
     this.apiPaiement,
   });
 
@@ -35,6 +36,7 @@ class TimingEstimateView extends StatefulWidget {
   final Function(String?) onAccept;
   final Function(String?) onRefuse;
   final String role;
+  final VoidCallback goBack;
   final Function(int amount,String currency)? apiPaiement;
 
   @override
@@ -51,7 +53,7 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
   void initState() {
     widget.fetchData(widget.uuid).then((value) {
       setState(() {
-        timingEstimateStatic = value as TimingEstimate;
+        timingEstimateStatic = value;
         adress = timingEstimateStatic?.workRequest?.adress;
         isLoading = false;
       });
@@ -67,9 +69,15 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
         body: Center(child: CircularProgressIndicator()),
       );
     }
-    if (timingEstimateStatic?.uuid == null) {
+    if (timingEstimateStatic?.uuid == null && !isLoading) {
       return Scaffold(
-          appBar: appBarBackButton(context, title: AppText.timingEstimate),
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: widget.goBack,
+            ),
+            title: Text(AppText.timingEstimate),
+          ),
           body: Padding(
             padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
             child: Center(
@@ -78,14 +86,20 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
           ),
           floatingActionButton: addFloatingButton(() {
             final TimingEstimate timingEstimate = TimingEstimate(
-              estimateId: widget.uuid,
+              conversationId: widget.uuid,
             );
             Navigator.pushReplacementNamed(context, widget.routeToPost,
                 arguments: timingEstimate);
           }));
     }
     return Scaffold(
-      appBar: appBarBackButton(context, title: AppText.timingEstimate),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: widget.goBack,
+        ),
+        title: Text(AppText.timingEstimate),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),

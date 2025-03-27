@@ -477,7 +477,7 @@ class MyApp extends StatelessWidget {
             if (arguments is String?) {
               return MaterialPageRoute(
                 builder: (context) => TimingEstimateArtisan(
-                  uuid: arguments,
+                  convUuid: arguments,
                 ),
               );
             }
@@ -759,7 +759,7 @@ class MyApp extends StatelessWidget {
             if (arguments is String?) {
               return MaterialPageRoute(
                 builder: (context) => TimingEstimateCouncil(
-                  uuid: arguments,
+                  convUuid: arguments,
                 ),
               );
             }
@@ -780,7 +780,7 @@ class MyApp extends StatelessWidget {
             if (arguments is String?) {
               return MaterialPageRoute(
                 builder: (context) => TimingEstimateUnion(
-                  uuid: arguments,
+                  convUuid: arguments,
                 ),
               );
             }
