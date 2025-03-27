@@ -32,8 +32,8 @@ class CreateTimingEstimateArtisan extends StatelessWidget {
     if(timingEstimate.estimateId == null) return;
     Navigator.pushReplacementNamed(
       context,
-      'artisan/timing_estimate',
-      arguments: SeeConvArg(uuid: timingEstimate.estimateId!, futureToFetchData: fetchTimingEstimateArtisan),
+      '/artisan/timing_estimate',
+      arguments: timingEstimate.estimateId!,
     );
   }
 }

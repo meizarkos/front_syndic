@@ -11,10 +11,6 @@ class AttributesEstimate{
   static const statusGoal = 'status_goal';
   static const workRequestId = 'work_request_id';
   static const workRequest = 'work_request';
-  static const artisanId = 'artisan_id';
-  static const unionId = 'union_id';
-  static const councilId = 'council_id';
-  static const userId = 'user_id';
   static const conversationId = 'conversation_id';
   static const createdAt = 'created_at';
   static const updatedAt = 'upadated_at';
@@ -30,10 +26,6 @@ class Estimate {
   List<TimingEstimate>? timingsEstimate;
   String? workRequestId;
   WorkRequest? workRequest;
-  String? artisanId;
-  String? unionId;
-  String? councilId;
-  String? userId;
   String? conversationId;
   String? createdAt;
   String? updatedAt;
@@ -48,10 +40,6 @@ class Estimate {
     this.timingsEstimate,
     this.workRequestId,
     this.workRequest,
-    this.artisanId,
-    this.unionId,
-    this.councilId,
-    this.userId,
     this.conversationId,
     this.updatedAt,
     this.createdAt,
@@ -72,10 +60,7 @@ class Estimate {
       workRequest: json[AttributesEstimate.workRequest] != null
           ? WorkRequest.fromJson(json[AttributesEstimate.workRequest])
           : null,
-      artisanId: json[AttributesEstimate.artisanId],
-      unionId: json[AttributesEstimate.unionId],
-      councilId: json[AttributesEstimate.councilId],
-      userId: json[AttributesEstimate.userId],
+      conversationId: json[AttributesEstimate.conversationId],
       updatedAt: json[AttributesEstimate.updatedAt],
       createdAt: json[AttributesEstimate.createdAt],
     );

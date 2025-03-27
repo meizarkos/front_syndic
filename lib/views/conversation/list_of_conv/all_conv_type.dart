@@ -52,7 +52,12 @@ class AllConvArtisan extends StatelessWidget {
             arguments: id
         );
       },
-      goToTimingEstimate: (String? id) {},
+      goToTimingEstimate: (String? id) {
+        if(id == null) return;
+        Navigator.pushNamed(context,'/artisan/timing_estimate',
+            arguments: id
+        );
+      },
       sideText: SideConv.artisan,
     );
   }

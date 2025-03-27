@@ -25,7 +25,7 @@ class CreateTimingArtisan extends StatelessWidget {
           Navigator.pushReplacementNamed(
             context,
             '/artisan/see_conv',
-            arguments: SeeConvArg(uuid: convUuid!, futureToFetchData: fetchSpecificConvArtisan),
+            arguments: convUuid!,
           );
         }
     );
@@ -52,7 +52,7 @@ class CreateTimingUnion extends StatelessWidget {
           Navigator.pushReplacementNamed(
             context,
             'union/specific_conv',
-            arguments: SeeConvArg(uuid: convUuid!, futureToFetchData: fetchSpecificConvUnion),
+            arguments: convUuid!,
           );
         }
     );
@@ -79,7 +79,7 @@ class CreateTimingCouncil extends StatelessWidget {
           Navigator.pushReplacementNamed(
             context,
             '/council/see_conv',
-            arguments: SeeConvArg(uuid: convUuid!, futureToFetchData: fetchSpecificConvCouncil),
+            arguments: convUuid!,
           );
         }
     );

@@ -472,13 +472,12 @@ class MyApp extends StatelessWidget {
             }
             break;
 
-          case 'artisan/timing_estimate':
+          case '/artisan/timing_estimate':
             final arguments = settings.arguments;
-            if (arguments is SeeConvArg) {
+            if (arguments is String?) {
               return MaterialPageRoute(
                 builder: (context) => TimingEstimateArtisan(
-                  fetchData: arguments.futureToFetchData,
-                  uuid: arguments.uuid,
+                  uuid: arguments,
                 ),
               );
             }
@@ -757,11 +756,10 @@ class MyApp extends StatelessWidget {
 
           case '/council/timing_estimate':
             final arguments = settings.arguments;
-            if (arguments is SeeConvArg) {
+            if (arguments is String?) {
               return MaterialPageRoute(
                 builder: (context) => TimingEstimateCouncil(
-                  fetchData: arguments.futureToFetchData,
-                  uuid: arguments.uuid,
+                  uuid: arguments,
                 ),
               );
             }
@@ -779,11 +777,10 @@ class MyApp extends StatelessWidget {
 
           case '/union/timing_estimate':
             final arguments = settings.arguments;
-            if (arguments is SeeConvArg) {
+            if (arguments is String?) {
               return MaterialPageRoute(
                 builder: (context) => TimingEstimateUnion(
-                  fetchData: arguments.futureToFetchData,
-                  uuid: arguments.uuid,
+                  uuid: arguments,
                 ),
               );
             }

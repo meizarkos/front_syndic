@@ -61,7 +61,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
         ),
       );
     }
-    else if (estimateFromRequest == null && !isLoading) {
+    else if (estimateFromRequest?.uuid == null && !isLoading) {
       return Scaffold(
         appBar: appBarBackButton(context, title: AppText.estimate),
         body: Padding(

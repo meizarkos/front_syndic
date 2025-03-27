@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
+import 'package:front_syndic/models/union/union.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/text_style/text_style_main_color.dart';
 
+import '../../../models/artisan/artisan.dart';
+import '../../../models/council/council.dart';
 import '../../../models/timing/timing.dart';
 import '../../../text/fr.dart';
 import '../../../utils/date_to_string/date.dart';
@@ -21,8 +24,8 @@ class TimingDetail extends StatefulWidget {
 
   final Function(String?) routeToRefuse;
   final VoidCallback routeToCreateMeeting;
-  final Future<Timing?> future;
-  final Function(Timing) textContact;
+  final Future<TimingAndCreator?> future;
+  final Function(TimingAndCreator) textContact;
 
   @override
   State<TimingDetail> createState() => _TimingDetailState();
@@ -30,7 +33,11 @@ class TimingDetail extends StatefulWidget {
 
 class _TimingDetailState extends State<TimingDetail> {
 
-  Timing timing = Timing();
+  TimingAndCreator? timingAndCreator;
+  Timing? timing;
+  Artisan? artisan;
+  UnionApi? union;
+  Council? council;
   bool isLoading = true;
 
   @override
@@ -40,9 +47,12 @@ class _TimingDetailState extends State<TimingDetail> {
       setState(() {
         isLoading = false;
       });
-      if (value?.uuid != null) {
+      if (value?.timing?.uuid != null) {
         setState(() {
-          timing = value!;
+          timing = value?.timing;
+          artisan = value?.artisan;
+          union = value?.union;
+          council = value?.council;
         });
       }
     });
@@ -57,7 +67,7 @@ class _TimingDetailState extends State<TimingDetail> {
         ),
       );
     }
-    if(isLoading == false && timing.uuid == null) { // create a meeting
+    if(isLoading == false && timing?.uuid == null) { // create a meeting
       return Scaffold(
         appBar: appBarBackButton(context,title: AppText.timing),
         body: Column(
@@ -93,7 +103,7 @@ class _TimingDetailState extends State<TimingDetail> {
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               Center(
                 child: Text(
-                  timing.workRequest?.title ?? AppText.noTitleForWork,
+                  timing?.workRequest?.title ?? AppText.noTitleForWork,
                   style: getTextStyleMainColor(18),
                 ),
               ),
@@ -106,13 +116,13 @@ class _TimingDetailState extends State<TimingDetail> {
                   child: Column(
                     children: [
                       Text(
-                        '${AppText.meetingEstimateText} ${formatStringToApiDate(timing.date, 'dd/MM')} ${AppText.at} ${timing.time?.substring(0, 5).replaceAll(':', 'h') ?? ''}.',
+                        '${AppText.meetingEstimateText} ${formatStringToApiDate(timing?.date, 'dd/MM')} ${AppText.at} ${timing?.time?.substring(0, 5).replaceAll(':', 'h') ?? ''}.',
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
                       Text(
                         "\n\n${AppText.interventionPlace}"
-                        "\n\n${timing.workRequest?.adress?.street ?? ''}, ${timing.workRequest?.adress?.city ?? ''}, ${timing.workRequest?.adress?.postalCode ?? ''}"
-                        "\n${timing.workRequest?.adress?.country?.toUpperCase() ?? ''} \n",
+                        "\n\n${timing?.workRequest?.adress?.street ?? ''}, ${timing?.workRequest?.adress?.city ?? ''}, ${timing?.workRequest?.adress?.postalCode ?? ''}"
+                        "\n${timing?.workRequest?.adress?.country?.toUpperCase() ?? ''} \n",
                         style: Theme.of(context).textTheme.displaySmall,
                       ),
                     ],
@@ -126,7 +136,7 @@ class _TimingDetailState extends State<TimingDetail> {
                   width: MediaQuery.of(context).size.width * 0.8,
                   // Define the width to constrain text justification
                   child: Text(
-                    widget.textContact(timing),
+                    widget.textContact(TimingAndCreator(timing, artisan, union, council)),
                     style: Theme.of(context).textTheme.displaySmall,
                     textAlign: TextAlign.justify,
                   ),
@@ -139,7 +149,7 @@ class _TimingDetailState extends State<TimingDetail> {
                   AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
                   AppText.refuse,
                   context,
-                      () => widget.routeToRefuse(timing.uuid),
+                      () => widget.routeToRefuse(timing?.uuid),
                   Colors.black,
                 ),
               ),

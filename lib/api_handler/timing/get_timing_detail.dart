@@ -1,44 +1,56 @@
 import 'package:front_syndic/models/timing/timing.dart';
+import 'package:front_syndic/models/union/union.dart';
 import '../../core_value.dart';
+import '../../models/artisan/artisan.dart';
+import '../../models/council/council.dart';
 import '../request.dart';
 
-Future<Timing?> fetchTimingDetail(String route) async {
+Future<TimingAndCreator?> fetchTimingDetail(String route) async {
   try{
     final response = await request(url: route, method: "GET");
-    final records = Timing.fromJson(response.data);
-    return records; 
+    final timing = Timing.fromJson(response.data['timing']);
+    final artisan = Artisan.fromJson(response.data['artisan']);
+    final union = UnionApi.fromJson(response.data['union']);
+    final council = Council.fromJson(response.data['council']);
+    final timingAndCreator = TimingAndCreator(
+      timing,
+      artisan,
+      union,
+      council,
+    );
+    return timingAndCreator;
   } catch(e) {
     return null;
   }
 }
 
-Future<Timing?> fetchTimingDetailCouncil(String? uuid) async {
+Future<TimingAndCreator?> fetchTimingDetailCouncil(String? uuid) async {
   if(uuid == null) return null;
   return await fetchTimingDetail('${APIValue.unionCouncil}timing_detail_council/$uuid');
 }
 
-Future<Timing?> fetchTimingDetailCouncilFromConversation(String? uuid) async {
+Future<TimingAndCreator?> fetchTimingDetailCouncilFromConversation(String? uuid) async {
   if(uuid == null) return null;
   return await fetchTimingDetail('${APIValue.unionCouncil}timing_detail_council_from_conversation/$uuid');
 }
 
-Future<Timing?> fetchTimingDetailArtisan(String? uuid) async {
+Future<TimingAndCreator?> fetchTimingDetailArtisan(String? uuid) async {
   if(uuid == null) return null;
   return await fetchTimingDetail('${APIValue.artisan}timing_detail_artisan/$uuid');
 }
 
-Future<Timing?> fetchTimingDetailArtisanFromConv(String? uuid) async {
+Future<TimingAndCreator?> fetchTimingDetailArtisanFromConversation(String? uuid) async {
   if(uuid == null) return null;
   return await fetchTimingDetail('${APIValue.artisan}timing_detail_artisan_from_conv/$uuid');
 }
 
 
-Future<Timing?> fetchTimingDetailUnion(String? uuid) async {
+Future<TimingAndCreator?> fetchTimingDetailUnion(String? uuid) async {
   if(uuid == null) return null;
   return await fetchTimingDetail('${APIValue.union}timing_detail_union/$uuid');
 }
 
-Future<Timing?> fetchTimingDetailUnionFromConversation(String? uuid) async {
+Future<TimingAndCreator?> fetchTimingDetailUnionFromConversation(String? uuid) async {
   if(uuid == null) return null;
   return await fetchTimingDetail('${APIValue.union}timing_detail_union_from_conversation/$uuid');
 }

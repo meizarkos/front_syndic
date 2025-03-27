@@ -11,17 +11,15 @@ import '../../../widget/handle_status/text_based_on_user.dart';
 class TimingEstimateArtisan extends StatelessWidget {
   const TimingEstimateArtisan({
     super.key,
-    required this.fetchData,
     required this.uuid,
   });
 
-  final Function(String?) fetchData;
   final String? uuid;
 
   @override
   Widget build(BuildContext context) {
     return TimingEstimateView(
-      fetchData: fetchData,
+      fetchData: fetchTimingEstimateArtisan,
       uuid: uuid,
       valueValidateByYou: ValidateByYou.artisan,
       routeToPost:  '/artisan/create_timing_estimate',
@@ -41,8 +39,8 @@ class TimingEstimateArtisan extends StatelessWidget {
     if(uuid == null) return;
     Navigator.pushReplacementNamed(
       context,
-      'artisan/timing_estimate',
-      arguments: SeeConvArg(uuid: uuid!, futureToFetchData: fetchTimingEstimateArtisan),
+      '/artisan/timing_estimate',
+      arguments: uuid!,
     );
   }
 }
@@ -50,17 +48,15 @@ class TimingEstimateArtisan extends StatelessWidget {
 class TimingEstimateCouncil extends StatelessWidget {
   const TimingEstimateCouncil({
     super.key,
-    required this.fetchData,
     required this.uuid,
   });
 
-  final Function(String?) fetchData;
   final String? uuid;
 
   @override
   Widget build(BuildContext context) {
     return TimingEstimateView(
-      fetchData: fetchData,
+      fetchData: fetchTimingEstimateCouncil,
       uuid: uuid,
       valueValidateByYou: ValidateByYou.council, //all value where the timing is validated by you
       routeToPost:  '/council/create_timing_estimate',
@@ -90,17 +86,15 @@ class TimingEstimateCouncil extends StatelessWidget {
 class TimingEstimateUnion extends StatelessWidget {
   const TimingEstimateUnion({
     super.key,
-    required this.fetchData,
     required this.uuid,
   });
 
-  final Function(String?) fetchData;
   final String? uuid;
 
   @override
   Widget build(BuildContext context) {
     return TimingEstimateView(
-      fetchData: fetchData,
+      fetchData: fetchTimingEstimateUnion,
       uuid: uuid,
       //valueOfValidation: 1,
       valueValidateByYou: ValidateByYou.union, //all value where the timing is validated by you

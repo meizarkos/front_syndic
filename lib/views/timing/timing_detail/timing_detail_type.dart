@@ -28,7 +28,7 @@ class TimingDetailArtisan extends StatelessWidget {
         Navigator.pushReplacementNamed(
           context,
           '/artisan/see_conv',
-          arguments: SeeConvArg(uuid: convUuid!, futureToFetchData: fetchSpecificConvArtisan),
+          arguments: convUuid!,
         );
       },
       routeToCreateMeeting: () {
@@ -37,8 +37,8 @@ class TimingDetailArtisan extends StatelessWidget {
             arguments: convUuid
         );
       },
-      future: fetchTimingDetailArtisanFromConv(convUuid),
-      textContact : (Timing timing){
+      future: fetchTimingDetailArtisanFromConversation(convUuid),
+      textContact : (TimingAndCreator timing){
         if(timing.council != null){
           return "${AppText.contactCouncilActive} ${toUpperFirst(timing.council?.lastName ?? '')} ${toUpperFirst(timing.council?.firstName ?? '')} ${toLowerFirst(AppText.to)} ${timing.council?.phone ?? AppText.noPhone}.\n\n"
               "${timing.union != null ? "${AppText.contactUnionForArtisan} ${toUpperFirst(timing.union?.name ?? AppText.noNameUnion)} ${toLowerFirst(AppText.to)} ${timing.union?.phone ?? AppText.noPhone}." : ""}";
@@ -66,7 +66,7 @@ class TimingDetailUnion extends StatelessWidget {
         await refuseTimingDetailUnion(uuid);
         if(uuid == null) return;
         Navigator.pushReplacementNamed(context, 'union/specific_conv',
-            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvUnionFromTiming)
+            arguments: convUuid
         );
       },
       routeToCreateMeeting: () {
@@ -76,7 +76,7 @@ class TimingDetailUnion extends StatelessWidget {
         );
       },
       future: fetchTimingDetailUnionFromConversation(convUuid),
-      textContact: (Timing timing){
+      textContact: (TimingAndCreator timing){
         final contactArtisan = "${AppText.contactez} ${toUpperFirst(timing.artisan?.companyName ?? '')} ${toLowerFirst(AppText.to)} ${timing.artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
         return "$contactArtisan\n\n${AppText.contactCouncil} ${timing.council?.phone ?? AppText.noPhone}";
       },
@@ -100,7 +100,7 @@ class TimingDetailCouncil extends StatelessWidget {
         if(uuid == null) return;
         await refuseTimingDetailCouncil(uuid);
         Navigator.pushReplacementNamed(context, '/council/see_conv',
-            arguments: SeeConvArg(uuid: uuid, futureToFetchData: fetchSpecificConvCouncilFromTiming)
+            arguments: convUuid
         );
       },
       routeToCreateMeeting: () {
@@ -110,7 +110,7 @@ class TimingDetailCouncil extends StatelessWidget {
         );
       },
       future: fetchTimingDetailCouncilFromConversation(convUuid),
-      textContact: (Timing timing){
+      textContact: (TimingAndCreator timing){
         final contactArtisan = "${AppText.contactez} ${toUpperFirst(timing.artisan?.companyName ?? '')} ${toLowerFirst(AppText.to)} ${timing.artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
         if(timing.union != null){
           return "$contactArtisan\n\n${AppText.contactUnion} ${timing.union?.phone ?? AppText.noPhone}.";

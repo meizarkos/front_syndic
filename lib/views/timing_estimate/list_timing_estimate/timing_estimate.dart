@@ -7,7 +7,6 @@ import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/text_style/text_style_main_color.dart';
 
-import '../../../api_handler/paiement/paiement_council.dart';
 import '../../../core_value.dart';
 import '../../../models/timing/timing_estimate.dart';
 import '../../../utils/date_to_string/date.dart';
@@ -47,18 +46,10 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
   Adress? adress;
 
   bool isLoading = true;
-  bool isEmpty = false;
 
   @override
   void initState() {
     widget.fetchData(widget.uuid).then((value) {
-      if (value == null) {
-        setState(() {
-          isEmpty = true;
-          isLoading = false;
-        });
-        return;
-      }
       setState(() {
         timingEstimateStatic = value as TimingEstimate;
         adress = timingEstimateStatic?.workRequest?.adress;
@@ -76,7 +67,7 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
         body: Center(child: CircularProgressIndicator()),
       );
     }
-    if (isEmpty) {
+    if (timingEstimateStatic?.uuid == null) {
       return Scaffold(
           appBar: appBarBackButton(context, title: AppText.timingEstimate),
           body: Padding(
