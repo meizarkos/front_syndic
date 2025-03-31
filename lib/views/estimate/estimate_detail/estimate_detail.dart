@@ -9,7 +9,6 @@ import '../../../text/fr.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
 import '../../../widget/handle_status/text_based_on_user.dart';
 import '../../../widget/text_style/text_style_main_color.dart';
-import '../common_app_bar.dart';
 
 class EstimateDetail extends StatefulWidget {
   const EstimateDetail({
@@ -25,8 +24,8 @@ class EstimateDetail extends StatefulWidget {
   final String? uuid;
   final Function(String?) fetchData;
   final String role;
-  final Function(String?,VoidCallback) patchStatus;
-  final Function(String?,VoidCallback) refuseEstimate;
+  final Function(String?, VoidCallback) patchStatus;
+  final Function(String?, VoidCallback) refuseEstimate;
   final VoidCallback goToBack;
 
   @override
@@ -34,7 +33,6 @@ class EstimateDetail extends StatefulWidget {
 }
 
 class _EstimateDetailState extends State<EstimateDetail> {
-
   Estimate? estimateFromRequest;
   bool isLoading = true;
 
@@ -51,17 +49,17 @@ class _EstimateDetailState extends State<EstimateDetail> {
 
   @override
   Widget build(BuildContext context) {
-    if(isLoading){
+    if (isLoading) {
       return Scaffold(
-        appBar: appBarBackButton(context,title: AppText.estimate),
+        appBar: appBarBackButton(context, title: AppText.estimate),
         body: Center(
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.mainBackgroundColor),
+            valueColor:
+                AlwaysStoppedAnimation<Color>(AppColors.mainBackgroundColor),
           ),
         ),
       );
-    }
-    else if (estimateFromRequest?.uuid == null && !isLoading) {
+    } else if (estimateFromRequest?.uuid == null && !isLoading) {
       return Scaffold(
         appBar: appBarBackButton(context, title: AppText.estimate),
         body: Padding(
@@ -85,7 +83,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
         title: Text(AppText.estimate),
       ),
       body: SingleChildScrollView(
-        child : Padding(
+        child: Padding(
           padding: EdgeInsets.all(AppUIValue.spaceScreenToAny),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +92,8 @@ class _EstimateDetailState extends State<EstimateDetail> {
               const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
               Center(
                 child: Text(
-                  estimateFromRequest?.workRequest?.title ?? AppText.noTitleForWork,
+                  estimateFromRequest?.workRequest?.title ??
+                      AppText.noTitleForWork,
                   style: getTextStyleMainColor(AppUIValue.sizeFontTitle),
                 ),
               ),
@@ -123,7 +122,8 @@ class _EstimateDetailState extends State<EstimateDetail> {
                 width: double.infinity,
                 decoration: decorationRoundMainColor(),
                 child: Text(
-                  estimateFromRequest?.description ?? AppText.noDescriptionEstimate,
+                  estimateFromRequest?.description ??
+                      AppText.noDescriptionEstimate,
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
@@ -138,7 +138,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny * 3),
-              if(handleText() == AppText.validate)
+              if (handleText() == AppText.validate)
                 Center(
                   child: elevatedButtonAndTextColor(
                     AppColors.mainBackgroundColor,
@@ -149,8 +149,8 @@ class _EstimateDetailState extends State<EstimateDetail> {
                     AppColors.mainTextColor,
                   ),
                 ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny*3),
-              if(handleText() == AppText.estimateAlreadyAccept)
+              const SizedBox(height: AppUIValue.spaceScreenToAny * 3),
+              if (handleText() == AppText.estimateAlreadyAccept) // refuse button
                 Center(
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.6,
@@ -158,15 +158,14 @@ class _EstimateDetailState extends State<EstimateDetail> {
                       Colors.black,
                       AppText.refuseEstimate,
                       context,
-                          (){
-                        widget.refuseEstimate(estimateFromRequest?.uuid,()async{
+                      () => alertToAccept(AppText.refuseEstimateAlertDialog, () async {
+                        await widget.refuseEstimate(estimateFromRequest?.uuid, () async {
                           var estimateStatic = await widget.fetchData(widget.uuid);
-                          setState((){
-                            //validateEstimateText = AppText.validate;
+                          setState(() {
                             estimateFromRequest?.status = estimateStatic.status;
                           });
                         });
-                      },
+                      }),
                       Colors.white,
                     ),
                   ),
@@ -187,7 +186,8 @@ class _EstimateDetailState extends State<EstimateDetail> {
         estimateFromRequest?.status == 3) {
       return AppText.estimateAlreadyAccept;
     }
-    if (widget.role == RoleBasedText.union && estimateFromRequest?.status == 5) {
+    if (widget.role == RoleBasedText.union &&
+        estimateFromRequest?.status == 5) {
       return AppText.estimateAlreadyAccept;
     }
     return AppText.validate;
@@ -202,17 +202,44 @@ class _EstimateDetailState extends State<EstimateDetail> {
         estimateFromRequest?.status == 3) {
       return () {};
     }
-    if (widget.role == RoleBasedText.union && estimateFromRequest?.status == 5) {
+    if (widget.role == RoleBasedText.union &&
+        estimateFromRequest?.status == 5) {
       return () {};
     }
-    return () async {
-      widget.patchStatus(estimateFromRequest?.uuid,()async{
-        var estimateStatic = await widget.fetchData(widget.uuid);
-        setState(() {
-          //validateEstimateText = AppText.estimateAlreadyAccept;
-          estimateFromRequest?.status = estimateStatic.status;
+
+    return () => alertToAccept(AppText.acceptEstimateAlertDialog, () async {
+          widget.patchStatus(estimateFromRequest?.uuid, () async {
+            var estimateStatic = await widget.fetchData(widget.uuid);
+            setState(() {
+              estimateFromRequest?.status = estimateStatic.status;
+            });
+          });
         });
-      });
-    };
+  }
+
+  Future alertToAccept(String text, Function executeFunction) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(text),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+              },
+              child: Text(AppText.cancel),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context); // Close the dialog
+                await executeFunction(); // Execute function asynchronously
+              },
+              child: Text('Ok'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

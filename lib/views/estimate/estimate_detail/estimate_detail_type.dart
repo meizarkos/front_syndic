@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/views/estimate/estimate_detail/estimate_detail.dart';
 
-import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../api_handler/estimate/change_status_estimate.dart';
 import '../../../api_handler/estimate/get_estimate_detail.dart';
-import '../../../api_handler/timing_estimate/get_timing_estimate.dart';
-import '../../../models/to_screen/see_conv_arg.dart';
 import '../../../widget/handle_status/text_based_on_user.dart';
 
 class EstimateDetailUnion extends StatelessWidget {

@@ -68,19 +68,6 @@ class _RecapTimingChange extends State<RecapTimingChange> {
               errorText: AppText.createWorkRequestTimingWrong,
             ),
             const SizedBox(height: 20),
-            GestureDetector(
-              onTap: _choseTime,
-              child: Text(
-                '${AppText.createWorkRequestTiming} ${fromCalendarToString(
-                    selectedDate.day, selectedDate.month,
-                    selectedDate.year)}',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .labelSmall,
-              ),
-            ),
-            const SizedBox(height: 20),
             if (timings != null &&
                 timings!.isNotEmpty)
               ...timings!.map((date) {
@@ -127,12 +114,13 @@ class _RecapTimingChange extends State<RecapTimingChange> {
       setState(() {
         selectedDate = date;
       });
+      _choseTime();
     }
 
     Future<void> _choseTime() async {
       final TimeOfDay? pickedTime = await showTimePicker(
         context: context,
-        initialTime: const TimeOfDay(hour: 10, minute: 47),
+        initialTime: const TimeOfDay(hour: 10, minute: 00),
         builder: (BuildContext context, Widget? child) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),

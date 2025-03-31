@@ -248,6 +248,8 @@ class AppText {
   static const String estimateWaitingForCouncil = "En attente de validation par le conseil syndical";
   static const String estimateWaitingForUser = "En attente de validation par le propriétaire";
   static const String estimateWaitingForYou = "En attente de votre validation";
+  static const String acceptEstimateAlertDialog = "Vous allez accepter ce devis, cela ne vous engage pas à le réaliser cependant une notification sera envoyée à l'artisan";
+  static const String refuseEstimateAlertDialog = "Vous allez refuser ce devis, cela n'annulera pas le devis, mais l'artisan sera informé de votre refus";
 
   /* Timing Estimate */
   static const String timingEstimateTitle = 'Date des travaux';

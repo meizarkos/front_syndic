@@ -56,14 +56,6 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
               errorVisibility: errorVisibility,
               errorText: AppText.createWorkRequestTimingWrong,
             ),
-            const SizedBox(height: 5),
-            GestureDetector(
-              onTap: _choseTime,
-              child: Text(
-                '${AppText.createWorkRequestTiming} ${fromCalendarToString(selectedDate.day, selectedDate.month, selectedDate.year)}',
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
-            ),
             const SizedBox(height: 30),
             if (widget.createWorkRequest.workRequest.timings != null &&
                 widget.createWorkRequest.workRequest.timings!.isNotEmpty)
@@ -100,6 +92,7 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
     setState(() {
       selectedDate = date;
     });
+    _choseTime();
   }
 
   Future<void> _choseTime() async {

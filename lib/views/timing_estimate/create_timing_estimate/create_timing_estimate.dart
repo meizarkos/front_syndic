@@ -59,13 +59,6 @@ class _CreateTimingEstimateState extends State<CreateTimingEstimate> {
                 lastDate: lastDate,
                 onDateChanged: onDateChanged,
               ),
-              GestureDetector(
-                onTap: _choseTime,
-                child: Text(
-                  '${AppText.createWorkRequestTiming} ${fromCalendarToString(selectedDate.day, selectedDate.month, selectedDate.year)}',
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ),
               const SizedBox(height: 35),
               Text(
                 _noDateOrTime(),
@@ -133,8 +126,22 @@ class _CreateTimingEstimateState extends State<CreateTimingEstimate> {
       calendarKey = UniqueKey();
       widget.timingEstimate.dateStart =
           '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}';
-      widget.timingEstimate.dateEnd = '${date.year}-${date.month}-${date.day}';
+
+      String? formatDateStart = formatStringToApiDate(widget.timingEstimate.dateStart, 'yyyy-MM-dd');
+      String? formatDateEnd = formatStringToApiDate(widget.timingEstimate.dateEnd, 'yyyy-MM-dd');
+
+      if(formatDateStart != null && formatDateEnd != null){
+        DateTime dateStartDateTime = DateTime.parse(formatDateStart);
+        DateTime dateEndDateTime = DateTime.parse(formatDateEnd);
+        if(dateEndDateTime.isBefore(dateStartDateTime)){
+          widget.timingEstimate.dateEnd = widget.timingEstimate.dateStart;
+        }
+      }
+      else{
+        widget.timingEstimate.dateEnd = widget.timingEstimate.dateStart;
+      }
     });
+    _choseTime();
   }
 
   void onDateEndChanged(DateTime date) {
