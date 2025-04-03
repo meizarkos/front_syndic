@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/views/timing/create_timing/create_timing.dart';
 
-import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../api_handler/timing/post_timing.dart';
 
 class CreateTimingArtisan extends StatelessWidget {

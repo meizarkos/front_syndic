@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:front_syndic/api_handler/request_with_body.dart';
 
-import '../../core_value.dart';
 
 Future<bool> isEmailUnique(String email, VoidCallback handleVisibility) async {
   try{

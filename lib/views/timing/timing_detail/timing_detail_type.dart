@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/models/to_screen/see_conv_arg.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail.dart';
 
-import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../api_handler/timing/get_timing_detail.dart';
 import '../../../api_handler/timing/refuse_timing_detail.dart';
 import '../../../models/timing/timing.dart';

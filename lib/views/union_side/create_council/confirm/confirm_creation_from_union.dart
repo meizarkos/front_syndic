@@ -4,7 +4,6 @@ import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
-import 'package:front_syndic/widget/visibility/error.dart';
 
 import '../../../../api_handler/council/post_council.dart';
 import '../../../../models/council/createCouncil.dart';

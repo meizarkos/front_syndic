@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../utils/string_handler/handle_string.dart';
 
 Row rowOfTextAndIcon(String path, String toPrint, BuildContext context) {
   return Row(

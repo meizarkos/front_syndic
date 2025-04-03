@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/views/conversation/conversation_in_progress/cell_conversation.dart';
 
-import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../models/conversation/conversation.dart';
 import '../../../text/fr.dart';
 import '../../../widget/search_bar/search_bar.dart';

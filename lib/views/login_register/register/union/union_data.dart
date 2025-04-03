@@ -8,6 +8,7 @@ import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
 import '../../../../widget/decoration/text_filed_deco_no_counter.dart';
+import '../../../../widget/text_format_input_textfield/customSpaceFormatter.dart';
 
 class UnionData extends StatefulWidget {
   const UnionData({
@@ -86,6 +87,7 @@ class _UnionDataState extends State<UnionData> {
                     widget.createUnion.union.phone = value;
                   },
                   keyboardType: TextInputType.phone,
+                  inputFormatters: [CustomCharacterSpaceFormatter(interval: 2)],
                   maxLength: 50,
                 ),
                 const SizedBox(height: AppUIValue.spaceScreenToAny),
@@ -95,7 +97,9 @@ class _UnionDataState extends State<UnionData> {
                   onChanged: (value) {
                     widget.createUnion.union.siretNumber = value;
                   },
-                  maxLength: 50,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [CustomCharacterSpaceFormatter(interval: 4)],
+                  maxLength: 17,
                 ),
                 const SizedBox(height: AppUIValue.spaceScreenToAny),
                 ErrorVisibility(errorVisibility: errorVisibility, errorText: errorText),
@@ -119,6 +123,8 @@ class _UnionDataState extends State<UnionData> {
     if(union.name != null && union.administratorFirstName != null && union.administratorName != null && union.phone != null && union.siretNumber != null &&
         union.name != '' && union.administratorFirstName != '' && union.administratorName != ''  && union.phone != ''  && union.siretNumber != '' ){
 
+      union.siretNumber = union.siretNumber!.replaceAll(' ', '');
+      union.phone = union.phone!.replaceAll(' ', '');
 
       if(union.siretNumber!.length != 14){
         setState(() {

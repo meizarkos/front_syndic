@@ -107,7 +107,7 @@ class _CouncilConfirmRegisterState extends State<CouncilConfirmRegister> {
       Credential.instance.token = 'Bearer $token';
       Navigator.pushNamedAndRemoveUntil(
         context,
-        '/in_progress/council/conversation',
+        '/council_main',
             (Route<dynamic> route) => false,
       );
     }

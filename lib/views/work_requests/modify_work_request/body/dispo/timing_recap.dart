@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
-import 'package:front_syndic/utils/date_to_string/date.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 
 import '../../../../../../models/timing/timing.dart';
@@ -96,7 +95,6 @@ class _RecapTimingChange extends State<RecapTimingChange> {
                     ),
                   )),
             ),
-            const SizedBox(height: 20),
             elevatedButtonAndTextColor(
               AppColors.mainBackgroundColor,
               AppText.save,

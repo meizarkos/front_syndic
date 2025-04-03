@@ -1,9 +1,5 @@
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/co_owner/co_owner.dart';
-import 'package:front_syndic/models/timing/timing.dart';
-import 'package:front_syndic/models/timing/timing_estimate.dart';
-import '../../models/estimate/estimate.dart';
-import '../../models/work_request/work_request.dart';
 import '../request.dart';
 
 Future<Map<String, dynamic>> fetchCoOwnerMainData(String route) async {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../color.dart';
 import '../../../core_value.dart';
 import '../../../utils/string_handler/handle_string.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';

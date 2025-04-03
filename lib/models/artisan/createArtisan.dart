@@ -1,4 +1,3 @@
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:front_syndic/models/adress/adress.dart';
 import 'package:front_syndic/models/artisan/artisan.dart';
 import 'package:front_syndic/models/bank_info/bank_info.dart';

@@ -6,7 +6,6 @@ import '../../../core_value.dart';
 import '../../../models/to_screen/see_conv_arg.dart';
 import '../../../models/work_request/work_request.dart';
 import '../../../text/fr.dart';
-import '../../../utils/string_handler/handle_string.dart';
 import '../../../widget/button/elevated_button_opacity.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
 import '../../../widget/header/app_bar_back_button.dart';

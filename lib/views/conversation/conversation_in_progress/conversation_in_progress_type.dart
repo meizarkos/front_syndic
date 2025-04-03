@@ -4,7 +4,6 @@ import 'package:front_syndic/widget/bottom/nav_bar_artisan.dart';
 import 'package:front_syndic/widget/bottom/nav_bar_council.dart';
 
 import '../../../api_handler/conversation/fetch_conversation.dart';
-import '../../../models/to_screen/see_conv_arg.dart';
 import '../../../widget/bottom/nav_bar_union.dart';
 
 class ConversationInProgressArtisan extends StatelessWidget {

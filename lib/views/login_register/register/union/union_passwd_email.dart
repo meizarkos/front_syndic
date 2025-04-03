@@ -7,7 +7,6 @@ import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
 import '../../../../api_handler/email/check_email_is_unique.dart';
-import '../../../../api_handler/register/register_union.dart';
 import '../../../../models/union/create_union.dart';
 import '../../../../widget/decoration/text_filed_deco_no_counter.dart';
 

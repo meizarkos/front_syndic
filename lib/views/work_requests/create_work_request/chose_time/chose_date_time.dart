@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
-import 'package:front_syndic/utils/date_to_string/date.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 
@@ -56,7 +55,6 @@ class _ChoseDateTimeState extends State<ChoseDateTime> {
               errorVisibility: errorVisibility,
               errorText: AppText.createWorkRequestTimingWrong,
             ),
-            const SizedBox(height: 30),
             if (widget.createWorkRequest.workRequest.timings != null &&
                 widget.createWorkRequest.workRequest.timings!.isNotEmpty)
               ...widget.createWorkRequest.workRequest.timings!.map((date) {

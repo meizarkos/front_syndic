@@ -5,7 +5,6 @@ import '../../../api_handler/paiement/paiement_council.dart';
 import '../../../api_handler/timing_estimate/accept_timing_estimate.dart';
 import '../../../api_handler/timing_estimate/delete_timing_estimate.dart';
 import '../../../api_handler/timing_estimate/get_timing_estimate.dart';
-import '../../../models/to_screen/see_conv_arg.dart';
 import '../../../widget/handle_status/text_based_on_user.dart';
 
 class TimingEstimateArtisan extends StatelessWidget {

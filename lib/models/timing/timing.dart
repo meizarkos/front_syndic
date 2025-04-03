@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:front_syndic/models/artisan/artisan.dart';
 import 'package:front_syndic/models/council/council.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../models/council/createCouncil.dart';
-import 'chose_name_size.dart';
+import 'chose_name.dart';
 
 class UnionChoseNameCouncil extends StatelessWidget {
   const UnionChoseNameCouncil({

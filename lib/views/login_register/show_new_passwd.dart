@@ -27,21 +27,18 @@ class _ShowNewPasswdState extends State<ShowNewPasswd> {
           AppText.enterEmail,
           style: Theme.of(context).textTheme.displaySmall,
       ),
-      content: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.15,
-        child: Column(
-          children: [
-            TextField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: roundBorderTextFieldWithoutCounter(AppText.emailWithoutAt),
-              style: Theme.of(context).textTheme.displaySmall,
-              maxLength: 256,
-            ),
-            const SizedBox(height: AppUIValue.spaceScreenToAny),
-            ErrorVisibility(errorVisibility: errorVisibilityEmail, errorText: errorTextEmail),
-          ],
-        ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: emailController,
+            keyboardType: TextInputType.emailAddress,
+            decoration: roundBorderTextFieldWithoutCounter(AppText.emailWithoutAt),
+            style: Theme.of(context).textTheme.displaySmall,
+            maxLength: 256,
+          ),
+          ErrorVisibility(errorVisibility: errorVisibilityEmail, errorText: errorTextEmail),
+        ],
       ),
       actions: [
         TextButton(
