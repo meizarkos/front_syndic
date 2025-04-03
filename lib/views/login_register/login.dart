@@ -171,7 +171,11 @@ class _ConnectAllState extends State<ConnectAll> {
       return;
     }
     if (response[0] == '0') {
-      Navigator.pushNamed(context, response[1]!);
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        response[1]!,
+            (Route<dynamic> route) => false, // Removes all previous routes
+      );
     } else {
       return;
     }

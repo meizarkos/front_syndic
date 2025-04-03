@@ -28,7 +28,11 @@ class ChoseModifyCategories extends StatelessWidget {
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               GestureDetector(
                 onTap: (){
-                  Navigator.pushNamed(context, '/');
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/',
+                        (Route<dynamic> route) => false, // Removes all previous routes
+                  );
                 },
                 child : Text(
                   AppText.deconnect,
