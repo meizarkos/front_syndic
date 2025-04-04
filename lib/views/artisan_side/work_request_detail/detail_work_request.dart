@@ -9,6 +9,7 @@ import '../../../text/fr.dart';
 import '../../../widget/button/elevated_button_opacity.dart';
 import '../../../widget/decoration/decoration_round_main_color.dart';
 import '../../../widget/header/app_bar_back_button.dart';
+import '../../../widget/text_style/text_style_main_color.dart';
 import '../../work_requests/create_work_request/chose_time/cell_time.dart';
 import '../../work_requests/create_work_request/recap/recap.dart';
 
@@ -58,11 +59,14 @@ class _DetailWorkRequestArtisanSideState extends State<DetailWorkRequestArtisanS
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    data.title ?? AppText.apiNoResult,
-                    style: Theme.of(context).textTheme.displayLarge,
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      data.title ?? AppText.apiNoResult,
+                      style: getTextStyleMainColor(18),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                  divider(),
                   const SizedBox(height: spaceCate),
                   Text(
                     AppText.description,

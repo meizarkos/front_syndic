@@ -51,7 +51,11 @@ String textStatusEstimate(int? status, int? statusGoal,String role){
 Text textEstimateStatusUser(int? status, int? statusGoal, BuildContext context,String role){
   return Text(
     textStatusEstimate(status, statusGoal,role),
-    style: Theme.of(context).textTheme.displaySmall,
+    style: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: status == statusGoal ? Colors.green : Colors.red,
+    ),
   );
 }
 

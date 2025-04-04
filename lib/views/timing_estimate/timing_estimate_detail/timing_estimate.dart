@@ -107,7 +107,6 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: AppUIValue.spaceScreenToAny),
               Center(
                 child: Text(
                   timingEstimateStatic?.workRequest?.title ??
@@ -122,14 +121,15 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                   timingEstimateStatic?.statusGoal,
                   widget.role,
                 ),
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .displaySmall,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                  color: timingEstimateStatic?.status == timingEstimateStatic?.statusGoal ? Colors.green : Colors.red,
+                ),
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
               Text(
-                "${AppText.dateStartForTimingOfWorkRequest} :",
+                "${AppText.dateStartForTimingOfWorkRequest}:",
                 style: Theme
                     .of(context)
                     .textTheme
@@ -137,11 +137,9 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
               ),
               const SizedBox(height: 10),
               Text(
-                (formatStringToApiDate(
+                "${formatStringToApiDate(
                     timingEstimateStatic?.dateStart, 'dd/MM/yyyy') ??
-                    AppText.noDateStartForTimingEstimate) +
-                    " ${AppText.at} " +
-                    formatTimeString(timingEstimateStatic?.timeStart),
+                    AppText.noDateStartForTimingEstimate} ${AppText.at} ${formatTimeString(timingEstimateStatic?.timeStart)}",
                 style: Theme
                     .of(context)
                     .textTheme
@@ -177,7 +175,7 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               Text(
-                "${AppText.dateEndForTimingOfWorkRequest} :",
+                "${AppText.dateEndForTimingOfWorkRequest}:",
                 style: Theme
                     .of(context)
                     .textTheme

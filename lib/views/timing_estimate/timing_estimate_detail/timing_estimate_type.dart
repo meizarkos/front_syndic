@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/views/timing_estimate/list_timing_estimate/timing_estimate.dart';
+import 'package:front_syndic/views/timing_estimate/timing_estimate_detail/timing_estimate.dart';
 
 import '../../../api_handler/paiement/paiement_council.dart';
 import '../../../api_handler/timing_estimate/accept_timing_estimate.dart';

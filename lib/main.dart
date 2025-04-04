@@ -39,7 +39,7 @@ import 'package:front_syndic/views/process/in_progress_type.dart';
 import 'package:front_syndic/views/timing/create_timing/create_timing_type.dart';
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/timing_estimate/create_timing_estimate/create_timing_estimate_type.dart';
-import 'package:front_syndic/views/timing_estimate/list_timing_estimate/timing_estimate_type.dart';
+import 'package:front_syndic/views/timing_estimate/timing_estimate_detail/timing_estimate_type.dart';
 import 'package:front_syndic/views/union_side/union_home.dart';
 import 'package:front_syndic/views/adress/chose_adress_type.dart';
 import 'package:front_syndic/views/union_side/create_council/chose_name/chose_name_type.dart';

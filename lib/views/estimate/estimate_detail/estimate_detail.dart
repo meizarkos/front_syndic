@@ -89,7 +89,6 @@ class _EstimateDetailState extends State<EstimateDetail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
               Center(
                 child: Text(
                   estimateFromRequest?.workRequest?.title ??
@@ -104,14 +103,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
                 context,
                 widget.role,
               ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
-              Text(
-                estimateFromRequest?.price == null
-                    ? AppText.noPriceEstimate
-                    : '${AppText.createEstimatePrice}: ${estimateFromRequest?.price} ${AppText.euro}',
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
               Text(
                 AppText.description,
                 style: Theme.of(context).textTheme.displayMedium,
@@ -121,13 +113,9 @@ class _EstimateDetailState extends State<EstimateDetail> {
                 padding: EdgeInsets.all(AppUIValue.spaceScreenToAny),
                 width: double.infinity,
                 decoration: decorationRoundMainColor(),
-                child: Text(
-                  estimateFromRequest?.description ??
-                      AppText.noDescriptionEstimate,
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
+                child: globalText(),
               ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
               Text(
                 AppText.commentary,
                 style: Theme.of(context).textTheme.displayMedium,
@@ -137,7 +125,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
                 estimateFromRequest?.commentary ?? AppText.noCommentary,
                 style: Theme.of(context).textTheme.displaySmall,
               ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny * 3),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
               if (handleText() == AppText.validate)
                 Center(
                   child: elevatedButtonAndTextColor(
@@ -149,7 +137,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
                     AppColors.mainTextColor,
                   ),
                 ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny * 3),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
               if (handleText() == AppText.estimateAlreadyAccept) // refuse button
                 Center(
                   child: SizedBox(
@@ -174,6 +162,31 @@ class _EstimateDetailState extends State<EstimateDetail> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  RichText globalText(){
+    return RichText(
+      text: TextSpan(
+        style: TextStyle(
+          fontSize: 16,
+          color: Colors.black,
+        ), // Use default style as base
+        children: [
+          TextSpan(
+            text: '${AppText.createEstimatePrice}: ',
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+            ),
+          ),
+          TextSpan(
+            text: '${estimateFromRequest?.price} ${AppText.euro}\n\n',
+          ),
+          TextSpan(
+            text: estimateFromRequest?.description ?? AppText.noDescriptionEstimate,
+          ),
+        ],
       ),
     );
   }
