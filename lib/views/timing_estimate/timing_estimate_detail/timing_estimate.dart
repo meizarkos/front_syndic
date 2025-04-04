@@ -122,7 +122,7 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                   widget.role,
                 ),
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: timingEstimateStatic?.status == timingEstimateStatic?.statusGoal ? Colors.green : Colors.red,
                 ),

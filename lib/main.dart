@@ -40,12 +40,11 @@ import 'package:front_syndic/views/timing/create_timing/create_timing_type.dart'
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/timing_estimate/create_timing_estimate/create_timing_estimate_type.dart';
 import 'package:front_syndic/views/timing_estimate/timing_estimate_detail/timing_estimate_type.dart';
+import 'package:front_syndic/views/union_side/create_council/confirm/confirm_creation_type.dart';
 import 'package:front_syndic/views/union_side/union_home.dart';
 import 'package:front_syndic/views/adress/chose_adress_type.dart';
 import 'package:front_syndic/views/union_side/create_council/chose_name/chose_name_type.dart';
 import 'package:front_syndic/views/union_side/create_council/conctact_info/contact_info_type.dart';
-import 'package:front_syndic/views/union_side/create_council/confirm/confirm_creation_from_union.dart';
-import 'package:front_syndic/views/union_side/create_council/confirm/confirm_register_council.dart';
 import 'package:front_syndic/views/union_side/create_council/create_password/council_passwd.dart';
 import 'package:front_syndic/views/union_side/modify_council/main_modify_council.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category/category_type.dart';
@@ -345,7 +344,7 @@ class MyApp extends StatelessWidget {
             final arguments = settings.arguments;
             if(arguments is CreateCouncil){
               return MaterialPageRoute(
-                builder: (context) => ConfirmCreationCouncilUnion(
+                builder: (context) => ConfirmCreationFromUnion(
                   createCouncil: arguments,
                 ),
               );
@@ -355,7 +354,7 @@ class MyApp extends StatelessWidget {
             final arguments = settings.arguments;
             if(arguments is CreateCouncil){
               return MaterialPageRoute(
-                builder: (context) => CouncilConfirmRegister(
+                builder: (context) => ConfirmCouncilRegister(
                   createCouncil: arguments,
                 ),
               );

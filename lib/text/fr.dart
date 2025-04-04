@@ -293,7 +293,7 @@ class AppText {
   static const String adressCreationError = 'Veuillez remplir tous les champs';
 
   /* Create Council */
-  static const String infoCoOwner = 'Informations de la copropriété';
+  static const String infoCoOwner = 'Copropriété :';
   static const String infoCouncil = 'Informations du conseil syndical';
   static const String name = 'Nom';
   static const String lotNumber = 'Nombre de lots';
