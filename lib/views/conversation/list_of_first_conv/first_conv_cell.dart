@@ -28,11 +28,11 @@ class FirstConvCell extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                  trimText(stringNullOrDefaultValue(conversation.workRequest?.title, AppText.noTitleForWork), 25),
+                  trimText(conversation.workRequest?.title ?? AppText.noTitleForWork, 25),
                   style: getTextStyleMainColor(20)
               ),
               const SizedBox(height: 15),
-              Text(trimText(stringNullOrDefaultValue(conversation.message,AppText.messageNoMessage),150)),
+              Text(trimText(conversation.message ?? AppText.messageNoMessage,150)),
               const SizedBox(height: 25),
               Text(_date()),
             ],

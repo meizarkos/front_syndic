@@ -20,7 +20,7 @@ class RecapCouncilWorkRequest extends StatelessWidget {
           await postWorkRequestCouncil(createWorkRequest);
           Navigator.pushNamedAndRemoveUntil(
             context,
-            '/co_owner/work_requests',
+            '/council_main',
                 (Route<dynamic> route) => false,
           );
         }

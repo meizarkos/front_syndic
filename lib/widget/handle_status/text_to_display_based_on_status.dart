@@ -26,6 +26,10 @@ String textStatusEstimate(int? status, int? statusGoal){
 Text textEstimateStatus(int? status, int? statusGoal, BuildContext context){
   return Text(
     textStatusEstimate(status, statusGoal),
-    style: Theme.of(context).textTheme.displayMedium,
+    style: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: status == statusGoal ? Colors.green : Colors.red,
+    ),
   );
 }

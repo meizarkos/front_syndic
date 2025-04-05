@@ -23,7 +23,7 @@ class RecapWorkRequestCouncil extends StatelessWidget {
         await deleteWorkRequestDetailCouncil(uuid);
         Navigator.pushNamedAndRemoveUntil(
           context,
-          '/co_owner/work_requests',
+          '/council_main',
               (Route<dynamic> route) => false,
         );
       },

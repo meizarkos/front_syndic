@@ -105,7 +105,6 @@ class _EstimateDetailArtisanState extends State<EstimateDetailArtisan> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
               Center(
                 child: Text(
                   estimateFromRequest?.workRequest?.title ??
