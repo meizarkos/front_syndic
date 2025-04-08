@@ -89,13 +89,16 @@ class AppText {
   /* Adress */
   static const String prefillAdress = 'Pré-remplir l\'adresse';
 
-
-
   /* UnionMainStrings */
   static const String noStringNameForCowner = 'Nom introuvable';
   static const String noStringNameForCownerSubtitle = 'Adresse inconnu';
   static const String unionMainSearchBarEmpty = 'Rechercher';
   static const String unionMainAddButton = 'Ajouter';
+  static const List<String> unionCategories = ['Copropriété','Appartement'];
+  static const String createAPlace = 'Créer un client';
+  static const String createACopro = 'Créer une copropriété';
+  static const String createAnAppartment = 'Créer un appartement';
+  static const String unionClientName = 'Nom du client';
 
   /* CoOwnerMain */
   static const String conversation = 'Conversations';
@@ -293,7 +296,7 @@ class AppText {
   static const String adressCreationError = 'Veuillez remplir tous les champs';
 
   /* Create Council */
-  static const String infoCoOwner = 'Copropriété :';
+  static const String infoCoOwner = 'Copropriété';
   static const String infoCouncil = 'Informations du conseil syndical';
   static const String name = 'Nom';
   static const String lotNumber = 'Nombre de lots';

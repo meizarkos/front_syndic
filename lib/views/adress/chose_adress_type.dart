@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_syndic/models/appartment/appartment.dart';
 import 'package:front_syndic/models/artisan/createArtisan.dart';
 import 'package:front_syndic/models/union/create_union.dart';
 import 'package:front_syndic/views/adress/chose_adress.dart';
@@ -6,6 +7,7 @@ import 'package:front_syndic/views/adress/chose_adress.dart';
 import '../../api_handler/adress/fetch_prefill_adress.dart';
 import '../../models/adress/adress.dart';
 import '../../models/council/createCouncil.dart';
+import '../../models/user/createUser.dart';
 import '../../models/work_request/create_work_request.dart';
 
 class ChoseAdressCreateCouncil extends StatelessWidget {
@@ -130,6 +132,26 @@ class CreateWorkRequestAdressCouncil extends StatelessWidget {
       prefillAdress: ()async{
         return await fetchAdressCouncil();
       },
+    );
+  }
+}
+
+class ChoseAdressCreateUserFromUnion extends StatelessWidget {
+  const ChoseAdressCreateUserFromUnion({
+    super.key,
+    required this.createUser,
+  });
+
+  final CreateUser createUser;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoseAdress(
+      onRegister: (Adress address)=>{
+        createUser.adress = address,
+        Navigator.pushNamed(context, '/union/create_user/recap', arguments: createUser)
+      },
+      adress: createUser.adress,
     );
   }
 }

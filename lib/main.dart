@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:front_syndic/models/appartment/appartment.dart';
 import 'package:front_syndic/models/estimate/estimate.dart';
 import 'package:front_syndic/models/timing/timing_estimate.dart';
 import 'package:front_syndic/views/account/artisan/modify_adress_artisan.dart';
@@ -40,7 +41,10 @@ import 'package:front_syndic/views/timing/create_timing/create_timing_type.dart'
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/timing_estimate/create_timing_estimate/create_timing_estimate_type.dart';
 import 'package:front_syndic/views/timing_estimate/timing_estimate_detail/timing_estimate_type.dart';
+import 'package:front_syndic/views/union_side/chose_which_one_create.dart';
 import 'package:front_syndic/views/union_side/create_council/confirm/confirm_creation_type.dart';
+import 'package:front_syndic/views/union_side/create_user/chose_name.dart';
+import 'package:front_syndic/views/union_side/create_user/recap_user.dart';
 import 'package:front_syndic/views/union_side/union_home.dart';
 import 'package:front_syndic/views/adress/chose_adress_type.dart';
 import 'package:front_syndic/views/union_side/create_council/chose_name/chose_name_type.dart';
@@ -61,6 +65,7 @@ import 'models/council/createCouncil.dart';
 import 'models/to_screen/artisan_detail_work_request.dart';
 import 'models/to_screen/see_conv_arg.dart';
 import 'models/union/create_union.dart';
+import 'models/user/createUser.dart';
 import 'models/work_request/create_work_request.dart';
 
 void main(){
@@ -105,6 +110,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const ConnectAll(),
         '/register': (context) => const ChoseClass(),
+        '/union/create_place': (context) => const ChoseWhichOneCreateUnion(),
         '/union_main': (context) => const UnionMain(),
         '/union/conversation': (context) => const ConversationInProgressUnion(),
         '/artisan_main': (context) => const ArtisanMain(),
@@ -340,6 +346,28 @@ class MyApp extends StatelessWidget {
             }
             break;
 
+          case '/union/create_user/adress':
+            final arguments = settings.arguments;
+            if (arguments is CreateUser) {
+              return MaterialPageRoute(
+                builder: (context) => ChoseAdressCreateUserFromUnion(
+                  createUser: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/union/create_user/recap':
+            final arguments = settings.arguments;
+            if (arguments is CreateUser) {
+              return MaterialPageRoute(
+                builder: (context) => RecapUserFromUnion(
+                  createUser: arguments,
+                ),
+              );
+            }
+            break;
+
           case '/union/create_council/confirm':
             final arguments = settings.arguments;
             if(arguments is CreateCouncil){
@@ -360,13 +388,23 @@ class MyApp extends StatelessWidget {
               );
             }
 
-
           case '/union/create_council/name':
             final arguments = settings.arguments;
             if (arguments is CreateCouncil) {
               return MaterialPageRoute(
                 builder: (context) => UnionChoseNameCouncil(
                   createCouncil: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/union/create_user/name':
+            final arguments = settings.arguments;
+            if (arguments is CreateUser) {
+              return MaterialPageRoute(
+                builder: (context) => ChoseNameUser(
+                    createUser : arguments,
                 ),
               );
             }

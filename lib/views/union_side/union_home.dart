@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/core_value.dart';
+import 'package:front_syndic/models/appartment/appartment.dart';
 import 'package:front_syndic/models/council/createCouncil.dart';
 import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/button/add_floating_button.dart';
 import 'package:front_syndic/widget/search_bar/search_bar.dart';
 
+import '../../api_handler/appartment/get_all_appartment.dart';
 import '../../api_handler/co_owner/get_co_owner_of_union.dart';
 import '../../models/adress/adress.dart';
 import '../../models/co_owner/co_owner.dart';
@@ -21,6 +23,7 @@ class UnionMain extends StatefulWidget {
 
 class _UnionMainState extends State<UnionMain> {
   String searchValue = '';
+  String? category = AppText.unionCategories[0];
 
   @override
   Widget build(BuildContext context) {
@@ -54,56 +57,138 @@ class _UnionMainState extends State<UnionMain> {
                 ),
               ],
             ),
-            const SizedBox(height: 30),
-            FutureBuilder(
-              future: fetchAllCoOwnersFromUnion(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError || snapshot.data == null) {
-                  return const Center(child: Text(AppText.apiErrorText));
-                } else if (snapshot.data!.isEmpty) {
-                  return const Center(child: Text(AppText.apiNoResult));
-                } else {
-                  final dataFiltered = lengthOfList(snapshot.data);
-                  if (dataFiltered == null || dataFiltered.isEmpty) {
-                    return const Center(child: Text(AppText.apiNoResult));
-                  }
-                  final size = dataFiltered.length + 1;
-                  return Expanded(
-                    child: GridView.builder(
-                      itemCount: size,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 20.0,
-                        mainAxisSpacing: 20.0,
-                      ),
-                      itemBuilder: (context, index) {
-                        if (index == dataFiltered.length) {
-                          return const SizedBox(height: 25);
-                        }
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context,'/union/co_owner_detail', arguments: dataFiltered[index].councilId);
-                          },
-                          child: CoOwnerCell(
-                            title: dataFiltered[index].name,
-                            subtitle: dataFiltered[index].adress?.street,
+            const SizedBox(height: AppUIValue.spaceScreenToAny),
+            Padding(
+              padding: const EdgeInsets.all(AppUIValue.spaceScreenToAny),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "${AppText.workRequestArtisanSideFilterBy}  ",
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  Expanded(
+                    child: DropdownButton(
+                      value: category,
+                      isExpanded: false,
+                      underline: Container(),
+                      iconSize: 35,
+                      items:
+                      AppText.unionCategories.map((String value) {
+                        return DropdownMenuItem(
+                          value: value,
+                          child: Text(
+                              value,
+                              style: TextStyle(
+                                fontSize: 14,
+                              )
                           ),
                         );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          category = newValue;
+                        });
                       },
                     ),
-                  );
-                }
-              },
-            )
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppUIValue.spaceScreenToAny),
+            if(category == AppText.unionCategories[0])
+              FutureBuilder(
+                future: fetchAllCoOwnersFromUnion(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError || snapshot.data == null) {
+                    return const Center(child: Text(AppText.apiErrorText));
+                  } else if (snapshot.data!.isEmpty) {
+                    return const Center(child: Text(AppText.apiNoResult));
+                  } else {
+                    final dataFiltered = lengthOfList(snapshot.data);
+                    if (dataFiltered == null || dataFiltered.isEmpty) {
+                      return const Center(child: Text(AppText.apiNoResult));
+                    }
+                    final size = dataFiltered.length + 1;
+                    return Expanded(
+                      child: GridView.builder(
+                        itemCount: size,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 20.0,
+                          mainAxisSpacing: 20.0,
+                        ),
+                        itemBuilder: (context, index) {
+                          if (index == dataFiltered.length) {
+                            return const SizedBox(height: 25);
+                          }
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context,'/union/co_owner_detail', arguments: dataFiltered[index].councilId);
+                            },
+                            child: CoOwnerCell(
+                              title: dataFiltered[index].name,
+                              subtitle: dataFiltered[index].adress?.street,
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }
+                },
+              )
+            else
+              FutureBuilder(
+                future: getAllApartment(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError || snapshot.data == null) {
+                    return const Center(child: Text(AppText.apiErrorText));
+                  } else if (snapshot.data!.isEmpty) {
+                    return const Center(child: Text(AppText.apiNoResult));
+                  } else {
+                    final dataFiltered = lengthOfApartment(snapshot.data);
+                    if (dataFiltered == null || dataFiltered.isEmpty) {
+                      return const Center(child: Text(AppText.apiNoResult));
+                    }
+                    final size = dataFiltered.length + 1;
+                    return Expanded(
+                      child: GridView.builder(
+                        itemCount: size,
+                        gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 20.0,
+                          mainAxisSpacing: 20.0,
+                        ),
+                        itemBuilder: (context, index) {
+                          if (index == dataFiltered.length) {
+                            return const SizedBox(height: 25);
+                          }
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context,'/union/user_detail', arguments: dataFiltered[index].userId);
+                            },
+                            child: CoOwnerCell(
+                              title: dataFiltered[index].user?.name,
+                              subtitle: dataFiltered[index].adress?.street,
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }
+                },
+              ),
           ],
         ),
       ),
       floatingActionButton: addFloatingButton(() {
-        final createCouncil = CreateCouncil(adress: Adress(), council: Council(), coOwner: CoOwner());
-        Navigator.pushNamed(context, '/union/create_council/name', arguments: createCouncil);
+        Navigator.pushNamed(context, '/union/create_place');
       }),
       bottomNavigationBar: bottomNavigationBarUnion(context, 0),
     );
@@ -113,6 +198,15 @@ class _UnionMainState extends State<UnionMain> {
     setState(() {
       searchValue = value;
     });
+  }
+
+  List<Apartment>? lengthOfApartment(List<Apartment>? data) {
+    return data?.where((apartment) {
+      if (apartment.user?.name == null) {
+        return false;
+      }
+      return apartment.user!.name!.toLowerCase().startsWith(searchValue.toLowerCase());
+    }).toList();
   }
 
   List<CoOwner>? lengthOfList(List<CoOwner>? data) {
