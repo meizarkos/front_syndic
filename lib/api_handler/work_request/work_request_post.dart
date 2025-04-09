@@ -25,6 +25,7 @@ Future<void> postWorkRequest(CreateWorkRequest createWorkRequest,String route) a
 
   var body = jsonEncode({
     AttributesWorkRequest.councilId: createWorkRequest.workRequest.councilId,
+    AttributesWorkRequest.userId: createWorkRequest.workRequest.userId,
     AttributesWorkRequest.title: createWorkRequest.workRequest.title,
     AttributesWorkRequest.description: createWorkRequest.workRequest.description,
     AttributesWorkRequest.category: createWorkRequest.workRequest.category,

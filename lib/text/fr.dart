@@ -59,6 +59,7 @@ class AppText {
   static const String accountTypeTitle = 'Type de compte';
   static const String artisan = 'Artisan';
   static const String council = 'Conseil syndical';
+  static const String user = 'Propriétaire';
   static const String union = 'Syndicat';
   static const String unionInfo = 'Informations du syndicat';
   static const String unionName = 'Nom du syndicat';
@@ -99,6 +100,7 @@ class AppText {
   static const String createACopro = 'Créer une copropriété';
   static const String createAnAppartment = 'Créer un appartement';
   static const String unionClientName = 'Nom du client';
+  static const String unionUserDetail = 'Détails appartement';
 
   /* CoOwnerMain */
   static const String conversation = 'Conversations';
@@ -301,6 +303,7 @@ class AppText {
   static const String name = 'Nom';
   static const String lotNumber = 'Nombre de lots';
   static const String phoneCouncil = 'Téléphone du conseil';
+  static const String phoneUser = 'Téléphone du client';
   static const String firstName = 'Prénom';
   static const String emailFormatError = 'Format de l\'email incorrect';
   static const String createATemporaryPassword = 'Créer un mot de passe temporaire';

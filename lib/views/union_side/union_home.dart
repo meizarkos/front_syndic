@@ -171,7 +171,7 @@ class _UnionMainState extends State<UnionMain> {
                           }
                           return GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context,'/union/user_detail', arguments: dataFiltered[index].userId);
+                              Navigator.pushNamed(context,'/union/user_detail', arguments: dataFiltered[index].uuid);
                             },
                             child: CoOwnerCell(
                               title: dataFiltered[index].user?.name,

@@ -107,7 +107,12 @@ class CreateWorkRequestAdressUnion extends StatelessWidget {
       },
       adress: createWorkRequest.adress,
       prefillAdress: ()async{
+        if(createWorkRequest.workRequest.councilId != null){
         return await fetchAdressCouncilFromUnion(createWorkRequest.workRequest.councilId);
+        }
+        else if(createWorkRequest.workRequest.userId != null){
+          return await fetchAdressUserFromUnion(createWorkRequest.workRequest.userId);
+        }
       },
     );
   }

@@ -84,7 +84,7 @@ class _ChoseNameUserState extends State<ChoseNameUser> {
             const SizedBox(height: AppUIValue.spaceScreenToAny),
             TextField(
               controller: _phoneController,
-              decoration : roundBorderTextFieldWithoutCounter(AppText.phoneCouncil),
+              decoration : roundBorderTextFieldWithoutCounter(AppText.phoneUser),
               inputFormatters: [CustomCharacterSpaceFormatter(interval: 2)],
               onChanged: (value) {
                 widget.createUser.user.phone = value;

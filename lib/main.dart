@@ -45,12 +45,14 @@ import 'package:front_syndic/views/union_side/chose_which_one_create.dart';
 import 'package:front_syndic/views/union_side/create_council/confirm/confirm_creation_type.dart';
 import 'package:front_syndic/views/union_side/create_user/chose_name.dart';
 import 'package:front_syndic/views/union_side/create_user/recap_user.dart';
+import 'package:front_syndic/views/union_side/modify_user/main_modify_user.dart';
 import 'package:front_syndic/views/union_side/union_home.dart';
 import 'package:front_syndic/views/adress/chose_adress_type.dart';
 import 'package:front_syndic/views/union_side/create_council/chose_name/chose_name_type.dart';
 import 'package:front_syndic/views/union_side/create_council/conctact_info/contact_info_type.dart';
 import 'package:front_syndic/views/union_side/create_council/create_password/council_passwd.dart';
 import 'package:front_syndic/views/union_side/modify_council/main_modify_council.dart';
+import 'package:front_syndic/views/user/user_detail/detail_user_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category/category_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/recap/recap_type.dart';
@@ -139,6 +141,27 @@ class MyApp extends StatelessWidget {
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
+
+          case '/union/user_detail':
+            final arguments = settings.arguments;
+            if(arguments is String?){
+              return MaterialPageRoute(
+                builder: (context) => DetailUserUnionSide(
+                  apartmentUuid: arguments,
+                ),
+              );
+            }
+
+          case '/union/user_modify':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => MainModifyUserFromUnion(
+                  apartmentUuid: arguments,
+                ),
+              );
+            }
+            break;
 
           case '/union/council_modify':
             final arguments = settings.arguments;
