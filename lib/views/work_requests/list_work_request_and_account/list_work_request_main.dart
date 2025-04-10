@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_request_cell.dart';
 
-import '../../api_handler/work_request/get_work_request_id.dart';
-import '../../core_value.dart';
-import '../../models/adress/adress.dart';
-import '../../models/work_request/create_work_request.dart';
-import '../../models/work_request/work_request.dart';
-import '../../text/fr.dart';
-import '../../widget/bottom/nav_bar_council.dart';
-import '../../widget/button/add_floating_button.dart';
-import '../../widget/search_bar/search_bar.dart';
+import '../../../api_handler/work_request/get_work_request_id.dart';
+import '../../../core_value.dart';
+import '../../../models/adress/adress.dart';
+import '../../../models/work_request/create_work_request.dart';
+import '../../../models/work_request/work_request.dart';
+import '../../../text/fr.dart';
+import '../../../widget/bottom/nav_bar_council.dart';
+import '../../../widget/button/add_floating_button.dart';
+import '../../../widget/search_bar/search_bar.dart';
 
-class CouncilMain extends StatefulWidget {
-  const CouncilMain({
+class ListWorkRequestMain extends StatefulWidget {
+  const ListWorkRequestMain({
     super.key,
+    required this.goToAccount,
+    required this.fetchWorkRequestPending,
+    required this.goToModifyDemand,
+    required this.goToCreateWorkRequest,
+    required this.bottom
   });
 
+  final VoidCallback goToAccount;
+  final Future<List<WorkRequest>?> Function() fetchWorkRequestPending;
+  final Function(String) goToModifyDemand;
+  final Function() goToCreateWorkRequest;
+  final BottomNavigationBar bottom;
+
   @override
-  State<CouncilMain> createState() => _CouncilMainState();
+  State<ListWorkRequestMain> createState() => _ListWorkRequestMainState();
 }
 
-class _CouncilMainState extends State<CouncilMain> {
-  //final List<String> _workRequests = [AppText.workRequestsPending, AppText.workRequestsHistory];
+class _ListWorkRequestMainState extends State<ListWorkRequestMain> {
   String searchValue = '';
 
   @override
@@ -50,8 +60,7 @@ class _CouncilMainState extends State<CouncilMain> {
                 IconButton(
                   icon: const Icon(Icons.account_circle),
                   iconSize: 40,
-                  onPressed: () =>
-                      {Navigator.pushNamed(context, '/council/account')},
+                  onPressed: widget.goToAccount,
                 ),
               ],
             ),
@@ -59,7 +68,7 @@ class _CouncilMainState extends State<CouncilMain> {
           Expanded(
             // Ensure ListView takes the remaining space
             child: FutureBuilder(
-              future: fetchWorkRequestFromCoOwnerPending(),
+              future: widget.fetchWorkRequestPending(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -83,8 +92,7 @@ class _CouncilMainState extends State<CouncilMain> {
                           if (dataFiltered[index].uuid == null) {
                             return;
                           }
-                          Navigator.pushNamed(context, '/council/modify_demand',
-                              arguments: dataFiltered[index].uuid);
+                          widget.goToModifyDemand(dataFiltered[index].uuid!);
                         },
                         child: WorkRequestCell(
                           title: dataFiltered[index].title,
@@ -101,14 +109,9 @@ class _CouncilMainState extends State<CouncilMain> {
         ],
       ),
       floatingActionButton: addFloatingButton(
-        () async {
-          var createWorkRequest =
-              CreateWorkRequest([], WorkRequest(), null, Adress());
-          Navigator.pushNamed(context, '/work_requests/title_and_desc',
-              arguments: createWorkRequest);
-        },
+        widget.goToCreateWorkRequest,
       ),
-      bottomNavigationBar: bottomNavigationBarCouncil(context, 0),
+      bottomNavigationBar: widget.bottom,
     );
   }
 

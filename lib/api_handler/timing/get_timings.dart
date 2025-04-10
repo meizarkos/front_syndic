@@ -8,6 +8,7 @@ Future<List<Timing>?> fetchTimings(String route) async {
     final records = (response.data as List)
         .map((recordJson) => Timing.fromJson(recordJson))
         .toList();
+    print(route);
     return records;
   } catch(e) {
     return null;
@@ -21,6 +22,10 @@ Future<List<Timing>?> fetchTimingFromWorkRequestCouncil(String uuid) async {
 
 Future<List<Timing>?> fetchTimingFromWorkRequestUnion(String uuid) async {
   return await fetchTimings('${APIValue.union}timings_detail_union/$uuid');
+}
+
+Future<List<Timing>?> fetchTimingFromWorkRequestUser(String uuid) async {
+  return await fetchTimings('${APIValue.user}timings_detail_user/$uuid');
 }
 
 Future<List<Timing>?> fetchTimingsCouncil() async {

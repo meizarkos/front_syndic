@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:front_syndic/models/appartment/appartment.dart';
 import 'package:front_syndic/models/estimate/estimate.dart';
 import 'package:front_syndic/models/timing/timing_estimate.dart';
 import 'package:front_syndic/views/account/artisan/modify_adress_artisan.dart';
@@ -21,7 +20,6 @@ import 'package:front_syndic/views/conversation/conversation_in_progress/convers
 import 'package:front_syndic/views/conversation/list_of_conv/all_conv_type.dart';
 import 'package:front_syndic/views/conversation/list_of_conv/all_post_meeting_type.dart';
 import 'package:front_syndic/views/conversation/list_of_first_conv/first_conv_type.dart';
-import 'package:front_syndic/views/council_side/council_main.dart';
 import 'package:front_syndic/views/estimate/create_estimate/recap_estimate.dart';
 import 'package:front_syndic/views/estimate/create_estimate/set_description_estimate.dart';
 import 'package:front_syndic/views/estimate/create_estimate/set_price_and_commentary.dart';
@@ -59,6 +57,7 @@ import 'package:front_syndic/views/work_requests/create_work_request/recap/recap
 import 'package:front_syndic/views/work_requests/create_work_request/take_picture.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/title_desc/title_and_desc_type.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_request_type.dart';
+import 'package:front_syndic/views/work_requests/list_work_request_and_account/list_work_request_main_type.dart';
 import 'package:front_syndic/views/work_requests/modify_work_request/recap_from_conv.dart';
 import 'package:front_syndic/views/work_requests/modify_work_request/recap_main_type.dart';
 
@@ -118,6 +117,7 @@ class MyApp extends StatelessWidget {
         '/artisan_main': (context) => const ArtisanMain(),
         '/artisan/conversation': (context) => const ConversationInProgressArtisan(),
         '/artisan_main/first_conv': (context) => const FirstConvArtisan(),
+        '/user_main':(context) => const UserMain(),
         '/council_main': (context) => const CouncilMain(),
         '/council/conversation': (context) => const ConversationInProgressCouncil(),
         '/union/work_requests': (context) => const WorkRequestListUnion(),
@@ -141,6 +141,61 @@ class MyApp extends StatelessWidget {
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
+
+          case '/user/work_requests/title_and_desc':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => TitleAndDescUser(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/user/work_requests/category':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => CategoryUser(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/user/work_requests/adress':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => CreateWorkRequestAdressUser(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/user/work_requests/chose_date_time':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => ChoseDateTimeUser(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/user/work_requests/recap':
+            final arguments = settings.arguments;
+            if (arguments is CreateWorkRequest) {
+              return MaterialPageRoute(
+                builder: (context) => RecapUserWorkRequest(
+                  createWorkRequest: arguments,
+                ),
+              );
+            }
+            break;
 
           case '/union/user_detail':
             final arguments = settings.arguments;
@@ -212,6 +267,16 @@ class MyApp extends StatelessWidget {
             if (arguments is String) {
               return MaterialPageRoute(
                 builder: (context) => RecapMainCouncil(
+                  workRequestUuid: arguments,
+                ),
+              );
+            }
+
+          case '/user/modify_demand':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => RecapMainUser(
                   workRequestUuid: arguments,
                 ),
               );

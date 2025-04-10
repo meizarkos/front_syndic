@@ -36,3 +36,20 @@ class TitleAndDescUnion extends StatelessWidget {
     );
   }
 }
+
+class TitleAndDescUser extends StatelessWidget {
+  const TitleAndDescUser({
+    super.key,
+    required this.createWorkRequest,
+  });
+
+  final CreateWorkRequest createWorkRequest;
+
+  @override
+  Widget build(BuildContext context) {
+    return TitleAndDesc(
+      createWorkRequest: createWorkRequest,
+      route: '/user/work_requests/category',
+    );
+  }
+}

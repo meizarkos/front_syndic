@@ -65,3 +65,9 @@ Future<void> postWorkRequestCouncil(CreateWorkRequest createWorkRequest) async {
 Future<void> postWorkRequestUnion(CreateWorkRequest createWorkRequest) async {
   return postWorkRequest(createWorkRequest, '${APIValue.union}work_request_union');
 }
+
+Future<void> postWorkRequestUser(CreateWorkRequest createWorkRequest) async {
+  return postWorkRequest(createWorkRequest, '${APIValue.user}work_request_user');
+}
+
+

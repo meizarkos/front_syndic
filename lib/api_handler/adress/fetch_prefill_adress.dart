@@ -48,8 +48,19 @@ Future<Adress> fetchAdressWorkRequestCouncil(String? workRequestUuid)async{
   return await fetchPrefillAdress('${APIValue.unionCouncil}adress_work_request_council/$workRequestUuid');
 }
 
+Future<Adress> fetchAdressWorkRequestUser(String? workRequestUuid)async{
+  if(workRequestUuid == null){
+    return Adress();
+  }
+  return await fetchPrefillAdress('${APIValue.user}adress_work_request_user/$workRequestUuid');
+}
+
 Future<Adress> fetchAdressCouncil()async{
   return await fetchPrefillAdress('${APIValue.unionCouncil}adress_council');
+}
+
+Future<Adress> fetchAdressUser()async{
+  return await fetchPrefillAdress('${APIValue.user}adress_user');
 }
 
 Future<Adress> fetchAdressArtisan(String? useless)async{

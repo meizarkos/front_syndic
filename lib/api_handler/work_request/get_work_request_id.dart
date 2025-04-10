@@ -21,3 +21,7 @@ Future<List<WorkRequest>?> fetchWorkRequestFromCoOwnerPending() async {
 Future<List<WorkRequest>?> fetchWorkRequestFromCoOwnerPast() async {
   return await fetchWorkRequestFromParticularOrCouncil('${APIValue.unionCouncil}work_requests_past');
 }
+
+Future<List<WorkRequest>?> fetchWorkRequestFromUserPending() async {
+  return await fetchWorkRequestFromParticularOrCouncil('${APIValue.user}work_requests_user_pending');
+}

@@ -29,6 +29,13 @@ Future<void> patchAdressWorkRequestFromUnion(String? workRequestUuid,Adress adre
   return await patchAdress("${APIValue.union}adress_union/$workRequestUuid", adress);
 }
 
+Future<void> patchAdressWorkRequestFromUser(String? workRequestUuid,Adress adress)async{
+  if(workRequestUuid == null){
+    return;
+  }
+  return await patchAdress("${APIValue.user}adress_user/$workRequestUuid", adress);
+}
+
 Future<void> patchAdressWorkRequestForCouncil(String? workRequestUuid,Adress adress)async{
   if(workRequestUuid == null){
     return;

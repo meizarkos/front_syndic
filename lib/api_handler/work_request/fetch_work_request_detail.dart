@@ -41,3 +41,9 @@ Future<WorkRequest?> fetchWorkRequestDetailUnion(String? uuid) async {
   if(uuid == null) return null;
   return fetchWorkRequestDetail('${APIValue.union}work_request_detail_union/$uuid');
 }
+
+Future<WorkRequest?> fetchWorkRequestDetailUser(String? uuid) async {
+  if(uuid == null) return null;
+  return fetchWorkRequestDetail('${APIValue.user}work_request_detail_user/$uuid');
+}
+

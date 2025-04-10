@@ -39,3 +39,21 @@ class TimingRecapUnion extends StatelessWidget {
     );
   }
 }
+
+class TimingRecapUser extends StatelessWidget {
+  const TimingRecapUser({
+    super.key,
+    required this.workRequestUuid,
+  });
+
+  final String workRequestUuid;
+
+  @override
+  Widget build(BuildContext context) {
+    return RecapTimingChange(
+      uuid: workRequestUuid,
+      fetchAllTimingFromWorkRequest: fetchTimingFromWorkRequestUser,
+      patchAllTimingFromWorkRequest: patchTimingFromWorkRequestUser,
+    );
+  }
+}

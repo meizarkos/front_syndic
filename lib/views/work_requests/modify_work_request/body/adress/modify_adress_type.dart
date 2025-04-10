@@ -39,3 +39,23 @@ class ModifyAdressWorkRequestCouncil extends StatelessWidget {
     );
   }
 }
+
+class ModifyAdressWorkRequestUser extends StatelessWidget {
+  const ModifyAdressWorkRequestUser({
+    super.key,
+    required this.workRequestUuid,
+  });
+
+  final String workRequestUuid;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoseAdressPatchWorkRequest(
+      workRequestUuid: workRequestUuid,
+      fetchAdress: fetchAdressWorkRequestUser,
+      onRegister: patchAdressWorkRequestFromUser,
+    );
+  }
+}
+
+

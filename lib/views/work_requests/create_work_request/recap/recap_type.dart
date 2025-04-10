@@ -51,3 +51,27 @@ class RecapUnionWorkRequest extends StatelessWidget {
     );
   }
 }
+
+class RecapUserWorkRequest extends StatelessWidget {
+  const RecapUserWorkRequest({
+    super.key,
+    required this.createWorkRequest,
+  });
+
+  final CreateWorkRequest createWorkRequest;
+
+  @override
+  Widget build(BuildContext context) {
+    return RecapForCreateWorkRequest(
+        createWorkRequest: createWorkRequest,
+        onPost: (CreateWorkRequest createWorkRequest) async {
+          await postWorkRequestUser(createWorkRequest);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            '/user_main',
+                (Route<dynamic> route) => false,
+          );
+        }
+    );
+  }
+}

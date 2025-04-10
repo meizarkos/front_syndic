@@ -53,6 +53,31 @@ class HeaderUnion extends StatelessWidget {
   }
 }
 
+class HeaderUser extends StatelessWidget {
+  const HeaderUser({
+    super.key,
+    required this.category,
+    required this.onCategoryChange,
+  });
+
+  final String category;
+  final Function(String) onCategoryChange;
+  @override
+  Widget build(BuildContext context) {
+    return HeaderForModifyWorkRequest(
+      category: category,
+      onChangedCategory: onCategoryChange,
+      onBack: ()=>{
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/user_main', // The new route
+              (Route<dynamic> route) => false, // Remove all previous routes
+        )
+      },
+    );
+  }
+}
+
 class HeaderUnionFromConversation extends StatelessWidget {
   const HeaderUnionFromConversation({
     super.key,

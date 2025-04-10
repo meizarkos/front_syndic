@@ -36,3 +36,20 @@ class CategoryUnion extends StatelessWidget {
     );
   }
 }
+
+class CategoryUser extends StatelessWidget {
+  const CategoryUser({
+    super.key,
+    required this.createWorkRequest,
+  });
+
+  final CreateWorkRequest createWorkRequest;
+
+  @override
+  Widget build(BuildContext context) {
+    return WorkRequestCategory(
+        createWorkRequest: createWorkRequest,
+        route : '/user/work_requests/adress'
+    );
+  }
+}

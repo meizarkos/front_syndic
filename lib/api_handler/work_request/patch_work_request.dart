@@ -26,3 +26,7 @@ Future<void> patchWorkRequestDetailCouncil(String workRequestUuid, WorkRequest w
 Future<void> patchWorkRequestDetailUnion(String workRequestUuid, WorkRequest workRequest) async {
   return await patchWorkRequestDetail('${APIValue.union}work_requests_detail_union/$workRequestUuid', workRequest);
 }
+
+Future<void> patchWorkRequestDetailUser(String workRequestUuid, WorkRequest workRequest) async {
+  return await patchWorkRequestDetail('${APIValue.user}work_requests_detail_user/$workRequestUuid', workRequest);
+}

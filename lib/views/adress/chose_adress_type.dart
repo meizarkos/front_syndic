@@ -141,6 +141,29 @@ class CreateWorkRequestAdressCouncil extends StatelessWidget {
   }
 }
 
+class CreateWorkRequestAdressUser extends StatelessWidget {
+  const CreateWorkRequestAdressUser({
+    super.key,
+    required this.createWorkRequest,
+  });
+
+  final CreateWorkRequest createWorkRequest;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoseAdress(
+      onRegister: (Adress address)=>{
+        createWorkRequest.adress = address,
+        Navigator.pushNamed(context, '/user/work_requests/chose_date_time', arguments: createWorkRequest)
+      },
+      adress: createWorkRequest.adress,
+      prefillAdress: ()async{
+        return await fetchAdressUser();
+      },
+    );
+  }
+}
+
 class ChoseAdressCreateUserFromUnion extends StatelessWidget {
   const ChoseAdressCreateUserFromUnion({
     super.key,

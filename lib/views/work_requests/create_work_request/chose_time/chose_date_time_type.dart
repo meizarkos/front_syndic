@@ -36,3 +36,20 @@ class ChoseDateTimeUnion extends StatelessWidget {
     );
   }
 }
+
+class ChoseDateTimeUser extends StatelessWidget {
+  const ChoseDateTimeUser({
+    super.key,
+    required this.createWorkRequest,
+  });
+
+  final CreateWorkRequest createWorkRequest;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoseDateTime(
+      createWorkRequest: createWorkRequest,
+      route: '/user/work_requests/recap',
+    );
+  }
+}

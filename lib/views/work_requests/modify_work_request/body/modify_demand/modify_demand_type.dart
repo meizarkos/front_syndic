@@ -58,3 +58,30 @@ class RecapWorkRequestUnion extends StatelessWidget {
     );
   }
 }
+
+class RecapWorkRequestUser extends StatelessWidget {
+  const RecapWorkRequestUser({
+    super.key,
+    required this.workRequestUuid,
+  });
+
+  final String workRequestUuid;
+
+  @override
+  Widget build(BuildContext context) {
+    return RecapPatchWorkRequest(
+      uuid: workRequestUuid,
+      fetchDetailWorkRequest: fetchWorkRequestDetailUser,
+      onDelete: (String? uuid) async {
+        if (uuid == null) return;
+        await deleteWorkRequestDetailUser(uuid);
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/user_main',
+              (Route<dynamic> route) => false,
+        );
+      },
+      onPatchApi: patchWorkRequestDetailUser,
+    );
+  }
+}

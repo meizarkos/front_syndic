@@ -32,3 +32,7 @@ Future<void> patchTimingFromWorkRequestCouncil(String uuid,List<Timing>? timings
 Future<void> patchTimingFromWorkRequestUnion(String uuid,List<Timing>? timings) async {
   return await patchTimingFromWorkRequest('${APIValue.union}timings_detail_union/$uuid', timings);
 }
+
+Future<void> patchTimingFromWorkRequestUser(String uuid,List<Timing>? timings) async {
+  return await patchTimingFromWorkRequest('${APIValue.user}timings_detail_user/$uuid', timings);
+}

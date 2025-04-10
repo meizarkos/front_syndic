@@ -16,3 +16,7 @@ Future<void> deleteWorkRequestDetailUnion(String workRequestUuid) async {
 Future<void> deleteWorkRequestDetailCouncil(String workRequestUuid) async {
   return await deleteWorkRequestDetail('${APIValue.unionCouncil}work_requests_detail/$workRequestUuid');
 }
+
+Future<void> deleteWorkRequestDetailUser(String workRequestUuid) async {
+  return await deleteWorkRequestDetail('${APIValue.user}work_requests_detail_user/$workRequestUuid');
+}
