@@ -24,3 +24,7 @@ Future<String> getEmailCouncil()async{
 Future<String> getEmailUnion()async{
   return await getEmail('${APIValue.union}email_surf_union');
 }
+
+Future<String> getEmailUser()async{
+  return await getEmail('${APIValue.user}email_surf_user');
+}

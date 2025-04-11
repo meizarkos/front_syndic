@@ -50,11 +50,11 @@ Future<void> patchAdressCouncilFromUnion(String? councilId,Adress adress)async{
   return await patchAdress("${APIValue.union}adress_council_from_union/$councilId", adress);
 }
 
-Future<void> patchAdressUserFromUnion(String? apartmentId,Adress adress)async{
-  if(apartmentId == null){
+Future<void> patchAdressUserFromUnion(String? userId,Adress adress)async{
+  if(userId == null){
     return;
   }
-  return await patchAdress("${APIValue.union}adress_user_from_union/$apartmentId", adress);
+  return await patchAdress("${APIValue.union}adress_user_from_union/$userId", adress);
 }
 
 Future<void> patchAdressArtisan(String? useless,Adress adress)async{
@@ -69,3 +69,6 @@ Future<void> patchAdressUnion(String? useless,Adress adress)async{
   return await patchAdress("${APIValue.union}adress_union", adress);
 }
 
+Future<void> patchAdressUser(String? useless,Adress adress)async{
+  return await patchAdress("${APIValue.user}adress_user_current", adress);
+}

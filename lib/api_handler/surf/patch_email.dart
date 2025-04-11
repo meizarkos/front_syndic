@@ -30,3 +30,7 @@ Future<void> patchSurfCouncil(Surf surf)async{
 Future<void> patchSurfUnion(Surf surf)async{
   return await patchSurf('${APIValue.union}surf_union', surf);
 }
+
+Future<void> patchSurfUser(Surf surf)async{
+  return await patchSurf('${APIValue.user}surf_user', surf);
+}

@@ -65,3 +65,18 @@ class ChoseModifyTypeUnion extends StatelessWidget {
     );
   }
 }
+
+class ChoseModifyTypeUser extends StatelessWidget{
+  const ChoseModifyTypeUser({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoseModifyCategories(
+      list: [
+        textGo(context, AppText.myData, '/modify_user'),
+        textGo(context, AppText.myAdress, '/user/modify_adress'),
+        textGo(context,AppText.myLogin, '/user/modify_surf'),
+      ],
+    );
+  }
+}

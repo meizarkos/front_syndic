@@ -131,7 +131,7 @@ class _UserDetailState extends State<UserDetail> {
                 AppText.modifyTheseData,
                 context,
                     () {
-                  Navigator.pushNamed(context, '/union/user_modify', arguments: widget.apartmentUuid);
+                  Navigator.pushNamed(context, '/union/user_modify', arguments: apartment?.userId);
                 },
                 Colors.black,
               ),

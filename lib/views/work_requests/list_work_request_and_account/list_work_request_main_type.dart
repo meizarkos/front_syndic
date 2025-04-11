@@ -39,7 +39,7 @@ class UserMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListWorkRequestMain(
       goToAccount: ()=>{
-        Navigator.pushNamed(context, '/council/account'),
+        Navigator.pushNamed(context, '/user/account'),
       },
       fetchWorkRequestPending: fetchWorkRequestFromUserPending,
       goToModifyDemand: (uuid)=>{

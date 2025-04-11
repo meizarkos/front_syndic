@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:front_syndic/models/appartment/appartment.dart';
 import 'package:front_syndic/models/user/createUser.dart';
 
 import '../../../api_handler/email/check_email_is_unique.dart';
@@ -133,6 +132,7 @@ class _ChoseNameUserState extends State<ChoseNameUser> {
     setState(() {
       errorVisibility = false;
     });
+    widget.createUser.user.phone =widget.createUser.user.phone!.replaceAll(' ', '');
     Navigator.pushNamed(context, '/union/create_user/adress', arguments: widget.createUser);
   }
 }

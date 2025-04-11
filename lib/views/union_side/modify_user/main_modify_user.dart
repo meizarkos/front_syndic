@@ -8,10 +8,10 @@ import 'header.dart';
 class MainModifyUserFromUnion extends StatefulWidget {
   const MainModifyUserFromUnion({
     super.key,
-    required this.apartmentUuid,
+    required this.userUuid,
   });
 
-  final String? apartmentUuid;
+  final String? userUuid;
 
   @override
   State<MainModifyUserFromUnion> createState() => _MainModifyUserFromUnionState();
@@ -34,7 +34,7 @@ class _MainModifyUserFromUnionState extends State<MainModifyUserFromUnion> {
               category: category,
             ),
           ),
-          Expanded(child:handlerBodyForModifyUserFromUnion(category, widget.apartmentUuid),)
+          Expanded(child:handlerBodyForModifyUserFromUnion(category, widget.userUuid),)
         ],
       ),
     );

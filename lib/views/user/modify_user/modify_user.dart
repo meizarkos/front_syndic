@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
-import 'package:front_syndic/models/appartment/appartment.dart';
 import 'package:front_syndic/widget/button/elevated_button_opacity.dart';
 import 'package:front_syndic/widget/decoration/text_filed_deco_no_counter.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
@@ -16,13 +15,13 @@ class ModifyUser extends StatefulWidget {
     super.key,
     required this.fetchData,
     required this.patchData,
-    this.apartmentUuid,
+    this.userUuid,
     this.showAppBar = true,
   });
 
-  final Future<Apartment?> Function(String?) fetchData;
+  final Future<User?> Function(String?) fetchData;
   final Future<void> Function(String?,User) patchData;
-  final String? apartmentUuid;
+  final String? userUuid;
   final bool showAppBar;
 
   @override
@@ -31,7 +30,7 @@ class ModifyUser extends StatefulWidget {
 
 class _ModifyUserState extends State<ModifyUser > {
 
-  Apartment apartmentStatic = Apartment();
+  User userStatic = User();
 
   String errorText = AppText.recapError;
   bool errorVisibility = false;
@@ -45,7 +44,7 @@ class _ModifyUserState extends State<ModifyUser > {
   @override
   void initState() {
     super.initState();
-    widget.fetchData(widget.apartmentUuid).then((value) {
+    widget.fetchData(widget.userUuid).then((value) {
       if(value == null || value.uuid == null){
         setState(() {
           apiErrorVisibility = true;
@@ -53,10 +52,10 @@ class _ModifyUserState extends State<ModifyUser > {
         return;
       }
       setState(() {
-        apartmentStatic = value;
-        nameController.text = value.user?.name ?? '';
-        firstNameController.text = value.user?.firstName ?? '';
-        phoneController.text = value.user?.phone ?? '';
+        userStatic = value;
+        nameController.text = userStatic.name ?? '';
+        firstNameController.text = userStatic.firstName ?? '';
+        phoneController.text = userStatic.phone ?? '';
       });
     });
   }
@@ -80,7 +79,7 @@ class _ModifyUserState extends State<ModifyUser > {
                     controller: nameController,
                     decoration: roundBorderTextFieldWithoutCounter(AppText.name),
                     onChanged: (value) {
-                      apartmentStatic.user?.name = value;
+                      userStatic.name = value;
                     },
                     maxLength: 50,
                   ),
@@ -89,7 +88,7 @@ class _ModifyUserState extends State<ModifyUser > {
                     controller: firstNameController,
                     decoration: roundBorderTextFieldWithoutCounter(AppText.firstName),
                     onChanged: (value) {
-                      apartmentStatic.user?.firstName = value;
+                      userStatic.firstName = value;
                     },
                     maxLength: 50,
                   ),
@@ -99,7 +98,7 @@ class _ModifyUserState extends State<ModifyUser > {
                     decoration: roundBorderTextFieldWithoutCounter(AppText.phone),
                     inputFormatters: [CustomCharacterSpaceFormatter(interval: 2)],
                     onChanged: (value) {
-                      apartmentStatic.user?.phone = value;
+                      userStatic.phone = value;
                     },
                     maxLength: 20,
                     maxLines: 1,
@@ -128,9 +127,9 @@ class _ModifyUserState extends State<ModifyUser > {
 
   Future<void> updateApartment()async {
     if(
-    apartmentStatic.user?.name == null || apartmentStatic.user?.name == '' ||
-        apartmentStatic.user?.firstName == null || apartmentStatic.user?.firstName == '' ||
-        apartmentStatic.user?.phone == null || apartmentStatic.user?.phone == ''
+    userStatic.name == null || userStatic.name == '' ||
+        userStatic.firstName == null || userStatic.firstName == '' ||
+        userStatic.phone == null || userStatic.phone == ''
     ){
       setState(() {
         errorText = AppText.recapError;
@@ -139,14 +138,11 @@ class _ModifyUserState extends State<ModifyUser > {
       });
       return;
     }
-    apartmentStatic.user?.phone = phoneController.text.replaceAll(' ', '');
+    userStatic.phone = phoneController.text.replaceAll(' ', '');
     setState(() {
       errorVisibility = false;
       successVisibility = true;
     });
-    if(apartmentStatic.user == null){
-      return;
-    }
-    await widget.patchData(widget.apartmentUuid,apartmentStatic.user!);
+    await widget.patchData(widget.userUuid,userStatic);
   }
 }

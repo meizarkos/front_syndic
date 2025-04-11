@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
 
-import '../../../api_handler/appartment/get_detail_apartment.dart';
+import '../../../api_handler/user/get_user_current.dart';
 import '../../../api_handler/user/patch_user.dart';
 import 'modify_user.dart';
 
 class ModifyUserForUnion extends StatelessWidget {
   const ModifyUserForUnion({
     super.key,
-    required this.apartmentUuid,
+    required this.userUuid,
   });
 
-  final String? apartmentUuid;
+  final String? userUuid;
 
   @override
   Widget build(BuildContext context) {
     return ModifyUser(
-      fetchData: getDetailApartmentForUnion,
+      fetchData: getUserFromUnion,
       patchData: patchUserFromUnion,
-      showAppBar: false,
-      apartmentUuid: apartmentUuid,
+      userUuid: userUuid,
+    );
+  }
+}
+
+class ModifyUserFromUser extends StatelessWidget {
+  const ModifyUserFromUser({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ModifyUser(
+      fetchData: getUserFromUser,
+      patchData: patchUserFromUser,
+      userUuid: null,
     );
   }
 }

@@ -19,9 +19,13 @@ Future<void> patchUser(String route, User user ) async {
   }
 }
 
-Future<void> patchUserFromUnion(String? apartmentUuid, User user) async {
-  if (apartmentUuid == null) {
+Future<void> patchUserFromUnion(String? userUuid, User user) async {
+  if (userUuid == null) {
     return;
   }
-  return await patchUser('${APIValue.union}user/$apartmentUuid', user);
+  return await patchUser('${APIValue.union}user_from_union/$userUuid', user);
+}
+
+Future<void> patchUserFromUser(String? n,User user) async {
+  return await patchUser('${APIValue.user}user_current', user);
 }

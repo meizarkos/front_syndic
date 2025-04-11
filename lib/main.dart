@@ -12,6 +12,8 @@ import 'package:front_syndic/views/account/council/modify_surf_council.dart';
 import 'package:front_syndic/views/account/union/modify_adress_union.dart';
 import 'package:front_syndic/views/account/union/modify_login_union.dart';
 import 'package:front_syndic/views/account/union/modify_union.dart';
+import 'package:front_syndic/views/account/user/modify_adress_user.dart';
+import 'package:front_syndic/views/account/user/modify_surf_user.dart';
 import 'package:front_syndic/views/artisan_side/artisan_main.dart';
 import 'package:front_syndic/views/artisan_side/work_request_detail/first_contact_artisan.dart';
 import 'package:front_syndic/views/artisan_side/work_request_detail/detail_work_request.dart';
@@ -50,6 +52,7 @@ import 'package:front_syndic/views/union_side/create_council/chose_name/chose_na
 import 'package:front_syndic/views/union_side/create_council/conctact_info/contact_info_type.dart';
 import 'package:front_syndic/views/union_side/create_council/create_password/council_passwd.dart';
 import 'package:front_syndic/views/union_side/modify_council/main_modify_council.dart';
+import 'package:front_syndic/views/user/modify_user/modify_user_type.dart';
 import 'package:front_syndic/views/user/user_detail/detail_user_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category/category_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time_type.dart';
@@ -118,6 +121,10 @@ class MyApp extends StatelessWidget {
         '/artisan/conversation': (context) => const ConversationInProgressArtisan(),
         '/artisan_main/first_conv': (context) => const FirstConvArtisan(),
         '/user_main':(context) => const UserMain(),
+        '/user/account': (context) => const ChoseModifyTypeUser(),
+        '/user/modify_adress': (context) => const ModifyAdressUser(),
+        '/user/modify_surf': (context) => const ModifySurfUser(),
+        '/modify_user': (context) => const ModifyUserFromUser(),
         '/council_main': (context) => const CouncilMain(),
         '/council/conversation': (context) => const ConversationInProgressCouncil(),
         '/union/work_requests': (context) => const WorkRequestListUnion(),
@@ -212,7 +219,7 @@ class MyApp extends StatelessWidget {
             if (arguments is String?) {
               return MaterialPageRoute(
                 builder: (context) => MainModifyUserFromUnion(
-                  apartmentUuid: arguments,
+                  userUuid: arguments,
                 ),
               );
             }
