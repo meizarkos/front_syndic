@@ -12,13 +12,13 @@ String textStatusEstimate(int? status, int? statusGoal){
     return AppText.estimateWaitingForUnion;
   }
   if(status == 5){
-    return AppText.estimateWaitingForCouncil;
+    return AppText.estimateWaitingForClient;
   }
   if(status == 1){
     if(statusGoal == 3){
       return AppText.estimateWaitingForUser;
     }
-    return '${AppText.estimateWaitingForUnion}\n${AppText.estimateWaitingForCouncil}';
+    return '${AppText.estimateWaitingForUnion}\n${AppText.estimateWaitingForClient}';
   }
   return '';
 }

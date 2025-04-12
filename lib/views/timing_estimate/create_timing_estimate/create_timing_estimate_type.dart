@@ -102,5 +102,37 @@ class CreateTimingEstimateCouncil extends StatelessWidget {
   }
 }
 
+class CreateTimingEstimateUser extends StatelessWidget {
+  const CreateTimingEstimateUser({
+    super.key,
+    required this.timingEstimate,
+  });
+
+  final TimingEstimate timingEstimate;
+
+  @override
+  Widget build(BuildContext context) {
+    return CreateTimingEstimate(
+      timingEstimate: timingEstimate,
+      onBack: (){
+        goToTimingEstimate(context);
+      },
+      onRegister: (TimingEstimate timingEstimate)async{
+        await postTimingEstimateUser(timingEstimate);
+        goToTimingEstimate(context);
+      },
+    );
+  }
+
+  void goToTimingEstimate(BuildContext context){
+    if(timingEstimate.conversationId == null) return;
+    Navigator.pushReplacementNamed(
+      context,
+      '/user/timing_estimate',
+      arguments: timingEstimate.conversationId!,
+    );
+  }
+}
+
 
 

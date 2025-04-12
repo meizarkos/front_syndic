@@ -133,4 +133,47 @@ class TimingEstimateCouncil extends StatelessWidget {
   }
 }
 
+class TimingEstimateUser extends StatelessWidget {
+  const TimingEstimateUser({
+    super.key,
+    required this.convUuid,
+  });
+
+  final String? convUuid;
+
+  @override
+  Widget build(BuildContext context) {
+    return TimingEstimateView(
+      fetchData: fetchTimingEstimateUser,
+      uuid: convUuid,
+      valueValidateByYou: ValidateByYou.council, // is council but work for user
+      routeToPost:  '/user/create_timing_estimate',
+      onAccept: (String? uuid) async {
+        await acceptTimingEstimateUser(uuid);
+        goToTimingEstimate(context);
+      },
+      onRefuse: (String? uuid) async {
+        await deleteTimingEstimateUser(uuid);
+        goToTimingEstimate(context);
+      },
+      goBack: () {
+        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, '/user/see_conv', arguments: convUuid);
+      },
+      role: RoleBasedText.council,
+      apiPaiement: (int amount,String currency) => createPaymentCouncil(amount, 'EUR'),
+    );
+  }
+
+  void goToTimingEstimate(BuildContext context){
+    if(convUuid == null) return;
+    Navigator.pushReplacementNamed(
+      context,
+      '/user/timing_estimate',
+      arguments: convUuid!,
+    );
+  }
+}
+
+
 

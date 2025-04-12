@@ -236,7 +236,7 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                   ),
                 ),
               ),
-              if (timingEstimateStatic?.status == timingEstimateStatic?.statusGoal && widget.apiPaiement != null) ...[
+              /*if (timingEstimateStatic?.status == timingEstimateStatic?.statusGoal && widget.apiPaiement != null) ...[
                 const SizedBox(height: AppUIValue.spaceScreenToAny*2),
                 Center(
                   child: SizedBox(
@@ -256,7 +256,7 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                     ),
                   ),
                 ),
-              ],
+              ],*/
             ],
           ),
         ),

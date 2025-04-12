@@ -30,3 +30,8 @@ Future<void> postTimingEstimateUnion(TimingEstimate timingEstimate) async {
 Future<void> postTimingEstimateCouncil(TimingEstimate timingEstimate) async {
   return postTimingEstimate('${APIValue.unionCouncil}timing_estimate_council/${timingEstimate.conversationId}', timingEstimate);
 }
+
+
+Future<void> postTimingEstimateUser(TimingEstimate timingEstimate) async {
+  return postTimingEstimate('${APIValue.user}timing_estimate_user/${timingEstimate.conversationId}', timingEstimate);
+}

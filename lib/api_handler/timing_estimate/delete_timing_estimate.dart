@@ -21,6 +21,11 @@ Future<void> deleteTimingEstimateCouncil(String? uuid)async{
   await deleteTimingEstimate('${APIValue.unionCouncil}timing_estimate_council/$uuid');
 }
 
+Future<void> deleteTimingEstimateUser(String? uuid)async{
+  if(uuid == null) return;
+  await deleteTimingEstimate('${APIValue.user}timing_estimate_user/$uuid');
+}
+
 Future<void> deleteTimingEstimateUnion(String? uuid)async{
   if(uuid == null) return;
   await deleteTimingEstimate('${APIValue.union}timing_estimate_union/$uuid');

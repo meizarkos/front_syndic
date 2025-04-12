@@ -27,3 +27,8 @@ Future<void> acceptTimingEstimateUnion(String? uuid)async{
   if(uuid == null) return;
   await acceptTimingEstimate('${APIValue.union}accept_timing_estimate_union/$uuid');
 }
+
+Future<void> acceptTimingEstimateUser(String? uuid)async{
+  if(uuid == null) return;
+  await acceptTimingEstimate('${APIValue.user}accept_timing_estimate_user/$uuid');
+}

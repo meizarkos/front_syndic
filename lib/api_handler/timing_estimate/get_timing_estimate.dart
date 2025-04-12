@@ -26,3 +26,8 @@ Future<TimingEstimate?> fetchTimingEstimateCouncil(String? convUuid) async {
   if(convUuid == null)return null;
   return await fetchTimings('${APIValue.unionCouncil}timing_estimate_detail_from_conv_council/$convUuid');
 }
+
+Future<TimingEstimate?> fetchTimingEstimateUser(String? convUuid) async {
+  if(convUuid == null)return null;
+  return await fetchTimings('${APIValue.user}timing_estimate_detail_from_conv_user/$convUuid');
+}

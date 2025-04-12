@@ -28,22 +28,22 @@ String textStatusEstimate(int? status, int? statusGoal,String role){
     return AppText.estimateWaitingForUnion;
   }
   if(status == 5){
-    if(role == RoleBasedText.council){
+    if(role == RoleBasedText.council || role == RoleBasedText.user){
       return AppText.estimateWaitingForYou;
     }
-    return AppText.estimateWaitingForCouncil;
+    return AppText.estimateWaitingForClient;
   }
   if(status == 1){
     if(statusGoal == 3){
       return AppText.estimateWaitingForYou;
     }
     if(role == RoleBasedText.union){
-      return "${AppText.estimateWaitingForYou}\n${AppText.estimateWaitingForCouncil}";
+      return "${AppText.estimateWaitingForYou}\n${AppText.estimateWaitingForClient}";
     }
-    if(role == RoleBasedText.council){
+    if(role == RoleBasedText.council || role == RoleBasedText.user){
       return "${AppText.estimateWaitingForYou}\n${AppText.estimateWaitingForUnion}";
     }
-    return '${AppText.estimateWaitingForUnion}\n${AppText.estimateWaitingForCouncil}';
+    return '${AppText.estimateWaitingForUnion}\n${AppText.estimateWaitingForClient}';
   }
   return '';
 }
@@ -75,7 +75,7 @@ String timingEstimateHandleValidation(int? status, int? statusGoal,String role){
       res += '${AppText.estimateWaitingForYou}\n';
     }
     if(!ValidateByYou.council.contains(status)){
-      res += '${AppText.estimateWaitingForCouncil}\n';
+      res += '${AppText.estimateWaitingForClient}\n';
     }
     if(!ValidateByYou.artisan.contains(status)){
       res += AppText.estimateWaitingForArtisan;
@@ -100,7 +100,7 @@ String timingEstimateHandleValidation(int? status, int? statusGoal,String role){
       res += '${AppText.estimateWaitingForUnion}\n';
     }
     if(!ValidateByYou.council.contains(status)){
-      res += AppText.estimateWaitingForCouncil;
+      res += AppText.estimateWaitingForClient;
     }
   }
 

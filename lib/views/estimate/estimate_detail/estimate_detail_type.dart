@@ -64,3 +64,34 @@ class EstimateDetailCouncil extends StatelessWidget {
     );
   }
 }
+
+
+class EstimateDetailUser extends StatelessWidget {
+  const EstimateDetailUser({
+    super.key,
+    required this.convUuid,
+  });
+
+  final String? convUuid;
+
+  @override
+  Widget build(BuildContext context) {
+    return EstimateDetail(
+      fetchData: fetchEstimateDetailUserFromConversation,
+      uuid: convUuid,
+      role: RoleBasedText.user,
+      patchStatus: (String? id,VoidCallback changeText)async{
+        if(convUuid == null) return;
+        await patchEstimateUser(id,changeText);
+      },
+      refuseEstimate: (String? id,VoidCallback changeText)async{
+        if(convUuid == null) return;
+        await refuseEstimateUser(id,changeText);
+      },
+      goToBack: (){
+        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, '/user/see_conv',arguments: convUuid);
+      },
+    );
+  }
+}

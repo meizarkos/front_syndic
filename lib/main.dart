@@ -161,6 +161,17 @@ class MyApp extends StatelessWidget {
             }
             break;
 
+          case '/user/timing_estimate':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => TimingEstimateUser(
+                  convUuid: arguments,
+                ),
+              );
+            }
+            break;
+
           case '/user/timing_detail':
             final arguments = settings.arguments;
             if (arguments is String?) {
@@ -192,6 +203,28 @@ class MyApp extends StatelessWidget {
                 ),
               );
             }
+
+          case '/estimate/user/detail':
+            final arguments = settings.arguments;
+            if(arguments is String?){
+              return MaterialPageRoute(
+                builder: (context) => EstimateDetailUser(
+                    convUuid: arguments
+                ),
+              );
+            }
+
+          case  '/user/create_timing_estimate':
+            final arguments = settings.arguments;
+            if(arguments is TimingEstimate){
+              return MaterialPageRoute(
+                builder: (context) => CreateTimingEstimateUser(
+                  timingEstimate : arguments,
+                ),
+              );
+            }
+
+
 
           case '/user/work_requests/title_and_desc':
             final arguments = settings.arguments;

@@ -196,13 +196,13 @@ class AllConvUser extends StatelessWidget {
       },
       goToEstimate: (String? id) {
         if(id == null) return;
-        Navigator.pushNamed(context,'/estimate/council/detail',
+        Navigator.pushNamed(context,'/estimate/user/detail',
             arguments: id
         );
       },
       goToTimingEstimate: (String? id) {
         if(id == null) return;
-        Navigator.pushNamed(context,'/council/timing_estimate',
+        Navigator.pushNamed(context,'/user/timing_estimate',
             arguments: id
         );
       },

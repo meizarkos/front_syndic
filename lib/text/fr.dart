@@ -251,7 +251,7 @@ class AppText {
   static const String estimateAlreadyAccept = "Devis déjà accepté";
   static const String estimateWaitingForUnion = "En attente de validation par le syndicat";
   static const String estimateWaitingForArtisan = "En attente de validation par l'artisan";
-  static const String estimateWaitingForCouncil = "En attente de validation par le conseil syndical";
+  static const String estimateWaitingForClient = "En attente de validation par le client";
   static const String estimateWaitingForUser = "En attente de validation par le propriétaire";
   static const String estimateWaitingForYou = "En attente de votre validation";
   static const String acceptEstimateAlertDialog = "Vous allez accepter ce devis, cela ne vous engage pas à le réaliser cependant une notification sera envoyée à l'artisan";

@@ -27,6 +27,11 @@ Future<void> patchEstimateUnion(String? uuid,VoidCallback changeText) async {
   return await patchEstimateRequest('${APIValue.union}change_status_estimate_union/$uuid',changeText);
 }
 
+Future<void> patchEstimateUser(String? uuid,VoidCallback changeText) async {
+  if(uuid == null) return;
+  return await patchEstimateRequest('${APIValue.user}change_status_estimate_user/$uuid',changeText);
+}
+
 Future<void> refuseEstimateUnion(String? uuid,VoidCallback changeText) async {
   if(uuid == null) return;
   return await patchEstimateRequest('${APIValue.union}refuse_estimate_union/$uuid',changeText);
@@ -35,4 +40,9 @@ Future<void> refuseEstimateUnion(String? uuid,VoidCallback changeText) async {
 Future<void> refuseEstimateCouncil(String? uuid,VoidCallback changeText) async {
   if(uuid == null) return;
   return await patchEstimateRequest('${APIValue.unionCouncil}refuse_estimate_council/$uuid',changeText);
+}
+
+Future<void> refuseEstimateUser(String? uuid,VoidCallback changeText) async {
+  if(uuid == null) return;
+  return await patchEstimateRequest('${APIValue.user}refuse_estimate_user/$uuid',changeText);
 }

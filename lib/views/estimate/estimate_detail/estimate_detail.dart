@@ -195,7 +195,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
     if (estimateFromRequest?.status == estimateFromRequest?.statusGoal) {
       return AppText.estimateAlreadyAccept;
     }
-    if (widget.role == RoleBasedText.council &&
+    if ((widget.role == RoleBasedText.council || widget.role == RoleBasedText.user ) &&
         estimateFromRequest?.status == 3) {
       return AppText.estimateAlreadyAccept;
     }
