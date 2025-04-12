@@ -5,6 +5,7 @@ import 'package:front_syndic/widget/bottom/nav_bar_council.dart';
 
 import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../widget/bottom/nav_bar_union.dart';
+import '../../../widget/bottom/nav_bar_user.dart';
 
 class ConversationInProgressArtisan extends StatelessWidget {
   const ConversationInProgressArtisan({super.key});
@@ -59,6 +60,25 @@ class ConversationInProgressCouncil extends StatelessWidget {
         },
         fetchConversationInProgress: fetchFirstConvCouncil(),
         bottomNavigationBar: bottomNavigationBarCouncil(context, 1)
+    );
+  }
+}
+
+class ConversationInProgressUser extends StatelessWidget {
+  const ConversationInProgressUser({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ConversationInProgress(
+        goToConvDetail: (uuid) => {
+          Navigator.pushNamed(
+            context,
+            '/user/see_conv',
+            arguments: uuid,
+          )
+        },
+        fetchConversationInProgress: fetchFirstConvUser(),
+        bottomNavigationBar: bottomNavigationBarUser(context, 1)
     );
   }
 }

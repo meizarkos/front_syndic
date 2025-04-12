@@ -72,6 +72,7 @@ class AppText {
   static const String confirmPasswd = 'Confirmer le mot de passe';
   static const String passWdNoMatch = 'Les mots de passe ne correspondent pas';
   static const String noNameUnion = 'Pas de nom de syndicat trouvé';
+  static const String noName = 'Pas de nom trouvé';
   static const String noCompanyName = 'Pas de nom d\'entreprise trouvé';
   static const String noAdministratorName = 'Pas de prénom trouvé';
   static const String noAdministratorFirstName = 'Pas de nom trouvé';
@@ -214,7 +215,7 @@ class AppText {
   static const String timingListTitle = 'Vos rendez-vous';
   static const String create = 'a été fixé :';
   static const String meetingEstimateText = 'Rencontrez vous pour faire un devis le';
-  static const String interventionPlace = 'Lieu de l\'intervention :';
+  static const String interventionPlace = 'Lieu de l\'intervention';
   static const String phoneContact = 'Votre numéro de contact est :';
   static const String contactUs = "pour plus d'informations";
   static const String contactez = 'Contactez';
@@ -222,7 +223,7 @@ class AppText {
   static const String contactUnionForArtisan = 'Sinon contactez le syndicat : ';
   static const String contactUnion = "Contacter votre syndicat pour en savoir plus au :";
   static const String contactCouncil = "Si vous n'êtes pas à l'origine de cette demande adressez vous à ce conseil syndical :";
-
+  static const String contactUser = "Si vous n'êtes pas à l'origine de cette demande adressez vous à cette personne :";
   /* Timing Detail */
   static const String seeConv = 'Message';
   static const String seeConversation = 'Voir la conversation';

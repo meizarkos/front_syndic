@@ -42,7 +42,7 @@ BottomNavigationBar bottomNavigationBarUser(BuildContext context, int selectedIn
         goToAndDeleteAll(context, '/user_main',0, selectedIndex)
       }
       else if(index == 1){
-        goToAndDeleteAll(context, '/council/conversation', 1, selectedIndex)
+        goToAndDeleteAll(context, '/user/conversation', 1, selectedIndex)
       }
       else if(index == 2){
           goToAndDeleteAll(context, '/co_owner/invoice',2, selectedIndex)

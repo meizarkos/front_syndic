@@ -14,7 +14,8 @@ Future<void> postTiming(String? uuid,Timing timing,String route) async {
         AttributesTiming.time: timing.time,
       });
 
-    await requestWithBody(url: route, method: "POST", body: body);
+    final res = await requestWithBody(url: route, method: "POST", body: body);
+    print(res.data);
     return;
   } catch(e) {
     return;
@@ -31,6 +32,10 @@ Future<void> postTimingFromConvArtisan(String? uuid,Timing timing) async {
 
 Future<void> postTimingFromConvCouncil(String? uuid,Timing timing) async {
   await postTiming(uuid, timing,'${APIValue.unionCouncil}timing_council/$uuid');
+}
+
+Future<void> postTimingFromConvUser(String? uuid,Timing timing) async {
+  await postTiming(uuid, timing,'${APIValue.user}timing_user/$uuid');
 }
 
 Future<void> postTimingFromConvUnion(String? uuid,Timing timing) async {

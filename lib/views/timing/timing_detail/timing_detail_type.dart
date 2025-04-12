@@ -76,7 +76,13 @@ class TimingDetailUnion extends StatelessWidget {
       future: fetchTimingDetailUnionFromConversation(convUuid),
       textContact: (TimingAndCreator timing){
         final contactArtisan = "${AppText.contactez} ${toUpperFirst(timing.artisan?.companyName ?? '')} ${toLowerFirst(AppText.to)} ${timing.artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
-        return "$contactArtisan\n\n${AppText.contactCouncil} ${timing.council?.phone ?? AppText.noPhone}";
+        if(timing.council != null){
+          return "$contactArtisan\n\n${AppText.contactCouncil} ${toUpperFirst(timing.council?.lastName ?? '')} ${toUpperFirst(timing.council?.firstName ?? '')} ${toLowerFirst(AppText.to)} ${timing.council?.phone ?? AppText.noPhone}.";
+        }
+        else if(timing.user != null){
+          return "$contactArtisan\n\n${AppText.contactUser} ${toUpperFirst(timing.user?.name ?? AppText.noName)} ${toLowerFirst(AppText.to)} ${timing.user?.phone ?? AppText.noPhone}.";
+        }
+        return contactArtisan;
       },
     );
   }
@@ -108,6 +114,43 @@ class TimingDetailCouncil extends StatelessWidget {
         );
       },
       future: fetchTimingDetailCouncilFromConversation(convUuid),
+      textContact: (TimingAndCreator timing){
+        final contactArtisan = "${AppText.contactez} ${toUpperFirst(timing.artisan?.companyName ?? '')} ${toLowerFirst(AppText.to)} ${timing.artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
+        if(timing.union != null){
+          return "$contactArtisan\n\n${AppText.contactUnion} ${timing.union?.phone ?? AppText.noPhone}.";
+        }
+        return contactArtisan;
+      },
+    );
+  }
+}
+
+class TimingDetailUser extends StatelessWidget {
+  const TimingDetailUser({
+    super.key,
+    required this.convUuid,
+  });
+
+  final String? convUuid;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return TimingDetail(
+      routeToRefuse: (String? uuid) async{
+        if(uuid == null) return;
+        await refuseTimingDetailCouncil(uuid);
+        Navigator.pushReplacementNamed(context, '/user/see_conv',
+            arguments: convUuid
+        );
+      },
+      routeToCreateMeeting: () {
+        if(convUuid == null) return;
+        Navigator.pushNamed(context, '/user/create_timing',
+            arguments: convUuid
+        );
+      },
+      future: fetchTimingDetailUserFromConversation(convUuid),
       textContact: (TimingAndCreator timing){
         final contactArtisan = "${AppText.contactez} ${toUpperFirst(timing.artisan?.companyName ?? '')} ${toLowerFirst(AppText.to)} ${timing.artisan?.phone ?? AppText.noPhone} ${AppText.contactUs}";
         if(timing.union != null){

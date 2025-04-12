@@ -4,6 +4,8 @@ import 'package:front_syndic/models/council/council.dart';
 import 'package:front_syndic/models/union/union.dart';
 import 'package:front_syndic/models/work_request/work_request.dart';
 
+import '../user/user.dart';
+
 class AttributesTiming {
   static const uuid = 'uuid';
   static const date = 'time';
@@ -62,6 +64,7 @@ class TimingAndCreator{
   Artisan? artisan;
   UnionApi? union;
   Council? council;
+  User? user;
 
-  TimingAndCreator(this.timing, this.artisan, this.union, this.council);
+  TimingAndCreator(this.timing, this.artisan, this.union, this.council, this.user);
 }

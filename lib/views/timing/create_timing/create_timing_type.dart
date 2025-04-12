@@ -83,3 +83,30 @@ class CreateTimingCouncil extends StatelessWidget {
     );
   }
 }
+
+class CreateTimingUser extends StatelessWidget {
+  const CreateTimingUser ({
+    super.key,
+    required this.convUuid,
+  });
+
+  final String? convUuid;
+
+  @override
+  Widget build(BuildContext context) {
+    return CreateTiming(
+        futureCreateMeeting: postTimingFromConvUser,
+        convUuid: convUuid,
+        routeToConv : () {
+          if(convUuid == null) return;
+          Navigator.pop(context);
+          Navigator.pop(context);
+          Navigator.pushReplacementNamed(
+            context,
+            '/user/see_conv',
+            arguments: convUuid!,
+          );
+        }
+    );
+  }
+}

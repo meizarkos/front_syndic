@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/views/work_requests/modify_work_request/handler_body/handler_body_council.dart';
+import 'package:front_syndic/views/work_requests/modify_work_request/handler_body/handler_body_user.dart';
 import 'package:front_syndic/views/work_requests/modify_work_request/recap_main.dart';
 
 import '../../../text/fr.dart';
@@ -70,6 +71,43 @@ class _RecapMainCouncilFromConversationState extends State<RecapMainCouncilFromC
     return RecapMain(
       top: HeaderCouncilFromConversation(category: category, onCategoryChange: onCategoryChange),
       bottom: handlerBodyCouncil(category, widget.workRequestUuid!),
+    );
+  }
+
+  void onCategoryChange(String category) {
+    setState(() {
+      this.category = category;
+    });
+  }
+}
+
+class RecapMainUserFromConversation extends StatefulWidget {
+  const RecapMainUserFromConversation({
+    super.key,
+    required this.workRequestUuid,
+  });
+
+  final String? workRequestUuid;
+
+  @override
+  State<RecapMainUserFromConversation> createState() => _RecapMainUserFromConversationState();
+}
+
+class _RecapMainUserFromConversationState extends State<RecapMainUserFromConversation> {
+
+  String category = AppText.demand;
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.workRequestUuid == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pop(context);
+      });
+      return const SizedBox(); // Return an empty widget while the pop is handled
+    }
+    return RecapMain(
+      top: HeaderCouncilFromConversation(category: category, onCategoryChange: onCategoryChange),
+      bottom: handlerBodyUser(category, widget.workRequestUuid!),
     );
   }
 

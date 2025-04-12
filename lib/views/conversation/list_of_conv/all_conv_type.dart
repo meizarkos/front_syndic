@@ -161,5 +161,55 @@ class AllConvCouncil extends StatelessWidget {
   }
 }
 
+class AllConvUser extends StatelessWidget {
+  const AllConvUser({
+    super.key,
+    required this.id,
+  });
+
+  final String id;
+
+  @override
+  Widget build(BuildContext context) {
+    return SeeConv(
+      uuid: id,
+      futureForGetConv: fetchSpecificConvUser(id),
+      futureForPostConv: postConvUser,
+      routeToBack: () {
+        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, '/user/conversation');
+      },
+      goToRequest: (String? id) async{
+        if(id == null) return;
+        await fetchUuidWorkRequestUser(id).then((uuid){
+          if(uuid == null) return;
+          Navigator.pushNamed(context,'/user/modify_demand/from_conv',
+            arguments: uuid,
+          );
+        });
+      },
+      goToMeeting: (String? id) {
+        if(id == null) return;
+        Navigator.pushNamed(context,'/user/timing_detail',
+            arguments: id
+        );
+      },
+      goToEstimate: (String? id) {
+        if(id == null) return;
+        Navigator.pushNamed(context,'/estimate/council/detail',
+            arguments: id
+        );
+      },
+      goToTimingEstimate: (String? id) {
+        if(id == null) return;
+        Navigator.pushNamed(context,'/council/timing_estimate',
+            arguments: id
+        );
+      },
+      sideText: SideConv.other,
+    );
+  }
+}
+
 
 

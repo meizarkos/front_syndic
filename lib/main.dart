@@ -121,6 +121,7 @@ class MyApp extends StatelessWidget {
         '/artisan/conversation': (context) => const ConversationInProgressArtisan(),
         '/artisan_main/first_conv': (context) => const FirstConvArtisan(),
         '/user_main':(context) => const UserMain(),
+        '/user/conversation': (context) => const ConversationInProgressUser(),
         '/user/account': (context) => const ChoseModifyTypeUser(),
         '/user/modify_adress': (context) => const ModifyAdressUser(),
         '/user/modify_surf': (context) => const ModifySurfUser(),
@@ -148,6 +149,49 @@ class MyApp extends StatelessWidget {
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
+
+          case '/user/see_conv':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => AllConvUser(
+                    id : arguments
+                ),
+              );
+            }
+            break;
+
+          case '/user/timing_detail':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => TimingDetailUser(
+                  convUuid: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/user/create_timing':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => CreateTimingUser(
+                  convUuid: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/user/modify_demand/from_conv':
+            final arguments = settings.arguments;
+            if (arguments is String) {
+              return MaterialPageRoute(
+                builder: (context) => RecapMainUserFromConversation(
+                  workRequestUuid: arguments,
+                ),
+              );
+            }
 
           case '/user/work_requests/title_and_desc':
             final arguments = settings.arguments;

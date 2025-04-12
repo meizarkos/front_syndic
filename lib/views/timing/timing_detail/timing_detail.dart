@@ -8,6 +8,7 @@ import 'package:front_syndic/widget/text_style/text_style_main_color.dart';
 import '../../../models/artisan/artisan.dart';
 import '../../../models/council/council.dart';
 import '../../../models/timing/timing.dart';
+import '../../../models/user/user.dart';
 import '../../../text/fr.dart';
 import '../../../utils/date_to_string/date.dart';
 import '../../../widget/button/elevated_button_opacity.dart';
@@ -38,6 +39,7 @@ class _TimingDetailState extends State<TimingDetail> {
   Artisan? artisan;
   UnionApi? union;
   Council? council;
+  User? user;
   bool isLoading = true;
 
   @override
@@ -53,6 +55,7 @@ class _TimingDetailState extends State<TimingDetail> {
           artisan = value?.artisan;
           union = value?.union;
           council = value?.council;
+          user = value?.user;
         });
       }
     });
@@ -136,7 +139,7 @@ class _TimingDetailState extends State<TimingDetail> {
                   width: MediaQuery.of(context).size.width * 0.8,
                   // Define the width to constrain text justification
                   child: Text(
-                    widget.textContact(TimingAndCreator(timing, artisan, union, council)),
+                    widget.textContact(TimingAndCreator(timing, artisan, union, council,user)),
                     style: Theme.of(context).textTheme.displaySmall,
                     textAlign: TextAlign.justify,
                   ),
