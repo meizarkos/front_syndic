@@ -116,7 +116,7 @@ class AppText {
 
   static const String titleNextWorkMeeting = 'Mes prochains travaux';
   static const String titleTimingEstimate = 'Passage pour les travaux le :';
-  static const String noTimingEstimate = "Aucune date n'a été proposé, ou elles ont toutes été refusées.";
+  static const String noTimingEstimate = "Aucune date n'a été proposé, ou elles ont toutes été refusées.\nSi aucun devis n'est crée il n'est pas possible de créer une date de travaux";
   static const String buttonTextWorkMeeting = 'Voir mes dates de travaux';
 
   static const String titleNextWork = 'Mes demandes';
@@ -135,6 +135,7 @@ class AppText {
   static const String adress = 'Adresse';
   static const String demand = 'Demande';
   static const String dispo = 'Dispo.';
+  static const String wrModificationAlertText = 'Vous allez modifier cette demande, cela remettra le processus de validation à zéro ( les devis et date de travaux seront à revalider)';
 
   /* takePictureWorkRequest */
   static const String takePictureSkip = 'Passer cette étape';

@@ -17,6 +17,16 @@ class AttributesTimingEstimate {
   static const updatedAt = 'upadated_at';
 }
 
+class  TimingEstimateAndEstimate{
+  Estimate? estimate;
+  TimingEstimate? timingEstimate;
+
+  TimingEstimateAndEstimate({
+    this.estimate,
+    this.timingEstimate,
+  });
+}
+
 class TimingEstimate{
    String? uuid;
    String? dateStart;

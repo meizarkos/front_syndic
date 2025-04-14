@@ -157,13 +157,39 @@ class _RecapPatchWorkRequestState extends State<RecapPatchWorkRequest> {
         successVisibility = false;
       });
     } else {
-      setState(() {
-        errorVisibility = false;
-        successVisibility = true;
-      });
-      if(workRequestStatic.uuid == null) return;
-      await widget.onPatchApi(workRequestStatic.uuid!, workRequestStatic);
+      onPatch(context);
     }
+  }
+
+  void onPatch(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(AppText.wrModificationAlertText),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(AppText.cancel),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                if(workRequestStatic.uuid == null) return;
+                await widget.onPatchApi(workRequestStatic.uuid!, workRequestStatic);
+                setState(() {
+                  errorVisibility = false;
+                  successVisibility = true;
+                });
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void choiceDelete(){

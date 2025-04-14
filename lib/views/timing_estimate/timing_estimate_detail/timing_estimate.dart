@@ -8,6 +8,7 @@ import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/text_style/text_style_main_color.dart';
 
 import '../../../core_value.dart';
+import '../../../models/estimate/estimate.dart';
 import '../../../models/timing/timing_estimate.dart';
 import '../../../utils/date_to_string/date.dart';
 import '../../../widget/button/add_floating_button.dart';
@@ -45,6 +46,7 @@ class TimingEstimateView extends StatefulWidget {
 
 class _TimingEstimateViewState extends State<TimingEstimateView> {
   TimingEstimate? timingEstimateStatic;
+  Estimate? estimateStatic;
   Adress? adress;
 
   bool isLoading = true;
@@ -53,9 +55,12 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
   void initState() {
     widget.fetchData(widget.uuid).then((value) {
       setState(() {
-        timingEstimateStatic = value;
+        timingEstimateStatic = value.timingEstimate;
+        estimateStatic = value.estimate;
         adress = timingEstimateStatic?.workRequest?.adress;
         isLoading = false;
+
+        print(value);
       });
     });
     super.initState();
@@ -84,13 +89,18 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
               child: Text(AppText.noTimingEstimate),
             ),
           ),
-          floatingActionButton: addFloatingButton(() {
-            final TimingEstimate timingEstimate = TimingEstimate(
+          floatingActionButton: estimateStatic?.uuid != null ? addFloatingButton(() {
+            final timingEstimate = TimingEstimate(
               conversationId: widget.uuid,
             );
-            Navigator.pushReplacementNamed(context, widget.routeToPost,
-                arguments: timingEstimate);
-          }));
+            Navigator.pushReplacementNamed(
+              context,
+              widget.routeToPost,
+              arguments: timingEstimate,
+            );
+          })
+          : null,
+      );
     }
     return Scaffold(
       appBar: AppBar(

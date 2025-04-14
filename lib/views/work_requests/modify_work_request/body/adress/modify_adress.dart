@@ -146,11 +146,7 @@ class _ChoseAdressPatchWorkRequestState extends State<ChoseAdressPatchWorkReques
                     if(_commentController!.text.isEmpty){
                       adress.comment = null;
                     }
-                    setState(() {
-                      errorVisibility = false;
-                      successVisibility = true;
-                    });
-                    widget.onRegister(widget.workRequestUuid,adress);
+                    onPatch(context);
                   }
                 },
                 AppColors.mainTextColor,
@@ -159,6 +155,36 @@ class _ChoseAdressPatchWorkRequestState extends State<ChoseAdressPatchWorkReques
           ),
         ),
       ),
+    );
+  }
+
+  void onPatch(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(AppText.wrModificationAlertText),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(AppText.cancel),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await widget.onRegister(widget.workRequestUuid, adress);
+                setState(() {
+                  successVisibility = true;
+                  errorVisibility = false;
+                });
+              },
+              child: Text("Ok"),
+            ),
+          ],
+        );
+      },
     );
   }
 }
