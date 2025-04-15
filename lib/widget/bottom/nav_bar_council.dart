@@ -27,7 +27,7 @@ BottomNavigationBar bottomNavigationBarCouncil(BuildContext context, int selecte
           width: 24.0,
           height: 24.0,
         ),
-        label: AppText.workRequest,
+        label: AppText.conversationNavTitle,
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset(
