@@ -12,8 +12,8 @@ class StatusOfRequest {
   static const String debateEstimate = 'Devis en cours de négociation';
   static const String estimateAccepted = 'Devis accepté, aucune date de travaux fixée';
   static const String timingEstimateToDebate = 'Date de travaux proposée pour le ';
-  static const String toPay = 'Devis à payer';
-  static const String ready = 'Travaux pour le ';
+  static const String toPay = "Tout est validé, voir avec l'artisan pour le paiement";
+  static const String ready = 'Travaux prévu pour le ';
   static const String inProgress = 'Travaux en cours';
   static const String finished = 'Travaux terminés';
 
@@ -24,10 +24,10 @@ class StatusOfRequest {
     debateEstimate: Colors.purple,
     estimateAccepted: Colors.green,
     timingEstimateToDebate: Colors.cyan,
-    toPay: Colors.red,
+    toPay: Colors.green,
     ready: Colors.blueAccent,
     inProgress: Colors.amber,
-    finished: Colors.teal,
+    finished: Colors.green,
   };
 
   static Color getStatusColor(String status) {
