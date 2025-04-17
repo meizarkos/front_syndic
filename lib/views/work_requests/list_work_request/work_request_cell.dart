@@ -32,22 +32,35 @@ class WorkRequestCell extends StatelessWidget {
             children: [
               Text(
                 trimText(title ?? AppText.noTitleForWork, 22),
-                style: getTextStyleMainColor(18.0),
+                style: getTextStyleMainColor(22.0),
                 maxLines: 1,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 20),
-              Text(
-                type ?? AppText.noCategoryFound,
-                style: Theme.of(context).textTheme.displayMedium,
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
+              RichText(
                 textAlign: TextAlign.center,
                 maxLines: 1,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '${AppText.category}: ',
+                      style: Theme.of(context).textTheme.displayMedium, // First font
+                    ),
+                    TextSpan(
+                      text: type ?? AppText.noCategoryFound,
+                      style: Theme.of(context).textTheme.displayMedium, // Second font
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(
+                color: Colors.black,
+                thickness: 1,
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               Text(
-                trimText(subtitle ?? AppText.noDescriptionWorkRequest, 60),
+                trimText(subtitle ?? AppText.noDescriptionWorkRequest, 200),
                 style: Theme.of(context).textTheme.displaySmall,
-                textAlign: TextAlign.center,
               ),
             ],
           ),

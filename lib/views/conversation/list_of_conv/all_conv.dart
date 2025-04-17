@@ -42,7 +42,7 @@ class _SeeConvState extends State<SeeConv> {
   List<Conversation> _conversations = [];
   bool isLoading = true;
   final ScrollController _scrollController = ScrollController();
-  bool _isPanelOpen = false;
+  bool _isPanelOpen = true;
 
   @override
   void initState() {
@@ -187,7 +187,18 @@ class _SeeConvState extends State<SeeConv> {
                   IconButton(
                     icon: Transform.rotate(
                       angle: _isPanelOpen ? 3.1416 : 0, // Rotate when open
-                      child: Icon(Icons.arrow_back_ios_new),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        padding: EdgeInsets.all(8), // Adjust padding as needed
+                        child: Icon(
+                          Icons.arrow_back_ios_new,
+                          color: Colors.white, // Optional: make the icon white for contrast
+                          size: 20, // Optional: control icon size
+                        ),
+                      ),
                     ),
                     onPressed: () {
                       setState(() {
