@@ -124,7 +124,7 @@ class _FirstContactArtisanState extends State<FirstContactArtisan> {
               icon: const Icon(Icons.send),
               onPressed: () async {
                 final conv = await postFirstConvArtisanWorkRequest(
-                  choseId(),
+                  widget.uuid,
                   _messageController.text,
                 );
                 if (conv == null) {
