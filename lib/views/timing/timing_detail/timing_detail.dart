@@ -21,12 +21,14 @@ class TimingDetail extends StatefulWidget {
     required this.routeToCreateMeeting,
     required this.future,
     required this.textContact,
+    this.showValidateButton = true,
   });
 
   final Function(String?) routeToRefuse;
   final VoidCallback routeToCreateMeeting;
   final Future<TimingAndCreator?> future;
   final Function(TimingAndCreator) textContact;
+  final bool showValidateButton;
 
   @override
   State<TimingDetail> createState() => _TimingDetailState();
@@ -146,16 +148,18 @@ class _TimingDetailState extends State<TimingDetail> {
                 ),
               ),
               const SizedBox(height: 40),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: elevatedButtonAndTextColor(
-                  AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
-                  AppText.refuse,
-                  context,
-                      () => widget.routeToRefuse(timing?.uuid),
-                  Colors.black,
+              if (widget.showValidateButton)
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: elevatedButtonAndTextColor(
+                    AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
+                    AppText.refuse,
+                    context,
+                        () => widget.routeToRefuse(timing?.uuid),
+                    Colors.black,
+                  ),
                 ),
-              ),
+
             ],
           ),
         ),

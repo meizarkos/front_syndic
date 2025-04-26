@@ -66,7 +66,7 @@ class _ArtisanMainState extends State<ArtisanMain> {
                   Expanded(
                     child: DropdownButton(
                       value: category,
-                      isExpanded: false,
+                      isExpanded: true,
                       underline: Container(),
                       iconSize: 35,
                       items:

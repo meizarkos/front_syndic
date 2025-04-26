@@ -47,7 +47,7 @@ class _ArtisanInfoState extends State<ArtisanInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarBackButton(context,title: AppText.unionInfo),
+      appBar: appBarBackButton(context,title: AppText.artisanInfo),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(AppUIValue.spaceScreenToAny),
@@ -138,7 +138,7 @@ class _ArtisanInfoState extends State<ArtisanInfo> {
       setState(() {
         errorVisibility = false;
       });
-      Navigator.pushNamed(context,'/artisan/bank_info', arguments: widget.createArtisan);
+      Navigator.pushNamed(context, '/artisan/get_adress', arguments: widget.createArtisan);
     } else {
       setState(() {
         errorText = AppText.createTitleWorkErrorText;

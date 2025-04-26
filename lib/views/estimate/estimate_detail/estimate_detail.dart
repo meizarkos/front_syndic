@@ -19,6 +19,7 @@ class EstimateDetail extends StatefulWidget {
     required this.patchStatus,
     required this.refuseEstimate,
     required this.goToBack,
+    this.showButton = true,
   });
 
   final String? uuid;
@@ -27,6 +28,7 @@ class EstimateDetail extends StatefulWidget {
   final Function(String?, VoidCallback) patchStatus;
   final Function(String?, VoidCallback) refuseEstimate;
   final VoidCallback goToBack;
+  final bool showButton;
 
   @override
   State<EstimateDetail> createState() => _EstimateDetailState();
@@ -41,6 +43,7 @@ class _EstimateDetailState extends State<EstimateDetail> {
     super.initState();
     widget.fetchData(widget.uuid).then((value) {
       setState(() {
+        print(widget.showButton);
         isLoading = false;
         estimateFromRequest = value;
       });
@@ -125,40 +128,41 @@ class _EstimateDetailState extends State<EstimateDetail> {
                 estimateFromRequest?.commentary ?? AppText.noCommentary,
                 style: Theme.of(context).textTheme.displaySmall,
               ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny),
-              if (handleText() == AppText.validate)
-                Center(
-                  child: elevatedButtonAndTextColor(
-                    AppColors.mainBackgroundColor,
-                    //validateEstimateText == '' ? handleText() :
-                    handleText(),
-                    context,
-                    handleButton(),
-                    AppColors.mainTextColor,
-                  ),
-                ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny),
-              if (handleText() == AppText.estimateAlreadyAccept) // refuse button
-                Center(
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
+              if (widget.showButton) ...[
+                const SizedBox(height: AppUIValue.spaceScreenToAny),
+                if (handleText() == AppText.validate)
+                  Center(
                     child: elevatedButtonAndTextColor(
-                      Colors.black,
-                      AppText.refuseEstimate,
+                      AppColors.mainBackgroundColor,
+                      handleText(),
                       context,
-                      () => alertToAccept(AppText.refuseEstimateAlertDialog, () async {
-                        await widget.refuseEstimate(estimateFromRequest?.uuid, () async {
-                          var estimateStatic = await widget.fetchData(widget.uuid);
-                          setState(() {
-                            estimateFromRequest?.status = estimateStatic.status;
-                          });
-                        });
-                      }),
-                      Colors.white,
+                      handleButton(),
+                      AppColors.mainTextColor,
                     ),
                   ),
-                ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny),
+                const SizedBox(height: AppUIValue.spaceScreenToAny),
+                if (handleText() == AppText.estimateAlreadyAccept) // refuse button
+                  Center(
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: elevatedButtonAndTextColor(
+                        Colors.black,
+                        AppText.refuseEstimate,
+                        context,
+                            () => alertToAccept(AppText.refuseEstimateAlertDialog, () async {
+                          await widget.refuseEstimate(estimateFromRequest?.uuid, () async {
+                            var estimateStatic = await widget.fetchData(widget.uuid);
+                            setState(() {
+                              estimateFromRequest?.status = estimateStatic.status;
+                            });
+                          });
+                        }),
+                        Colors.white,
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: AppUIValue.spaceScreenToAny),
+              ],
             ],
           ),
         ),

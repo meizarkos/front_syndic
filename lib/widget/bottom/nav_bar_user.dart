@@ -29,12 +29,6 @@ BottomNavigationBar bottomNavigationBarUser(BuildContext context, int selectedIn
         ),
         label: AppText.conversationNavTitle,
       ),
-      BottomNavigationBarItem(
-        icon: SvgPicture.asset(
-          'assets/invoice.svg',
-        ),
-        label: AppText.invoice,
-      ),
     ],
     currentIndex: selectedIndex,
     onTap: (int index)=>{
@@ -44,9 +38,6 @@ BottomNavigationBar bottomNavigationBarUser(BuildContext context, int selectedIn
       else if(index == 1){
         goToAndDeleteAll(context, '/user/conversation', 1, selectedIndex)
       }
-      else if(index == 2){
-          goToAndDeleteAll(context, '/co_owner/invoice',2, selectedIndex)
-        }
     },
     selectedItemColor: AppColors.mainTextColor,
     unselectedItemColor: Colors.grey,

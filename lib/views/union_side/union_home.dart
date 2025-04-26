@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/appartment/appartment.dart';
-import 'package:front_syndic/models/council/createCouncil.dart';
+import 'package:front_syndic/models/artisan/artisan.dart';
 import 'package:front_syndic/text/fr.dart';
 import 'package:front_syndic/widget/button/add_floating_button.dart';
 import 'package:front_syndic/widget/search_bar/search_bar.dart';
 
 import '../../api_handler/appartment/get_all_appartment.dart';
 import '../../api_handler/co_owner/get_co_owner_of_union.dart';
+import '../../api_handler/union_artisans/get_all_artisan.dart';
 import '../../models/adress/adress.dart';
 import '../../models/co_owner/co_owner.dart';
-import '../../models/council/council.dart';
+import '../../models/user/createUser.dart';
+import '../../models/user/user.dart';
 import '../../widget/bottom/nav_bar_union.dart';
 import '../co_owner/co_owner_cell/co_owner_cell.dart';
 
@@ -98,7 +100,7 @@ class _UnionMainState extends State<UnionMain> {
             const SizedBox(height: AppUIValue.spaceScreenToAny),
             if(category == AppText.unionCategories[0])
               FutureBuilder(
-                future: fetchAllCoOwnersFromUnion(),
+                future: getAllArtisanInactiveUnion(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -127,11 +129,55 @@ class _UnionMainState extends State<UnionMain> {
                           }
                           return GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context,'/union/co_owner_detail', arguments: dataFiltered[index].councilId);
+                              Navigator.pushNamed(context,'/union/validate_artisan', arguments: dataFiltered[index].uuid);
                             },
                             child: CoOwnerCell(
-                              title: dataFiltered[index].name,
-                              subtitle: dataFiltered[index].adress?.street,
+                              title: dataFiltered[index].companyName,
+                              subtitle: '${dataFiltered[index].lastName}\n${dataFiltered[index].firstName}',
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }
+                },
+              )
+            else if(category == AppText.unionCategories[1])
+              FutureBuilder(
+                future: getAllArtisanActiveUnion(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError || snapshot.data == null) {
+                    return const Center(child: Text(AppText.apiErrorText));
+                  } else if (snapshot.data!.isEmpty) {
+                    return const Center(child: Text(AppText.apiNoResult));
+                  } else {
+                    final dataFiltered = lengthOfList(snapshot.data);
+                    if (dataFiltered == null || dataFiltered.isEmpty) {
+                      return const Center(child: Text(AppText.apiNoResult));
+                    }
+                    final size = dataFiltered.length + 1;
+                    return Expanded(
+                      child: GridView.builder(
+                        itemCount: size,
+                        gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 20.0,
+                          mainAxisSpacing: 20.0,
+                        ),
+                        itemBuilder: (context, index) {
+                          if (index == dataFiltered.length) {
+                            return const SizedBox(height: 25);
+                          }
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context,'/union/block_artisan', arguments: dataFiltered[index].uuid);
+                            },
+                            child: CoOwnerCell(
+                              title: dataFiltered[index].companyName,
+                              subtitle: '${dataFiltered[index].lastName}\n${dataFiltered[index].firstName}',
                             ),
                           );
                         },
@@ -188,7 +234,8 @@ class _UnionMainState extends State<UnionMain> {
         ),
       ),
       floatingActionButton: addFloatingButton(() {
-        Navigator.pushNamed(context, '/union/create_place');
+        final createUser = CreateUser(user: User(), adress: Adress());
+        Navigator.pushNamed(context, '/union/create_user/name',arguments: createUser);
       }),
       bottomNavigationBar: bottomNavigationBarUnion(context, 0),
     );
@@ -209,12 +256,12 @@ class _UnionMainState extends State<UnionMain> {
     }).toList();
   }
 
-  List<CoOwner>? lengthOfList(List<CoOwner>? data) {
-    return data?.where((coOwner) {
-      if (coOwner.name == null) {
+  List<Artisan>? lengthOfList(List<Artisan>? data) {
+    return data?.where((artisan) {
+      if (artisan.companyName == null) {
         return false;
       }
-      return coOwner.name!.toLowerCase().startsWith(searchValue.toLowerCase());
+      return artisan.companyName!.toLowerCase().startsWith(searchValue.toLowerCase());
     }).toList();
   }
 }

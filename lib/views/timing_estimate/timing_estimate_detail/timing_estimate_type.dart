@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_syndic/views/timing_estimate/timing_estimate_detail/timing_estimate.dart';
 
-import '../../../api_handler/paiement/paiement_council.dart';
 import '../../../api_handler/timing_estimate/accept_timing_estimate.dart';
 import '../../../api_handler/timing_estimate/delete_timing_estimate.dart';
 import '../../../api_handler/timing_estimate/get_timing_estimate.dart';
@@ -77,7 +76,7 @@ class TimingEstimateUnion extends StatelessWidget {
         Navigator.pushReplacementNamed(context, 'union/specific_conv', arguments: convUuid);
       },
       role: RoleBasedText.union,
-      apiPaiement: (int amount,String currency) => createPaymentUnion(amount, 'EUR'),
+      showButton: false,
     );
   }
 
@@ -119,7 +118,6 @@ class TimingEstimateCouncil extends StatelessWidget {
         Navigator.pushReplacementNamed(context, '/council/see_conv', arguments: convUuid);
       },
       role: RoleBasedText.council,
-      apiPaiement: (int amount,String currency) => createPaymentCouncil(amount, 'EUR'),
     );
   }
 
@@ -161,7 +159,6 @@ class TimingEstimateUser extends StatelessWidget {
         Navigator.pushReplacementNamed(context, '/user/see_conv', arguments: convUuid);
       },
       role: RoleBasedText.council,
-      apiPaiement: (int amount,String currency) => createPaymentCouncil(amount, 'EUR'),
     );
   }
 

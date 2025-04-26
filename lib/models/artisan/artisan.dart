@@ -1,3 +1,5 @@
+import '../adress/adress.dart';
+
 class AttributesArtisan {
   static const uuid = 'uuid';
   static const companyName = 'company_name';
@@ -5,6 +7,7 @@ class AttributesArtisan {
   static const lastName = 'last_name';
   static const siretNumber = 'siret_number';
   static const phone = 'phone';
+  static const adress = 'adress';
   static const adressId = 'adress_id';
   static const createdAt = 'created_at';
   static const updatedAt = 'updated_at';
@@ -18,6 +21,7 @@ class Artisan{
    String? siretNumber;
    String? phone;
    String? adressId;
+   Adress? adress;
    String? createdAt;
    String? updatedAt;
 
@@ -29,6 +33,7 @@ class Artisan{
     this.siretNumber,
     this.phone,
     this.adressId,
+    this.adress,
     this.createdAt,
     this.updatedAt,
   });
@@ -42,6 +47,9 @@ class Artisan{
       siretNumber: json[AttributesArtisan.siretNumber],
       phone: json[AttributesArtisan.phone],
       adressId: json[AttributesArtisan.adressId],
+      adress: json[AttributesArtisan.adress] != null
+          ? Adress.fromJson(json[AttributesArtisan.adress])
+          : null,
       createdAt: json[AttributesArtisan.createdAt],
       updatedAt: json[AttributesArtisan.updatedAt],
     );

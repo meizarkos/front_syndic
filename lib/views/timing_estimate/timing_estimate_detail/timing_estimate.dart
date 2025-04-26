@@ -27,7 +27,7 @@ class TimingEstimateView extends StatefulWidget {
     required this.onRefuse,
     required this.role,
     required this.goBack,
-    this.apiPaiement,
+    this.showButton = true,
   });
 
   final Function(String?) fetchData;
@@ -38,7 +38,7 @@ class TimingEstimateView extends StatefulWidget {
   final Function(String?) onRefuse;
   final String role;
   final VoidCallback goBack;
-  final Function(int amount,String currency)? apiPaiement;
+  final bool showButton;
 
   @override
   State<TimingEstimateView> createState() => _TimingEstimateViewState();
@@ -202,8 +202,27 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                     .displaySmall,
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny * 2),
-              if (!widget.valueValidateByYou
-                  .contains(timingEstimateStatic?.status))
+              if(widget.showButton)...[
+                if (!widget.valueValidateByYou
+                    .contains(timingEstimateStatic?.status))
+                  Center(
+                    child: SizedBox(
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.5,
+                      child: elevatedButtonAndTextColor(
+                        AppColors.mainBackgroundColor,
+                        AppText.validate,
+                        context,
+                            () {
+                          widget.onAccept(timingEstimateStatic?.uuid);
+                        },
+                        AppColors.mainTextColor,
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: AppUIValue.spaceScreenToAny),
                 Center(
                   child: SizedBox(
                     width: MediaQuery
@@ -211,41 +230,24 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
                         .size
                         .width * 0.5,
                     child: elevatedButtonAndTextColor(
-                      AppColors.mainBackgroundColor,
-                      AppText.validate,
+                      AppColors.actionButtonColor
+                          .withOpacity(AppUIValue.opacityActionButton),
+                      AppText.refuse,
                       context,
-                          () {
-                        widget.onAccept(timingEstimateStatic?.uuid);
-                      },
-                      AppColors.mainTextColor,
+                          () =>
+                          showMyAlert(
+                              context,
+                              AppText.refuseTimingEstimate,
+                              AppText.refuseTimingEstimateText,
+                                  () {
+                                widget.onRefuse(timingEstimateStatic?.uuid);
+                              }
+                          ),
+                      Colors.black,
                     ),
                   ),
                 ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny),
-              Center(
-                child: SizedBox(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 0.5,
-                  child: elevatedButtonAndTextColor(
-                    AppColors.actionButtonColor
-                        .withOpacity(AppUIValue.opacityActionButton),
-                    AppText.refuse,
-                    context,
-                        () =>
-                        showMyAlert(
-                            context,
-                            AppText.refuseTimingEstimate,
-                            AppText.refuseTimingEstimateText,
-                                () {
-                              widget.onRefuse(timingEstimateStatic?.uuid);
-                            }
-                        ),
-                    Colors.black,
-                  ),
-                ),
-              ),
+              ],
               /*if (timingEstimateStatic?.status == timingEstimateStatic?.statusGoal && widget.apiPaiement != null) ...[
                 const SizedBox(height: AppUIValue.spaceScreenToAny*2),
                 Center(
@@ -274,7 +276,7 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
     );
   }
 
-  Future<String?> createPaymentIntent(int amount, String currency) async {
+  /*Future<String?> createPaymentIntent(int amount, String currency) async {
     try {
       return await widget.apiPaiement!(amount, currency);
     } catch (err) {
@@ -317,5 +319,5 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
     catch (e) {
       print('$e');
     }
-  }
+  }*/
 }

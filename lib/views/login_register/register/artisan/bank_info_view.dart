@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 
 import '../../../../color.dart';
 import '../../../../core_value.dart';
@@ -105,4 +105,4 @@ class _BankInfoArtisanState extends State<BankInfoArtisan> {
     });
     Navigator.pushNamed(context, '/artisan/get_adress', arguments: widget.createArtisan);
   }
-}
+}*/

@@ -66,6 +66,11 @@ class RecapArtisanRegister extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
+              Text(
+                AppText.recapWarning,
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              const SizedBox(height: AppUIValue.spaceScreenToAny),
               Center(
                 child: elevatedButtonAndTextColor(
                   AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
@@ -83,10 +88,7 @@ class RecapArtisanRegister extends StatelessWidget {
   }
 
   Future<void> _register(BuildContext context)async{
-      final token = await registerArtisan(createArtisan);
-      if(token != ''){
-        Credential.instance.token = token;
-        Navigator.pushNamedAndRemoveUntil(context, '/artisan_main', (route) => false);
-      }
+      await registerArtisan(createArtisan);
+      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 }

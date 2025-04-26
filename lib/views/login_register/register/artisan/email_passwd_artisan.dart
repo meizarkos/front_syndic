@@ -24,8 +24,6 @@ class EmailPasswdArtisan extends StatefulWidget {
 
 class _EmailPasswdArtisanState extends State<EmailPasswdArtisan> {
   TextEditingController? _emailController;
-  TextEditingController? _passwdController;
-  TextEditingController? _confirmPasswdController;
 
   bool errorVisibility = false;
   String errorText = AppText.createTitleWorkErrorText;
@@ -34,8 +32,6 @@ class _EmailPasswdArtisanState extends State<EmailPasswdArtisan> {
   void initState(){
     super.initState();
     _emailController = TextEditingController(text: widget.createArtisan.email);
-    _passwdController = TextEditingController(text: widget.createArtisan.password);
-    _confirmPasswdController = TextEditingController(text: widget.createArtisan.password);
   }
 
   @override
@@ -53,28 +49,6 @@ class _EmailPasswdArtisanState extends State<EmailPasswdArtisan> {
                   widget.createArtisan.email = value;
                 },
                 maxLength: 50,
-              ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny),
-              TextField(
-                controller: _passwdController,
-                decoration: roundBorderTextFieldWithoutCounter(AppText.loginLabelTextPassword),
-                onChanged: (value) {
-                  if(_passwdController == null)return;
-                  _passwdController!.text = value;
-                },
-                maxLength: 50,
-                obscureText: true,
-              ),
-              const SizedBox(height: AppUIValue.spaceScreenToAny),
-              TextField(
-                controller: _confirmPasswdController,
-                decoration: roundBorderTextFieldWithoutCounter(AppText.confirmPasswd),
-                onChanged: (value) {
-                  if(_confirmPasswdController == null)return;
-                  _confirmPasswdController!.text = value;
-                },
-                maxLength: 50,
-                obscureText: true,
               ),
               const SizedBox(height: AppUIValue.spaceScreenToAny),
               ErrorVisibility(errorVisibility: errorVisibility, errorText: errorText),
@@ -100,7 +74,7 @@ class _EmailPasswdArtisanState extends State<EmailPasswdArtisan> {
 
   Future<void> _onRegister()async{
     final instance = widget.createArtisan;
-    if(instance.email == null || instance.email == '' || _passwdController == null || _passwdController!.text == '' || _confirmPasswdController == null || _confirmPasswdController!.text == '' || _passwdController == null || _passwdController!.text == ''){
+    if(instance.email == null || instance.email == ''){
       setState(() {
         errorText = AppText.createTitleWorkErrorText;
         errorVisibility = true;
@@ -109,13 +83,6 @@ class _EmailPasswdArtisanState extends State<EmailPasswdArtisan> {
     else if(!isValidEmail(instance.email!)){
       setState(() {
         errorText = AppText.emailFormatError;
-        errorVisibility = true;
-      });
-      return;
-    }
-    else if(_passwdController!.text != _confirmPasswdController!.text){
-      setState(() {
-        errorText = AppText.passWdNoMatch;
         errorVisibility = true;
       });
       return;
@@ -131,7 +98,6 @@ class _EmailPasswdArtisanState extends State<EmailPasswdArtisan> {
       setState(() {
         errorVisibility = false;
       });
-      widget.createArtisan.password = _passwdController!.text;
       Navigator.pushNamed(context, '/artisan/recap',arguments: widget.createArtisan);
     }
   }

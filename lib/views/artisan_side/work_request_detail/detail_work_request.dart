@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_syndic/utils/string_handler/handle_string.dart';
 
 import '../../../api_handler/conversation/fetch_conversation.dart';
 import '../../../color.dart';
@@ -113,7 +114,7 @@ class _DetailWorkRequestArtisanSideState extends State<DetailWorkRequestArtisanS
                             style: Theme.of(context).textTheme.displayMedium,
                           ),
                           TextSpan(
-                            text: data.category ?? AppText.apiNoResult,
+                            text: trimText(data.category ?? AppText.apiNoResult,20),
                             style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ],

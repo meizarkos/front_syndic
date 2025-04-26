@@ -31,6 +31,7 @@ class EstimateDetailUnion extends StatelessWidget {
         Navigator.pop(context);
         Navigator.pushReplacementNamed(context, 'union/specific_conv',arguments: convUuid);
       },
+      showButton: false,
     );
   }
 }

@@ -7,6 +7,9 @@ import 'package:front_syndic/widget/header/header_for_all.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
 
 import '../../api_handler/login/login.dart';
+import '../../models/adress/adress.dart';
+import '../../models/artisan/artisan.dart';
+import '../../models/artisan/createArtisan.dart';
 import '../../widget/header/app_bar_size.dart';
 
 class ConnectAll extends StatefulWidget {
@@ -125,22 +128,6 @@ class _ConnectAllState extends State<ConnectAll> {
             const SizedBox(height: AppUIValue.spaceScreenToAny),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/register');
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                // Add padding around the text
-                child: Center(
-                  child: Text(
-                    AppText.loginLinkToRegister,
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: AppUIValue.spaceScreenToAny),
-            GestureDetector(
-              onTap: () {
                 _enterPasswd(context);
               },
               child: Padding(
@@ -149,6 +136,23 @@ class _ConnectAllState extends State<ConnectAll> {
                 child: Center(
                   child: Text(
                     AppText.forgottenPasswd,
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: AppUIValue.spaceScreenToAny),
+            GestureDetector(
+              onTap: () {
+                final createArtisan = CreateArtisan(artisan: Artisan(), adress: Adress());
+                Navigator.pushNamed(context, '/artisan/creation_info',arguments : createArtisan);
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                // Add padding around the text
+                child: Center(
+                  child: Text(
+                    AppText.loginLinkToRegister,
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ),

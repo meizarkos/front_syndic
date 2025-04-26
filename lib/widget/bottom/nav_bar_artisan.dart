@@ -29,12 +29,6 @@ BottomNavigationBar bottomNavigationBarArtisan(BuildContext context, int selecte
         ),
         label: AppText.conversationNavTitle,
       ),
-      BottomNavigationBarItem(
-        icon: SvgPicture.asset(
-          'assets/invoice.svg',
-        ),
-        label: AppText.invoice,
-      ),
     ],
     currentIndex: selectedIndex,
     onTap: (int index)=>{
@@ -43,9 +37,6 @@ BottomNavigationBar bottomNavigationBarArtisan(BuildContext context, int selecte
       }
       else if(index == 1){
         goToAndDeleteAll(context, '/artisan/conversation', 1, selectedIndex)
-      }
-      else if(index == 2){
-        goToAndDeleteAll(context, '/artisan/invoice',2, selectedIndex)
       }
     },
     selectedItemColor: AppColors.mainTextColor,

@@ -42,14 +42,6 @@ BottomNavigationBar bottomNavigationBarUnion(BuildContext context, int selectedI
         ),
         label: AppText.conversationNavTitle,
       ),
-      BottomNavigationBarItem(
-        icon: SvgPicture.asset(
-          'assets/invoice.svg',
-          width: iconSize,
-          height: iconSize,
-        ),
-        label: AppText.invoice,
-      ),
     ],
     currentIndex: selectedIndex,
     onTap: (int index)=>{
@@ -61,9 +53,6 @@ BottomNavigationBar bottomNavigationBarUnion(BuildContext context, int selectedI
       }
       else if(index == 2){
           goToAndDeleteAll(context, '/union/conversation', 2, selectedIndex)
-      }
-      else if(index == 3){
-          goToAndDeleteAll(context, '/union/invoice',3, selectedIndex)
       }
     },
     selectedItemColor: AppColors.mainTextColor,

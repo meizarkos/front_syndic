@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
-import 'package:front_syndic/models/appartment/appartment.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 
 import '../../core_value.dart';
@@ -57,4 +56,4 @@ class ChoseWhichOneCreateUnion extends StatelessWidget {
       ),
     );
   }
-}
+}*/

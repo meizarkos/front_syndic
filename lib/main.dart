@@ -28,11 +28,9 @@ import 'package:front_syndic/views/estimate/create_estimate/set_price_and_commen
 import 'package:front_syndic/views/estimate/estimate_artisan/estimate_detail_artisan.dart';
 import 'package:front_syndic/views/estimate/estimate_detail/estimate_detail_type.dart';
 import 'package:front_syndic/views/login_register/login.dart';
-import 'package:front_syndic/views/login_register/register/artisan/bank_info_view.dart';
 import 'package:front_syndic/views/login_register/register/artisan/email_passwd_artisan.dart';
 import 'package:front_syndic/views/login_register/register/artisan/info_artisan.dart';
 import 'package:front_syndic/views/login_register/register/artisan/recap.dart';
-import 'package:front_syndic/views/login_register/register/chose_class.dart';
 import 'package:front_syndic/views/login_register/register/union/confirm.dart';
 import 'package:front_syndic/views/login_register/register/union/union_data.dart';
 import 'package:front_syndic/views/login_register/register/union/union_passwd_email.dart';
@@ -41,6 +39,7 @@ import 'package:front_syndic/views/timing/create_timing/create_timing_type.dart'
 import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart';
 import 'package:front_syndic/views/timing_estimate/create_timing_estimate/create_timing_estimate_type.dart';
 import 'package:front_syndic/views/timing_estimate/timing_estimate_detail/timing_estimate_type.dart';
+import 'package:front_syndic/views/union_side/artisan_validate_detail/artisan_validate_detail_type.dart';
 import 'package:front_syndic/views/union_side/chose_which_one_create.dart';
 import 'package:front_syndic/views/union_side/create_council/confirm/confirm_creation_type.dart';
 import 'package:front_syndic/views/union_side/create_user/chose_name.dart';
@@ -113,8 +112,6 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => const ConnectAll(),
-        '/register': (context) => const ChoseClass(),
-        '/union/create_place': (context) => const ChoseWhichOneCreateUnion(),
         '/union_main': (context) => const UnionMain(),
         '/union/conversation': (context) => const ConversationInProgressUnion(),
         '/artisan_main': (context) => const ArtisanMain(),
@@ -149,6 +146,29 @@ class MyApp extends StatelessWidget {
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
+
+          case '/union/block_artisan':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => ArtisanBlock(
+                  uuid: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/union/validate_artisan':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => ArtisanValidateRegister(
+                  uuid: arguments,
+                ),
+              );
+            }
+            break;
+
 
           case '/user/see_conv':
             final arguments = settings.arguments;
@@ -335,7 +355,7 @@ class MyApp extends StatelessWidget {
             }
             break;
 
-          case '/artisan/bank_info':
+          /*case '/artisan/bank_info':
             final arguments = settings.arguments;
             if (arguments is CreateArtisan) {
               return MaterialPageRoute(
@@ -344,7 +364,7 @@ class MyApp extends StatelessWidget {
                 ),
               );
             }
-            break;
+            break;*/
 
           case '/council/modify_demand':
             final arguments = settings.arguments;

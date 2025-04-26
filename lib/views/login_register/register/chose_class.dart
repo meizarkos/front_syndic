@@ -1,5 +1,5 @@
 
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/models/artisan/createArtisan.dart';
@@ -58,4 +58,4 @@ class ChoseClass extends StatelessWidget {
       ),
     );
   }
-}
+}*/

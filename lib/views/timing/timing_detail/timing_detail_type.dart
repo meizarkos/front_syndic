@@ -84,6 +84,7 @@ class TimingDetailUnion extends StatelessWidget {
         }
         return contactArtisan;
       },
+      showValidateButton: false,
     );
   }
 }

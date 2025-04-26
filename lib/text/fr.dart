@@ -45,7 +45,7 @@ class AppText {
   /* LoginStrings */
   static const String loginTitle = 'Connexion';
   static const String loginConnectionButtonText = 'Se connecter';
-  static const String loginLinkToRegister = 'Pas encore de compte ? Inscrivez-vous';
+  static const String loginLinkToRegister = 'Si vous êtes un artisan, inscrivez-vous ici';
   static const String forgottenPasswd = 'Mot de passe oublié';
   static const String loginLabelTextEmail = 'Email';
   static const String loginLabelTextPassword = 'Mot de passe';
@@ -54,14 +54,18 @@ class AppText {
   static const String loginErrorText = 'Mauvais identifiants';
   static const String siretNumberWrongSize = 'Le numéro de SIRET doit contenir 14 chiffres';
   static const String identification = 'Identification';
+  static const String validateArtisan = 'Valider artisan';
 
   /*Register */
   static const String accountTypeTitle = 'Type de compte';
+  static const String confirmArtisanPatchAccount = 'Etes vous sûr de vouloir éxécuter cet action?';
   static const String artisan = 'Artisan';
   static const String council = 'Conseil syndical';
   static const String user = 'Propriétaire';
   static const String union = 'Syndicat';
   static const String unionInfo = 'Informations du syndicat';
+  static const String artisanInfo = 'Informations de l\'artisan';
+  static const String recapWarning = "Le mot de passe vous sera communiqué par email.\nVotre compte sera inactif jusqu'à la validation par l'admin, vous recevrez un email une fois ce dernier activée.";
   static const String unionName = 'Nom du syndicat';
   static const String companyName = 'Nom de l\'entreprise';
   static const String unionLastName = 'Votre nom';
@@ -96,7 +100,7 @@ class AppText {
   static const String noStringNameForCownerSubtitle = 'Adresse inconnu';
   static const String unionMainSearchBarEmpty = 'Rechercher';
   static const String unionMainAddButton = 'Ajouter';
-  static const List<String> unionCategories = ['Copropriété','Appartement'];
+  static const List<String> unionCategories = ['Artisan à valider','Artisan validé','Appartement'];
   static const String createAPlace = 'Créer un client';
   static const String createACopro = 'Créer une copropriété';
   static const String createAnAppartment = 'Créer un appartement';
@@ -152,7 +156,7 @@ class AppText {
   static const String titlePlaceHolder = 'Titre de votre demande';
   static const String createTitleWorkErrorText = 'Veuillez remplir tous les champs';
   static const String createCategoryTitle = 'Choisissez une catégorie';
-  static const List<String> listOfTaskCategory = ['Plomberie', 'Electricité', 'Peinture', 'Sol', 'Menuiserie'];
+  static const List<String> listOfTaskCategory = ['Plomberie', 'Electricité', 'Peinture', 'Sol', 'Menuiserie','Jardinage','Développement informatique','Réparation informatique','Autre'];
   static const List<String> listOfTaskCategoryWithNull = [
     ...listOfTaskCategory,
     'Pas de categorie'
