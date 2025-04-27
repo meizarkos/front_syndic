@@ -24,7 +24,7 @@ class WorkRequestListCouncil extends StatelessWidget {
       },
       bottomBar: bottomNavigationBarCouncil(context, 1),
       addWorkRequest: ()async {
-        var createWorkRequest = CreateWorkRequest([],WorkRequest(),null,Adress());
+        var createWorkRequest = CreateWorkRequest([],WorkRequest(),Adress());
         Navigator.pushNamed(context, '/work_requests/title_and_desc',arguments: createWorkRequest);
       },
     );

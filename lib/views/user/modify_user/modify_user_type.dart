@@ -18,6 +18,7 @@ class ModifyUserForUnion extends StatelessWidget {
       fetchData: getUserFromUnion,
       patchData: patchUserFromUnion,
       userUuid: userUuid,
+      showAppBar: false,
     );
   }
 }

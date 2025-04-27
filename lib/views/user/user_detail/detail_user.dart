@@ -108,16 +108,6 @@ class _UserDetailState extends State<UserDetail> {
                               () => goToCreateWorkRequest(context),
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: elevatedButtonOpacity(
-                          AppColors.mainTextColor.withOpacity(AppUIValue.opacityActionButton),
-                          AppText.buttonSeeInvoice,
-                          context,
-                              () => Navigator.pushNamed(context, '/invoice'),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -136,6 +126,19 @@ class _UserDetailState extends State<UserDetail> {
                 Colors.black,
               ),
             ),
+            const SizedBox(height: spaceInsideColumn),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.85,
+              child: elevatedButtonAndTextColor(
+                AppColors.actionButtonColor.withOpacity(AppUIValue.opacityActionButton),
+                AppText.blockUser,
+                context,
+                    () {
+                  Navigator.pushNamed(context, '/union/deactivate_user',arguments: widget.apartmentUuid);
+                },
+                Colors.black,
+              ),
+            ),
           ],
         ),
       ),
@@ -147,7 +150,6 @@ class _UserDetailState extends State<UserDetail> {
       arguments: CreateWorkRequest(
         [],
         WorkRequest(userId: apartment?.userId),
-        null,
         Adress(),
       ),
     );

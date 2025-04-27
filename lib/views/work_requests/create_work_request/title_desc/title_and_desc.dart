@@ -1,11 +1,9 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/core_value.dart';
 import 'package:front_syndic/widget/decoration/text_field_deco_main.dart';
 import 'package:front_syndic/widget/header/app_bar_back_button.dart';
 import 'package:front_syndic/widget/visibility/error.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../models/work_request/create_work_request.dart';
 import '../../../../text/fr.dart';
@@ -104,14 +102,16 @@ class _TitleAndDescState extends State<TitleAndDesc> {
     );
   }
 
-  Future<CameraDescription> getCamera() async {
+  void _goToCategory() {
+    Navigator.pushNamed(context, widget.route,arguments: widget.createWorkRequest);
+  }
+
+  /*Future<CameraDescription> getCamera() async {
     final cameras = await availableCameras();
     return cameras.first;
   }
 
-  void _goToCategory() {
-    Navigator.pushNamed(context, widget.route,arguments: widget.createWorkRequest);
-  }
+
 
   void _goToCamera() {
     Navigator.pushNamed(context, '/work_requests/pictures', arguments: widget.createWorkRequest);
@@ -139,5 +139,5 @@ class _TitleAndDescState extends State<TitleAndDesc> {
   Future<CameraDescription> _getCamera() async {
     final cameras = await availableCameras();
     return cameras.first;
-  }
+  }*/
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:front_syndic/color.dart';
 import 'package:front_syndic/models/adress/adress.dart';
 import 'package:front_syndic/text/fr.dart';

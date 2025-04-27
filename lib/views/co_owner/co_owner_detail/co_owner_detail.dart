@@ -207,7 +207,6 @@ class _CoOwnerDetailState extends State<CoOwnerDetail> {
             arguments: CreateWorkRequest(
               [],
               WorkRequest(councilId: widget.uuid),
-              null,
               Adress(),
             ),
         );

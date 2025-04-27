@@ -186,9 +186,9 @@ class _UnionMainState extends State<UnionMain> {
                   }
                 },
               )
-            else
+            else if(category == AppText.unionCategories[2])
               FutureBuilder(
-                future: getAllApartment(),
+                future: getAllApartmentActive(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -229,7 +229,51 @@ class _UnionMainState extends State<UnionMain> {
                     );
                   }
                 },
-              ),
+              )
+            else
+                FutureBuilder(
+                  future: getAllApartmentInactive(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError || snapshot.data == null) {
+                      return const Center(child: Text(AppText.apiErrorText));
+                    } else if (snapshot.data!.isEmpty) {
+                      return const Center(child: Text(AppText.apiNoResult));
+                    } else {
+                      final dataFiltered = lengthOfApartment(snapshot.data);
+                      if (dataFiltered == null || dataFiltered.isEmpty) {
+                        return const Center(child: Text(AppText.apiNoResult));
+                      }
+                      final size = dataFiltered.length + 1;
+                      return Expanded(
+                        child: GridView.builder(
+                          itemCount: size,
+                          gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 20.0,
+                            mainAxisSpacing: 20.0,
+                          ),
+                          itemBuilder: (context, index) {
+                            if (index == dataFiltered.length) {
+                              return const SizedBox(height: 25);
+                            }
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context,'/union/activate_user', arguments: dataFiltered[index].uuid);
+                              },
+                              child: CoOwnerCell(
+                                title: dataFiltered[index].user?.name,
+                                subtitle: dataFiltered[index].adress?.street,
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                  },
+                ),
           ],
         ),
       ),

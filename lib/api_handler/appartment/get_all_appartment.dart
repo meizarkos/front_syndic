@@ -3,9 +3,9 @@ import 'package:front_syndic/models/appartment/appartment.dart';
 import '../../core_value.dart';
 import '../request.dart';
 
-Future<List<Apartment>?> getAllApartment()async{
+Future<List<Apartment>?> getAllApartment(String route)async{
   try{
-    final response = await request(url: '${APIValue.union}get_all_appartment', method: "GET");
+    final response = await request(url: route, method: "GET");
     final apartments = (response.data as List)
         .map((recordJson) => Apartment.fromJson(recordJson))
         .toList();
@@ -13,4 +13,12 @@ Future<List<Apartment>?> getAllApartment()async{
   }catch(e){
     return null;
   }
+}
+
+Future<List<Apartment>?> getAllApartmentActive()async{
+  return await getAllApartment('${APIValue.union}get_all_appartment');
+}
+
+Future<List<Apartment>?> getAllApartmentInactive()async{
+  return await getAllApartment('${APIValue.union}get_all_appartment_inactive');
 }
