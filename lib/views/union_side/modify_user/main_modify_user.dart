@@ -19,7 +19,7 @@ class MainModifyUserFromUnion extends StatefulWidget {
 
 class _MainModifyUserFromUnionState extends State<MainModifyUserFromUnion> {
 
-  String category = AppText.council;
+  String category = AppText.user;
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-import 'dart:io';
+/*import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -220,4 +220,4 @@ class CameraScreenState extends State<CameraScreen> {
     widget.createWorkRequest.images = images;
     Navigator.pushNamed(context, '/work_requests/category',arguments: widget.createWorkRequest);
   }
-}
+}*/

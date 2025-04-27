@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:front_syndic/models/estimate/estimate.dart';
 import 'package:front_syndic/models/timing/timing_estimate.dart';
 import 'package:front_syndic/views/account/artisan/modify_adress_artisan.dart';
@@ -40,7 +39,7 @@ import 'package:front_syndic/views/timing/timing_detail/timing_detail_type.dart'
 import 'package:front_syndic/views/timing_estimate/create_timing_estimate/create_timing_estimate_type.dart';
 import 'package:front_syndic/views/timing_estimate/timing_estimate_detail/timing_estimate_type.dart';
 import 'package:front_syndic/views/union_side/artisan_validate_detail/artisan_validate_detail_type.dart';
-import 'package:front_syndic/views/union_side/chose_which_one_create.dart';
+import 'package:front_syndic/views/union_side/change_account_status_user/change_status_account_user_type.dart';
 import 'package:front_syndic/views/union_side/create_council/confirm/confirm_creation_type.dart';
 import 'package:front_syndic/views/union_side/create_user/chose_name.dart';
 import 'package:front_syndic/views/union_side/create_user/recap_user.dart';
@@ -56,7 +55,6 @@ import 'package:front_syndic/views/user/user_detail/detail_user_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/category/category_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/chose_time/chose_date_time_type.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/recap/recap_type.dart';
-import 'package:front_syndic/views/work_requests/create_work_request/take_picture.dart';
 import 'package:front_syndic/views/work_requests/create_work_request/title_desc/title_and_desc_type.dart';
 import 'package:front_syndic/views/work_requests/list_work_request/work_request_type.dart';
 import 'package:front_syndic/views/work_requests/list_work_request_and_account/list_work_request_main_type.dart';
@@ -73,7 +71,6 @@ import 'models/work_request/create_work_request.dart';
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
-  Stripe.publishableKey = 'pk_test_51QWlA5P3n22SAVzLvhdPoTDKJf1jk5NcN1JSf5D42zMnV6fNZylrfV5DdhqTU84acIcIFAk7MSunGXHyOH3EyBl200bjWz1ZG9';
   runApp(const MyApp());
 }
 
@@ -146,6 +143,28 @@ class MyApp extends StatelessWidget {
       },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
+
+          case '/union/activate_user':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => ChangeStatusAccountUserActivate(
+                  apartmentUuid: arguments,
+                ),
+              );
+            }
+            break;
+
+          case '/union/deactivate_user':
+            final arguments = settings.arguments;
+            if (arguments is String?) {
+              return MaterialPageRoute(
+                builder: (context) => ChangeStatusAccountUserDeActivate(
+                  apartmentUuid: arguments,
+                ),
+              );
+            }
+            break;
 
           case '/union/block_artisan':
             final arguments = settings.arguments;
@@ -780,16 +799,6 @@ class MyApp extends StatelessWidget {
             if (arguments is CreateWorkRequest) {
               return MaterialPageRoute(
                 builder: (context) => TitleAndDescCouncil(
-                  createWorkRequest: arguments,
-                ),
-              );
-            }
-            break;
-          case '/work_requests/pictures':
-            final arguments = settings.arguments;
-            if (arguments is CreateWorkRequest) {
-              return MaterialPageRoute(
-                builder: (context) => CameraScreen(
                   createWorkRequest: arguments,
                 ),
               );

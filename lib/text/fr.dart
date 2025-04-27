@@ -32,6 +32,8 @@ class AppText {
   static const String from = 'du';
   static const String one = 'Un';
   static const String validate = 'Valider';
+  static const String block = 'Bloquer';
+  static const String unblock = 'Débloquer';
   static const String successModify = 'Modification réussie';
   static const String listCoOwneTitle = 'Mes copropriétées';
   static const String deconnect = 'Déconnexion';
@@ -55,6 +57,7 @@ class AppText {
   static const String siretNumberWrongSize = 'Le numéro de SIRET doit contenir 14 chiffres';
   static const String identification = 'Identification';
   static const String validateArtisan = 'Valider artisan';
+  static const String validateUser = 'Valider utilisateur';
 
   /*Register */
   static const String accountTypeTitle = 'Type de compte';
@@ -100,7 +103,7 @@ class AppText {
   static const String noStringNameForCownerSubtitle = 'Adresse inconnu';
   static const String unionMainSearchBarEmpty = 'Rechercher';
   static const String unionMainAddButton = 'Ajouter';
-  static const List<String> unionCategories = ['Artisan à valider','Artisan validé','Appartement'];
+  static const List<String> unionCategories = ['Artisan à valider','Artisan validé','Appartement actif','Utilisateur bloqué'];
   static const String createAPlace = 'Créer un client';
   static const String createACopro = 'Créer une copropriété';
   static const String createAnAppartment = 'Créer un appartement';
@@ -196,6 +199,7 @@ class AppText {
   static const String lotSize = 'Nombre de lots';
   static const String wrongInt = 'Veuillez entrer un nombre entier';
   static const String modifyTheseData = 'Modifier ces informations';
+  static const String blockUser = 'Bloquer cet utilisateur';
   static const String uniqueSiretNumber = 'Le numéro de SIRET doit être unique';
 
   /* WorkRequestMessage */

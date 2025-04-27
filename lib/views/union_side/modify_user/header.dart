@@ -24,7 +24,7 @@ class HeaderForModifyUserFromUnion extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            buildText(AppText.council),
+            buildText(AppText.user),
             SizedBox(width: AppUIValue.spaceScreenToAny*2),
             buildText(AppText.adress),
           ],

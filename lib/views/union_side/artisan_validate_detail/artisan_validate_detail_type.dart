@@ -37,7 +37,7 @@ class ArtisanBlock extends StatelessWidget {
     return  ArtisanDetailValidate(
       fetchArtisan: getDetailArtisanFromUnion(uuid),
       patchArtisan:deactivateArtisan(uuid),
-      text: AppText.refuse,
+      text: AppText.block,
     );
   }
 }

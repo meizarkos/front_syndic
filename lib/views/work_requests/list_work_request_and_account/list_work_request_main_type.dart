@@ -23,7 +23,7 @@ class CouncilMain extends StatelessWidget {
         },
         goToCreateWorkRequest: () async {
           var createWorkRequest =
-          CreateWorkRequest([], WorkRequest(), null, Adress());
+          CreateWorkRequest([], WorkRequest(), Adress());
           Navigator.pushNamed(context, '/work_requests/title_and_desc',
               arguments: createWorkRequest);
         },
@@ -47,7 +47,7 @@ class UserMain extends StatelessWidget {
       },
       goToCreateWorkRequest: () async {
         var createWorkRequest =
-        CreateWorkRequest([], WorkRequest(), null, Adress());
+        CreateWorkRequest([], WorkRequest(), Adress());
         Navigator.pushNamed(context, '/user/work_requests/title_and_desc',
             arguments: createWorkRequest);
       },
