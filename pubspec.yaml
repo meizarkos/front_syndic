@@ -26,10 +26,11 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/launcher/icon.jpg"
+  image_path: "assets/launcher/icon_rec.png"
 
 flutter_native_splash:
-  background_image: assets/launcher/launcher.jpg
+  color: "#3390E0"
+  image: assets/launcher/launcher_rec.png
   android: true
   ios: true
 
