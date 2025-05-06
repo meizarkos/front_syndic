@@ -30,6 +30,7 @@ Future<void> registerArtisan(CreateArtisan createArtisan) async{
         "phone": createArtisan.artisan.phone,
       },
     });
+    final response = await requestWithBody(url: '/register_artisan', body: body, method: 'POST');
     return;
   }
   catch(e){
