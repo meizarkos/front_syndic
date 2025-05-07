@@ -34,7 +34,6 @@ Future<void> registerArtisan(CreateArtisan createArtisan) async{
     return;
   }
   catch(e){
-    print(e);
     return;
   }
 }

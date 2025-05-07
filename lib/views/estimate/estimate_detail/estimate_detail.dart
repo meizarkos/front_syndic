@@ -43,7 +43,6 @@ class _EstimateDetailState extends State<EstimateDetail> {
     super.initState();
     widget.fetchData(widget.uuid).then((value) {
       setState(() {
-        print(widget.showButton);
         isLoading = false;
         estimateFromRequest = value;
       });

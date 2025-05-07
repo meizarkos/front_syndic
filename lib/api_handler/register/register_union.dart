@@ -38,7 +38,6 @@ Future<String> registerUnion(CreateUnion createUnion) async{
     return '';
   }
   catch(e){
-    print(e);
     return '';
   }
 }

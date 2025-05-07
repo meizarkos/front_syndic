@@ -6,7 +6,6 @@ Future<void> patchArtisanAccounStatus(String route) async {
     final response = await request(url: route, method: "PATCH");
     return;
   } catch(e) {
-    print('Error fetching artisans: $e');
     return;
   }
 }

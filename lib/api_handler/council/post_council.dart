@@ -38,7 +38,6 @@ Future<Response<dynamic>?> postCouncil(CreateCouncil createCouncil, String route
     return response;
   }
   catch(e){
-    print(e);
     return null;
   }
 }

@@ -11,7 +11,6 @@ Future<List<Artisan>?> getAllArtisan(String route) async {
         .toList();
     return artisans;
   } catch(e) {
-    print('Error fetching artisans: $e');
     return null;
   }
 }

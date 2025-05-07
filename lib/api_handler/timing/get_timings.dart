@@ -8,7 +8,6 @@ Future<List<Timing>?> fetchTimings(String route) async {
     final records = (response.data as List)
         .map((recordJson) => Timing.fromJson(recordJson))
         .toList();
-    print(route);
     return records;
   } catch(e) {
     return null;

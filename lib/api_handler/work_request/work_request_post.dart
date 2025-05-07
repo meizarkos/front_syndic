@@ -49,11 +49,9 @@ Future<void> postWorkRequest(CreateWorkRequest createWorkRequest,String route) a
         method: "POST",
         body: body
     );
-    print(response);
     return;
   }
   catch (e) {
-    print(e);
     return;
   }
 }

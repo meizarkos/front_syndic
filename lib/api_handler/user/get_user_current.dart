@@ -11,7 +11,6 @@ Future<User?> getUser(String route) async {
     final user = User.fromJson(response.data);
     return user;
   } catch (e) {
-    print(e);
     return null;
   }
 }

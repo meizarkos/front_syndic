@@ -32,7 +32,6 @@ Future<Response<dynamic>?> postUser(CreateUser createUser)async{
     return null;
   }
   catch(e){
-    print(e);
     return null;
   }
 }

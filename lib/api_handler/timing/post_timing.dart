@@ -15,7 +15,6 @@ Future<void> postTiming(String? uuid,Timing timing,String route) async {
       });
 
     final res = await requestWithBody(url: route, method: "POST", body: body);
-    print(res.data);
     return;
   } catch(e) {
     return;

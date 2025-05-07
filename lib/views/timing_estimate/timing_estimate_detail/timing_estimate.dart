@@ -58,8 +58,6 @@ class _TimingEstimateViewState extends State<TimingEstimateView> {
         estimateStatic = value.estimate;
         adress = timingEstimateStatic?.workRequest?.adress;
         isLoading = false;
-
-        print(value);
       });
     });
     super.initState();

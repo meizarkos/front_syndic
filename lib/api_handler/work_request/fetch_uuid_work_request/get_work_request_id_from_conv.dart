@@ -9,7 +9,6 @@ Future<String?> fetchUuidWorkRequest(String route) async {
     return data['work_request_id'];
   }
   catch(e){
-    print(e);
     return null;
   }
 }

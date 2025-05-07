@@ -11,7 +11,6 @@ Future<void> requestNewPasswd(String email) async {
     return;
   }
   catch(e){
-    print(e);
     return;
   }
 }

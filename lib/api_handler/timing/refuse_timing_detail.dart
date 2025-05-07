@@ -4,7 +4,6 @@ import 'package:front_syndic/core_value.dart';
 Future<void> refuseTimingDetail(String route)async{
   try{
       final response = await request(url: route, method: "PATCH");
-      print(response.data);
       return;
   }
   catch(e){

@@ -11,7 +11,6 @@ Future<List<Estimate>?> fetchEstimate(String route) async {
         .toList();
     return records;
   } catch(e) {
-    print(e);
     return null;
   }
 }

@@ -14,7 +14,6 @@ Future<void> patchUser(String route, User user ) async {
     final response = await requestWithBody(url: route, method: "PATCH", body: body);
     return;
   } catch (e) {
-    print(e);
     return;
   }
 }

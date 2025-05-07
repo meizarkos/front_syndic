@@ -46,7 +46,6 @@ Future<TimingAndCreator?> fetchTimingDetail(String route) async {
     );
     return timingAndCreator;
   } catch (e) {
-    print('Error fetching timing details: $e');
     return null;
   }
 }

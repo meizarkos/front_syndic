@@ -13,7 +13,6 @@ Future<Artisan?> getDetailArtisanFromUnion(String? artisanUuid) async {
 
     return artisan;
   } catch(e) {
-    print('Error fetching artisans: $e');
     return null;
   }
 }

@@ -6,7 +6,6 @@ import '../request.dart';
 Future<void> patchEstimateRequest(String route, VoidCallback changeTextButton) async {
   try{
     final response = await request(url: route, method: "PATCH");
-    print(response.data);
     if(response.statusCode == 200){
       changeTextButton();
       return;
