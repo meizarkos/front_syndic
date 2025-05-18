@@ -16,7 +16,7 @@ class DioService {
     final Dio dio = Dio(BaseOptions(
         //baseUrl: 'https://helpother.fr/',
         //test  = 'http://10.0.2.2:3000/'
-        baseUrl: 'http://192.168.1.126:3000/',
+        baseUrl: 'https://vps112093.serveur-vps.net/',
         connectTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
         validateStatus: (status) {
